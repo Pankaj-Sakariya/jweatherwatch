@@ -33,7 +33,8 @@ public class ACCUWeatherFetcher {
 	public static LocationList search(String location) {
 		Document doc = getDocument(baseURL + "city-find.asp?location="
 				+ location);
-		return new LocationList(getXMLElements((Element)doc.getElementsByTagName("adc_database").item(0), "location"));
+		return new LocationList(getXMLElements((Element) doc
+				.getElementsByTagName("adc_database").item(0), "location"));
 	}
 
 	public static CurrentWeather getCurrentWeather(Location location) {
@@ -57,7 +58,7 @@ public class ACCUWeatherFetcher {
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 				.newInstance();
 		DocumentBuilder docBuilder = null;
-		try {			
+		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(url);
 			return doc;
@@ -79,7 +80,7 @@ public class ACCUWeatherFetcher {
 
 	}
 
-	public static  UnitCode getUnit_code() {
+	public static UnitCode getUnit_code() {
 		return unitCode;
 	}
 
@@ -105,9 +106,10 @@ public class ACCUWeatherFetcher {
 		out.close();
 	}
 
-	public static  LocationList load() {
-		if(!new File(homeDirectory
-					+ "/.SnarlWeatherWatch/profile.xml").exists())return new LocationList();
+	public static LocationList load() {
+		if (!new File(homeDirectory + "/.SnarlWeatherWatch/profile.xml")
+				.exists())
+			return new LocationList();
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 				.newInstance();
 		DocumentBuilder docBuilder = null;
@@ -127,12 +129,17 @@ public class ACCUWeatherFetcher {
 			e.printStackTrace();
 		}
 
-		if(doc	.getElementsByTagName("unitCode").item(0)!=null)
-		unitCode=UnitCode.valueOf(Utils.getXMLValue(((Element) (doc.getElementsByTagName("SnarlWeatherWatchProfile").item(0))),"unitCode"));
-		LocationList locationList  = null;
-		if(doc.getElementsByTagName("locations").item(0)!=null){		
-		Element locations=(Element) doc.getElementsByTagName("locations").item(0).getChildNodes();
-		locationList=new LocationList(getXMLElements(locations, "location"));
+		if (doc.getElementsByTagName("unitCode").item(0) != null)
+			unitCode = UnitCode.valueOf(Utils.getXMLValue(
+					((Element) (doc
+							.getElementsByTagName("SnarlWeatherWatchProfile")
+							.item(0))), "unitCode"));
+		LocationList locationList = null;
+		if (doc.getElementsByTagName("locations").item(0) != null) {
+			Element locations = (Element) doc.getElementsByTagName("locations")
+					.item(0).getChildNodes();
+			locationList = new LocationList(getXMLElements(locations,
+					"location"));
 		}
 		return locationList;
 	}
@@ -141,10 +148,11 @@ public class ACCUWeatherFetcher {
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.contains("windows"))
 			homeDirectory = System.getenv("appdata");
-		if(os.contains("linux"))
-			homeDirectory=System.getProperty("user.home");
+		if (os.contains("linux"))
+			homeDirectory = System.getProperty("user.home");
 	}
-	private  static Element[] getXMLElements(Element doc, String tag) {
+
+	private static Element[] getXMLElements(Element doc, String tag) {
 		NodeList nodes = doc.getElementsByTagName(tag);
 		Element elements[] = new Element[nodes.getLength()];
 		for (int i = 0; i < nodes.getLength(); ++i) {

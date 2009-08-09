@@ -116,8 +116,10 @@ public class Location implements Runnable {
 						.getCurrentWeather(this);
 				if (!temp.equals(currentWeather)) {
 					currentWeather = temp;
-					NotificationConnector.sendNotification("Current Weather Notification", this.toString(),
-							currentWeather.getNotification(),currentWeather.getWeathericon());
+					NotificationConnector.sendNotification(
+							"Current Weather Notification", this.toString(),
+							currentWeather.getNotification(), currentWeather
+									.getWeathericon());
 				}
 			}
 			if (fiveDayForecast != null) {
@@ -131,22 +133,25 @@ public class Location implements Runnable {
 							NotificationConnector.sendNotification(
 									"Forecast Weather Notification", this
 											.toString(), fore.getDay(i)
-											.getDay().getNotification(),fore.getDay(i)
-											.getDay().getWeathericon());
+											.getDay().getNotification(), fore
+											.getDay(i).getDay()
+											.getWeathericon());
 						}
 						if (!fore.getDay(i).getNight().equals(
 								fiveDayForecast.getDay(i).getNight())) {
 							NotificationConnector.sendNotification(
 									"Forecast Weather Notification", this
 											.toString(), fore.getDay(i)
-											.getNight().getNotification(),fore.getDay(i)
-											.getNight().getWeathericon());
+											.getNight().getNotification(), fore
+											.getDay(i).getNight()
+											.getWeathericon());
 
 						}
 					}
 					fiveDayForecast = fore;
 				}
 			}
+
 			try {
 				Thread.sleep(600000);
 			} catch (InterruptedException e) {

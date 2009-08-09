@@ -21,6 +21,7 @@ import javax.swing.border.EtchedBorder;
 
 import net.ACCUWeatherFetcher;
 import net.NotificationConnector;
+import net.NotificationThread;
 import net.Utils;
 import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
@@ -30,7 +31,10 @@ import net.ACCUWeather.WeatherSubtypes.UnitCode;
 public class Gui extends JFrame {
 	public static final  String name="JWeatherWatch";
 	public static final String version="v1.1";
+	
 
+	private NotificationThread notificationthread=null;  //  @jve:decl-index=0:
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
 	private JScrollBar jScrollBar = null;
@@ -77,6 +81,7 @@ public class Gui extends JFrame {
 		NotificationConnector.sendNotification(null, "Snarl Weather Watch",
 		"Snarl Weather Watch succsessfully registered","");
 		load();
+		setNotificationthread(new NotificationThread(locations,30));
 
 	}
 
@@ -664,7 +669,7 @@ public class Gui extends JFrame {
 	 */
 	Settings getSettings() {
 		if (settings == null) {
-			settings = new Settings();
+			settings = new Settings(this);
 		}
 		return settings;
 	}
@@ -672,6 +677,14 @@ public class Gui extends JFrame {
 	public static void main(String[] args) {
 		new Gui();
 
+	}
+
+	public void setNotificationthread(NotificationThread notificationthread) {
+		this.notificationthread = notificationthread;
+	}
+
+	public NotificationThread getNotificationthread() {
+		return notificationthread;
 	}
 	
 
