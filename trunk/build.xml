@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="create_run_jar" name="Create Runnable Jar for Project ACCUWeatherSnarl">
     <target name="create_run_jar">
+    	<delete dir="./dist"/>
+    	<mkdir dir="./dist"/>
         <jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="gui.Gui"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="./bin"/>        	
-        </jar>
+        </jar>    	
     	 <copy todir="./dist/iconset">
     	    <fileset dir="iconset"/>
     	  </copy>
-    	<copy file="./snarl4java.dll" tofile="./dist/snarl4java.dll"/>
+    	
+    	<copy todir="./dist/lib">
+    	    	    <fileset dir="lib"/>
+    	    	  </copy>
     </target>
 </project>

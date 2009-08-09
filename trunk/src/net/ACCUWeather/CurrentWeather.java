@@ -1,6 +1,6 @@
 package net.ACCUWeather;
 
-import lib.Utils;
+import net.Utils;
 import net.ACCUWeather.WeatherSubtypes.Pressure;
 import net.ACCUWeather.WeatherSubtypes.Speed;
 import net.ACCUWeather.WeatherSubtypes.Temperature;
