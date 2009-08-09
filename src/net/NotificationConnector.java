@@ -23,7 +23,7 @@ public class NotificationConnector {
 					.println("NotificationConnector is not initialized, please run \"NotificationConnector.initialize(trayicon);\" firs.");
 			return;
 		}	
-		notifer.send(alert, title, description, iconPath);
+		notifer.send(alert, title, description, System.getProperty("user.dir")+"/iconset/"+iconPath+".png");
 	}
 
 	public static void exit() {
