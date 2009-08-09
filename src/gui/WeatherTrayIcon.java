@@ -78,8 +78,18 @@ public class WeatherTrayIcon extends TrayIcon {
 							}
 						}
 					});
+			
+			
+			MenuItem settings = new MenuItem("Settings");
+			settings.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					parent.getSettings().setVisible(true);
+				}
+			});
 
 			popupMenu.add(new MenuItem(Gui.name + " " + Gui.version));
+			popupMenu.add(new MenuItem("-"));
+			popupMenu.add(settings);
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(bringToFront);
 			popupMenu.add(notifyCurrent);

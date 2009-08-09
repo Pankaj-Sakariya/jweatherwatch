@@ -29,7 +29,7 @@ import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 public class Gui extends JFrame {
 	public static final  String name="JWeatherWatch";
-	public static final String version="v1.0.1";
+	public static final String version="v1.1";
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -65,6 +65,7 @@ public class Gui extends JFrame {
 	private Splash splash = null; // @jve:decl-index=0:visual-constraint="277,470"
 	private boolean adding;
 	private WeatherTrayIcon trayIcon=null;
+	private Settings settings = null;  //  @jve:decl-index=0:visual-constraint="-3,68"
 
 	/**
 	 * This is the default constructor
@@ -135,6 +136,7 @@ public class Gui extends JFrame {
 		if(trayIcon==null){
 			trayIcon=new WeatherTrayIcon(this, this.getIconImage());			
 		}
+		
 		return trayIcon;
 	}
 
@@ -653,6 +655,18 @@ public class Gui extends JFrame {
 	}
 	public LocationList getLocations() {
 		return locations;
+	}
+
+	/**
+	 * This method initializes settings	
+	 * 	
+	 * @return gui.Settings	
+	 */
+	Settings getSettings() {
+		if (settings == null) {
+			settings = new Settings();
+		}
+		return settings;
 	}
 
 	public static void main(String[] args) {
