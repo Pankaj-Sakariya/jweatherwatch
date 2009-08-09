@@ -2,14 +2,9 @@ package gui;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
-import java.awt.MenuItem;
 import java.awt.Point;
-import java.awt.PopupMenu;
 import java.awt.Rectangle;
 import java.awt.SystemTray;
-import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -69,8 +64,7 @@ public class Gui extends JFrame {
 	private ImageBox imageBox_Loading = null;
 	private Splash splash = null; // @jve:decl-index=0:visual-constraint="277,470"
 	private boolean adding;
-	private TrayIcon trayIcon = null;  //  @jve:decl-index=0:
-	private PopupMenu popupMenu = null;  //  @jve:decl-index=0:
+	private WeatherTrayIcon trayIcon=null;
 
 	/**
 	 * This is the default constructor
@@ -78,7 +72,7 @@ public class Gui extends JFrame {
 	public Gui() {
 		super();	
 		initialize();
-		NotificationConnector.initialize(getTrayIcon());
+		NotificationConnector.initialize(getTryIcon());
 		NotificationConnector.sendNotification(null, "Snarl Weather Watch",
 		"Snarl Weather Watch succsessfully registered","");
 		load();
@@ -126,7 +120,7 @@ public class Gui extends JFrame {
 
 		});
 		try {
-			SystemTray.getSystemTray().add(getTrayIcon());
+			SystemTray.getSystemTray().add(getTryIcon());
 
 		} catch (AWTException e1) {
 			// TODO Auto-generated catch block
@@ -136,72 +130,12 @@ public class Gui extends JFrame {
 
 	}
 
-	private TrayIcon getTrayIcon() {
-		if (trayIcon == null) {
-		
-			trayIcon = new TrayIcon(getIconImage(),
-					name, getPopupMenu());
-			trayIcon.setImageAutoSize(true);
-			trayIcon.setToolTip(name+" "+version);
-			trayIcon.addActionListener(new ActionListener() {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (getState() == JFrame.ICONIFIED) {
-						setVisible(true);
-						setState(JFrame.NORMAL);
-						toFront();
-					}
-				}
-			});
+	public WeatherTrayIcon getTryIcon() {
+		if(trayIcon==null){
+			trayIcon=new WeatherTrayIcon(this, this.getIconImage());			
 		}
-
 		return trayIcon;
-	}
-
-	private PopupMenu getPopupMenu() {
-		if (popupMenu == null) {
-			popupMenu = new PopupMenu();
-			MenuItem exit = new MenuItem("Exit");
-			exit.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					close();
-					dispose();
-					System.exit(0);
-				}
-			});
-			MenuItem bringToFront = new MenuItem("Show/Hide");
-			bringToFront.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					if (getState() == JFrame.ICONIFIED) {
-						setVisible(true);
-						setState(JFrame.NORMAL);
-						toFront();
-					}else if(getState()==JFrame.NORMAL)
-						setState(JFrame.ICONIFIED);
-						
-				}
-			});
-			MenuItem notifyCurrent=new MenuItem("Notify");
-			notifyCurrent.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					for(Location l:locations){
-						NotificationConnector.sendNotification("Current Weather Notification",l.toString(),
-								l.getCurrentWeather().getNotification(),l.getCurrentWeather().getWeathericon());	
-					}
-				}
-			});
-				
-			popupMenu.add(new MenuItem(name+ " "+version));
-			popupMenu.add(new MenuItem("-"));
-			popupMenu.add(bringToFront);
-			popupMenu.add(notifyCurrent);
-			popupMenu.add(new MenuItem("-"));
-			popupMenu.add(exit);
-
-		}
-
-		return popupMenu;
 	}
 
 	/**
@@ -670,7 +604,7 @@ public class Gui extends JFrame {
 		return splash;
 	}
 
-	private void close() {
+	public void close() {
 		NotificationConnector.exit();
 		SystemTray.getSystemTray().remove(trayIcon);
 		ACCUWeatherFetcher.save(locations);
@@ -717,10 +651,14 @@ public class Gui extends JFrame {
 		}
 	
 	}
+	public LocationList getLocations() {
+		return locations;
+	}
 
 	public static void main(String[] args) {
 		new Gui();
 
 	}
+	
 
 } // @jve:decl-index=0:visual-constraint="10,10"
