@@ -27,5 +27,8 @@ public void send(String alert, String title, String description,
 		snarl.snRevokeConfig();
 
 	}
+	public SnarlNetworkBridge getSnarl() {
+		return snarl;
+	}
 
 }

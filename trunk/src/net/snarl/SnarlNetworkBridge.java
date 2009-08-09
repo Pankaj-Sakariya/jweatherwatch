@@ -139,5 +139,19 @@ public class SnarlNetworkBridge {
 	public boolean SnarlIsRunnging(){
 		return snarlIsRunning;
 	}
+	public void setHost(String host){
+		Object oldAlerts[]=alerts.keySet().toArray();
+		alerts.clear();
+		create(appName, host);
+		for(Object o :oldAlerts){
+			snRegisterAlert((String)o);
+		}
+		
+	}
+
+	public String getHost() {
+		System.out.println("HostName: "+sock.getInetAddress().toString());
+		return sock.getInetAddress().getHostAddress();
+	}
 
 }

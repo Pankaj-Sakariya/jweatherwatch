@@ -25,9 +25,22 @@ public class NotificationConnector {
 		}	
 		notifer.send(alert, title, description, System.getProperty("user.dir")+"/iconset/"+iconPath+".png");
 	}
-
+	public static boolean setNotifer(Notifer notifer2){
+		if(notifer!=null)
+			notifer.unload();
+		if(notifer2.laod()){
+				notifer=notifer2;
+				return true;
+		}
+		else
+			System.err.println("Setting Notifer failed");
+		return false;
+	}
 	public static void exit() {
 		notifer.unload();
+	}
+	public static Notifer getNotifer() {
+		return notifer;
 	}
 
 }
