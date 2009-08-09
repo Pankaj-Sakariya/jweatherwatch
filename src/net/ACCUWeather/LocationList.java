@@ -13,12 +13,13 @@ public class LocationList extends HashMap<Integer, Location> implements
 	 * 
 	 */
 	private static final long serialVersionUID = 5423811612672652279L;
-	int count = 0;
-
+	private int count = 0;
+	
 	public LocationList() {
-		super();
-
+		super();		
 	}
+	
+	
 
 	public LocationList(Element[] locationElements) {
 
@@ -38,14 +39,12 @@ public class LocationList extends HashMap<Integer, Location> implements
 
 		Location o = super.remove(key);
 		System.out.println("Remove: " + key + " " + o);
-		int i = 0;
-		LocationList loc = new LocationList();
-		for (Location l : values()) {
-			System.out.println("[" + i + "] " + l);
-			loc.put(i++, l);
-		}
+		Object loc[] = this.values().toArray();
 		this.clear();
-		this.putAll(loc);
+		for (int i=0;i<loc.length;++i) {
+			System.out.println("[" + i + "] " + loc[i]);
+			this.put(i++, (Location)loc[i]);
+		}
 		o.stop();
 		return o;
 	}
@@ -85,6 +84,14 @@ public class LocationList extends HashMap<Integer, Location> implements
 		throw new UnsupportedOperationException();
 
 	}
+
+
+		
+	
+	
+	
+		
+	
 
 
 }

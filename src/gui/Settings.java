@@ -10,12 +10,16 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import net.NotificationConnector;
+import net.NotificationThread;
 import net.Notifer.Notifers.NetSnarl;
 import net.Notifer.Notifers.Snarl;
 
 public class Settings extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	private Gui parent;
+	
 	private JPanel jContentPane = null;
 	private JTextField jTextField_NotificationInterval = null;
 	private JLabel jLabel = null;
@@ -30,8 +34,9 @@ public class Settings extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public Settings() {
+	public Settings(Gui parent) {
 		super();
+		this.parent=parent;
 		initialize();
 	}
 
@@ -42,6 +47,7 @@ public class Settings extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(300, 200);
+		this.setResizable(false);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Settings");
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -49,6 +55,8 @@ public class Settings extends JFrame {
 				if (NotificationConnector.getNotifer() instanceof NetSnarl) {
 					jTextField_Host.setText(((NetSnarl) NotificationConnector
 							.getNotifer()).getSnarl().getHost());
+				if(parent.getNotificationthread()!=null)	jTextField_NotificationInterval.setText(String.valueOf(parent.getNotificationthread().getInterval()));
+					jToggleButton_Netbridge.setSelected(true);
 				}
 
 			}
@@ -117,6 +125,13 @@ public class Settings extends JFrame {
 			jButton_NotificationInterval.setBounds(new Rectangle(120, 30, 61,
 					16));
 			jButton_NotificationInterval.setText("Set");
+			jButton_NotificationInterval
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							parent.getNotificationthread().shutdown();
+							parent.setNotificationthread(new NotificationThread(parent.getLocations(),Integer.valueOf(jTextField_NotificationInterval.getText())));
+						}
+					});
 		}
 		return jButton_NotificationInterval;
 	}
@@ -135,7 +150,8 @@ public class Settings extends JFrame {
 					.addItemListener(new java.awt.event.ItemListener() {
 						public void itemStateChanged(java.awt.event.ItemEvent e) {
 							if (jToggleButton_Netbridge.isSelected()) {
-
+									if(NotificationConnector.getNotifer() instanceof NetSnarl)
+										return;
 								if (NotificationConnector
 										.setNotifer(new NetSnarl())) {
 									jToggleButton_Netbridge.setText("Yes");
@@ -146,7 +162,8 @@ public class Settings extends JFrame {
 								} else
 									jToggleButton_Netbridge.setText("No");
 							} else {
-
+								if(NotificationConnector.getNotifer() instanceof Snarl)
+									return;
 								if (NotificationConnector
 										.setNotifer(new Snarl()))
 									jToggleButton_Netbridge.setText("No");
