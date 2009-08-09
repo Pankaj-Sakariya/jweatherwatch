@@ -51,7 +51,8 @@ public class Location implements Runnable {
 			currentWeather = ACCUWeatherFetcher.getCurrentWeather(this);
 			NotificationConnector.sendNotification(
 					"Current Weather Notification", this.toString(),
-					currentWeather.getNotification(),System.getProperty("user.dir")+"/iconset/"+currentWeather.getWeathericon()+".png");
+					currentWeather.getNotification(), currentWeather
+							.getWeathericon());
 		}
 		if (!updateIsRunnging) {
 			new Thread(this).start();
@@ -116,7 +117,7 @@ public class Location implements Runnable {
 				if (!temp.equals(currentWeather)) {
 					currentWeather = temp;
 					NotificationConnector.sendNotification("Current Weather Notification", this.toString(),
-							currentWeather.getNotification(),System.getProperty("user.dir")+"/iconset/"+currentWeather.getWeathericon()+".png");
+							currentWeather.getNotification(),currentWeather.getWeathericon());
 				}
 			}
 			if (fiveDayForecast != null) {
@@ -130,16 +131,16 @@ public class Location implements Runnable {
 							NotificationConnector.sendNotification(
 									"Forecast Weather Notification", this
 											.toString(), fore.getDay(i)
-											.getDay().getNotification(),System.getProperty("user.dir")+"/iconset/"+fore.getDay(i)
-											.getDay().getWeathericon()+".png");
+											.getDay().getNotification(),fore.getDay(i)
+											.getDay().getWeathericon());
 						}
 						if (!fore.getDay(i).getNight().equals(
 								fiveDayForecast.getDay(i).getNight())) {
 							NotificationConnector.sendNotification(
 									"Forecast Weather Notification", this
 											.toString(), fore.getDay(i)
-											.getNight().getNotification(),System.getProperty("user.dir")+"/iconset/"+fore.getDay(i)
-											.getNight().getWeathericon()+".png");
+											.getNight().getNotification(),fore.getDay(i)
+											.getNight().getWeathericon());
 
 						}
 					}
@@ -157,6 +158,6 @@ public class Location implements Runnable {
 	}
 
 	public Calendar getCurrentTime() {
-		return Calendar.getInstance(TimeZone.getTimeZone("GMT"+timeZone));
+		return Calendar.getInstance(TimeZone.getTimeZone("GMT" + timeZone));
 	}
 }

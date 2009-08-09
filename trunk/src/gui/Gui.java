@@ -34,7 +34,7 @@ import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 public class Gui extends JFrame {
 	public static final  String name="JWeatherWatch";
-	public static final String version="v1.0";
+	public static final String version="v1.0.1";
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -182,9 +182,20 @@ public class Gui extends JFrame {
 						
 				}
 			});
+			MenuItem notifyCurrent=new MenuItem("Notify");
+			notifyCurrent.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					for(Location l:locations){
+						NotificationConnector.sendNotification("Current Weather Notification",l.toString(),
+								l.getCurrentWeather().getNotification(),l.getCurrentWeather().getWeathericon());	
+					}
+				}
+			});
+				
 			popupMenu.add(new MenuItem(name+ " "+version));
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(bringToFront);
+			popupMenu.add(notifyCurrent);
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(exit);
 
