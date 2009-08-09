@@ -8,7 +8,7 @@ public class Snarl implements Notifer {
 	@Override
 	public boolean laod() {
 		try {
-			System.loadLibrary("snarl4java");
+			System.loadLibrary("lib/snarl4java");
 		} catch (UnsatisfiedLinkError e) {
 			System.out.println(e.getMessage());
 			return false;

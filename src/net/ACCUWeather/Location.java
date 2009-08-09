@@ -3,9 +3,9 @@ package net.ACCUWeather;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import lib.Utils;
 import net.ACCUWeatherFetcher;
 import net.NotificationConnector;
+import net.Utils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

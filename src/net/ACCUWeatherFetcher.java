@@ -10,7 +10,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import lib.Utils;
 import net.ACCUWeather.CurrentWeather;
 import net.ACCUWeather.FiveDayForecast;
 import net.ACCUWeather.Location;

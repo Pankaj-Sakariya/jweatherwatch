@@ -2,7 +2,7 @@ package net.ACCUWeather;
 
 
 
-import lib.Utils;
+import net.Utils;
 import net.ACCUWeather.WeatherSubtypes.Day;
 import net.ACCUWeather.WeatherSubtypes.UnitCode;
 

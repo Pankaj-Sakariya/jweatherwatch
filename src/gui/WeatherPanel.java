@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
-import lib.Utils;
+import net.Utils;
 import net.ACCUWeather.CurrentWeather;
 import net.ACCUWeather.ForecastWeather;
 import net.ACCUWeather.Location;

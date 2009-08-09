@@ -24,9 +24,9 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.EtchedBorder;
 
-import lib.Utils;
 import net.ACCUWeatherFetcher;
 import net.NotificationConnector;
+import net.Utils;
 import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
 import net.ACCUWeather.WeatherSubtypes.Day;

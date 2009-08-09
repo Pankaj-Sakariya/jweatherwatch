@@ -6,7 +6,8 @@ import java.awt.Rectangle;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import lib.Utils;
+import net.Utils;
+
 
 public class Splash extends JPanel {
 
