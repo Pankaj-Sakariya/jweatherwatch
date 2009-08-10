@@ -1,7 +1,12 @@
 =Screenshots=
+===Windows 7===
 http://jweatherwatch.googlecode.com/svn/images/Capture.png
+===KDE 4===
+http://jweatherwatch.googlecode.com/svn/images/kde.png
 ==Notifications==
 ===Snarl===
 http://www.fullphat.net/applications/Misc/jWeatherWatch/jWeatherWatch.png 
 ===Defaul Windows===
 http://jweatherwatch.googlecode.com/svn/images/standartnotificationpng.png
+===Default KDE4===
+http://jweatherwatch.googlecode.com/svn/images/default-kde.png
