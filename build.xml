@@ -11,7 +11,7 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<javac srcdir="./src" destdir="./comp"  classpath="./lib/growlwrapper.jar" >
+		<javac srcdir="./src" destdir="./comp"  classpath="./lib/growlwrapper.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar" >
 		</javac>
 	</target>
 
@@ -19,7 +19,7 @@
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="gui.Gui" />
-				<attribute name="Class-Path" value="." />
+				<attribute name="Class-Path" value=". ./lib/Snarl4Java-0.1.1.jar ./lib/growlwrapper.jar ./lib/SnarlNetworkeBridge.jar" />
 			</manifest>
 			<fileset dir="./comp" />
 			<fileset dir="./data"/>
@@ -37,9 +37,9 @@
 	</target>
 
 	<target name="makeTar" depends="create_run_jar,copyfiles">
-		<tar destfile="./dist/jWeatherWatcher.tar" basedir="./dist" />
-		<gzip src="./dist/jWeatherWatcher.tar" destfile="./dist/jWeatherWatcher.tar.gz" />
-		<delete file="./dist/jWeatherWatcher.tar" />
+		<tar destfile="./dist/jWeatherWatch.tar" basedir="./dist" />
+		<gzip src="./dist/jWeatherWatch.tar" destfile="./dist/jWeatherWatch.tar.gz" />
+		<delete file="./dist/jWeatherWatch.tar" />
 		
 	</target>
 
@@ -48,22 +48,5 @@
 		<javadoc  sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
 		</javadoc>
 	</target>
-	
-	<target name="NetworkBridgeDoc">
-		<javadoc packagenames="net.snarl.*" sourcepath="src" defaultexcludes="yes" destdir="./javadoc/SnarlNetworkBridge" author="true" version="true" use="true" windowtitle="SnarlNetworkBridge">
-		</javadoc>
-	</target>
 
-	<target name="createSnarlNetworkBridge" depends="compile">
-		
-		<copy todir="./comp/net/snarl">
-					<fileset dir="./src/net/snarl/" />
-				</copy>
-		<jar destfile="./dist/SnarlNetworkeBridge.jar" basedir="./comp/" includes="/net/snarl/*">
-			<manifest>
-				<attribute name="version" value="1.0" />
-			</manifest>
-		</jar>
-		<antcall target="cleanup"></antcall>
-	</target>
 </project>
