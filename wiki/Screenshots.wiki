@@ -1,0 +1,7 @@
+=Screenshots=
+http://jweatherwatch.googlecode.com/svn/images/Capture.png
+==Notifications==
+===Snarl===
+http://www.fullphat.net/applications/Misc/jWeatherWatch/jWeatherWatch.png 
+===Defaul Windows===
+http://jweatherwatch.googlecode.com/svn/images/standartnotificationpng.png
