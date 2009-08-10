@@ -1,25 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project ACCUWeatherSnarl">
-	<target name="create_run_jar">
+<project default="makeTar" name="Create Runnable Jar for Project ACCUWeatherSnarl">
+
+	<target name="init">
 		<delete dir="./dist" />
 		<mkdir dir="./dist" />
+		<mkdir dir="./comp" />
+	</target>
+	<target name="cleanup">
+		<delete dir="./comp" />	
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="./src" destdir="./comp" >
+		</javac>
+	</target>
+
+	<target name="create_run_jar" depends="compile">
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="gui.Gui" />
 				<attribute name="Class-Path" value="." />
 			</manifest>
-			<fileset dir="./bin" />
+			<fileset dir="./comp" />
 		</jar>
+		<antcall target="cleanup"></antcall>
+	</target>
+
+	<target name="copyfiles">
 		<copy todir="./dist/iconset">
 			<fileset dir="iconset" />
 		</copy>
-
 		<copy todir="./dist/lib">
 			<fileset dir="lib" />
 		</copy>
+	</target>
+
+	<target name="makeTar" depends="create_run_jar,copyfiles">
+		<tar destfile="./dist/jWeatherWatcher.tar" basedir="./dist" />
+		<gzip src="./dist/jWeatherWatcher.tar" destfile="./dist/jWeatherWatcher.tar.gz" />
+		<delete file="./dist/jWeatherWatcher.tar" />
 		
-		<tar destfile="./dist/jWeatherWatcher.tar" basedir="./dist"/>
-		<gzip src="./dist/jWeatherWatcher.tar" destfile="./dist/jWeatherWatcher.tar.gz"/>
-		<delete file="./dist/jWeatherWatcher.tar"/>
+	</target>
+
+
+	<target name="doc">
+		<javadoc  sourcepath="src" defaultexcludes="yes" destdir="docs/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
+		</javadoc>
+	</target>
+	
+	<target name="NetworkBridgeDoc">
+		<javadoc packagenames="net.snarl.*" sourcepath="src" defaultexcludes="yes" destdir="docs/SnarlNetworkBridge" author="true" version="true" use="true" windowtitle="SnarlNetworkBridge">
+		</javadoc>
+	</target>
+
+	<target name="createSnarlNetworkBridge" depends="compile,NetworkBridgeDoc">
+		
+		<copy todir="./comp/net/snarl">
+					<fileset dir="./src/net/snarl/" />
+				</copy>
+		<jar destfile="./dist/SnarlnetworkeBridge.jar" basedir="./comp/" includes="/net/snarl/*">
+			<manifest>
+				<attribute name="version" value="1.0" />
+			</manifest>
+		</jar>
+		<antcall target="cleanup"></antcall>
 	</target>
 </project>
