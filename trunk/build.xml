@@ -44,12 +44,12 @@
 
 
 	<target name="doc">
-		<javadoc  sourcepath="src" defaultexcludes="yes" destdir="docs/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
+		<javadoc  sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
 		</javadoc>
 	</target>
 	
 	<target name="NetworkBridgeDoc">
-		<javadoc packagenames="net.snarl.*" sourcepath="src" defaultexcludes="yes" destdir="docs/SnarlNetworkBridge" author="true" version="true" use="true" windowtitle="SnarlNetworkBridge">
+		<javadoc packagenames="net.snarl.*" sourcepath="src" defaultexcludes="yes" destdir="./javadoc/SnarlNetworkBridge" author="true" version="true" use="true" windowtitle="SnarlNetworkBridge">
 		</javadoc>
 	</target>
 
