@@ -10,59 +10,168 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 
+/**
+ * SnarlNetworkBridge for SNP v1.0
+ * 
+ * @author Patrick von Reth
+ * @version 1.0
+ */
 public class SnarlNetworkBridge {
-	int timeout = 10;
-	double SNPVersion = 1.0;
-	String head = "type=SNP#?version=" + SNPVersion;
-	Socket sock = null;
-	PrintWriter out = null;
-	BufferedReader in = null;
-	String appName = null;
+	private int timeout = 10;
+	private double SNPVersion = 1.0;
+	private String head = "type=SNP#?version=" + SNPVersion;
+	private Socket sock = null;
+	private PrintWriter out = null;
+	private BufferedReader in = null;
+	private String appName = null;
 	private HashMap<String, Integer> alerts = new HashMap<String, Integer>();
 	private boolean snarlIsRunning = true;
 
-	public SnarlNetworkBridge(String appName) {
-		create(appName, "localhost");
+	/**
+	 * Creates a new SnarlNetworkBridge to the localhost
+	 * 
+	 * @param applicationName
+	 *            The Application you want to register with Snarl
+	 */
+	public SnarlNetworkBridge(String applicationName) {
+		create(applicationName, "localhost");
 	}
 
-	public SnarlNetworkBridge(String appName, String host) {
-		create(appName, host);
+	/**
+	 * Creates a new SnarlNetworkBridge to a remote host
+	 * 
+	 * @param applicationName
+	 *            The Name of the Application you want to register with Snarl
+	 * @param host
+	 *            The Name/IP of the host to connect to
+	 */
+	public SnarlNetworkBridge(String applicationName, String host) {
+		create(applicationName, host);
 	}
 
+	/**
+	 * Has to be called after the Constructor
+	 * 
+	 * @return The Answer of the SnarlClient
+	 */
 	public String snRegisterConfig() {
 		return send(head + "#?action=register#?app=" + appName);
 	}
 
+	/**
+	 * Register a new Alert Class to Snarl
+	 * 
+	 * @param title
+	 *            The title representing the Alert
+	 * @return The Answer of the SnarlClient
+	 */
 	public String snRegisterAlert(String title) {
 		alerts.put(title, alerts.size() + 1);
 		return send(head + "#?action=add_class#?app=" + appName + "#?class="
 				+ alerts.size() + "#?title=" + title);
-
 	}
 
-	public String snShowMessage(String alert, String title, String description) {
-		return snShowMessage(alert, title, description, timeout);
+	/**
+	 * Displays a Snarl Notification with the default timeout
+	 * 
+	 * @param alert
+	 *            The name of an registered Alert
+	 * @param title
+	 *            The Title of the Notification
+	 * @param content
+	 *            The Content of the Notification
+	 * @return The Answer of the SnarlClient
+	 */
+	public String snShowMessage(String alert, String title, String content) {
+		return snShowMessage(alert, title, content, timeout);
 	}
 
-	public String snShowMessage(String alert, String title, String description,
+	/**
+	 * Displays a Snarl Notification with a specific timeout
+	 * 
+	 * @param alert
+	 *            The name of an registered Alert
+	 * @param title
+	 *            The Title of the Notification
+	 * @param content
+	 *            The Content of the Notification
+	 * @param timeout
+	 *            An integer value representing the timeout
+	 * @return The Answer of the SnarlClient
+	 */
+	public String snShowMessage(String alert, String title, String content,
 			int timeout) {
 		if (snarlIsRunning)
 			return send(head + "#?action=notification#?app=" + appName
 					+ "#?class=" + alerts.get(alert) + "#?title=" + title
-					+ "#?text=" + description + "#?timeout=" + timeout);
+					+ "#?text=" + content + "#?timeout=" + timeout);
 		return "Snarl not Running";
 	}
 
+	/**
+	 * Sets the default timeout
+	 * 
+	 * @param timeout
+	 */
 	public void snSetTimeout(int timeout) {
 		this.timeout = timeout;
 	}
 
+	/**
+	 * Unregister your Snarl Application with all alerts
+	 * 
+	 * @return The Answer of the SnarlClient
+	 */
 	public String snRevokeConfig() {
 		String out = send(head + "#?action=unregister#?app=" + appName);
 		close();
 		return out;
 	}
 
+	/**
+	 * Sets a different host to a registered SnarlApplication, currently
+	 * registered Alerts will be registered to the new host
+	 * 
+	 * @param host
+	 *            The Name/IP of the host to connect to
+	 */
+	public void setHost(String host) {
+		Object oldAlerts[] = alerts.keySet().toArray();
+		alerts.clear();
+		create(appName, host);
+		for (Object o : oldAlerts) {
+			snRegisterAlert((String) o);
+		}
+
+	}
+
+	/**
+	 * 
+	 * @return The ip of the host
+	 */
+	public String getHost() {
+		System.out.println("HostName: " + sock.getInetAddress().toString());
+		return sock.getInetAddress().getHostAddress();
+	}
+
+	/**
+	 * Returns a boolean value representing the Snarl running Status
+	 * 
+	 * @return true if Snarl is running and listening to network Connections
+	 *         otherwise false
+	 */
+	public boolean isRunnging() {
+		return snarlIsRunning;
+	}
+
+	/**
+	 * Called by the Constructor and setHost
+	 * 
+	 * @param appName
+	 *            The Name of the Application you want to register with Snarl
+	 * @param host
+	 *            The Name/IP of the host to connect to
+	 */
 	private void create(String appName, String host) {
 		this.appName = appName;
 		try {
@@ -83,6 +192,11 @@ public class SnarlNetworkBridge {
 		}
 	}
 
+	/**
+	 * Called by every send Method to receive the Snarl Answer
+	 * 
+	 * @return The Answer of the SnarlClient or "Snarl is not running"
+	 */
 	private String listen() {
 		if (!snarlIsRunning) {
 			return "Snarl is not running";
@@ -100,6 +214,13 @@ public class SnarlNetworkBridge {
 
 	}
 
+	/**
+	 * Called by the different sn Actions
+	 * 
+	 * @param s
+	 *            the String to send
+	 * @return The Answer of the SnarlClient or "Snarl is not running"
+	 */
 	private String send(String s) {
 		if (!snarlIsRunning) {
 			return "Snarl is not running";
@@ -115,6 +236,9 @@ public class SnarlNetworkBridge {
 		return listen();
 	}
 
+	/**
+	 * Called by snRevokeConfig() closes the Socket and the Buffers
+	 */
 	private void close() {
 		try {
 			if (out != null)
@@ -127,31 +251,6 @@ public class SnarlNetworkBridge {
 			e.printStackTrace();
 		}
 
-	}
-
-	public static void main(String[] args) {
-		SnarlNetworkBridge test = new SnarlNetworkBridge("Nerver"/* ,"philipp-pc" */);
-		test.snRegisterConfig();
-		test.snRegisterAlert("Nerv");
-		test.snShowMessage("Nerv1", "Hallo", "Du Dusssel");
-		test.snRevokeConfig();
-	}
-	public boolean SnarlIsRunnging(){
-		return snarlIsRunning;
-	}
-	public void setHost(String host){
-		Object oldAlerts[]=alerts.keySet().toArray();
-		alerts.clear();
-		create(appName, host);
-		for(Object o :oldAlerts){
-			snRegisterAlert((String)o);
-		}
-		
-	}
-
-	public String getHost() {
-		System.out.println("HostName: "+sock.getInetAddress().toString());
-		return sock.getInetAddress().getHostAddress();
 	}
 
 }

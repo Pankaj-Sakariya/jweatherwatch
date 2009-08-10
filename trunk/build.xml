@@ -17,5 +17,9 @@
 		<copy todir="./dist/lib">
 			<fileset dir="lib" />
 		</copy>
+		
+		<tar destfile="./dist/jWeatherWatcher.tar" basedir="./dist"/>
+		<gzip src="./dist/jWeatherWatcher.tar" destfile="./dist/jWeatherWatcher.tar.gz"/>
+		<delete file="./dist/jWeatherWatcher.tar"/>
 	</target>
 </project>
