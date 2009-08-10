@@ -12,7 +12,7 @@ public boolean laod() {
 	snarl.snRegisterConfig();
 	snarl.snRegisterAlert("Current Weather Notification");
 	snarl.snRegisterAlert("Forecast Weather Notification");
-	return snarl.SnarlIsRunnging();
+	return snarl.isRunnging();
 }
 
 @Override
