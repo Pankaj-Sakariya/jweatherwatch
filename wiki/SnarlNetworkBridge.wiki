@@ -1,0 +1,9 @@
+=SnarlNetworkbridge=
+Snarlnetworkbridge is a java implementation of the SNP protocol for Snarl.
+it makes it Eays tro use the Snarl Network Protocol.
+ <br/> <br/> <br/>
+==Downlaod==
+The Jar file can be downloaded [http://jweatherwatch.googlecode.com/files/SnarlnetworkeBridge.jar here]
+<br/> <br/>
+==Doc==
+Javadoc can be found  [http://jweatherwatch.googlecode.com/svn/SnarlNetworkBridge/javadoc/index.html here]
