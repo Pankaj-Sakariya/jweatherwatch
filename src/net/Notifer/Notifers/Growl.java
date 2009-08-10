@@ -7,11 +7,10 @@ import com.growl.GrowlWrapper;
 
 public class Growl implements Notifer {
 	GrowlWrapper growlWrapper=null;
-	public Growl() {
-		growlWrapper=new GrowlWrapper(Gui.name+" "+Gui.version, System.getProperty("user.dir")+"/iconset/"+"01.png",new String[]{"Current Weather Notification","Forecast Weather Notification"}, new String[]{"defaultNotifications"});
-	}
+
 	@Override
 	public boolean laod() {
+		growlWrapper=new GrowlWrapper(Gui.name+" "+Gui.version, System.getProperty("user.dir")+"/iconset/"+"01.png",new String[]{"Current Weather Notification","Forecast Weather Notification"}, new String[]{"defaultNotifications"});
 		return growlWrapper.getState()==GrowlWrapper.GROWL_OK;
 	}
 
