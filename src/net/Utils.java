@@ -87,4 +87,23 @@ public class Utils {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	public static enum OS{
+		WINDOWS,LINUX,MAC,ERROR
+	}
+	public static OS getOS(){
+		String o=System.getProperty("os.name").toLowerCase();
+		if(o.contains("windows"))
+			return OS.WINDOWS;
+		if(o.contains("mac"))
+			return OS.MAC;
+		if(o.contains("linux"))
+			return OS.LINUX;
+		
+		return OS.ERROR;
+		
+		
+	}
 }

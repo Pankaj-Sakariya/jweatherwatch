@@ -77,7 +77,7 @@ public class Gui extends JFrame {
 	public Gui() {
 		super();	
 		initialize();
-		NotificationConnector.initialize(getTryIcon());
+		NotificationConnector.initialize(getTrayIcon());
 		NotificationConnector.sendNotification(null, "Snarl Weather Watch",
 		"Snarl Weather Watch succsessfully registered","");
 		load();
@@ -126,7 +126,7 @@ public class Gui extends JFrame {
 
 		});
 		try {
-			SystemTray.getSystemTray().add(getTryIcon());
+			SystemTray.getSystemTray().add(getTrayIcon());
 
 		} catch (AWTException e1) {
 			// TODO Auto-generated catch block
@@ -137,7 +137,7 @@ public class Gui extends JFrame {
 	}
 
 
-	public WeatherTrayIcon getTryIcon() {
+	public WeatherTrayIcon getTrayIcon() {
 		if(trayIcon==null){
 			trayIcon=new WeatherTrayIcon(this, this.getIconImage());			
 		}

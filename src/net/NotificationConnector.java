@@ -9,10 +9,22 @@ public class NotificationConnector {
 	private static Notifer notifer;
 
 	public static void initialize(TrayIcon trayIcon) {
-		notifer = new net.Notifer.Notifers.Snarl();
-		if (!notifer.laod())
-			notifer = new net.Notifer.Notifers.NetSnarl();
-		if (!notifer.laod())
+		switch (Utils.getOS()) {
+		case WINDOWS:
+			notifer = new net.Notifer.Notifers.Snarl();
+			if (!notifer.laod())
+				return;
+				notifer = new net.Notifer.Notifers.NetSnarl();
+				if(notifer.laod())
+					return;
+				break;
+		case MAC:
+			notifer=new net.Notifer.Notifers.Growl();	
+			if(notifer.laod())
+				return;
+			break;
+		}
+
 			notifer = new net.Notifer.Notifers.TrayNotification(trayIcon);
 	}
 
