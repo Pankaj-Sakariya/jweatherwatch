@@ -6,4 +6,4 @@ it makes it Eays tro use the Snarl Network Protocol.
 The Jar file can be downloaded [http://jweatherwatch.googlecode.com/files/SnarlnetworkeBridge.jar here]
 <br/> <br/>
 ==Doc==
-Javadoc can be found  [http://jweatherwatch.googlecode.com/svn/SnarlNetworkBridge/javadoc/index.html here]
+Javadoc can be found  [http://jweatherwatch.googlecode.com/svn/SnarlNetworkBridge/trunk/javadoc/index.html here]
