@@ -19,12 +19,12 @@
 
 
 	
-	<target name="NetworkBridgeDoc">
-		<javadoc packagenames="net.snarl.*" sourcepath="src" defaultexcludes="yes" destdir="./javadoc/SnarlNetworkBridge" author="true" version="true" use="true" windowtitle="SnarlNetworkBridge">
+	<target name="doc">
+		<javadoc packagenames="net.snarl.*" sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="SnarlNetworkBridge">
 		</javadoc>
 	</target>
 
-	<target name="createSnarlNetworkBridge" depends="compile,NetworkBridgeDoc">
+	<target name="createSnarlNetworkBridge" depends="compile,doc">
 		
 		<jar destfile="./dist/SnarlNetworkeBridge.jar" basedir="./comp/" includes="/net/snarl/*">
 			<manifest>
