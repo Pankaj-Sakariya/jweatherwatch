@@ -3,7 +3,6 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.io.File;
 import java.util.Calendar;
 
 import javax.swing.BorderFactory;
@@ -35,7 +34,6 @@ public class WeatherPanel extends JPanel implements Runnable {
 	private JLabel jLabel_Other_Lable = null;
 	private boolean timeIsRunning = false;
 	private String url=null;  //  @jve:decl-index=0:
-	private String iconEnding=null;  //  @jve:decl-index=0:
 	private Location location=null;
 
 	/**
@@ -47,24 +45,13 @@ public class WeatherPanel extends JPanel implements Runnable {
 		initialize();
 	
 	}
-	private String getIconEnding() {
-		if(iconEnding==null){	
-			if(new File("iconset/01.gif").exists())
-				iconEnding=".gif";
-			else if(new File("iconset/01.jpg").exists())
-				iconEnding=".jpg";	
-			else
-				iconEnding=".png";
-		}
-		return iconEnding;
-	}
 	public void updateWeather(Location location,Weather weather) {
 		this.location=location;
 		url = weather.getUrl();
 		jLabel_Location.setText(location.toString());
 		jLabel_Location.setToolTipText(location.toString());
 		imageBox.setImage(utils.imageLodaer("iconset/"
-				+ weather.getWeathericon() + getIconEnding()));
+				+ weather.getWeathericon() + ".png"));
 		jLabel_text.setText(weather.getWeathertext());
 		jLabel_text.setToolTipText(weather.getWeathertext());
 		jLabel.setText("Temprature:");

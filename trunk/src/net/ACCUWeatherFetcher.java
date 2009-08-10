@@ -145,11 +145,21 @@ public class ACCUWeatherFetcher {
 	}
 
 	private static void initializeHomeDirectory() {
-		String os = System.getProperty("os.name").toLowerCase();
-		if (os.contains("windows"))
+		switch (Utils.getOS()) {
+		case WINDOWS:
 			homeDirectory = System.getenv("appdata");
-		if (os.contains("linux"))
+			break;
+		case LINUX:			
+		case MAC:
 			homeDirectory = System.getProperty("user.home");
+			break;
+		default:
+			System.out.println("Unsopportet OS");
+			System.exit(-1);
+			break;
+		}
+
+			
 	}
 
 	private static Element[] getXMLElements(Element doc, String tag) {

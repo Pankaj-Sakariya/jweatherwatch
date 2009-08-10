@@ -1,5 +1,6 @@
 package net.Notifer.Notifers;
 
+import gui.Gui;
 import net.Notifer.Notifer;
 import at.dotti.snarl.Snarl4Java;
 
@@ -14,7 +15,7 @@ public class Snarl implements Notifer {
 			return false;
 		}
 		long msg = Snarl4Java.snGetGlobalMsg();
-		final long hWnd = Snarl4Java.snRegisterConfig(111, "JWeatherWatch", 3);
+		final long hWnd = Snarl4Java.snRegisterConfig(111, Gui.name+" "+Gui.version, 3);
 		System.out.println(msg + " " + hWnd);
 		return true;
 	}
