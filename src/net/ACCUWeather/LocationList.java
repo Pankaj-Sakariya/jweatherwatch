@@ -43,7 +43,7 @@ public class LocationList extends HashMap<Integer, Location> implements
 		this.clear();
 		for (int i=0;i<loc.length;++i) {
 			System.out.println("[" + i + "] " + loc[i]);
-			this.put(i++, (Location)loc[i]);
+			this.put(i, (Location)loc[i]);
 		}
 		o.stop();
 		return o;
