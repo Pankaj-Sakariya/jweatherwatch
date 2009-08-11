@@ -1,0 +1,11 @@
+Hi here you can find the newest version, which is untested, and probably unstable.
+If you interested in testing goon download it and write a comment.
+
+
+=This Version=
+*New in this version is the automatic loading and saving of the settings.
+*The possibility to Change the host in Notification systems which support remote hosts.
+*Changing the Notification system while the programme is running.
+*Support for Growl, only tested on windows with [http://growl.info/index.php Growl for Windows], need a mac tester
+
+[http://code.google.com/p/jweatherwatch/source/browse/beta/jWeatherWatch%20v1.2.5%20Beta.tar.gz jWeatherWatch v1.2.5 Beta.tar.gz]
