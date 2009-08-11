@@ -43,7 +43,7 @@ public class Snarl implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description) {
-		send(alert, title, description, null);
+		send(alert, title, description, "");
 
 	}
 
