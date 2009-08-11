@@ -7,16 +7,23 @@ import at.dotti.snarl.Snarl4Java;
 
 public class Snarl implements Notifer {
 
-	@Override
-	public boolean laod(String[] notifications) {
+	static boolean initialized = false;
+	static {
 		try {
 			System.loadLibrary("lib/snarl4java");
+			initialized = true;
 		} catch (UnsatisfiedLinkError e) {
 			System.out.println(e.getMessage());
-			return false;
 		}
+	}
+
+	@Override
+	public boolean laod(String[] notifications) {
+		if (!initialized)
+			return false;
 		long msg = Snarl4Java.snGetGlobalMsg();
-		final long hWnd = Snarl4Java.snRegisterConfig(111, Gui.name+" "+Gui.version, 3);
+		final long hWnd = Snarl4Java.snRegisterConfig(111, Gui.name + " "
+				+ Gui.version, 3);
 		System.out.println(msg + " " + hWnd);
 		return true;
 	}
@@ -37,11 +44,12 @@ public class Snarl implements Notifer {
 	@Override
 	public void send(String alert, String title, String description) {
 		send(alert, title, description, null);
-		
+
 	}
-	 @Override
+
+	@Override
 	public NotiferTypes getName() {
-	return NotiferTypes.Snarl;
+		return NotiferTypes.Snarl;
 	}
 
 }
