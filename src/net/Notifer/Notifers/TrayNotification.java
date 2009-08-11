@@ -4,6 +4,7 @@ import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
 
 import net.Notifer.Notifer;
+import net.Notifer.NotiferTypes;
 
 public class TrayNotification implements Notifer {
 	private TrayIcon trayIcon = null;
@@ -13,7 +14,7 @@ public class TrayNotification implements Notifer {
 	}
 
 	@Override
-	public boolean laod() {
+	public boolean laod(String[] notifications) {
 		// TODO Auto-generated method stub
 		return true;
 	}
@@ -29,6 +30,16 @@ public class TrayNotification implements Notifer {
 	public void unload() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void send(String alert, String title, String description) {
+	send(alert, title, description, null);
+		
+	}
+	@Override
+	public NotiferTypes getName() {
+		return NotiferTypes.TrayIcon;
 	}
 
 }

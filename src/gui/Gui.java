@@ -30,7 +30,7 @@ import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 public class Gui extends JFrame {
 	public static final  String name="JWeatherWatch";
-	public static final String version="v1.2";
+	public static final String version="v1.2.1";
 	
 
 	private NotificationThread notificationthread=null;  //  @jve:decl-index=0:
@@ -76,9 +76,10 @@ public class Gui extends JFrame {
 	 */
 	public Gui() {
 		super();	
+		getSettings();
 		initialize();
 		NotificationConnector.initialize(getTrayIcon());
-		NotificationConnector.sendNotification(null, "Snarl Weather Watch",
+		NotificationConnector.sendNotification("Startup", "Snarl Weather Watch",
 		"Snarl Weather Watch succsessfully registered","");
 		load();
 		setNotificationthread(new NotificationThread(locations,30));
@@ -612,9 +613,13 @@ public class Gui extends JFrame {
 	}
 
 	public void close() {
+		
+		
+		
+		ACCUWeatherFetcher.save(locations);
+		getSettings().save();
 		NotificationConnector.exit();
 		SystemTray.getSystemTray().remove(trayIcon);
-		ACCUWeatherFetcher.save(locations);
 
 	}
 
