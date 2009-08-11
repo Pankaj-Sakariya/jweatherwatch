@@ -2,12 +2,13 @@ package net.Notifer.Notifers;
 
 import gui.Gui;
 import net.Notifer.Notifer;
+import net.Notifer.NotiferTypes;
 import at.dotti.snarl.Snarl4Java;
 
 public class Snarl implements Notifer {
 
 	@Override
-	public boolean laod() {
+	public boolean laod(String[] notifications) {
 		try {
 			System.loadLibrary("lib/snarl4java");
 		} catch (UnsatisfiedLinkError e) {
@@ -31,6 +32,16 @@ public class Snarl implements Notifer {
 	public void unload() {
 		Snarl4Java.snRevokeConfig(111);
 
+	}
+
+	@Override
+	public void send(String alert, String title, String description) {
+		send(alert, title, description, null);
+		
+	}
+	 @Override
+	public NotiferTypes getName() {
+	return NotiferTypes.Snarl;
 	}
 
 }

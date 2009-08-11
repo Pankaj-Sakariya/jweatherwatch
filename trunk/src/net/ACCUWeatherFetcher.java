@@ -1,5 +1,7 @@
 package net;
 
+import gui.Gui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -91,23 +93,23 @@ public class ACCUWeatherFetcher {
 	public static void save(LocationList locationList) {
 		PrintWriter out = null;
 		try {
-			if (!new File(homeDirectory + "/.SnarlWeatherWatch").exists())
-				new File(homeDirectory + "/.SnarlWeatherWatch").mkdir();
+			if (!new File(homeDirectory + "/."+Gui.name).exists())
+				new File(homeDirectory + "/."+Gui.name).mkdir();
 			out = new PrintWriter(new FileOutputStream(homeDirectory
-					+ "/.SnarlWeatherWatch/profile.xml"));
+					+ "/."+Gui.name+"/profile.xml"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		out.println("<SnarlWeatherWatchProfile>");
+		out.println("<"+Gui.name+"Profile>");
 		out.println("<unitCode>" + unitCode + "</unitCode>");
 		out.println(locationList.toXML());
-		out.println("</SnarlWeatherWatchProfile>");
+		out.println("</"+Gui.name+"Profile>");
 		out.close();
 	}
 
 	public static LocationList load() {
-		if (!new File(homeDirectory + "/.SnarlWeatherWatch/profile.xml")
+		if (!new File(homeDirectory + "/."+Gui.name+"/profile.xml")
 				.exists())
 			return new LocationList();
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
@@ -117,7 +119,7 @@ public class ACCUWeatherFetcher {
 		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
 			doc = docBuilder.parse(homeDirectory
-					+ "/.SnarlWeatherWatch/profile.xml");
+					+ "/."+Gui.name+"/profile.xml");
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,7 +134,7 @@ public class ACCUWeatherFetcher {
 		if (doc.getElementsByTagName("unitCode").item(0) != null)
 			unitCode = UnitCode.valueOf(Utils.getXMLValue(
 					((Element) (doc
-							.getElementsByTagName("SnarlWeatherWatchProfile")
+							.getElementsByTagName(""+Gui.name+"Profile")
 							.item(0))), "unitCode"));
 		LocationList locationList = null;
 		if (doc.getElementsByTagName("locations").item(0) != null) {
@@ -169,6 +171,9 @@ public class ACCUWeatherFetcher {
 			elements[i] = (Element) nodes.item(i);
 		}
 		return elements;
+	}
+	public static String getHomeDirectory() {
+		return homeDirectory;
 	}
 
 }

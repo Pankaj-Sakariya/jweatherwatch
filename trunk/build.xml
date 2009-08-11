@@ -11,7 +11,7 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<javac srcdir="./src" destdir="./comp"  classpath="./lib/growlwrapper.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar" >
+		<javac srcdir="./src" destdir="./comp"  classpath="./lib/libgrowl.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar" >
 		</javac>
 	</target>
 
@@ -19,7 +19,7 @@
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="gui.Gui" />
-				<attribute name="Class-Path" value=". ./lib/Snarl4Java-0.1.1.jar ./lib/growlwrapper.jar ./lib/SnarlNetworkeBridge.jar" />
+				<attribute name="Class-Path" value=". ./lib/Snarl4Java-0.1.1.jar ./lib/libgrowl.jar ./lib/SnarlNetworkeBridge.jar" />
 			</manifest>
 			<fileset dir="./comp" />
 			<fileset dir="./data"/>

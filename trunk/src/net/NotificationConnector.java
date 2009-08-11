@@ -2,30 +2,41 @@ package net;
 
 import java.awt.TrayIcon;
 
+import net.Notifer.NetNotifer;
 import net.Notifer.Notifer;
+import net.Notifer.Notifers.NetGrowl;
+import net.Notifer.Notifers.NetSnarl;
+import net.Notifer.Notifers.Snarl;
+import net.Notifer.Notifers.TrayNotification;
 
 public class NotificationConnector {
 
 	private static Notifer notifer;
+	public final static String[] notifications = new String[] { "Startup",
+			"Forecast Weather Notification", "Current Weather Notification" };
+	private static String host="localhost";
 
 	public static void initialize(TrayIcon trayIcon) {
+		if(notifer!=null)return;
+
 		switch (Utils.getOS()) {
 		case WINDOWS:
-			notifer = new net.Notifer.Notifers.Snarl();
-			if (notifer.laod())
+			notifer = new Snarl();
+			if (notifer.laod(notifications))
 				return;
-			notifer = new net.Notifer.Notifers.NetSnarl();
-			if (notifer.laod())
+			notifer = new NetSnarl();
+			if (((NetNotifer)notifer).load(notifications, host))
 				return;
 			break;
 		case MAC:
-			notifer = new net.Notifer.Notifers.Growl();
-			if (notifer.laod())
+			notifer = new NetGrowl();
+			if (((NetNotifer)notifer).load(notifications, host))
 				return;
 			break;
 		}
 
-		notifer = new net.Notifer.Notifers.TrayNotification(trayIcon);
+		notifer = new TrayNotification(trayIcon);
+
 	}
 
 	public static void sendNotification(String alert, String title,
@@ -35,15 +46,30 @@ public class NotificationConnector {
 					.println("NotificationConnector is not initialized, please run \"NotificationConnector.initialize(trayicon);\" firs.");
 			return;
 		}
-		notifer.send(alert, title, description, System.getProperty("user.dir")
-				+ "/iconset/" + iconPath + ".png");
+		if (iconPath != null&&!iconPath.equals("") )
+			notifer.send(alert, title, description, System
+					.getProperty("user.dir")
+					+ "/iconset/" + iconPath + ".png");
+		else
+			notifer.send(alert, title, description);
 	}
 
 	public static boolean setNotifer(Notifer notifer2) {
+		if(notifer!=null&&notifer2.getName()==notifer.getName())
+			return false;
 		if (notifer != null)
 			notifer.unload();
-		if (notifer2.laod()) {
+		if(notifer2 instanceof NetNotifer)
+		{
+			if(((NetNotifer) notifer2).load(notifications, host)){
+				notifer = notifer2;
+				sendNotification("Startup", "Notifer Changed", "Notifer succsessfully chanegd", null);
+				return true;
+			}
+		}else
+		if (notifer2.laod(notifications)) {
 			notifer = notifer2;
+			sendNotification("Startup", "Notifer Changed", "Notifer succsessfully chanegd", null);
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");
@@ -57,5 +83,18 @@ public class NotificationConnector {
 	public static Notifer getNotifer() {
 		return notifer;
 	}
+	
+	public static String getHost() {
+		return host;
+	}
+	public static void setHost(String host) {
+		NotificationConnector.host = host;		
+		if (notifer instanceof NetNotifer) {
+			((NetNotifer) NotificationConnector.getNotifer())
+					.setHost(NotificationConnector.host);
+		}
+		
+	}
+
 
 }
