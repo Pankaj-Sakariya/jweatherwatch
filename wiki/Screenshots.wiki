@@ -4,7 +4,7 @@ http://jweatherwatch.googlecode.com/svn/images/Capture.png
 ===KDE 4===
 http://jweatherwatch.googlecode.com/svn/images/kde.png
 ==Notifications==
-===Windows Snarl===
+===Windows===
 Snarl 
 http://www.fullphat.net/applications/Misc/jWeatherWatch/jWeatherWatch.png 
 SnarlNetwork
