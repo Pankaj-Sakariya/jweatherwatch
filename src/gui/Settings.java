@@ -90,8 +90,8 @@ public class Settings extends JFrame {
 
 	private void loadSettings() {
 		if (NotificationConnector.getNotifer() instanceof NetNotifer) {
-			jTextField_Host.setText(((NetNotifer) NotificationConnector
-					.getNotifer()).getHost());
+			jTextField_Host.setText( NotificationConnector
+					.getHost());
 		}
 		if (parent.getNotificationthread() != null)
 			jTextField_NotificationInterval.setText(String.valueOf(parent
