@@ -14,5 +14,7 @@ GrowlNetwork
 http://jweatherwatch.googlecode.com/svn/images/win_gntp.png
 ===Defaul Windows===
 http://jweatherwatch.googlecode.com/svn/images/standartnotificationpng.png
-===Default KDE4===
+===KDE4===
+http://jweatherwatch.googlecode.com/svn/images/knotify.png
+===Linux/X11==
 http://jweatherwatch.googlecode.com/svn/images/default-kde.png
