@@ -138,7 +138,7 @@ public class Settings extends JFrame {
 			jLabel1.setText("minutes");
 			jLabel = new JLabel();
 			jLabel.setBounds(new Rectangle(30, 120, 151, 16));
-			jLabel.setText("Notification Interval:");
+			jLabel.setText("Notification Interval, 0 to deactivate:");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getJTextField_NotificationInterval(), null);

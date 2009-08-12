@@ -8,6 +8,7 @@ public class NotificationThread extends Thread {
 	private LocationList locationList=null;
 	private int interval=0;
 	public NotificationThread(LocationList locationList, int interval) {
+		if(interval==0)return;
 		this.locationList=locationList;
 		this.interval=interval;
 		this.start();
@@ -22,7 +23,7 @@ public class NotificationThread extends Thread {
 					l.getCurrentWeather().getNotification(),l.getCurrentWeather().getWeathericon());		
 			}
 			try{
-				Thread.sleep(interval*10000);
+				Thread.sleep(interval* 60000);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
