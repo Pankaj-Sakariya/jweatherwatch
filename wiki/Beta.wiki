@@ -8,4 +8,4 @@ If you interested in testing goon download it and write a comment.
  * Changing the Notification system while the programme is running.
  * Support for Growl, only tested on windows with [http://growl.info/index.php Growl for Windows], need a mac tester
 
-[http://jweatherwatch.googlecode.com/files/jWeatherWatch.tar.gz jWeatherWatch v1.2.5 Beta.tar.gz]
+[http://jweatherwatch.googlecode.com/files/jWeatherWatch%20v1.2.5.1%20Beta.tar.gz jWeatherWatch v1.2.5.1 Beta]
