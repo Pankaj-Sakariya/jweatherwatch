@@ -16,8 +16,12 @@ public class NotificationThread extends Thread {
 	@Override
 	public void run() {
 		threadRun=true;
+		try{
+			Thread.sleep(interval* 60000);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		while (threadRun){		
-		
 			for(Location l:locationList){
 			NotificationConnector.sendNotification("Current Weather Notification", l.toString(),
 					l.getCurrentWeather().getNotification(),l.getCurrentWeather().getWeathericon());		
