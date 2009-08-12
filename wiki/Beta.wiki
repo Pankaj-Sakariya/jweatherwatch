@@ -6,6 +6,8 @@ If you interested in testing goon download it and write a comment.
  * New in this version is the automatic loading and saving of the settings.
  * The possibility to Change the host in Notification systems which support remote hosts.
  * Changing the Notification system while the programme is running.
- * Support for Growl, only tested on windows with [http://growl.info/index.php Growl for Windows], need a mac tester
+ * Support for Growl using GNTP, only tested on windows with [http://growl.info/index.php Growl for Windows]
+ * Support for KNotify on KDE4
+
 
 [http://jweatherwatch.googlecode.com/files/jWeatherWatch%20v1.2.5.1%20Beta.tar.gz jWeatherWatch v1.2.5.1 Beta]
