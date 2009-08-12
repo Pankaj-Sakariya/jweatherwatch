@@ -1,3 +1,6 @@
+==jWeatherWatch v1.2.5.2 Beta==
+ * Fixed Notification timer, incorrect conversion from ms to min
+
 ==jWeatherWatch v1.2.5.1 Beta==
  * New in this version is the automatic loading and saving of the settings.
  * The possibility to Change the host in Notification systems which support remote hosts.
