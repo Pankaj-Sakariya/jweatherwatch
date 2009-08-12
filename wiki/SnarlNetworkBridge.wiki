@@ -1,5 +1,4 @@
 #labels Featured
-=SnarlNetworkbridge=
 Snarlnetworkbridge is a java implementation of the SNP protocol for Snarl.
 it makes it Eays tro use the Snarl Network Protocol.
 
