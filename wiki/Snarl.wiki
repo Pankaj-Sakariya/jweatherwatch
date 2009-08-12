@@ -1,5 +1,5 @@
 #labels Featured
-Snarl is a notification system for Windows. It provides a standard, simple way for application to notify you, the end user, of important events. </br>
+Snarl is a notification system for Windows. It provides a standard, simple way for application to notify you, the end user, of important events. <br>
 [http://www.fullphat.net/ Get Snarl]
 
 [http://www.fullphat.net/applications/Misc/jWeatherWatch/jWeatherWatch.png]
