@@ -2,5 +2,5 @@ package net.Notifer;
 
 
 public enum NotiferTypes {
-	Snarl,NetSnarl,NetGrowl,TrayIcon
+	Snarl,NetSnarl,NetGrowl,TrayIcon,KNotify
 }

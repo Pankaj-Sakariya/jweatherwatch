@@ -31,8 +31,9 @@ public class NetGrowl implements NetNotifer {
 			notificationTypes[i] = new NotificationType(notifications[i]);
 		}		
 
-		growlConnector.register(application, notificationTypes);
-		return true;
+		
+		return growlConnector.register(application, notificationTypes)==0;
+
 	}
 
 	@Override

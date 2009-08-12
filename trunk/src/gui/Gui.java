@@ -30,7 +30,7 @@ import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 public class Gui extends JFrame {
 	public static final  String name="JWeatherWatch";
-	public static final String version="v1.2.5 Beta";
+	public static final String version="v1.2.5.1 Beta";
 	
 
 	private NotificationThread notificationthread=null;  //  @jve:decl-index=0:
@@ -79,8 +79,7 @@ public class Gui extends JFrame {
 		getSettings();
 		initialize();
 		NotificationConnector.initialize(getTrayIcon());
-		NotificationConnector.sendNotification("Startup", "Snarl Weather Watch",
-		"Snarl Weather Watch succsessfully registered","");
+	
 		load();
 		setNotificationthread(new NotificationThread(locations,30));
 
@@ -429,20 +428,29 @@ public class Gui extends JFrame {
 			jRadioButton_English
 					.addItemListener(new java.awt.event.ItemListener() {
 						public void itemStateChanged(java.awt.event.ItemEvent e) {
-							if (jRadioButton_English.isSelected())
-								ACCUWeatherFetcher
-										.setUnitCode(UnitCode.English);
-							else
-								ACCUWeatherFetcher.setUnitCode(UnitCode.Metric);
-							for (Location l : locations) {
-								l.update();
-							}
-							if (locations.size() != 0)
-								updateWeather(locations.get(jScrollBar
-										.getValue()));
+							new Thread(){
+								@Override
+								public void run() {
+									imageBox_Loading.setVisible(true);
+									if (jRadioButton_English.isSelected())
+										ACCUWeatherFetcher
+												.setUnitCode(UnitCode.English);
+									else
+										ACCUWeatherFetcher.setUnitCode(UnitCode.Metric);
+									
+									for (Location l : locations) {
+										l.update();
+									}
+									if (locations.size() != 0)
+										updateWeather(locations.get(jScrollBar
+												.getValue()));
+									imageBox_Loading.setVisible(false);
 
+								}
+								
+							}.start();
+							
 						}
-
 					});
 		}
 		return jRadioButton_English;
