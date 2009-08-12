@@ -1,3 +1,4 @@
+#labels Featured
 [http://api.kde.org/4.x-api/kdebase-runtime-apidocs/knotify/html/index.html The KDE notification daemon]
 <br>
 [http://jweatherwatch.googlecode.com/svn/images/knotify.png]
