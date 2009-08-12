@@ -39,14 +39,16 @@ public class NetGrowl implements NetNotifer {
 	@Override
 	public void send(String alert, String title, String description,
 			String iconPath) {
-		growlConnector.notify(new Notification(application,
-				getNotification(alert), title, description));
+		Notification notification=new Notification(application,
+				getNotification(alert), title, description);
+		notification.setIcon(iconPath);
+		growlConnector.notify(notification);
 
 	}
 
 	@Override
 	public void send(String alert, String title, String description) {
-		send(alert, title, description, null);
+		send(alert, title, description, "");
 
 	}
 

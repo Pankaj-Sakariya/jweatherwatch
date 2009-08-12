@@ -30,7 +30,7 @@ import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 public class Gui extends JFrame {
 	public static final  String name="JWeatherWatch";
-	public static final String version="v1.2.5.1 Beta";
+	public static final String version="v1.2.5.3 Beta";
 	
 
 	private NotificationThread notificationthread=null;  //  @jve:decl-index=0:
