@@ -1,3 +1,4 @@
+#labels Featured
 ==jWeatherWatch v1.2.5.2 Beta==
  * Fixed Notification timer, incorrect conversion from ms to min
 
