@@ -1,5 +1,5 @@
 #labels Featured
 =On Windows=
 [http://jweatherwatch.googlecode.com/svn/images/standartnotificationpng.png]
-=On Linux0
+=On Linux=
 [http://jweatherwatch.googlecode.com/svn/images/default-kde.png]
