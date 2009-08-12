@@ -1,4 +1,3 @@
-#labels Featured
 =On Windows=
 [http://jweatherwatch.googlecode.com/svn/images/standartnotificationpng.png]
 =On Linux=
