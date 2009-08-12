@@ -25,6 +25,7 @@ import net.Utils;
 import net.Notifer.NetNotifer;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
+import net.Notifer.Notifers.KNotify;
 import net.Notifer.Notifers.NetGrowl;
 import net.Notifer.Notifers.NetSnarl;
 import net.Notifer.Notifers.Snarl;
@@ -57,6 +58,7 @@ public class Settings extends JFrame {
 	private JToggleButton jToggleButton_NetGrowl = null;
 
 	private JToggleButton jToggleButton_Trayicon = null;
+	private JToggleButton jToggleButton_KNotify =null;
 
 	/**
 	 * This is the default constructor
@@ -95,7 +97,8 @@ public class Settings extends JFrame {
 			jTextField_NotificationInterval.setText(String.valueOf(parent
 					.getNotificationthread().getInterval()));
 		else
-			parent.setNotificationthread(new NotificationThread(parent.getLocations(), 30));
+			parent.setNotificationthread(new NotificationThread(parent
+					.getLocations(), 30));
 		switch (NotificationConnector.getNotifer().getName()) {
 		case Snarl:
 			jToggleButton_Snarl.setSelected(true);
@@ -108,6 +111,9 @@ public class Settings extends JFrame {
 			break;
 		case TrayIcon:
 			jToggleButton_Trayicon.setSelected(true);
+			break;
+		case KNotify:
+			jToggleButton_KNotify.setSelected(true);
 			break;
 		default:
 			break;
@@ -147,11 +153,13 @@ public class Settings extends JFrame {
 			jContentPane.add(getJToggleButton_NetGrowl(), null);
 			jContentPane.add(getJToggleButton_Trayicon(), null);
 			jContentPane.add(getJToggleButton_SnarlNetbridge(), null);
+			jContentPane.add(getjToggleButton_KNotify(),null);
 			ButtonGroup bg = new ButtonGroup();
 			bg.add(jToggleButton_NetGrowl);
 			bg.add(jToggleButton_SnarlNetbridge);
 			bg.add(jToggleButton_Snarl);
 			bg.add(jToggleButton_Trayicon);
+			bg.add(jToggleButton_KNotify);
 		}
 		return jContentPane;
 	}
@@ -312,7 +320,7 @@ public class Settings extends JFrame {
 	private JToggleButton getJToggleButton_Trayicon() {
 		if (jToggleButton_Trayicon == null) {
 			jToggleButton_Trayicon = new JToggleButton();
-			jToggleButton_Trayicon.setBounds(new Rectangle(75, 75, 91, 16));
+			jToggleButton_Trayicon.setBounds(new Rectangle(75, 90, 91, 16));
 			jToggleButton_Trayicon.setText("Trayicon");
 			jToggleButton_Trayicon
 					.addItemListener(new java.awt.event.ItemListener() {
@@ -327,6 +335,25 @@ public class Settings extends JFrame {
 
 		}
 		return jToggleButton_Trayicon;
+	}
+	
+	private JToggleButton getjToggleButton_KNotify() {
+		if (jToggleButton_KNotify == null) {
+			jToggleButton_KNotify= new JToggleButton();
+			jToggleButton_KNotify.setBounds(new Rectangle(75, 75, 91, 16));
+			jToggleButton_KNotify.setText("KNotify");
+			jToggleButton_KNotify
+					.addItemListener(new java.awt.event.ItemListener() {
+						public void itemStateChanged(java.awt.event.ItemEvent e) {
+							if (jToggleButton_KNotify.isSelected()) {
+								NotificationConnector
+										.setNotifer(new KNotify());
+							}
+						}
+					});
+
+		}
+		return jToggleButton_KNotify;
 	}
 
 	private boolean loadFromFile() {
@@ -371,7 +398,8 @@ public class Settings extends JFrame {
 		case TrayIcon:
 			notifer2 = new TrayNotification(parent.getTrayIcon());
 			break;
-		default:
+		case KNotify:
+			notifer2 = new KNotify();
 			break;
 		}
 

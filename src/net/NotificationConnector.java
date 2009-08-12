@@ -1,9 +1,12 @@
 package net;
 
+import gui.Gui;
+
 import java.awt.TrayIcon;
 
 import net.Notifer.NetNotifer;
 import net.Notifer.Notifer;
+import net.Notifer.Notifers.KNotify;
 import net.Notifer.Notifers.NetGrowl;
 import net.Notifer.Notifers.NetSnarl;
 import net.Notifer.Notifers.Snarl;
@@ -21,21 +24,25 @@ public class NotificationConnector {
 
 		switch (Utils.getOS()) {
 		case WINDOWS:
-			notifer = new Snarl();
+			setNotifer(new Snarl());
 			if (notifer.laod(notifications))
 				return;
-			notifer = new NetSnarl();
+			setNotifer(new NetSnarl());
 			if (((NetNotifer)notifer).load(notifications, host))
 				return;
 			break;
 		case MAC:
-			notifer = new NetGrowl();
+			setNotifer( new NetGrowl());
 			if (((NetNotifer)notifer).load(notifications, host))
 				return;
 			break;
+		case LINUX:
+			setNotifer(new KNotify());
+			if (notifer.laod(notifications))
+				return;			
 		}
 
-		notifer = new TrayNotification(trayIcon);
+		setNotifer( new TrayNotification(trayIcon));
 
 	}
 
@@ -63,13 +70,15 @@ public class NotificationConnector {
 		{
 			if(((NetNotifer) notifer2).load(notifications, host)){
 				notifer = notifer2;
-				sendNotification("Startup", "Notifer Changed", "Notifer succsessfully chanegd", null);
+				NotificationConnector.sendNotification("Startup", Gui.name+" "+Gui.version,
+						Gui.name+" "+Gui.version +" succsessfully registered wit "+notifer2.getName(),null);
 				return true;
 			}
 		}else
 		if (notifer2.laod(notifications)) {
 			notifer = notifer2;
-			sendNotification("Startup", "Notifer Changed", "Notifer succsessfully chanegd", null);
+			NotificationConnector.sendNotification("Startup", Gui.name+" "+Gui.version,
+					Gui.name+" "+Gui.version +" succsessfully registered wit "+notifer2.getName(),null);
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");
