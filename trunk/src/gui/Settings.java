@@ -138,7 +138,7 @@ public class Settings extends JFrame {
 			jLabel1.setText("minutes");
 			jLabel = new JLabel();
 			jLabel.setBounds(new Rectangle(30, 120, 151, 16));
-			jLabel.setText("Notification Interval, 0 to deactivate:");
+			jLabel.setText("Notification Interval:");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getJTextField_NotificationInterval(), null);
@@ -177,6 +177,7 @@ public class Settings extends JFrame {
 			jTextField_NotificationInterval
 					.setHorizontalAlignment(JTextField.TRAILING);
 			jTextField_NotificationInterval.setText("30");
+			jTextField_NotificationInterval.setToolTipText("0 to deactivate");
 		}
 		return jTextField_NotificationInterval;
 	}
@@ -280,6 +281,7 @@ public class Settings extends JFrame {
 						public void itemStateChanged(java.awt.event.ItemEvent e) {
 							if (jToggleButton_Snarl.isSelected()) {
 								NotificationConnector.setNotifer(new Snarl());
+								loadSettings();
 							}
 						}
 					});
@@ -304,6 +306,7 @@ public class Settings extends JFrame {
 							if (jToggleButton_NetGrowl.isSelected()) {
 								NotificationConnector
 										.setNotifer(new NetGrowl());
+								loadSettings();
 							}
 						}
 					});
@@ -329,6 +332,7 @@ public class Settings extends JFrame {
 								NotificationConnector
 										.setNotifer(new TrayNotification(parent
 												.getTrayIcon()));
+								loadSettings();
 							}
 						}
 					});
@@ -348,6 +352,7 @@ public class Settings extends JFrame {
 							if (jToggleButton_KNotify.isSelected()) {
 								NotificationConnector
 										.setNotifer(new KNotify());
+								loadSettings();
 							}
 						}
 					});

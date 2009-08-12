@@ -16,9 +16,6 @@ public class Splash extends JPanel {
 	Utils utils=new Utils();
 	private JLabel jLabel = null;
 	private JLabel jLabel1 = null;
-	private JLabel jLabel2 = null;
-	private ImageBox imageBox1 = null;
-
 	/**
 	 * This is the default constructor
 	 */
@@ -33,9 +30,6 @@ public class Splash extends JPanel {
 	 * @return void
 	 */
 	private void initialize() {
-		jLabel2 = new JLabel();
-		jLabel2.setBounds(new Rectangle(150, 150, 226, 31));
-		jLabel2.setText("Snarl WeatherWatcher is powered by:");
 		jLabel1 = new JLabel();
 		jLabel1.setBounds(new Rectangle(150, 90, 631, 31));
 		jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -49,8 +43,6 @@ public class Splash extends JPanel {
 		this.add(getImageBox(), null);
 		this.add(jLabel, null);
 		this.add(jLabel1, null);
-		this.add(jLabel2, null);
-		this.add(getImageBox1(), null);
 	}
 
 	/**
@@ -68,20 +60,6 @@ public class Splash extends JPanel {
 		return imageBox;
 	}
 
-	/**
-	 * This method initializes imageBox1	
-	 * 	
-	 * @return gui.ImageBox	
-	 */
-	private ImageBox getImageBox1() {
-		if (imageBox1 == null) {
-			imageBox1 = new ImageBox();
-			imageBox1.setBounds(new Rectangle(375, 150, 226, 31));
-			imageBox1.setImage(utils
-				.imageLodaer("logo/accuweather_logotype_color.png"));
-		}
-		return imageBox1;
-	}
 	public void setLoadingText(String s){
 		jLabel1.setText(s);
 	}
