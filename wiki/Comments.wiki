@@ -1,1 +1,1 @@
-==This is the Comment Area if you have some feature request or simply like this programme please leave a comment==
+This is the Comment Area<br> If you have some feature request or simply like this programme,<br> feel free to leave a comment
