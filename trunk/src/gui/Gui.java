@@ -30,8 +30,8 @@ import net.ACCUWeather.WeatherSubtypes.Day;
 import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 public class Gui extends JFrame {
-	private NotificationThread notificationthread=null;  //  @jve:decl-index=0:
-	
+	private NotificationThread notificationthread = null; // @jve:decl-index=0:
+
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
 	private JScrollBar jScrollBar = null;
@@ -65,28 +65,29 @@ public class Gui extends JFrame {
 	private ImageBox imageBox_Loading = null;
 	private Splash splash = null; // @jve:decl-index=0:visual-constraint="277,470"
 	private boolean adding;
-	private WeatherTrayIcon trayIcon=null;
-	private SettingsDialog settings = null;  //  @jve:decl-index=0:visual-constraint="-3,68"
+	private WeatherTrayIcon trayIcon = null;
+	private SettingsDialog settings = null; // @jve:decl-index=0:visual-constraint="-3,68"
 
 	/**
 	 * This is the default constructor
 	 */
 	public Gui(int windowstate) {
-		super();		
+		super();
 		try {
 			SystemTray.getSystemTray().add(getTrayIcon());
 
 		} catch (AWTException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}	
+		}
 		Settings.load(this);
 		initialize();
 		this.setState(windowstate);
 		NotificationConnector.initialize(getTrayIcon());
-	
+
 		load();
-		setNotificationthread(new NotificationThread(locations,Settings.notificationInterval));
+		setNotificationthread(new NotificationThread(locations,
+				Settings.notificationInterval));
 
 	}
 
@@ -128,21 +129,19 @@ public class Gui extends JFrame {
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				close();
 			}
-			
 
 		});
-	
+
 		this.setVisible(true);
 
 	}
 
-
 	public WeatherTrayIcon getTrayIcon() {
-		if(trayIcon==null){
-			trayIcon=new WeatherTrayIcon(this,utils
-					.imageLodaer("logo/accuweather_logomark_color.png") );			
+		if (trayIcon == null) {
+			trayIcon = new WeatherTrayIcon(this, utils
+					.imageLodaer("logo/accuweather_logomark_color.png"));
 		}
-		
+
 		return trayIcon;
 	}
 
@@ -429,7 +428,7 @@ public class Gui extends JFrame {
 			jRadioButton_English
 					.addItemListener(new java.awt.event.ItemListener() {
 						public void itemStateChanged(java.awt.event.ItemEvent e) {
-							new Thread(){
+							new Thread() {
 								@Override
 								public void run() {
 									imageBox_Loading.setVisible(true);
@@ -437,8 +436,9 @@ public class Gui extends JFrame {
 										ACCUWeatherFetcher
 												.setUnitCode(UnitCode.English);
 									else
-										ACCUWeatherFetcher.setUnitCode(UnitCode.Metric);
-									
+										ACCUWeatherFetcher
+												.setUnitCode(UnitCode.Metric);
+
 									for (Location l : locations) {
 										l.update();
 									}
@@ -448,9 +448,9 @@ public class Gui extends JFrame {
 									imageBox_Loading.setVisible(false);
 
 								}
-								
+
 							}.start();
-							
+
 						}
 					});
 		}
@@ -510,6 +510,8 @@ public class Gui extends JFrame {
 			jComboBox_QuickSwitch
 					.addItemListener(new java.awt.event.ItemListener() {
 						public void itemStateChanged(java.awt.event.ItemEvent e) {
+							if( jComboBox_QuickSwitch
+									.getSelectedItem()==null)return;
 							updateWeather((Location) jComboBox_QuickSwitch
 									.getSelectedItem());
 							jScrollBar.setValue(jComboBox_QuickSwitch
@@ -535,11 +537,17 @@ public class Gui extends JFrame {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 							jComboBox_QuickSwitch.removeItem(locations
 									.remove(jScrollBar.getValue()));
-							updateWeather(locations.get(locations.size() - 1));
-							jComboBox_QuickSwitch.setSelectedIndex(locations
-									.size() - 1);
-							jScrollBar.setValues(locations.size() - 1, 1, 0,
-									locations.size() - 1);
+							if (locations.size() != 0) {
+								updateWeather(locations.get(0));
+								jScrollBar.setValues(jComboBox_QuickSwitch
+										.getSelectedIndex(), 1, 0, locations
+										.size() - 1);
+							} else {
+								jScrollBar.setMaximum(0);
+								weatherPanel.clear();
+								weatherPanel_Day1.clear();
+								weatherPanel_Day2.clear();
+							}
 
 						}
 					});
@@ -622,9 +630,7 @@ public class Gui extends JFrame {
 	}
 
 	public void close() {
-		
-		
-		
+
 		ACCUWeatherFetcher.save(locations);
 		Settings.save();
 		NotificationConnector.exit();
@@ -646,7 +652,7 @@ public class Gui extends JFrame {
 		jScrollBar.setValues(locations.size() - 1, 1, 0, locations.size() - 1);
 		imageBox_Loading.setVisible(false);
 		adding = false;
-	
+
 	}
 
 	void updateWeather(Location location) {
@@ -660,7 +666,7 @@ public class Gui extends JFrame {
 				.getDay(jScrollBar1_Forecast.getValue()).getDayNight(d));
 		weatherPanel_Day2.updateWeather(location, location.getFiveDayForecast()
 				.getDay(jScrollBar1_Forecast.getValue() + 1).getDayNight(d));
-	
+
 	}
 
 	void search() {
@@ -670,16 +676,17 @@ public class Gui extends JFrame {
 		for (Location l : loc) {
 			jComboBox_Results.addItem(l);
 		}
-	
+
 	}
+
 	public LocationList getLocations() {
 		return locations;
 	}
 
 	/**
-	 * This method initializes settings	
-	 * 	
-	 * @return gui.Settings	
+	 * This method initializes settings
+	 * 
+	 * @return gui.Settings
 	 */
 	SettingsDialog getSettings() {
 		if (settings == null) {
@@ -687,7 +694,6 @@ public class Gui extends JFrame {
 		}
 		return settings;
 	}
-	
 
 	public void setNotificationthread(NotificationThread notificationthread) {
 		this.notificationthread = notificationthread;
@@ -696,6 +702,5 @@ public class Gui extends JFrame {
 	public NotificationThread getNotificationthread() {
 		return notificationthread;
 	}
-	
 
 } // @jve:decl-index=0:visual-constraint="10,10"

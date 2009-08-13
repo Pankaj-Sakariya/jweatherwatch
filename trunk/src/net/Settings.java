@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 public class Settings {
 	public static final String name = "JWeatherWatch";
-	public static final String version = "v1.2.5.4 Beta";
+	public static final String version = "v1.2.5.5 Beta";
 	
 	private static String homeDirectory;
 	private static String workinDirectory =  System.getProperty("user.dir");
@@ -180,8 +180,7 @@ public class Settings {
 	private static void initializeHomeDirectory() {
 		switch (Utils.getOS()) {
 		case WINDOWS:
-			homeDirectory="C:\\Users\\patrick\\Desktop\\test 1\\."+name;
-			//homeDirectory = System.getenv("appdata") + "\\." + name;
+			homeDirectory = System.getenv("appdata") + "\\." + name;
 			break;
 		case LINUX:
 		case MAC:
@@ -198,8 +197,7 @@ public class Settings {
 
 	public static String getHomeDirectory() {
 		if(homeDirectory==null)
-			initializeHomeDirectory();
-		System.out.println("Your Home Directory: "+homeDirectory);
+			initializeHomeDirectory();		
 		return homeDirectory;
 	}
 	
