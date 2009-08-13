@@ -24,10 +24,6 @@ import org.xml.sax.SAXException;
 public class ACCUWeatherFetcher {
 	private static String baseURL = "http://vonreth.accu-weather.com/widget/vonreth/";
 	private static UnitCode unitCode = UnitCode.English;
-	private static String homeDirectory;
-
-	
-
 	public static LocationList search(String location) {
 		Document doc = getDocument(baseURL + "city-find.asp?location="
 				+ location);
@@ -89,9 +85,9 @@ public class ACCUWeatherFetcher {
 	public static void save(LocationList locationList) {
 		PrintWriter out = null;
 		try {
-			if (!new File(getHomeDirectory()).exists())
-				new File(homeDirectory).mkdir();
-			out = new PrintWriter(new FileOutputStream(getHomeDirectory()
+			if (!new File(Settings.getHomeDirectory()).exists())
+				new File(Settings.getHomeDirectory()).mkdir();
+			out = new PrintWriter(new FileOutputStream(Settings.getHomeDirectory()
 					+ "/profile.xml"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -105,7 +101,7 @@ public class ACCUWeatherFetcher {
 	}
 
 	public static LocationList load() {
-		if (!new File(getHomeDirectory() + "/profile.xml").exists())
+		if (!new File(Settings.getHomeDirectory() + "/profile.xml").exists())
 			return new LocationList();
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 				.newInstance();
@@ -113,7 +109,7 @@ public class ACCUWeatherFetcher {
 		Document doc = null;
 		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
-			doc = docBuilder.parse(getHomeDirectory() + "/profile.xml");
+			doc = docBuilder.parse(new File(Settings.getHomeDirectory() + "/profile.xml"));
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,24 +135,6 @@ public class ACCUWeatherFetcher {
 		return locationList;
 	}
 
-	private static void initializeHomeDirectory() {
-		switch (Utils.getOS()) {
-		case WINDOWS:
-			homeDirectory = System.getenv("appdata") + "\\." + Settings.name;
-			break;
-		case LINUX:
-		case MAC:
-			homeDirectory = System.getProperty("user.home") + "/."
-					+ Settings.name;
-			break;
-		default:
-			System.out.println("Unsopportet OS");
-			System.exit(-1);
-			break;
-		}
-
-	}
-
 	private static Element[] getXMLElements(Element doc, String tag) {
 		NodeList nodes = doc.getElementsByTagName(tag);
 		Element elements[] = new Element[nodes.getLength()];
@@ -164,12 +142,6 @@ public class ACCUWeatherFetcher {
 			elements[i] = (Element) nodes.item(i);
 		}
 		return elements;
-	}
-
-	public static String getHomeDirectory() {
-		if(homeDirectory==null)
-			initializeHomeDirectory();
-		return homeDirectory;
 	}
 
 }

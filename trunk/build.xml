@@ -15,7 +15,7 @@
 		</javac>
 	</target>
 
-	<target name="create_run_jar" depends="compile">
+	<target name="jar" depends="compile,copyfiles">
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="net.Main" />
@@ -36,7 +36,7 @@
 		</copy>
 	</target>
 
-	<target name="makeTar" depends="create_run_jar,copyfiles">
+	<target name="makeTar" depends="jar,copyfiles">
 		<tar destfile="./dist/jWeatherWatch.tar" basedir="./dist" />
 		<gzip src="./dist/jWeatherWatch.tar" destfile="./dist/jWeatherWatch.tar.gz" />
 		<delete file="./dist/jWeatherWatch.tar" />

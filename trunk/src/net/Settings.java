@@ -28,13 +28,15 @@ import org.xml.sax.SAXException;
 public class Settings {
 	public static final String name = "JWeatherWatch";
 	public static final String version = "v1.2.5.4 Beta";
+	
+	private static String homeDirectory;
 	private static String workinDirectory =  System.getProperty("user.dir");
 	private static boolean autostart=false;
 
 	public static int notificationInterval = 30;
 
 	static public boolean load(Gui parent) {
-		if (!new File(ACCUWeatherFetcher.getHomeDirectory() +  "/settings.xml").exists())
+		if (!new File(Settings.getHomeDirectory() +  "/settings.xml").exists())
 			return false;
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 				.newInstance();
@@ -42,7 +44,7 @@ public class Settings {
 		Document doc = null;
 		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
-			doc = docBuilder.parse(ACCUWeatherFetcher.getHomeDirectory() + "/settings.xml");
+			doc = docBuilder.parse(new File(Settings.getHomeDirectory() + "/settings.xml"));
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,9 +97,9 @@ public class Settings {
 	static public void save() {
 		PrintWriter out = null;
 		try {
-			if (!new File(ACCUWeatherFetcher.getHomeDirectory()).exists())
-				new File(ACCUWeatherFetcher.getHomeDirectory()).mkdir();
-			out = new PrintWriter(new FileOutputStream(ACCUWeatherFetcher
+			if (!new File(Settings.getHomeDirectory()).exists())
+				new File(Settings.getHomeDirectory()).mkdir();
+			out = new PrintWriter(new FileOutputStream(Settings
 					.getHomeDirectory() + "/settings.xml"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -127,7 +129,7 @@ public class Settings {
 	public static void addtoAutostart(){		
 		if(Utils.getOS()!=OS.WINDOWS)return;		
 		try {
-			PrintWriter out = new PrintWriter(new FileOutputStream(ACCUWeatherFetcher.getHomeDirectory()+"\\regme.reg"));
+			PrintWriter out = new PrintWriter(new FileOutputStream(Settings.getHomeDirectory()+"\\regme.reg"));
 		
 		out.println("Windows Registry Editor Version 5.00");
 		out.println();
@@ -135,7 +137,7 @@ public class Settings {
 		out.println("\"jWeatherWatch\"=\"javaw  -jar "+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\JWeatherWatch.jar -workindirectory "+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\ -minimized\"");
 		out.println();
 		out.close();
-		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", ACCUWeatherFetcher.getHomeDirectory()+"\\regme.reg"});
+		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", Settings.getHomeDirectory()+"\\regme.reg"});
 		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -151,7 +153,7 @@ public class Settings {
 	public static void removeAutostart(){
 		if(Utils.getOS()!=OS.WINDOWS)return;
 		try {
-			PrintWriter out = new PrintWriter(new FileOutputStream(ACCUWeatherFetcher.getHomeDirectory()+"regme.reg"));
+			PrintWriter out = new PrintWriter(new FileOutputStream(Settings.getHomeDirectory()+"regme.reg"));
 		
 		out.println("Windows Registry Editor Version 5.00");
 		out.println();
@@ -159,7 +161,7 @@ public class Settings {
 		out.println("\"jWeatherWatch\"=-");
 		out.println();
 		out.close();
-		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", ACCUWeatherFetcher.getHomeDirectory()+"regme.reg"});
+		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", Settings.getHomeDirectory()+"regme.reg"});
 		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -173,6 +175,32 @@ public class Settings {
 
 	public static boolean isAutostart() {
 		return autostart;
+	}
+
+	private static void initializeHomeDirectory() {
+		switch (Utils.getOS()) {
+		case WINDOWS:
+			homeDirectory="C:\\Users\\patrick\\Desktop\\test 1\\."+name;
+			//homeDirectory = System.getenv("appdata") + "\\." + name;
+			break;
+		case LINUX:
+		case MAC:
+			homeDirectory = System.getProperty("user.home") + "/."
+					+ name;
+			break;
+		default:
+			System.out.println("Unsopportet OS");
+			System.exit(-1);
+			break;
+		}
+	
+	}
+
+	public static String getHomeDirectory() {
+		if(homeDirectory==null)
+			initializeHomeDirectory();
+		System.out.println("Your Home Directory: "+homeDirectory);
+		return homeDirectory;
 	}
 	
 	
