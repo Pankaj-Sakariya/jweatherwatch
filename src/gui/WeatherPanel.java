@@ -94,6 +94,9 @@ public class WeatherPanel extends JPanel implements Runnable {
 			jLabel_other.setToolTipText(tooltip);
 
 		}
+		if(!imageBox.isVisible())
+			for(Component c:getComponents())
+				c.setVisible(true);
 
 	}
 
@@ -178,8 +181,11 @@ public class WeatherPanel extends JPanel implements Runnable {
 
 	private void updateTime() {
 		Calendar c = location.getCurrentTime();
-		jLabel_other.setText(c.get(Calendar.HOUR_OF_DAY) + ":"
-				+ c.get(Calendar.MINUTE));
+		String hour=c.get(Calendar.HOUR_OF_DAY)+"";
+		String min=c.get(Calendar.MINUTE)+"";
+		if(Integer.valueOf(hour)<10)hour="0"+hour;
+		if(Integer.valueOf(min)<10)min="0"+min;
+		jLabel_other.setText(hour+":"+min);
 	}
 	
 	public void clear(){
