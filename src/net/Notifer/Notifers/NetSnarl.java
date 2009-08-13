@@ -1,5 +1,6 @@
 package net.Notifer.Notifers;
 
+import net.Settings;
 import net.Notifer.NetNotifer;
 import net.Notifer.NotiferTypes;
 import net.snarl.SnarlNetworkBridge;
@@ -14,7 +15,7 @@ public class NetSnarl implements NetNotifer {
 
 	@Override
 	public boolean load(String[] notifications, String host) {
-		snarl = new SnarlNetworkBridge("ACCUWeather", host);
+		snarl = new SnarlNetworkBridge(Settings.name, host);
 		snarl.snRegisterConfig();
 		for (String s : notifications) {
 			snarl.snRegisterAlert(s);

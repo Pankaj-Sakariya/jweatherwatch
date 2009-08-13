@@ -27,7 +27,6 @@ public class NotificationConnector {
 				return;
 			if (setNotifer(new NetSnarl()))
 				return;
-			break;
 		case MAC:			
 			if (setNotifer(new NetGrowl()))
 				return;
