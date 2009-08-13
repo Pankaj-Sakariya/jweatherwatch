@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import net.NotificationConnector;
+import net.Settings;
 import net.ACCUWeather.Location;
 
 public class WeatherTrayIcon extends TrayIcon {
@@ -18,11 +19,11 @@ public class WeatherTrayIcon extends TrayIcon {
 	Gui parent = null;
 
 	public WeatherTrayIcon(final Gui parent, Image image) {
-		super(image, Gui.name);
+		super(image, Settings.name);
 		this.parent = parent;
 
 		this.setImageAutoSize(true);
-		this.setToolTip(Gui.name + " " + Gui.version);
+		this.setToolTip(Settings.name + " " + Settings.version);
 		this.addActionListener(new ActionListener() {
 
 			@Override
@@ -87,7 +88,7 @@ public class WeatherTrayIcon extends TrayIcon {
 				}
 			});
 
-			popupMenu.add(new MenuItem(Gui.name + " " + Gui.version));
+			popupMenu.add(new MenuItem(Settings.name + " " + Settings.version));
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(settings);
 			popupMenu.add(new MenuItem("-"));

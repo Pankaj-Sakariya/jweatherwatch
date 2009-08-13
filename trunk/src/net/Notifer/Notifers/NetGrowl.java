@@ -1,10 +1,11 @@
 package net.Notifer.Notifers;
 
-import gui.Gui;
+import net.Settings;
 import net.Notifer.NetNotifer;
 import net.Notifer.NotiferTypes;
 import net.sf.libgrowl.Application;
 import net.sf.libgrowl.GrowlConnector;
+import net.sf.libgrowl.IResponse;
 import net.sf.libgrowl.Notification;
 import net.sf.libgrowl.NotificationType;
 
@@ -23,8 +24,7 @@ public class NetGrowl implements NetNotifer {
 	public boolean load(String[] notifications, String host){
 		this.host=host;	
 		growlConnector = new GrowlConnector(host);
-		application = new Application(Gui.name + " " + Gui.version, System
-				.getProperty("user.dir")
+		application = new Application(Settings.name, Settings.getWorkindirectory()
 				+ "/iconset/01.png");
 		notificationTypes = new NotificationType[notifications.length];
 		for (int i = 0; i < notifications.length; ++i) {
@@ -32,7 +32,8 @@ public class NetGrowl implements NetNotifer {
 		}		
 
 		
-		return growlConnector.register(application, notificationTypes)==0;
+		return growlConnector.register(application, notificationTypes)==IResponse.OK;
+		
 
 	}
 

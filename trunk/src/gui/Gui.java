@@ -22,6 +22,7 @@ import javax.swing.border.EtchedBorder;
 import net.ACCUWeatherFetcher;
 import net.NotificationConnector;
 import net.NotificationThread;
+import net.Settings;
 import net.Utils;
 import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
@@ -29,10 +30,6 @@ import net.ACCUWeather.WeatherSubtypes.Day;
 import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 public class Gui extends JFrame {
-	public static final  String name="JWeatherWatch";
-	public static final String version="v1.2.5.3 Beta";
-	
-
 	private NotificationThread notificationthread=null;  //  @jve:decl-index=0:
 	
 	private static final long serialVersionUID = 1L;
@@ -69,19 +66,27 @@ public class Gui extends JFrame {
 	private Splash splash = null; // @jve:decl-index=0:visual-constraint="277,470"
 	private boolean adding;
 	private WeatherTrayIcon trayIcon=null;
-	private Settings settings = null;  //  @jve:decl-index=0:visual-constraint="-3,68"
+	private SettingsDialog settings = null;  //  @jve:decl-index=0:visual-constraint="-3,68"
 
 	/**
 	 * This is the default constructor
 	 */
-	public Gui() {
-		super();	
-		getSettings();
+	public Gui(int windowstate) {
+		super();		
+		try {
+			SystemTray.getSystemTray().add(getTrayIcon());
+
+		} catch (AWTException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		Settings.load(this);
 		initialize();
+		this.setState(windowstate);
 		NotificationConnector.initialize(getTrayIcon());
 	
 		load();
-		setNotificationthread(new NotificationThread(locations,30));
+		setNotificationthread(new NotificationThread(locations,Settings.notificationInterval));
 
 	}
 
@@ -112,7 +117,7 @@ public class Gui extends JFrame {
 		getJContentPane();
 		this.setContentPane(getSplash());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle(name);
+		this.setTitle(Settings.name);
 		this.setIconImage(utils
 				.imageLodaer("logo/accuweather_logomark_color.png"));
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -123,15 +128,10 @@ public class Gui extends JFrame {
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				close();
 			}
+			
 
 		});
-		try {
-			SystemTray.getSystemTray().add(getTrayIcon());
-
-		} catch (AWTException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+	
 		this.setVisible(true);
 
 	}
@@ -139,7 +139,8 @@ public class Gui extends JFrame {
 
 	public WeatherTrayIcon getTrayIcon() {
 		if(trayIcon==null){
-			trayIcon=new WeatherTrayIcon(this, this.getIconImage());			
+			trayIcon=new WeatherTrayIcon(this,utils
+					.imageLodaer("logo/accuweather_logomark_color.png") );			
 		}
 		
 		return trayIcon;
@@ -625,7 +626,7 @@ public class Gui extends JFrame {
 		
 		
 		ACCUWeatherFetcher.save(locations);
-		getSettings().save();
+		Settings.save();
 		NotificationConnector.exit();
 		SystemTray.getSystemTray().remove(trayIcon);
 
@@ -680,17 +681,13 @@ public class Gui extends JFrame {
 	 * 	
 	 * @return gui.Settings	
 	 */
-	Settings getSettings() {
+	SettingsDialog getSettings() {
 		if (settings == null) {
-			settings = new Settings(this);
+			settings = new SettingsDialog(this);
 		}
 		return settings;
 	}
-
-	public static void main(String[] args) {
-		new Gui();
-
-	}
+	
 
 	public void setNotificationthread(NotificationThread notificationthread) {
 		this.notificationthread = notificationthread;

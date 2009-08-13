@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.Settings;
 import net.Utils;
 
 
@@ -37,7 +38,7 @@ public class Splash extends JPanel {
 		jLabel = new JLabel();
 		jLabel.setBounds(new Rectangle(45, 15, 391, 31));
 		jLabel.setFont(new Font("Dialog", Font.BOLD, 24));
-		jLabel.setText("Starting: "+Gui.name);
+		jLabel.setText("Starting: "+Settings.name);
 		this.setSize(817, 448);
 		this.setLayout(null);
 		this.add(getImageBox(), null);

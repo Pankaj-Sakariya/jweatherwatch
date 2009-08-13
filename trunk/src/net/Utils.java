@@ -66,7 +66,7 @@ public class Utils {
 	}
 
 	public static String getXMLValue(Element ele, String tag) {
-		if (ele.getElementsByTagName(tag).item(0).getChildNodes().item(0) == null)
+		if (ele.getElementsByTagName(tag).item(0) == null || ele.getElementsByTagName(tag).item(0).getChildNodes().item(0) == null)
 			return null;
 		String s = ele.getElementsByTagName(tag).item(0).getChildNodes()
 				.item(0).getNodeValue();
