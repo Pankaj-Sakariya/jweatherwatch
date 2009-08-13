@@ -1,7 +1,5 @@
 package net;
 
-import gui.Gui;
-
 import java.awt.TrayIcon;
 
 import net.Notifer.NetNotifer;
@@ -25,21 +23,17 @@ public class NotificationConnector {
 
 		switch (Utils.getOS()) {
 		case WINDOWS:
-			setNotifer(new Snarl());
-			if (notifer.laod(notifications))
+			if (setNotifer(new Snarl()))
 				return;
-			setNotifer(new NetSnarl());
-			if (((NetNotifer) notifer).load(notifications, host))
+			if (setNotifer(new NetSnarl()))
 				return;
 			break;
-		case MAC:
-			setNotifer(new NetGrowl());
-			if (((NetNotifer) notifer).load(notifications, host))
+		case MAC:			
+			if (setNotifer(new NetGrowl()))
 				return;
 			break;
-		case LINUX:
-			setNotifer(new KNotify());
-			if (notifer.laod(notifications))
+		case LINUX:			
+			if (setNotifer(new KNotify()))
 				return;
 		}
 
@@ -56,11 +50,14 @@ public class NotificationConnector {
 			return;
 		}
 		if (iconPath != null && !iconPath.equals("")) {
-			if (notifer instanceof NetNotifer && !host.equals("localhost")&&!host.equals("127.0.0.1"))
-				iconPath = "http://jweatherwatch.googlecode.com/svn/trunk/iconset/"+iconPath+".png";
-			else			
-				iconPath = System.getProperty("user.dir") + "/iconset/"	+ iconPath + ".png";
-			System.out.println( iconPath);
+			if (notifer instanceof NetNotifer && !host.equals("localhost")
+					&& !host.equals("127.0.0.1"))
+				iconPath = "http://jweatherwatch.googlecode.com/svn/trunk/iconset/"
+						+ iconPath + ".png";
+			else
+				iconPath = Settings.getWorkindirectory() + "/iconset/"
+						+ iconPath + ".png";
+			System.out.println(iconPath);
 			notifer.send(alert, title, description, iconPath);
 		}
 
@@ -76,19 +73,18 @@ public class NotificationConnector {
 		if (notifer2 instanceof NetNotifer) {
 			if (((NetNotifer) notifer2).load(notifications, host)) {
 				notifer = notifer2;
-				NotificationConnector.sendNotification("Startup", Gui.name
-						+ " " + Gui.version,
-						Gui.name + " " + Gui.version
-								+ " succsessfully registered wit "
-								+ notifer2.getName(), null);
+				NotificationConnector.sendNotification("Startup", Settings.name
+						+ " " + Settings.version, Settings.name + " "
+						+ Settings.version + " succsessfully registered wit "
+						+ notifer2.getName(), null);
 				return true;
 			}
 		} else if (notifer2.laod(notifications)) {
 			notifer = notifer2;
-			NotificationConnector.sendNotification("Startup", Gui.name + " "
-					+ Gui.version, Gui.name + " " + Gui.version
-					+ " succsessfully registered wit " + notifer2.getName(),
-					null);
+			NotificationConnector.sendNotification("Startup", Settings.name
+					+ " " + Settings.version, Settings.name + " "
+					+ Settings.version + " succsessfully registered wit "
+					+ notifer2.getName(), null);
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");

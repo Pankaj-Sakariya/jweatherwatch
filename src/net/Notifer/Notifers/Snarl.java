@@ -1,6 +1,6 @@
 package net.Notifer.Notifers;
 
-import gui.Gui;
+import net.Settings;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
 import at.dotti.snarl.Snarl4Java;
@@ -22,8 +22,8 @@ public class Snarl implements Notifer {
 		if (!initialized)
 			return false;
 		long msg = Snarl4Java.snGetGlobalMsg();
-		final long hWnd = Snarl4Java.snRegisterConfig(111, Gui.name + " "
-				+ Gui.version, 3);
+		final long hWnd = Snarl4Java.snRegisterConfig(111, Settings.name + " "
+				+ Settings.version, 3);
 		System.out.println(msg + " " + hWnd);
 		return true;
 	}
