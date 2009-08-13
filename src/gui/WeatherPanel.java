@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -26,27 +27,28 @@ public class WeatherPanel extends JPanel implements Runnable {
 	private JLabel jLabel_Temp = null;
 	private JLabel jLabel_RealFeal = null;
 	private JLabel jLabel_Wind = null;
-	Utils utils = new Utils();  //  @jve:decl-index=0:
+	Utils utils = new Utils(); // @jve:decl-index=0:
 	private JLabel jLabel_other = null;
 	private JLabel jLabel = null;
 	private JLabel jLabel1 = null;
 	private JLabel jLabel2 = null;
 	private JLabel jLabel_Other_Lable = null;
 	private boolean timeIsRunning = false;
-	private String url=null;  //  @jve:decl-index=0:
-	private Location location=null;
+	private String url = null; // @jve:decl-index=0:
+	private Location location = null;
 
 	/**
 	 * This is the default constructor
-	 */	
+	 */
 
 	public WeatherPanel() {
 		super();
 		initialize();
-	
+
 	}
-	public void updateWeather(Location location,Weather weather) {
-		this.location=location;
+
+	public void updateWeather(Location location, Weather weather) {
+		this.location = location;
 		url = weather.getUrl();
 		jLabel_Location.setText(location.toString());
 		jLabel_Location.setToolTipText(location.toString());
@@ -58,7 +60,7 @@ public class WeatherPanel extends JPanel implements Runnable {
 		jLabel_Temp.setText(weather.getTemperature().toString());
 		jLabel1.setText("RealFeal®:");
 		jLabel_RealFeal.setText(weather.getRealfeel().toString());
-		jLabel2.setText("Wind:");		
+		jLabel2.setText("Wind:");
 		jLabel_Wind.setText(weather.getWinddirection() + " "
 				+ weather.getWindspeed());
 		if (weather instanceof CurrentWeather) {
@@ -69,33 +71,29 @@ public class WeatherPanel extends JPanel implements Runnable {
 			updateTime();
 		}
 		if (weather instanceof ForecastWeather) {
-			jLabel_text.setText(( (ForecastWeather)weather).getTxtshort().toString()); 
-			jLabel_Location.setText("Day: "+((ForecastWeather) weather).getDay().getDayNR()+" "+((ForecastWeather) weather).getDay()
-					.getDayCode()
-					+ " " + ((ForecastWeather) weather).getDay().getDate());
-			jLabel_Location.setToolTipText("Day: "+((ForecastWeather) weather).getDay().getDayNR()+" "+((ForecastWeather) weather).getDay()
-					.getDayCode()
-					+ " " + ((ForecastWeather) weather).getDay().getDate());
+			jLabel_text.setText(((ForecastWeather) weather).getTxtshort()
+					.toString());
+			jLabel_Location.setText("Day: "
+					+ ((ForecastWeather) weather).getDay().getDayNR() + " "
+					+ ((ForecastWeather) weather).getDay().getDayCode() + " "
+					+ ((ForecastWeather) weather).getDay().getDate());
+			jLabel_Location.setToolTipText("Day: "
+					+ ((ForecastWeather) weather).getDay().getDayNR() + " "
+					+ ((ForecastWeather) weather).getDay().getDayCode() + " "
+					+ ((ForecastWeather) weather).getDay().getDate());
 			jLabel_Other_Lable.setText("Precipitation: ");
-			jLabel_Other_Lable.setToolTipText("Rain: "
-					+ ((ForecastWeather) weather).getRain() + ", Snow: "
-					+ ((ForecastWeather) weather).getSnow() + ", Ice: "
-					+ ((ForecastWeather) weather).getIce()
-					+ ", Thunderstorm Probability: "
-					+ ((ForecastWeather) weather).getThunderstormProbability()
-					+ "%");
+			String tooltip="Rain: "
+				+ ((ForecastWeather) weather).getRain()
+				+ ", Thunderstorm Probability: "
+				+ ((ForecastWeather) weather).getThunderstormProbability()
+				+ "%" + ", Snow: " + ((ForecastWeather) weather).getSnow()
+				+ ", Ice: " + ((ForecastWeather) weather).getIce();
+			jLabel_Other_Lable.setToolTipText(tooltip);
 			jLabel_other.setText(((ForecastWeather) weather).getPrecipitation()
 					.toString());
-			jLabel_other.setToolTipText("Rain: "
-					+ ((ForecastWeather) weather).getRain() + ", Snow: "
-					+ ((ForecastWeather) weather).getSnow() + ", Ice: "
-					+ ((ForecastWeather) weather).getIce()
-					+ ", Thunderstorm Probability: "
-					+ ((ForecastWeather) weather).getThunderstormProbability()
-					+ "%");
-			
+			jLabel_other.setToolTipText(tooltip);
+
 		}
-		
 
 	}
 
@@ -110,7 +108,7 @@ public class WeatherPanel extends JPanel implements Runnable {
 		jLabel2 = new JLabel();
 		jLabel2.setBounds(new Rectangle(105, 90, 91, 16));
 		jLabel1 = new JLabel();
-		jLabel1.setBounds(new Rectangle(105, 75, 91, 16));		
+		jLabel1.setBounds(new Rectangle(105, 75, 91, 16));
 		jLabel = new JLabel();
 		jLabel.setBounds(new Rectangle(105, 60, 91, 16));
 		jLabel_other = new JLabel();
@@ -158,9 +156,9 @@ public class WeatherPanel extends JPanel implements Runnable {
 			imageBox.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 					Utils.visitURL(url);
-					}
+				}
 			});
-			
+
 		}
 		return imageBox;
 	}
@@ -179,9 +177,15 @@ public class WeatherPanel extends JPanel implements Runnable {
 	}
 
 	private void updateTime() {
-		Calendar c=location.getCurrentTime();
+		Calendar c = location.getCurrentTime();
 		jLabel_other.setText(c.get(Calendar.HOUR_OF_DAY) + ":"
 				+ c.get(Calendar.MINUTE));
 	}
+	
+	public void clear(){
+		for(Component c:getComponents())
+			c.setVisible(false);
+	}
 
+	
 } // @jve:decl-index=0:visual-constraint="10,10"

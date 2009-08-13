@@ -56,7 +56,6 @@ public class NotificationConnector {
 			else
 				iconPath = Settings.getWorkindirectory() + "/iconset/"
 						+ iconPath + ".png";
-			System.out.println(iconPath);
 			notifer.send(alert, title, description, iconPath);
 		}
 

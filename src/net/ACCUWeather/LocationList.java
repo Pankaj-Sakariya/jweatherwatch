@@ -38,6 +38,7 @@ public class LocationList extends HashMap<Integer, Location> implements
 	public Location remove(Object key) {
 
 		Location o = super.remove(key);
+		if(o==null)return null;
 		System.out.println("Remove: " + key + " " + o);
 		Object loc[] = this.values().toArray();
 		this.clear();
@@ -84,6 +85,7 @@ public class LocationList extends HashMap<Integer, Location> implements
 		throw new UnsupportedOperationException();
 
 	}
+	
 
 
 		
