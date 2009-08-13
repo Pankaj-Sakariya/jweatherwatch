@@ -1,1 +1,2 @@
+#labels Featured
 This is the Comment Area<br> If you have some feature request or simply like this programme,<br> feel free to leave a comment
