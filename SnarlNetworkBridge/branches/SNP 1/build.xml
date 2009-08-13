@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="createSnarlNetworkBridge" name="Create Runnable Jar for Project ACCUWeatherSnarl">
+
+	<target name="init">
+		<delete dir="./dist" />
+		<mkdir dir="./dist" />
+		<mkdir dir="./comp" />
+	</target>
+	
+	<target name="cleanup">
+		<delete dir="./comp" />	
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="./src" destdir="./comp" >
+		</javac>
+	</target>
+
+
+
+	
+	<target name="doc">
+		<javadoc packagenames="net.snarl.*" sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="SnarlNetworkBridge">
+		</javadoc>
+	</target>
+
+	<target name="createSnarlNetworkBridge" depends="compile,doc">
+		
+		<jar destfile="./dist/SnarlNetworkeBridge.jar" basedir="./comp/" includes="/net/snarl/*">
+			<manifest>
+				<attribute name="version" value="1.0" />
+			</manifest>
+		</jar>
+		<copy todir="./comp/net/snarl">
+					<fileset dir="./src/net/snarl/" />
+				</copy>
+		<jar destfile="./dist/SnarlNetworkeBridgeSrc.jar" basedir="./comp/" includes="/net/snarl/*">
+			<manifest>
+				<attribute name="version" value="1.0" />
+			</manifest>
+		</jar>
+		<antcall target="cleanup"></antcall>
+	</target>
+</project>
