@@ -2,6 +2,12 @@
 ==jWeatherWatch v1.2.5.4 Beta SVN==
  * Remote Icon Support
  * Fixed some bugs in Settings Dialog
+ * Reorganized Settings Dialog
+ * Fixed critical bug on initialize
+ * Added Start wit System option on windows
+ * added start arguments 
+  # workingdirectory, used to start jWeather watch from outside  the icon location
+  # minimized to start jWeatherWatch minimized
 
 ==jWeatherWatch v1.2.5.3 Beta Current==
  * Added Icons to Growl suppoert
