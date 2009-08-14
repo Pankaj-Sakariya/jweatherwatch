@@ -1,14 +1,18 @@
 #labels Featured
+ This will be the last release for the next weeks, because I'll go in holidays tomorrow.
+
 ==Planned Features=
  * For October, support for mac systems.
 
-==jWeatherWatch v1.2.5.6 Beta==
+==jWeatherWatch v1.2.5.6.1==
+ * Fixed remove from autostart
+
+==jWeatherWatch v1.2.5.6==
  * Fixed bug With Remove button
  * Changed display of current time
  * Unregister Notifier on host change
  * Changed application Icon
  * Icon in Settings Dialog
- This will be the last release for the next weeks, because I'll go in holidays tomorrow.
 
 
 ==jWeatherWatch v1.2.5.5 Beta==
