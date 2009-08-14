@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 public class Settings {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.5.5 Beta";
+	public static final String version = "v1.2.5.6 Beta";
 	
 	private static String homeDirectory;
 	private static String workinDirectory =  System.getProperty("user.dir");
