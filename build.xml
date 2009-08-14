@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="makeTar" name="Create Runnable Jar for Project ACCUWeatherSnarl">
-
+<project default="zip" name="Create Runnable Jar for Project ACCUWeatherSnarl">
+  	
 	<target name="init">
 		<delete><fileset dir="./dist" includes="**/*"/>
 	</delete>
@@ -35,12 +35,16 @@
 			<fileset dir="lib" />
 		</copy>
 	</target>
+	
+	<target name="getVersion">
+			<java jar="./dist/JWeatherwatch.jar"  fork="true" outputproperty="version">		
+			 <arg value="-version"/>				
+		</java>
+		<echo>${version}</echo>
+		</target>
 
-	<target name="makeTar" depends="jar,copyfiles">
-		<tar destfile="./dist/jWeatherWatch.tar" basedir="./dist" />
-		<gzip src="./dist/jWeatherWatch.tar" destfile="./dist/jWeatherWatch.tar.gz" />
-		<delete file="./dist/jWeatherWatch.tar" />
-		
+	<target name="zip" depends="jar,copyfiles,getVersion">
+		<zip destfile="./dist/${version}.zip" basedir="./dist" ></zip>		
 	</target>
 
 
@@ -48,5 +52,7 @@
 		<javadoc  sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
 		</javadoc>
 	</target>
+	
+	
 
 </project>
