@@ -1,5 +1,6 @@
 package net.Notifer.Notifers;
 
+import net.NotificationConnector;
 import net.Settings;
 import net.Notifer.NetNotifer;
 import net.Notifer.NotiferTypes;
@@ -54,10 +55,10 @@ public class NetSnarl implements NetNotifer {
 
 	@Override
 	public boolean setHost(String host) {
-		snarl.setHost(host);
-		return snarl.isRunnging();
+		unload();
+		return load(NotificationConnector.notifications, host);
 	}
-	
+
 	@Override
 	public NotiferTypes getName() {
 		return NotiferTypes.NetSnarl;

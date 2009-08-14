@@ -1,5 +1,6 @@
 package net.Notifer.Notifers;
 
+
 import net.Settings;
 import net.Notifer.NetNotifer;
 import net.Notifer.NotiferTypes;
@@ -22,20 +23,23 @@ public class NetGrowl implements NetNotifer {
 
 	}
 	public boolean load(String[] notifications, String host){
-		this.host=host;	
-		growlConnector = new GrowlConnector(host);
-		application = new Application(Settings.name, Settings.getWorkindirectory()
-				+ "/iconset/01.png");
 		notificationTypes = new NotificationType[notifications.length];
 		for (int i = 0; i < notifications.length; ++i) {
 			notificationTypes[i] = new NotificationType(notifications[i]);
-		}		
-
+		}	
+		return load(notifications, host);
 		
+	}
+	
+	public boolean load(NotificationType[] notifications, String host){
+		this.host=host;	
+		growlConnector = new GrowlConnector(host);
+		application = new Application(Settings.name, Settings.getWorkindirectory()
+				+ "/iconset/01.png");		
 		return growlConnector.register(application, notificationTypes)==IResponse.OK;
 		
-
 	}
+
 
 	@Override
 	public void send(String alert, String title, String description,
@@ -76,12 +80,8 @@ public class NetGrowl implements NetNotifer {
 
 	@Override
 	public boolean setHost(String host) {
-		String[] n=new String[notificationTypes.length];
-		for(int i=0;i<notificationTypes.length;++i){
-			n[i]=notificationTypes[i].getDisplayName();
-		}
-		
-		return load(n,host);		
+		unload();		
+		return load(notificationTypes,host);		
 	}
 	
 	@Override

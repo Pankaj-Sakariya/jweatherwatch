@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 public class Settings {
-	public static final String name = "JWeatherWatch";
+	public static final String name = "jWeatherWatch";
 	public static final String version = "v1.2.5.5 Beta";
 	
 	private static String homeDirectory;

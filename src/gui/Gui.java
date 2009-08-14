@@ -120,7 +120,7 @@ public class Gui extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(Settings.name);
 		this.setIconImage(utils
-				.imageLodaer("logo/accuweather_logomark_color.png"));
+				.imageLodaer("./iconset/01.png"));
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowIconified(java.awt.event.WindowEvent e) {
 				setVisible(false);
@@ -139,7 +139,7 @@ public class Gui extends JFrame {
 	public WeatherTrayIcon getTrayIcon() {
 		if (trayIcon == null) {
 			trayIcon = new WeatherTrayIcon(this, utils
-					.imageLodaer("logo/accuweather_logomark_color.png"));
+					.imageLodaer("./iconset/01.png"));
 		}
 
 		return trayIcon;
