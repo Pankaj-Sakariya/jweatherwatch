@@ -1,6 +1,6 @@
 #labels Featured
 ==Planned Features=
- * For October, a support for mac systems.
+ * For October, support for mac systems.
 
 ==jWeatherWatch v1.2.5.6 Beta==
  * Fixed bug With Remove button
