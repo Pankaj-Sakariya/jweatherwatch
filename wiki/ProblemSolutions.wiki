@@ -1,0 +1,14 @@
+=The program doesn't Start=
+
+=Solution=
+ * Stop all running instances of jWeatherWatch
+ * Open a explorer window and enter "%appdata%\.jWeatherWatch" as path
+ * Delete the two files
+  # settings.xml
+  # profile.xml 
+ * Start jWeatherWatch
+
+
+
+
+ 
