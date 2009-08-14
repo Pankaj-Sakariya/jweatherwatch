@@ -183,8 +183,8 @@ public class WeatherPanel extends JPanel implements Runnable {
 		Calendar c = location.getCurrentTime();
 		String hour=c.get(Calendar.HOUR_OF_DAY)+"";
 		String min=c.get(Calendar.MINUTE)+"";
-		if(Integer.valueOf(hour)<10)hour="0"+hour;
-		if(Integer.valueOf(min)<10)min="0"+min;
+		if(hour.length()==1)hour="0"+hour;
+		if(min.length()==1)min="0"+min;
 		jLabel_other.setText(hour+":"+min);
 	}
 	

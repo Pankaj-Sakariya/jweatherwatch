@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 public class Settings {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.6.1";
+	public static final String version = "v1.2.7";
 	
 	private static String homeDirectory;
 	private static String workinDirectory =  System.getProperty("user.dir");
@@ -134,7 +134,7 @@ public class Settings {
 		out.println("Windows Registry Editor Version 5.00");
 		out.println();
 		out.println("[HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run]");
-		out.println("\"jWeatherWatch\"=\"javaw  -jar "+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\JWeatherWatch.jar -workindirectory "+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\ -minimized\"");
+		out.println("\"jWeatherWatch\"=\""+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\jWeatherWatch.exe -workindirectory "+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\ -minimized\"");
 		out.println();
 		out.close();
 		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", Settings.getHomeDirectory()+"/regme.reg"});

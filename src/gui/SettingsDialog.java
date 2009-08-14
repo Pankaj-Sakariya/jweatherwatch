@@ -72,14 +72,15 @@ public class SettingsDialog extends JFrame {
 
 	private void loadSettings() {
 		jTextField_Host.setText(NotificationConnector.getHost());
-		
+
 		if (parent.getNotificationthread() != null)
 			jTextField_NotificationInterval.setText(String.valueOf(parent
-					.getNotificationthread().getInterval()));	
+					.getNotificationthread().getInterval()));
 		else
 			parent.setNotificationthread(new NotificationThread(parent
 					.getLocations(), 30));
-		jComboBox_Notifer.setSelectedItem(NotificationConnector.getNotifer().getName());
+		jComboBox_Notifer.setSelectedItem(NotificationConnector.getNotifer()
+				.getName());
 	}
 
 	/**
@@ -125,7 +126,8 @@ public class SettingsDialog extends JFrame {
 	private JTextField getJTextField_NotificationInterval() {
 		if (jTextField_NotificationInterval == null) {
 			jTextField_NotificationInterval = new JTextField();
-			jTextField_NotificationInterval.setBounds(new Rectangle(30, 75, 31, 16));
+			jTextField_NotificationInterval.setBounds(new Rectangle(30, 75, 31,
+					16));
 			jTextField_NotificationInterval
 					.setHorizontalAlignment(JTextField.TRAILING);
 			jTextField_NotificationInterval.setText("30");
@@ -142,7 +144,8 @@ public class SettingsDialog extends JFrame {
 	private JButton getJButton_NotificationInterval() {
 		if (jButton_NotificationInterval == null) {
 			jButton_NotificationInterval = new JButton();
-			jButton_NotificationInterval.setBounds(new Rectangle(120, 75, 61, 16));
+			jButton_NotificationInterval.setBounds(new Rectangle(120, 75, 61,
+					16));
 			jButton_NotificationInterval.setText("Set");
 			jButton_NotificationInterval
 					.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +157,8 @@ public class SettingsDialog extends JFrame {
 											Integer
 													.valueOf(jTextField_NotificationInterval
 															.getText())));
-							Settings.notificationInterval=parent.getNotificationthread().getInterval();
+							Settings.notificationInterval = parent
+									.getNotificationthread().getInterval();
 						}
 					});
 		}
@@ -194,70 +198,84 @@ public class SettingsDialog extends JFrame {
 	}
 
 	/**
-	 * This method initializes jToggleButton_SystemStart	
-	 * 	
-	 * @return javax.swing.JToggleButton	
+	 * This method initializes jToggleButton_SystemStart
+	 * 
+	 * @return javax.swing.JToggleButton
 	 */
 	private JToggleButton getJToggleButton_SystemStart() {
 		if (jToggleButton_SystemStart == null) {
 			jToggleButton_SystemStart = new JToggleButton();
-			jToggleButton_SystemStart.setBounds(new Rectangle(30, 150, 151, 16));
+			jToggleButton_SystemStart
+					.setBounds(new Rectangle(30, 150, 151, 16));
 			jToggleButton_SystemStart.setText("Start with System");
 			jToggleButton_SystemStart.setSelected(Settings.isAutostart());
-			if(Utils.getOS()!=Utils.OS.WINDOWS) jToggleButton_SystemStart.setEnabled(false);
-			jToggleButton_SystemStart.addItemListener(new java.awt.event.ItemListener() {
-				public void itemStateChanged(java.awt.event.ItemEvent e) {
-				if(jToggleButton_SystemStart.isSelected()) Settings.addtoAutostart();
-				else Settings.removeAutostart();
-				}
-			});
+			if (Utils.getOS() != Utils.OS.WINDOWS)
+				jToggleButton_SystemStart.setEnabled(false);
+			jToggleButton_SystemStart
+					.addItemListener(new java.awt.event.ItemListener() {
+						public void itemStateChanged(java.awt.event.ItemEvent e) {
+							if (jToggleButton_SystemStart.isSelected())
+								Settings.addtoAutostart();
+							else
+								Settings.removeAutostart();
+						}
+					});
 		}
 		return jToggleButton_SystemStart;
 	}
 
 	/**
-	 * This method initializes jComboBox_Notifer	
-	 * 	
-	 * @return javax.swing.JComboBox	
+	 * This method initializes jComboBox_Notifer
+	 * 
+	 * @return javax.swing.JComboBox
 	 */
 	private JComboBox getJComboBox_Notifer() {
 		if (jComboBox_Notifer == null) {
 			jComboBox_Notifer = new JComboBox();
 			jComboBox_Notifer.setBounds(new Rectangle(30, 30, 151, 16));
-					jComboBox_Notifer.addItem(NotiferTypes.Snarl);
-					jComboBox_Notifer.addItem(NotiferTypes.KNotify);
-					jComboBox_Notifer.addItem(NotiferTypes.NetGrowl);
-					jComboBox_Notifer.addItem(NotiferTypes.NetSnarl);
-					jComboBox_Notifer.addItem(NotiferTypes.TrayIcon);
-	
-			jComboBox_Notifer.addItemListener(new java.awt.event.ItemListener() {
-				public void itemStateChanged(java.awt.event.ItemEvent e) {
-					boolean changed=false;
-				switch ((NotiferTypes)jComboBox_Notifer.getSelectedItem()) {				
-				case Snarl:
-					changed=NotificationConnector.setNotifer(new Snarl());					
-					break;
-				case KNotify:
-					changed=NotificationConnector.setNotifer(new KNotify());					
-					break;
-				case NetGrowl:
-					changed=NotificationConnector.setNotifer(new NetGrowl());					
-					break;
-				case NetSnarl:
-					changed=NotificationConnector.setNotifer(new NetSnarl());					
-					break;
-				case TrayIcon:
-					changed=NotificationConnector.setNotifer(new TrayNotification(parent.getTrayIcon()));					
-					break;					
-				}
-				if(changed)jComboBox_Notifer.setSelectedItem(NotificationConnector.getNotifer().getName());
-				}
-			});
-		
+			jComboBox_Notifer.addItem(NotiferTypes.Snarl);
+			jComboBox_Notifer.addItem(NotiferTypes.KNotify);
+			jComboBox_Notifer.addItem(NotiferTypes.NetGrowl);
+			jComboBox_Notifer.addItem(NotiferTypes.NetSnarl);
+			jComboBox_Notifer.addItem(NotiferTypes.TrayIcon);
+
+			jComboBox_Notifer
+					.addItemListener(new java.awt.event.ItemListener() {
+						public void itemStateChanged(java.awt.event.ItemEvent e) {
+							boolean changed = false;
+							switch ((NotiferTypes) jComboBox_Notifer
+									.getSelectedItem()) {
+							case Snarl:
+								changed = NotificationConnector
+										.setNotifer(new Snarl());
+								break;
+							case KNotify:
+								changed = NotificationConnector
+										.setNotifer(new KNotify());
+								break;
+							case NetGrowl:
+								changed = NotificationConnector
+										.setNotifer(new NetGrowl());
+								break;
+							case NetSnarl:
+								changed = NotificationConnector
+										.setNotifer(new NetSnarl());
+								break;
+							case TrayIcon:
+								changed = NotificationConnector
+										.setNotifer(new TrayNotification(parent
+												.getTrayIcon()));
+								break;
+							}
+							if (changed)
+								jComboBox_Notifer
+										.setSelectedItem(NotificationConnector
+												.getNotifer().getName());
+						}
+					});
+
 		}
 		return jComboBox_Notifer;
 	}
-
-	
 
 } // @jve:decl-index=0:visual-constraint="10,10"
