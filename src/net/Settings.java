@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 public class Settings {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.5.6 Beta";
+	public static final String version = "v1.2.6.1";
 	
 	private static String homeDirectory;
 	private static String workinDirectory =  System.getProperty("user.dir");
@@ -129,7 +129,7 @@ public class Settings {
 	public static void addtoAutostart(){		
 		if(Utils.getOS()!=OS.WINDOWS)return;		
 		try {
-			PrintWriter out = new PrintWriter(new FileOutputStream(Settings.getHomeDirectory()+"\\regme.reg"));
+			PrintWriter out = new PrintWriter(new FileOutputStream(Settings.getHomeDirectory()+"/regme.reg"));
 		
 		out.println("Windows Registry Editor Version 5.00");
 		out.println();
@@ -137,7 +137,7 @@ public class Settings {
 		out.println("\"jWeatherWatch\"=\"javaw  -jar "+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\JWeatherWatch.jar -workindirectory "+System.getProperty("user.dir").replace("\\","\\\\")+"\\\\ -minimized\"");
 		out.println();
 		out.close();
-		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", Settings.getHomeDirectory()+"\\regme.reg"});
+		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", Settings.getHomeDirectory()+"/regme.reg"});
 		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -153,7 +153,7 @@ public class Settings {
 	public static void removeAutostart(){
 		if(Utils.getOS()!=OS.WINDOWS)return;
 		try {
-			PrintWriter out = new PrintWriter(new FileOutputStream(Settings.getHomeDirectory()+"regme.reg"));
+			PrintWriter out = new PrintWriter(new FileOutputStream(Settings.getHomeDirectory()+"/regme.reg"));
 		
 		out.println("Windows Registry Editor Version 5.00");
 		out.println();
@@ -161,7 +161,7 @@ public class Settings {
 		out.println("\"jWeatherWatch\"=-");
 		out.println();
 		out.close();
-		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", Settings.getHomeDirectory()+"regme.reg"});
+		Runtime.getRuntime().exec(new String[]{"regedit.exe","/s", Settings.getHomeDirectory()+"/regme.reg"});
 		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

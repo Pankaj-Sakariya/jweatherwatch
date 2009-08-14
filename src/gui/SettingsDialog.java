@@ -207,7 +207,8 @@ public class SettingsDialog extends JFrame {
 			if(Utils.getOS()!=Utils.OS.WINDOWS) jToggleButton_SystemStart.setEnabled(false);
 			jToggleButton_SystemStart.addItemListener(new java.awt.event.ItemListener() {
 				public void itemStateChanged(java.awt.event.ItemEvent e) {
-				Settings.addtoAutostart();
+				if(jToggleButton_SystemStart.isSelected()) Settings.addtoAutostart();
+				else Settings.removeAutostart();
 				}
 			});
 		}
