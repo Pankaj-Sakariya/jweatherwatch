@@ -1,6 +1,18 @@
 #labels Featured
+==Planned Features=
+ * For October, a support for mac systems.
+
+==jWeatherWatch v1.2.5.6 Beta==
+ * Fixed bug With Remove button
+ * Changed display of current time
+ * Unregister Notifier on host change
+ * Changed application Icon
+ * Icon in Settings Dialog
+ This will be the last release for the next weeks, because I'll go in holidays tomorrow.
+
+
 ==jWeatherWatch v1.2.5.5 Beta==
- * Fiexed bug which prevented jWeatherWatch to start on winxp Systems.
+ * Fixed bug which prevented jWeatherWatch to start on winxp Systems.
 
 Thanks to Brian from the Growl for Windows team for reporting this bug
 
