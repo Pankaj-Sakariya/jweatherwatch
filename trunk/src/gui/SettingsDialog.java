@@ -61,6 +61,7 @@ public class SettingsDialog extends JFrame {
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Settings");
+		this.setIconImage(parent.getIconImage());
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowOpened(java.awt.event.WindowEvent e) {
 				loadSettings();
