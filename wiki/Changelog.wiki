@@ -4,6 +4,9 @@
 ==Planned Features=
  * For October, support for mac systems.
 
+==jWeatherWatch v1.2.5.7.1==
+ * Added workaround for currupted settingsxml,profile.xml
+
 ==jWeatherWatch v1.2.5.7==
  * Created launcher exe and changed release to zip, to make it essayer for windows user to start jWeatherWatch
 
