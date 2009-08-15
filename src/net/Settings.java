@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,7 +28,7 @@ import org.xml.sax.SAXException;
 
 public class Settings {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.7";
+	public static final String version = "v1.2.7.1";
 	
 	private static String homeDirectory;
 	private static String workinDirectory =  System.getProperty("user.dir");
@@ -35,9 +36,10 @@ public class Settings {
 
 	public static int notificationInterval = 30;
 
-	static public boolean load(Gui parent) {
+	static public boolean load(Gui parent) {		
 		if (!new File(Settings.getHomeDirectory() +  "/settings.xml").exists())
 			return false;
+		try{
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 				.newInstance();
 		DocumentBuilder docBuilder = null;
@@ -92,6 +94,12 @@ public class Settings {
 				"autoStart"));
 
 		return true;
+		
+		}catch(NullPointerException e){			
+			JOptionPane.showMessageDialog(parent,	 "Settings are reseted.",  "Your Settings file is corrupted",JOptionPane.ERROR_MESSAGE);
+			new File(Settings.getHomeDirectory() +  "/settings.xml").delete();
+			return false;
+		}		
 	}
 
 	static public void save() {

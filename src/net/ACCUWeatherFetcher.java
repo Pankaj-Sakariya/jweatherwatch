@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -103,6 +104,7 @@ public class ACCUWeatherFetcher {
 	public static LocationList load() {
 		if (!new File(Settings.getHomeDirectory() + "/profile.xml").exists())
 			return new LocationList();
+		try{
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 				.newInstance();
 		DocumentBuilder docBuilder = null;
@@ -133,6 +135,12 @@ public class ACCUWeatherFetcher {
 					"location"));
 		}
 		return locationList;
+		}catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null,	 "Locations reseted.",     "Your Location List iscorrupted",JOptionPane.ERROR_MESSAGE);
+			new File(Settings.getHomeDirectory()
+					+ "/profile.xml").delete();
+			return new LocationList();
+		}
 	}
 
 	private static Element[] getXMLElements(Element doc, String tag) {
