@@ -1,7 +1,12 @@
 #labels Featured
 =Screenshots=
 ===Windows 7===
-http://jweatherwatch.googlecode.com/svn/images/Capture.png
+Default View
+<br> http://jweatherwatch.googlecode.com/svn/images/Capture.png
+<br>
+Minimal View
+<br>
+http://jweatherwatch.googlecode.com/svn/images/minimal%20view.png
 ===KDE 4===
 http://jweatherwatch.googlecode.com/svn/images/kde.png
 ==Notifications==
