@@ -9,13 +9,15 @@
  * fixed the ability to set a different icon path
 
 ==jWeatherWatch v1.2.8 RC1==
- * minimal View
+ * minimal View 
  * better exception handling
  * advanced settings
  * new Settings Dialog 
  * faster data fetching
  * added support for SNP 1.1(in development)
  * fixed autostart
+<br>
+[http://jweatherwatch.googlecode.com/svn/images/minimal%20view.png]
 
 ==jWeatherWatch v1.2.7.1==
  * Added workaround for currupted settingsxml,profile.xml
