@@ -9,11 +9,11 @@ package net.snarl;
  * 
  */
 public enum Reply {
-	OK(0), BadPacket(107), Application_Is_Already_Registered(203), Class_Is_Already_Registered(
+	SNP_SUCCESS(0), SNP_ERROR_FAILED(101), SNP_ERROR_UNKNOWN_COMMAND(102), SNP_ERROR_TIMED_OUT(
+			103), SNP_ERROR_BAD_PACKET(107), SNP_ERROR_NOT_RUNNING(201), SNP_ERROR_NOT_REGISTERED(
+			202), SNP_ERROR_ALREADY_REGISTERED(203), SNP_ERROR_CLASS_ALREADY_EXISTS(
 			204), Notification_Cancelled(302), Notification_Timed_Out(303), Notification_Acknowledged(
-			304), Notification_Closed(307),
-
-	ERROR(-1);
+			304), Notification_Closed(307);
 	private int code;
 
 	private Reply(int code) {
@@ -31,7 +31,7 @@ public enum Reply {
 		for (Reply r : Reply.values())
 			if (r.code == code)
 				return r;
-		return ERROR;
+		return SNP_ERROR_FAILED;
 	}
 
 	/**

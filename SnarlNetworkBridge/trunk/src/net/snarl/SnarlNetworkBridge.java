@@ -20,8 +20,8 @@ import java.util.HashMap;
  * @version 1.1
  */
 public class SnarlNetworkBridge {
-	// enable disable data output
-	private static boolean debug = true;
+	// enable/disable protocol output
+	private static boolean debug = false;
 
 	// protocol header
 	/**
@@ -91,8 +91,11 @@ public class SnarlNetworkBridge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Message msg = send(new Message("#?action=register#?app=" + appName));
 
-		return send(new Message("#?action=register#?app=" + appName));
+		snarlIsRegisterd = snarlIsRunning = msg != null
+				&& msg.getReply() != Reply.SNP_ERROR_NOT_RUNNING;
+		return msg;
 	}
 
 	/**
@@ -210,6 +213,10 @@ public class SnarlNetworkBridge {
 	public static boolean snIsRunnging() {
 		return snarlIsRunning;
 	}
+	
+	public static void setDebug(boolean debug) {
+		SnarlNetworkBridge.debug = debug;
+	}
 
 	/**
 	 * Listening for Snarl Response
@@ -237,7 +244,7 @@ public class SnarlNetworkBridge {
 								.getByCode(replyType.getCode()));
 					} else {
 						// set ID
-						if (replyType == Reply.OK) {
+						if (replyType == Reply.SNP_SUCCESS) {
 							reply = waitingMessages.removeLast();
 							reply.setReply(replyType);
 							((Notification) reply).setId(data[4]);
@@ -268,8 +275,10 @@ public class SnarlNetworkBridge {
 	 * 
 	 */
 	private static Message send(Message reply) {
-		if (!snarlIsRunning)
+		if (!snarlIsRunning) {
 			System.err.println("Snarl is not running");
+			return null;
+		}
 		waitingMessages.push(reply);
 		if (debug)
 			System.out.println("Sending: " + reply);
