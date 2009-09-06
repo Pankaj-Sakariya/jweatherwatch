@@ -40,23 +40,31 @@ public class Gui extends JFrame implements LocationListUser {
 	public Gui(int windowstate) {
 		super();
 		initialize();
+		this.setState(windowstate);
 		NotificationConnector.initialize(this, getTrayIcon());
 		locations = ACCUWeatherFetcher.load(this);
+		for (Location l : locations) {
+			splash.setLoadingText("Loading Station: " + l);
+			l.update();
+		}
 		view = WeatherView.getViewByName(SettingsReader.view, this);
 		this.setContentPane(view);
 		setNotificationthread(new NotificationThread(locations,
 				SettingsReader.notificationInterval));
-		JOptionPane.showMessageDialog(this,
+		JOptionPane.showMessageDialog(null,
 				"This is a beta version please report all occuring errors.",
 				"This is a beta", JOptionPane.INFORMATION_MESSAGE);
-		this.setState(windowstate);
 
 	}
 
 	public void addLocation(Location l) {
 		if (!locations.containsValue(l)) {
+			l.update();
 			System.out.println("Adding Location: " + l + " to location list.");
 			locations.put(locations.size(), l);
+			for(Location lo:locations){
+				System.out.println("[" + lo.getNr() + "] " + lo);
+			}
 		}
 	}
 

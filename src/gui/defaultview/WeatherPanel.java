@@ -37,7 +37,7 @@ public class WeatherPanel extends JPanel {
 	private JLabel jLabel_Other_Lable = null;
 	private boolean timeIsRunning = false;
 	private String url = null; // @jve:decl-index=0:
-
+	private Location weatherLocation = null;
 
 	/**
 	 * This is the default constructor
@@ -53,7 +53,8 @@ public class WeatherPanel extends JPanel {
 		url = weather.getUrl();
 		jLabel_Location.setText(location.toString());
 		jLabel_Location.setToolTipText(location.toString());
-		imageBox.setImage(utils.imageLodaer(SettingsReader.getIconpPath()+ weather.getWeathericon() + ".png"));
+		imageBox.setImage(utils.imageLodaer(SettingsReader.getIconpPath()
+				+ weather.getWeathericon() + ".png"));
 		jLabel_text.setText(weather.getWeathertext());
 		jLabel_text.setToolTipText(weather.getWeathertext());
 		jLabel.setText("Temprature:");
@@ -65,12 +66,13 @@ public class WeatherPanel extends JPanel {
 				+ weather.getWindspeed());
 		if (weather instanceof CurrentWeather) {
 			jLabel_Other_Lable.setText("Current Time:");
+			this.weatherLocation = location;
 			if (!timeIsRunning)
 				new Thread("Time" + location.getCity()) {
 					public void run() {
 						timeIsRunning = true;
 						while (timeIsRunning) {
-							jLabel_other.setText(location.getCurrentTime());
+							updateTime();
 							try {
 								Thread.sleep(60000);
 							} catch (InterruptedException e) {
@@ -78,8 +80,11 @@ public class WeatherPanel extends JPanel {
 								e.printStackTrace();
 							}
 						}
-					};
+					}
+
 				}.start();
+			else
+				updateTime();
 
 		}
 		if (weather instanceof ForecastWeather) {
@@ -111,11 +116,17 @@ public class WeatherPanel extends JPanel {
 
 	}
 
+	private void updateTime() {
+		jLabel_other.setText(weatherLocation.getCurrentTime());
+
+	};
+
 	/**
 	 * This method initializes this
 	 * 
 	 * @return void
 	 */
+
 	private void initialize() {
 		jLabel_Other_Lable = new JLabel();
 		jLabel_Other_Lable.setBounds(new Rectangle(105, 105, 91, 16));
@@ -181,6 +192,7 @@ public class WeatherPanel extends JPanel {
 		for (Component c : getComponents())
 			c.setVisible(false);
 	}
+
 	public void setTimeIsRunning(boolean timeIsRunning) {
 		this.timeIsRunning = timeIsRunning;
 	}

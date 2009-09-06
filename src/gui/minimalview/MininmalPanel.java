@@ -95,7 +95,7 @@ public class MininmalPanel extends JPanel {
 						+ ".png"));
 				boxes[i].setToolTipText("Current");
 			} else {
-				boxes[i].setImage(utils.imageLodaer("iconset/"
+				boxes[i].setImage(utils.imageLodaer(SettingsReader.getIconpPath()
 						+ weatherLocation.getFiveDayForecast().getDay(i)
 								.getDay().getWeathericon() + ".png"));
 				boxes[i].setToolTipText(weatherLocation.getFiveDayForecast()

@@ -22,9 +22,9 @@ import org.xml.sax.SAXException;
 
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.8";
+	public static final String version = "v1.2.8 RC2";
 
-	private static String homeDirectory;
+	private static String homeDirectory = null;
 	private static String iconpPath = null;
 	private static boolean autostart = false;
 
@@ -233,6 +233,9 @@ public class SettingsReader {
 	}
 
 	public static void setIconpPath(String iconpPath) {
+		iconpPath = iconpPath.replace("\\", "/");
+		if (!iconpPath.endsWith("/"))
+			iconpPath += "/";
 		if (new File(iconpPath + "/01.png").exists())
 			SettingsReader.iconpPath = iconpPath;
 
