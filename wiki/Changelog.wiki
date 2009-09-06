@@ -4,8 +4,10 @@
 ==Planned Features=
  * For October, support for mac systems.
 
+==jWeatherWatch v1.2.8 RC2==
+ * fixed the ability to set a different icon path
 
-==jWeatherWatch v1.2.8==
+==jWeatherWatch v1.2.8 RC1==
  * minimal View
  * better exception handling
  * advanced settings
