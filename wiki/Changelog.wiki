@@ -5,9 +5,11 @@
  * For October, support for mac systems.
  
 
-==jWeatherWatch v1.2.8==
+==jWeatherWatch v1.2.8 RC3==
  * fixed clock in default view
-
+ * changed running check
+ * fixed all known bugs
+ 
 ==jWeatherWatch v1.2.8 RC2==
  * fixed the ability to set a different icon path
  * single application instance control
