@@ -1,0 +1,665 @@
+Apache Ant version 1.7.1 compiled on June 27 2008
+Buildfile: build.xml
+Detected Java version: 1.6 in: C:\Program Files\Java\jdk1.6.0_14\jre
+Detected OS: Windows 7
+parsing buildfile C:\Portable\workspace\jWeatherWatch\build.xml with URI = file:/C:/Portable/workspace/jWeatherWatch/build.xml
+Project base dir set to: C:\Portable\workspace\jWeatherWatch
+Build sequence for target(s) `zip' is [init, compile, copyfiles, jar, getVersion, zip]
+Complete build sequence is [init, compile, copyfiles, jar, getVersion, zip, cleanup, doc, ]
+
+init:
+[antlib:org.apache.tools.ant] Could not load definitions from resource org/apache/tools/ant/antlib.xml. It could not be found.
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\JWeatherWatch.jar
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\01.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\02.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\03.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\04.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\05.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\06.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\07.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\08.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\11.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\12.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\13.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\14.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\15.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\16.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\17.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\18.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\19.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\20.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\21.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\22.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\23.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\24.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\25.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\26.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\29.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\30.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\31.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\32.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\33.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\34.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\35.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\36.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\37.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\38.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\39.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\40.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\41.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\42.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\43.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\44.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\iconset\swa.png
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\jWeatherWatch v1.2.8.zip
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\jWeatherWatch.exe
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\lib\Snarl4Java-0.1.1.jar
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\lib\SnarlNetworkeBridge_v1.1.jar
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\lib\libgrowl.jar
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\dist\lib\snarl4java.dll
+    [mkdir] Created dir: C:\Portable\workspace\jWeatherWatch\comp
+
+compile:
+    [javac] gui\Gui.java added as gui\Gui.class doesn't exist.
+    [javac] gui\ImageBox.java added as gui\ImageBox.class doesn't exist.
+    [javac] gui\Splash.java added as gui\Splash.class doesn't exist.
+    [javac] gui\WeatherTrayIcon.java added as gui\WeatherTrayIcon.class doesn't exist.
+    [javac] gui\WeatherView.java added as gui\WeatherView.class doesn't exist.
+    [javac] gui\minimal\Data.java added as gui\minimal\Data.class doesn't exist.
+    [javac] gui\minimal\MinimumView.java added as gui\minimal\MinimumView.class doesn't exist.
+    [javac] gui\minimal\MininmalPanerl.java added as gui\minimal\MininmalPanerl.class doesn't exist.
+    [javac] gui\settings\SettingsDialog.java added as gui\settings\SettingsDialog.class doesn't exist.
+    [javac] gui\settings\tabs\AdvancedTab.java added as gui\settings\tabs\AdvancedTab.class doesn't exist.
+    [javac] gui\settings\tabs\MainTab.java added as gui\settings\tabs\MainTab.class doesn't exist.
+    [javac] gui\settings\tabs\MinimalTab.java added as gui\settings\tabs\MinimalTab.class doesn't exist.
+    [javac] gui\settings\tabs\SettingsTab.java added as gui\settings\tabs\SettingsTab.class doesn't exist.
+    [javac] gui\standart\StandartView.java added as gui\standart\StandartView.class doesn't exist.
+    [javac] gui\standart\WeatherPanel.java added as gui\standart\WeatherPanel.class doesn't exist.
+    [javac] net\ACCUWeatherFetcher.java added as net\ACCUWeatherFetcher.class doesn't exist.
+    [javac] net\ACCUWeather\CurrentWeather.java added as net\ACCUWeather\CurrentWeather.class doesn't exist.
+    [javac] net\ACCUWeather\FiveDayForecast.java added as net\ACCUWeather\FiveDayForecast.class doesn't exist.
+    [javac] net\ACCUWeather\ForecastDay.java added as net\ACCUWeather\ForecastDay.class doesn't exist.
+    [javac] net\ACCUWeather\ForecastWeather.java added as net\ACCUWeather\ForecastWeather.class doesn't exist.
+    [javac] net\ACCUWeather\Location.java added as net\ACCUWeather\Location.class doesn't exist.
+    [javac] net\ACCUWeather\LocationList.java added as net\ACCUWeather\LocationList.class doesn't exist.
+    [javac] net\ACCUWeather\Weather.java added as net\ACCUWeather\Weather.class doesn't exist.
+    [javac] net\ACCUWeather\WeatherSubtypes\Amount.java added as net\ACCUWeather\WeatherSubtypes\Amount.class doesn't exist.
+    [javac] net\ACCUWeather\WeatherSubtypes\Day.java added as net\ACCUWeather\WeatherSubtypes\Day.class doesn't exist.
+    [javac] net\ACCUWeather\WeatherSubtypes\Pressure.java added as net\ACCUWeather\WeatherSubtypes\Pressure.class doesn't exist.
+    [javac] net\ACCUWeather\WeatherSubtypes\Speed.java added as net\ACCUWeather\WeatherSubtypes\Speed.class doesn't exist.
+    [javac] net\ACCUWeather\WeatherSubtypes\Temperature.java added as net\ACCUWeather\WeatherSubtypes\Temperature.class doesn't exist.
+    [javac] net\ACCUWeather\WeatherSubtypes\UVIndex.java added as net\ACCUWeather\WeatherSubtypes\UVIndex.class doesn't exist.
+    [javac] net\ACCUWeather\WeatherSubtypes\UnitCode.java added as net\ACCUWeather\WeatherSubtypes\UnitCode.class doesn't exist.
+    [javac] net\Main.java added as net\Main.class doesn't exist.
+    [javac] net\Notifer\NetNotifer.java added as net\Notifer\NetNotifer.class doesn't exist.
+    [javac] net\Notifer\Notifer.java added as net\Notifer\Notifer.class doesn't exist.
+    [javac] net\Notifer\NotiferTypes.java added as net\Notifer\NotiferTypes.class doesn't exist.
+    [javac] net\Notifer\Notifers\KNotify.java added as net\Notifer\Notifers\KNotify.class doesn't exist.
+    [javac] net\Notifer\Notifers\NetGrowl.java added as net\Notifer\Notifers\NetGrowl.class doesn't exist.
+    [javac] net\Notifer\Notifers\NetSnarl\NetSnarl.java added as net\Notifer\Notifers\NetSnarl\NetSnarl.class doesn't exist.
+    [javac] net\Notifer\Notifers\NetSnarl\NetSnarlWeatherNotification.java added as net\Notifer\Notifers\NetSnarl\NetSnarlWeatherNotification.class doesn't exist.
+    [javac] net\Notifer\Notifers\Snarl.java added as net\Notifer\Notifers\Snarl.class doesn't exist.
+    [javac] net\Notifer\Notifers\TrayNotification.java added as net\Notifer\Notifers\TrayNotification.class doesn't exist.
+    [javac] net\NotificationConnector.java added as net\NotificationConnector.class doesn't exist.
+    [javac] net\NotificationThread.java added as net\NotificationThread.class doesn't exist.
+    [javac] net\SettingsReader.java added as net\SettingsReader.class doesn't exist.
+    [javac] net\Utils.java added as net\Utils.class doesn't exist.
+    [javac] net\myxml\Doc.java added as net\myxml\Doc.class doesn't exist.
+    [javac] net\myxml\Node.java added as net\myxml\Node.class doesn't exist.
+    [javac] net\myxml\Property.java added as net\myxml\Property.class doesn't exist.
+    [javac] Compiling 47 source files to C:\Portable\workspace\jWeatherWatch\comp
+    [javac] Using modern compiler
+    [javac] Compilation arguments:
+    [javac] '-d'
+    [javac] 'C:\Portable\workspace\jWeatherWatch\comp'
+    [javac] '-classpath'
+    [javac] 'C:\Portable\workspace\jWeatherWatch\comp;C:\Portable\workspace\jWeatherWatch\lib\libgrowl.jar;C:\Portable\workspace\jWeatherWatch\lib\Snarl4Java-0.1.1.jar;C:\Portable\workspace\jWeatherWatch\lib\SnarlNetworkeBridge_v1.1.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-launcher.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-antlr.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-apache-bcel.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-apache-bsf.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-apache-log4j.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-apache-oro.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-apache-regexp.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-apache-resolver.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-commons-logging.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-commons-net.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-jai.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-javamail.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-jdepend.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-jmf.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-jsch.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-junit.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-netrexx.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-nodeps.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-starteam.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-stylebook.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-swing.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-trax.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant-weblogic.jar;C:\Program Files\eclipse\plugins\org.apache.ant_1.7.1.v20090120-1145\lib\ant.jar;C:\Program Files\Java\jdk1.6.0_14\lib\tools.jar'
+    [javac] '-sourcepath'
+    [javac] 'C:\Portable\workspace\jWeatherWatch\src'
+    [javac] '-g:none'
+    [javac] 
+    [javac] The ' characters around the executable and arguments are
+    [javac] not part of the command.
+    [javac] Files to be compiled:
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\Gui.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\ImageBox.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\Splash.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\WeatherTrayIcon.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\WeatherView.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\minimal\Data.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\minimal\MinimumView.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\minimal\MininmalPanerl.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\settings\SettingsDialog.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\settings\tabs\AdvancedTab.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\settings\tabs\MainTab.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\settings\tabs\MinimalTab.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\settings\tabs\SettingsTab.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\standart\StandartView.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\gui\standart\WeatherPanel.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeatherFetcher.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\CurrentWeather.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\FiveDayForecast.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\ForecastDay.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\ForecastWeather.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\Location.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\LocationList.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\Weather.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\WeatherSubtypes\Amount.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\WeatherSubtypes\Day.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\WeatherSubtypes\Pressure.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\WeatherSubtypes\Speed.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\WeatherSubtypes\Temperature.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\WeatherSubtypes\UVIndex.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\ACCUWeather\WeatherSubtypes\UnitCode.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Main.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\NetNotifer.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\Notifer.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\NotiferTypes.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\Notifers\KNotify.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\Notifers\NetGrowl.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\Notifers\NetSnarl\NetSnarl.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\Notifers\NetSnarl\NetSnarlWeatherNotification.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\Notifers\Snarl.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Notifer\Notifers\TrayNotification.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\NotificationConnector.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\NotificationThread.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\SettingsReader.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\Utils.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\myxml\Doc.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\myxml\Node.java
+    [javac]     C:\Portable\workspace\jWeatherWatch\src\net\myxml\Property.java
+
+copyfiles:
+     [copy] 01.png added as 01.png doesn't exist.
+     [copy] 02.png added as 02.png doesn't exist.
+     [copy] 03.png added as 03.png doesn't exist.
+     [copy] 04.png added as 04.png doesn't exist.
+     [copy] 05.png added as 05.png doesn't exist.
+     [copy] 06.png added as 06.png doesn't exist.
+     [copy] 07.png added as 07.png doesn't exist.
+     [copy] 08.png added as 08.png doesn't exist.
+     [copy] 11.png added as 11.png doesn't exist.
+     [copy] 12.png added as 12.png doesn't exist.
+     [copy] 13.png added as 13.png doesn't exist.
+     [copy] 14.png added as 14.png doesn't exist.
+     [copy] 15.png added as 15.png doesn't exist.
+     [copy] 16.png added as 16.png doesn't exist.
+     [copy] 17.png added as 17.png doesn't exist.
+     [copy] 18.png added as 18.png doesn't exist.
+     [copy] 19.png added as 19.png doesn't exist.
+     [copy] 20.png added as 20.png doesn't exist.
+     [copy] 21.png added as 21.png doesn't exist.
+     [copy] 22.png added as 22.png doesn't exist.
+     [copy] 23.png added as 23.png doesn't exist.
+     [copy] 24.png added as 24.png doesn't exist.
+     [copy] 25.png added as 25.png doesn't exist.
+     [copy] 26.png added as 26.png doesn't exist.
+     [copy] 29.png added as 29.png doesn't exist.
+     [copy] 30.png added as 30.png doesn't exist.
+     [copy] 31.png added as 31.png doesn't exist.
+     [copy] 32.png added as 32.png doesn't exist.
+     [copy] 33.png added as 33.png doesn't exist.
+     [copy] 34.png added as 34.png doesn't exist.
+     [copy] 35.png added as 35.png doesn't exist.
+     [copy] 36.png added as 36.png doesn't exist.
+     [copy] 37.png added as 37.png doesn't exist.
+     [copy] 38.png added as 38.png doesn't exist.
+     [copy] 39.png added as 39.png doesn't exist.
+     [copy] 40.png added as 40.png doesn't exist.
+     [copy] 41.png added as 41.png doesn't exist.
+     [copy] 42.png added as 42.png doesn't exist.
+     [copy] 43.png added as 43.png doesn't exist.
+     [copy] 44.png added as 44.png doesn't exist.
+     [copy] swa.png added as swa.png doesn't exist.
+     [copy]  omitted as C:\Portable\workspace\jWeatherWatch\dist\iconset is up to date.
+     [copy] Copying 41 files to C:\Portable\workspace\jWeatherWatch\dist\iconset
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\41.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\41.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\08.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\08.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\swa.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\swa.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\16.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\16.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\36.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\36.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\04.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\04.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\24.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\24.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\44.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\44.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\12.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\12.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\32.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\32.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\20.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\20.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\19.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\19.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\40.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\40.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\07.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\07.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\39.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\39.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\15.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\15.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\03.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\03.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\35.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\35.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\23.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\23.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\43.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\43.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\11.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\11.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\31.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\31.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\18.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\18.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\38.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\38.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\06.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\06.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\26.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\26.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\14.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\14.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\02.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\02.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\34.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\34.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\22.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\22.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\42.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\42.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\30.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\30.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\29.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\29.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\17.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\17.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\05.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\05.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\37.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\37.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\25.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\25.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\13.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\13.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\33.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\33.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\01.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\01.png
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\iconset\21.png to C:\Portable\workspace\jWeatherWatch\dist\iconset\21.png
+     [copy] Copying 1 file to C:\Portable\workspace\jWeatherWatch\dist
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\build\jWeatherWatch.exe to C:\Portable\workspace\jWeatherWatch\dist\jWeatherWatch.exe
+     [copy] Snarl4Java-0.1.1.jar added as Snarl4Java-0.1.1.jar doesn't exist.
+     [copy] SnarlNetworkeBridge_v1.1.jar added as SnarlNetworkeBridge_v1.1.jar doesn't exist.
+     [copy] libgrowl.jar added as libgrowl.jar doesn't exist.
+     [copy] snarl4java.dll added as snarl4java.dll doesn't exist.
+     [copy]  omitted as C:\Portable\workspace\jWeatherWatch\dist\lib is up to date.
+     [copy] Copying 4 files to C:\Portable\workspace\jWeatherWatch\dist\lib
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\lib\SnarlNetworkeBridge_v1.1.jar to C:\Portable\workspace\jWeatherWatch\dist\lib\SnarlNetworkeBridge_v1.1.jar
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\lib\libgrowl.jar to C:\Portable\workspace\jWeatherWatch\dist\lib\libgrowl.jar
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\lib\snarl4java.dll to C:\Portable\workspace\jWeatherWatch\dist\lib\snarl4java.dll
+     [copy] Copying C:\Portable\workspace\jWeatherWatch\lib\Snarl4Java-0.1.1.jar to C:\Portable\workspace\jWeatherWatch\dist\lib\Snarl4Java-0.1.1.jar
+
+jar:
+      [jar] Building jar: C:\Portable\workspace\jWeatherWatch\dist\JWeatherWatch.jar
+      [jar] adding directory gui/
+      [jar] adding directory gui/minimal/
+      [jar] adding directory gui/settings/
+      [jar] adding directory gui/settings/tabs/
+      [jar] adding directory gui/standart/
+      [jar] adding directory net/
+      [jar] adding directory net/ACCUWeather/
+      [jar] adding directory net/ACCUWeather/WeatherSubtypes/
+      [jar] adding directory net/Notifer/
+      [jar] adding directory net/Notifer/Notifers/
+      [jar] adding directory net/Notifer/Notifers/NetSnarl/
+      [jar] adding directory net/myxml/
+      [jar] adding entry gui/Gui$1.class
+      [jar] adding entry gui/Gui.class
+      [jar] adding entry gui/ImageBox.class
+      [jar] adding entry gui/Splash.class
+      [jar] adding entry gui/WeatherTrayIcon$1.class
+      [jar] adding entry gui/WeatherTrayIcon$2.class
+      [jar] adding entry gui/WeatherTrayIcon$3.class
+      [jar] adding entry gui/WeatherTrayIcon$4.class
+      [jar] adding entry gui/WeatherTrayIcon$5.class
+      [jar] adding entry gui/WeatherTrayIcon$6.class
+      [jar] adding entry gui/WeatherTrayIcon$7.class
+      [jar] adding entry gui/WeatherTrayIcon.class
+      [jar] adding entry gui/WeatherView$1.class
+      [jar] adding entry gui/WeatherView$Views.class
+      [jar] adding entry gui/WeatherView.class
+      [jar] adding entry gui/minimal/Data.class
+      [jar] adding entry gui/minimal/MinimumView.class
+      [jar] adding entry gui/minimal/MininmalPanerl$1.class
+      [jar] adding entry gui/minimal/MininmalPanerl$2.class
+      [jar] adding entry gui/minimal/MininmalPanerl.class
+      [jar] adding entry gui/settings/SettingsDialog$1.class
+      [jar] adding entry gui/settings/SettingsDialog$2.class
+      [jar] adding entry gui/settings/SettingsDialog$3.class
+      [jar] adding entry gui/settings/SettingsDialog.class
+      [jar] adding entry gui/settings/tabs/AdvancedTab.class
+      [jar] adding entry gui/settings/tabs/MainTab.class
+      [jar] adding entry gui/settings/tabs/MinimalTab$1.class
+      [jar] adding entry gui/settings/tabs/MinimalTab$2.class
+      [jar] adding entry gui/settings/tabs/MinimalTab.class
+      [jar] adding entry gui/settings/tabs/SettingsTab.class
+      [jar] adding entry gui/standart/StandartView$1.class
+      [jar] adding entry gui/standart/StandartView$10.class
+      [jar] adding entry gui/standart/StandartView$11.class
+      [jar] adding entry gui/standart/StandartView$12.class
+      [jar] adding entry gui/standart/StandartView$2.class
+      [jar] adding entry gui/standart/StandartView$3.class
+      [jar] adding entry gui/standart/StandartView$4.class
+      [jar] adding entry gui/standart/StandartView$5$1.class
+      [jar] adding entry gui/standart/StandartView$5.class
+      [jar] adding entry gui/standart/StandartView$6.class
+      [jar] adding entry gui/standart/StandartView$7.class
+      [jar] adding entry gui/standart/StandartView$8$1.class
+      [jar] adding entry gui/standart/StandartView$8.class
+      [jar] adding entry gui/standart/StandartView$9.class
+      [jar] adding entry gui/standart/StandartView.class
+      [jar] adding entry gui/standart/WeatherPanel$1.class
+      [jar] adding entry gui/standart/WeatherPanel$2.class
+      [jar] adding entry gui/standart/WeatherPanel.class
+      [jar] adding entry net/ACCUWeatherFetcher.class
+      [jar] adding entry net/ACCUWeather/CurrentWeather.class
+      [jar] adding entry net/ACCUWeather/FiveDayForecast.class
+      [jar] adding entry net/ACCUWeather/ForecastDay.class
+      [jar] adding entry net/ACCUWeather/ForecastWeather.class
+      [jar] adding entry net/ACCUWeather/Location.class
+      [jar] adding entry net/ACCUWeather/LocationList.class
+      [jar] adding entry net/ACCUWeather/Weather.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Amount.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Day.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Pressure.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Speed.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Temperature.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/UVIndex.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/UnitCode$1.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/UnitCode.class
+      [jar] adding entry net/Main$1.class
+      [jar] adding entry net/Main$options.class
+      [jar] adding entry net/Main.class
+      [jar] adding entry net/Notifer/NetNotifer.class
+      [jar] adding entry net/Notifer/Notifer.class
+      [jar] adding entry net/Notifer/NotiferTypes$1.class
+      [jar] adding entry net/Notifer/NotiferTypes.class
+      [jar] adding entry net/Notifer/Notifers/KNotify.class
+      [jar] adding entry net/Notifer/Notifers/NetGrowl.class
+      [jar] adding entry net/Notifer/Notifers/NetSnarl/NetSnarl.class
+      [jar] adding entry net/Notifer/Notifers/NetSnarl/NetSnarlWeatherNotification.class
+      [jar] adding entry net/Notifer/Notifers/Snarl.class
+      [jar] adding entry net/Notifer/Notifers/TrayNotification.class
+      [jar] adding entry net/NotificationConnector$1.class
+      [jar] adding entry net/NotificationConnector.class
+      [jar] adding entry net/NotificationThread.class
+      [jar] adding entry net/SettingsReader$1.class
+      [jar] adding entry net/SettingsReader.class
+      [jar] adding entry net/Utils$OS.class
+      [jar] adding entry net/Utils.class
+      [jar] adding entry net/myxml/Doc.class
+      [jar] adding entry net/myxml/Node.class
+      [jar] adding entry net/myxml/Property.class
+      [jar] adding directory logo/
+      [jar] adding directory other/
+      [jar] adding entry logo/accuweather_logomark_color.png
+      [jar] adding entry logo/accuweather_logotype_color.png
+      [jar] adding entry other/bigrotation2.gif
+      [jar] No Implementation-Title set.No Implementation-Version set.No Implementation-Vendor set.
+      [jar] Location: C:\Portable\workspace\jWeatherWatch\build.xml:19: 
+      [jar] Building jar: C:\Portable\workspace\jWeatherWatch\dist\JWeatherWatch.jar
+      [jar] adding directory META-INF/
+      [jar] adding entry META-INF/MANIFEST.MF
+      [jar] adding directory gui/
+      [jar] adding directory gui/minimal/
+      [jar] adding directory gui/settings/
+      [jar] adding directory gui/settings/tabs/
+      [jar] adding directory gui/standart/
+      [jar] adding directory net/
+      [jar] adding directory net/ACCUWeather/
+      [jar] adding directory net/ACCUWeather/WeatherSubtypes/
+      [jar] adding directory net/Notifer/
+      [jar] adding directory net/Notifer/Notifers/
+      [jar] adding directory net/Notifer/Notifers/NetSnarl/
+      [jar] adding directory net/myxml/
+      [jar] adding entry gui/Gui$1.class
+      [jar] adding entry gui/Gui.class
+      [jar] adding entry gui/ImageBox.class
+      [jar] adding entry gui/Splash.class
+      [jar] adding entry gui/WeatherTrayIcon$1.class
+      [jar] adding entry gui/WeatherTrayIcon$2.class
+      [jar] adding entry gui/WeatherTrayIcon$3.class
+      [jar] adding entry gui/WeatherTrayIcon$4.class
+      [jar] adding entry gui/WeatherTrayIcon$5.class
+      [jar] adding entry gui/WeatherTrayIcon$6.class
+      [jar] adding entry gui/WeatherTrayIcon$7.class
+      [jar] adding entry gui/WeatherTrayIcon.class
+      [jar] adding entry gui/WeatherView$1.class
+      [jar] adding entry gui/WeatherView$Views.class
+      [jar] adding entry gui/WeatherView.class
+      [jar] adding entry gui/minimal/Data.class
+      [jar] adding entry gui/minimal/MinimumView.class
+      [jar] adding entry gui/minimal/MininmalPanerl$1.class
+      [jar] adding entry gui/minimal/MininmalPanerl$2.class
+      [jar] adding entry gui/minimal/MininmalPanerl.class
+      [jar] adding entry gui/settings/SettingsDialog$1.class
+      [jar] adding entry gui/settings/SettingsDialog$2.class
+      [jar] adding entry gui/settings/SettingsDialog$3.class
+      [jar] adding entry gui/settings/SettingsDialog.class
+      [jar] adding entry gui/settings/tabs/AdvancedTab.class
+      [jar] adding entry gui/settings/tabs/MainTab.class
+      [jar] adding entry gui/settings/tabs/MinimalTab$1.class
+      [jar] adding entry gui/settings/tabs/MinimalTab$2.class
+      [jar] adding entry gui/settings/tabs/MinimalTab.class
+      [jar] adding entry gui/settings/tabs/SettingsTab.class
+      [jar] adding entry gui/standart/StandartView$1.class
+      [jar] adding entry gui/standart/StandartView$10.class
+      [jar] adding entry gui/standart/StandartView$11.class
+      [jar] adding entry gui/standart/StandartView$12.class
+      [jar] adding entry gui/standart/StandartView$2.class
+      [jar] adding entry gui/standart/StandartView$3.class
+      [jar] adding entry gui/standart/StandartView$4.class
+      [jar] adding entry gui/standart/StandartView$5$1.class
+      [jar] adding entry gui/standart/StandartView$5.class
+      [jar] adding entry gui/standart/StandartView$6.class
+      [jar] adding entry gui/standart/StandartView$7.class
+      [jar] adding entry gui/standart/StandartView$8$1.class
+      [jar] adding entry gui/standart/StandartView$8.class
+      [jar] adding entry gui/standart/StandartView$9.class
+      [jar] adding entry gui/standart/StandartView.class
+      [jar] adding entry gui/standart/WeatherPanel$1.class
+      [jar] adding entry gui/standart/WeatherPanel$2.class
+      [jar] adding entry gui/standart/WeatherPanel.class
+      [jar] adding entry net/ACCUWeatherFetcher.class
+      [jar] adding entry net/ACCUWeather/CurrentWeather.class
+      [jar] adding entry net/ACCUWeather/FiveDayForecast.class
+      [jar] adding entry net/ACCUWeather/ForecastDay.class
+      [jar] adding entry net/ACCUWeather/ForecastWeather.class
+      [jar] adding entry net/ACCUWeather/Location.class
+      [jar] adding entry net/ACCUWeather/LocationList.class
+      [jar] adding entry net/ACCUWeather/Weather.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Amount.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Day.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Pressure.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Speed.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/Temperature.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/UVIndex.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/UnitCode$1.class
+      [jar] adding entry net/ACCUWeather/WeatherSubtypes/UnitCode.class
+      [jar] adding entry net/Main$1.class
+      [jar] adding entry net/Main$options.class
+      [jar] adding entry net/Main.class
+      [jar] adding entry net/Notifer/NetNotifer.class
+      [jar] adding entry net/Notifer/Notifer.class
+      [jar] adding entry net/Notifer/NotiferTypes$1.class
+      [jar] adding entry net/Notifer/NotiferTypes.class
+      [jar] adding entry net/Notifer/Notifers/KNotify.class
+      [jar] adding entry net/Notifer/Notifers/NetGrowl.class
+      [jar] adding entry net/Notifer/Notifers/NetSnarl/NetSnarl.class
+      [jar] adding entry net/Notifer/Notifers/NetSnarl/NetSnarlWeatherNotification.class
+      [jar] adding entry net/Notifer/Notifers/Snarl.class
+      [jar] adding entry net/Notifer/Notifers/TrayNotification.class
+      [jar] adding entry net/NotificationConnector$1.class
+      [jar] adding entry net/NotificationConnector.class
+      [jar] adding entry net/NotificationThread.class
+      [jar] adding entry net/SettingsReader$1.class
+      [jar] adding entry net/SettingsReader.class
+      [jar] adding entry net/Utils$OS.class
+      [jar] adding entry net/Utils.class
+      [jar] adding entry net/myxml/Doc.class
+      [jar] adding entry net/myxml/Node.class
+      [jar] adding entry net/myxml/Property.class
+      [jar] adding directory logo/
+      [jar] adding directory other/
+      [jar] adding entry logo/accuweather_logomark_color.png
+      [jar] adding entry logo/accuweather_logotype_color.png
+      [jar] adding entry other/bigrotation2.gif
+      [jar] No Implementation-Title set.No Implementation-Version set.No Implementation-Vendor set.
+      [jar] Location: C:\Portable\workspace\jWeatherWatch\build.xml:19: 
+Project base dir set to: C:\Portable\workspace\jWeatherWatch
+  [antcall] calling target(s) [cleanup] in build file C:\Portable\workspace\jWeatherWatch\build.xml
+parsing buildfile C:\Portable\workspace\jWeatherWatch\build.xml with URI = file:/C:/Portable/workspace/jWeatherWatch/build.xml
+Project base dir set to: C:\Portable\workspace\jWeatherWatch
+Build sequence for target(s) `cleanup' is [cleanup]
+Complete build sequence is [cleanup, init, compile, copyfiles, jar, getVersion, zip, doc, ]
+  [antcall] Entering C:\Portable\workspace\jWeatherWatch\build.xml...
+Build sequence for target(s) `cleanup' is [cleanup]
+Complete build sequence is [cleanup, init, compile, copyfiles, jar, getVersion, zip, doc, ]
+
+cleanup:
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\Gui$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\Gui.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\ImageBox.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\minimal\Data.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\minimal\MinimumView.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\minimal\MininmalPanerl$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\minimal\MininmalPanerl$2.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\minimal\MininmalPanerl.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\gui\minimal
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\SettingsDialog$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\SettingsDialog$2.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\SettingsDialog$3.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\SettingsDialog.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\tabs\AdvancedTab.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\tabs\MainTab.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\tabs\MinimalTab$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\tabs\MinimalTab$2.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\tabs\MinimalTab.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\settings\tabs\SettingsTab.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\gui\settings\tabs
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\gui\settings
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\Splash.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$10.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$11.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$12.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$2.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$3.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$4.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$5$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$5.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$6.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$7.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$8$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$8.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView$9.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\StandartView.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\WeatherPanel$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\WeatherPanel$2.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\standart\WeatherPanel.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\gui\standart
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon$2.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon$3.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon$4.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon$5.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon$6.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon$7.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherTrayIcon.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherView$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherView$Views.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\gui\WeatherView.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\gui
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\CurrentWeather.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\FiveDayForecast.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\ForecastDay.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\ForecastWeather.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\Location.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\LocationList.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\Weather.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\Amount.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\Day.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\Pressure.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\Speed.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\Temperature.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\UnitCode$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\UnitCode.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes\UVIndex.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather\WeatherSubtypes
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeather
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\ACCUWeatherFetcher.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Main$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Main$options.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Main.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\myxml\Doc.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\myxml\Node.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\myxml\Property.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\net\myxml
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\NetNotifer.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifer.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers\KNotify.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers\NetGrowl.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers\NetSnarl\NetSnarl.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers\NetSnarl\NetSnarlWeatherNotification.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers\NetSnarl
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers\Snarl.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers\TrayNotification.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\Notifers
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\NotiferTypes$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Notifer\NotiferTypes.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\net\Notifer
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\NotificationConnector$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\NotificationConnector.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\NotificationThread.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\SettingsReader$1.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\SettingsReader.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Utils$OS.class
+   [delete] Deleting C:\Portable\workspace\jWeatherWatch\comp\net\Utils.class
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp\net
+   [delete] Deleting directory C:\Portable\workspace\jWeatherWatch\comp
+  [antcall] Exiting C:\Portable\workspace\jWeatherWatch\build.xml.
+
+getVersion:
+     [java] Executing 'C:\Program Files\Java\jdk1.6.0_14\jre\bin\java.exe' with arguments:
+     [java] '-jar'
+     [java] 'C:\Portable\workspace\jWeatherWatch\dist\JWeatherwatch.jar'
+     [java] '-version'
+     [java] 
+     [java] The ' characters around the executable and arguments are
+     [java] not part of the command.
+     [java] Output redirected to property: version
+     [echo] jWeatherWatch v1.2.8
+
+zip:
+      [zip] Building zip: C:\Portable\workspace\jWeatherWatch\dist\jWeatherWatch v1.2.8.zip
+      [zip] adding directory iconset/
+      [zip] adding directory lib/
+      [zip] adding entry JWeatherWatch.jar
+      [zip] adding entry iconset/01.png
+      [zip] adding entry iconset/02.png
+      [zip] adding entry iconset/03.png
+      [zip] adding entry iconset/04.png
+      [zip] adding entry iconset/05.png
+      [zip] adding entry iconset/06.png
+      [zip] adding entry iconset/07.png
+      [zip] adding entry iconset/08.png
+      [zip] adding entry iconset/11.png
+      [zip] adding entry iconset/12.png
+      [zip] adding entry iconset/13.png
+      [zip] adding entry iconset/14.png
+      [zip] adding entry iconset/15.png
+      [zip] adding entry iconset/16.png
+      [zip] adding entry iconset/17.png
+      [zip] adding entry iconset/18.png
+      [zip] adding entry iconset/19.png
+      [zip] adding entry iconset/20.png
+      [zip] adding entry iconset/21.png
+      [zip] adding entry iconset/22.png
+      [zip] adding entry iconset/23.png
+      [zip] adding entry iconset/24.png
+      [zip] adding entry iconset/25.png
+      [zip] adding entry iconset/26.png
+      [zip] adding entry iconset/29.png
+      [zip] adding entry iconset/30.png
+      [zip] adding entry iconset/31.png
+      [zip] adding entry iconset/32.png
+      [zip] adding entry iconset/33.png
+      [zip] adding entry iconset/34.png
+      [zip] adding entry iconset/35.png
+      [zip] adding entry iconset/36.png
+      [zip] adding entry iconset/37.png
+      [zip] adding entry iconset/38.png
+      [zip] adding entry iconset/39.png
+      [zip] adding entry iconset/40.png
+      [zip] adding entry iconset/41.png
+      [zip] adding entry iconset/42.png
+      [zip] adding entry iconset/43.png
+      [zip] adding entry iconset/44.png
+      [zip] adding entry iconset/swa.png
+      [zip] adding entry jWeatherWatch.exe
+      [zip] adding entry lib/Snarl4Java-0.1.1.jar
+      [zip] adding entry lib/SnarlNetworkeBridge_v1.1.jar
+      [zip] adding entry lib/libgrowl.jar
+      [zip] adding entry lib/snarl4java.dll
+
+BUILD SUCCESSFUL
+Total time: 4 seconds

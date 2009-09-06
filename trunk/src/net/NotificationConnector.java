@@ -2,22 +2,32 @@ package net;
 
 import java.awt.TrayIcon;
 
+import javax.swing.JFrame;
+
 import net.Notifer.NetNotifer;
 import net.Notifer.Notifer;
+import net.Notifer.NotiferTypes;
 import net.Notifer.Notifers.KNotify;
 import net.Notifer.Notifers.NetGrowl;
-import net.Notifer.Notifers.NetSnarl;
 import net.Notifer.Notifers.Snarl;
 import net.Notifer.Notifers.TrayNotification;
+import net.Notifer.Notifers.NetSnarl.NetSnarl;
 
 public class NotificationConnector {
 
 	private static Notifer notifer;
+	private static JFrame frame = null;
 	public final static String[] notifications = new String[] { "Startup",
 			"Forecast Weather Notification", "Current Weather Notification" };
 	private static String host = "localhost";
 
-	public static void initialize(TrayIcon trayIcon) {
+	public static void initialize(JFrame frame, TrayIcon trayIcon) {
+		NotificationConnector.frame = frame;
+		if (SettingsReader.notifer != null
+				&& setNotifer(NotiferTypes.getNotifer(SettingsReader.notifer,
+						trayIcon)))
+			return;
+
 		if (notifer != null)
 			return;
 
@@ -27,11 +37,11 @@ public class NotificationConnector {
 				return;
 			if (setNotifer(new NetSnarl()))
 				return;
-		case MAC:			
+		case MAC:
 			if (setNotifer(new NetGrowl()))
 				return;
 			break;
-		case LINUX:			
+		case LINUX:
 			if (setNotifer(new KNotify()))
 				return;
 		}
@@ -48,19 +58,23 @@ public class NotificationConnector {
 					.println("NotificationConnector is not initialized, please run \"NotificationConnector.initialize(trayicon);\" firs.");
 			return;
 		}
-		if (iconPath != null && !iconPath.equals("")) {
+		if (iconPath == null || iconPath.equals("")) {
+			notifer.send(alert, title, description);
+		return;
+		}
+		if(iconPath.matches("[0-9][0-9]")){
+		
 			if (notifer instanceof NetNotifer && !host.equals("localhost")
 					&& !host.equals("127.0.0.1"))
 				iconPath = "http://jweatherwatch.googlecode.com/svn/trunk/iconset/"
 						+ iconPath + ".png";
 			else
-				iconPath = Settings.getWorkindirectory() + "/iconset/"
+				iconPath = SettingsReader.getIconpPath()
 						+ iconPath + ".png";
 			notifer.send(alert, title, description, iconPath);
-		}
-
-		else
-			notifer.send(alert, title, description);
+		}else
+			notifer.send(alert, title, description, iconPath);
+			
 	}
 
 	public static boolean setNotifer(Notifer notifer2) {
@@ -71,18 +85,18 @@ public class NotificationConnector {
 		if (notifer2 instanceof NetNotifer) {
 			if (((NetNotifer) notifer2).load(notifications, host)) {
 				notifer = notifer2;
-				NotificationConnector.sendNotification("Startup", Settings.name
-						+ " " + Settings.version, Settings.name + " "
-						+ Settings.version + " succsessfully registered wit "
+				NotificationConnector.sendNotification("Startup", SettingsReader.name
+						+ " " + SettingsReader.version, SettingsReader.name + " "
+						+ SettingsReader.version + " succsessfully registered wit "
 						+ notifer2.getName(), null);
 				return true;
 			}
 		} else if (notifer2.laod(notifications)) {
 			notifer = notifer2;
-			NotificationConnector.sendNotification("Startup", Settings.name
-					+ " " + Settings.version, Settings.name + " "
-					+ Settings.version + " succsessfully registered wit "
-					+ notifer2.getName(), null);
+			NotificationConnector.sendNotification("Startup", SettingsReader.name
+					+ " " + SettingsReader.version, SettingsReader.name + " "
+					+ SettingsReader.version + " succsessfully registered wit "
+					+ notifer2.getName(), "C:/Program Files/full phat/Snarl/etc/icons/info.png");
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");
@@ -102,6 +116,7 @@ public class NotificationConnector {
 	}
 
 	public static void setHost(String host) {
+		if(NotificationConnector.host.equals(host))return;
 		NotificationConnector.host = host;
 		if (notifer instanceof NetNotifer) {
 			((NetNotifer) NotificationConnector.getNotifer())
@@ -110,4 +125,11 @@ public class NotificationConnector {
 
 	}
 
+	public static JFrame getFrame() {
+		return frame;
+	}
+
+	public static void bringFrameToFront() {
+		frame.setState(JFrame.NORMAL);
+	}
 }

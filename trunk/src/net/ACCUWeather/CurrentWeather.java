@@ -1,6 +1,7 @@
 package net.ACCUWeather;
 
 import net.Utils;
+import net.ACCUWeather.WeatherSubtypes.Amount;
 import net.ACCUWeather.WeatherSubtypes.Pressure;
 import net.ACCUWeather.WeatherSubtypes.Speed;
 import net.ACCUWeather.WeatherSubtypes.Temperature;
@@ -15,8 +16,6 @@ public class CurrentWeather extends Weather {
 	Pressure pressure;
 	String humidity;
 	String visibility;
-	String precip;
-	
 	String dewpoint;
 	String cloudcover;
 	String apparenttemp;
@@ -36,13 +35,13 @@ public class CurrentWeather extends Weather {
 		windspeed = new Speed(Utils.getXMLValue(element, "windspeed"),unitCode);
 		winddirection = Utils.getXMLValue(element, "winddirection");
 		visibility = Utils.getXMLValue(element, "visibility");
-		precip = Utils.getXMLValue(element, "precip");
+		precipitation = new Amount(Utils.getXMLValue(element, "precip"),unitCode);
 		uvindex = new UVIndex(element);
 		dewpoint = Utils.getXMLValue(element, "dewpoint");
 		cloudcover = Utils.getXMLValue(element, "cloudcover");
 		apparenttemp = Utils.getXMLValue(element, "apparenttemp");
 		windchill = Utils.getXMLValue(element, "windchill");
-		
+	
 	}
 
 	
@@ -60,7 +59,7 @@ public class CurrentWeather extends Weather {
 
 	
 	public boolean equals(CurrentWeather currentWeather) {
-		return super.equals(currentWeather)&&pressure.equals(currentWeather.pressure)&&humidity.equals(currentWeather.humidity)&&visibility.equals(visibility)&&precip.equals(currentWeather.precip)&&dewpoint.equals(currentWeather.dewpoint)&&cloudcover.equals(currentWeather.cloudcover )&&apparenttemp.equals(currentWeather.apparenttemp)&&windchill.equals(currentWeather.windchill);
+		return super.equals(currentWeather)&&pressure.equals(currentWeather.pressure)&&humidity.equals(currentWeather.humidity)&&visibility.equals(visibility)&&dewpoint.equals(currentWeather.dewpoint)&&cloudcover.equals(currentWeather.cloudcover )&&apparenttemp.equals(currentWeather.apparenttemp)&&windchill.equals(currentWeather.windchill);
 	}
 	
 

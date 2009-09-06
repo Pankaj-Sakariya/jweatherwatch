@@ -1,10 +1,11 @@
-package gui;
+package gui.defaultview;
+
+import gui.ImageBox;
 
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -12,13 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
+import net.SettingsReader;
 import net.Utils;
 import net.ACCUWeather.CurrentWeather;
 import net.ACCUWeather.ForecastWeather;
 import net.ACCUWeather.Location;
 import net.ACCUWeather.Weather;
 
-public class WeatherPanel extends JPanel implements Runnable {
+public class WeatherPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ImageBox imageBox = null;
@@ -35,7 +37,7 @@ public class WeatherPanel extends JPanel implements Runnable {
 	private JLabel jLabel_Other_Lable = null;
 	private boolean timeIsRunning = false;
 	private String url = null; // @jve:decl-index=0:
-	private Location location = null;
+
 
 	/**
 	 * This is the default constructor
@@ -47,13 +49,11 @@ public class WeatherPanel extends JPanel implements Runnable {
 
 	}
 
-	public void updateWeather(Location location, Weather weather) {
-		this.location = location;
+	public void updateWeather(final Location location, Weather weather) {
 		url = weather.getUrl();
 		jLabel_Location.setText(location.toString());
 		jLabel_Location.setToolTipText(location.toString());
-		imageBox.setImage(utils.imageLodaer("iconset/"
-				+ weather.getWeathericon() + ".png"));
+		imageBox.setImage(utils.imageLodaer(SettingsReader.getIconpPath()+ weather.getWeathericon() + ".png"));
 		jLabel_text.setText(weather.getWeathertext());
 		jLabel_text.setToolTipText(weather.getWeathertext());
 		jLabel.setText("Temprature:");
@@ -66,9 +66,21 @@ public class WeatherPanel extends JPanel implements Runnable {
 		if (weather instanceof CurrentWeather) {
 			jLabel_Other_Lable.setText("Current Time:");
 			if (!timeIsRunning)
-				new Thread(this).start();
-			timeIsRunning = true;
-			updateTime();
+				new Thread("Time" + location.getCity()) {
+					public void run() {
+						timeIsRunning = true;
+						while (timeIsRunning) {
+							jLabel_other.setText(location.getCurrentTime());
+							try {
+								Thread.sleep(60000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					};
+				}.start();
+
 		}
 		if (weather instanceof ForecastWeather) {
 			jLabel_text.setText(((ForecastWeather) weather).getTxtshort()
@@ -82,20 +94,19 @@ public class WeatherPanel extends JPanel implements Runnable {
 					+ ((ForecastWeather) weather).getDay().getDayCode() + " "
 					+ ((ForecastWeather) weather).getDay().getDate());
 			jLabel_Other_Lable.setText("Precipitation: ");
-			String tooltip="Rain: "
-				+ ((ForecastWeather) weather).getRain()
-				+ ", Thunderstorm Probability: "
-				+ ((ForecastWeather) weather).getThunderstormProbability()
-				+ "%" + ", Snow: " + ((ForecastWeather) weather).getSnow()
-				+ ", Ice: " + ((ForecastWeather) weather).getIce();
+			String tooltip = "Rain: " + ((ForecastWeather) weather).getRain()
+					+ ", Thunderstorm Probability: "
+					+ ((ForecastWeather) weather).getThunderstormProbability()
+					+ "%" + ", Snow: " + ((ForecastWeather) weather).getSnow()
+					+ ", Ice: " + ((ForecastWeather) weather).getIce();
 			jLabel_Other_Lable.setToolTipText(tooltip);
 			jLabel_other.setText(((ForecastWeather) weather).getPrecipitation()
 					.toString());
 			jLabel_other.setToolTipText(tooltip);
 
 		}
-		if(!imageBox.isVisible())
-			for(Component c:getComponents())
+		if (!imageBox.isVisible())
+			for (Component c : getComponents())
 				c.setVisible(true);
 
 	}
@@ -166,32 +177,12 @@ public class WeatherPanel extends JPanel implements Runnable {
 		return imageBox;
 	}
 
-	public void run() {
-		while (timeIsRunning) {
-			updateTime();
-			try {
-				Thread.sleep(60000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-	}
-
-	private void updateTime() {
-		Calendar c = location.getCurrentTime();
-		String hour=c.get(Calendar.HOUR_OF_DAY)+"";
-		String min=c.get(Calendar.MINUTE)+"";
-		if(hour.length()==1)hour="0"+hour;
-		if(min.length()==1)min="0"+min;
-		jLabel_other.setText(hour+":"+min);
-	}
-	
-	public void clear(){
-		for(Component c:getComponents())
+	public void clear() {
+		for (Component c : getComponents())
 			c.setVisible(false);
 	}
+	public void setTimeIsRunning(boolean timeIsRunning) {
+		this.timeIsRunning = timeIsRunning;
+	}
 
-	
 } // @jve:decl-index=0:visual-constraint="10,10"

@@ -38,16 +38,16 @@ public class Utils {
 	}
 
 	public Image imageLodaer(String src) {
-	
-		if(new File(src).exists())
+
+		if (new File(src).exists())
 			return new ImageIcon(src).getImage();
-		else{
-		URL u = this.getClass().getResource("/" + src.trim());
-			if(u!=null)
+		else {
+			URL u = this.getClass().getResource("/" + src.trim());
+			if (u != null)
 				return new ImageIcon(u).getImage();
 		}
 		return null;
-			
+
 	}
 
 	static public void saveImage(Image img) {
@@ -66,7 +66,9 @@ public class Utils {
 	}
 
 	public static String getXMLValue(Element ele, String tag) {
-		if (ele.getElementsByTagName(tag).item(0) == null || ele.getElementsByTagName(tag).item(0).getChildNodes().item(0) == null)
+		if (ele.getElementsByTagName(tag).item(0) == null
+				|| ele.getElementsByTagName(tag).item(0).getChildNodes()
+						.item(0) == null)
 			return null;
 		String s = ele.getElementsByTagName(tag).item(0).getChildNodes()
 				.item(0).getNodeValue();
@@ -74,36 +76,35 @@ public class Utils {
 		return s;
 	}
 
-
 	public static void visitURL(String url) {
-		try {System.out.println("Visiting: "+url);
-		String os=System.getProperty("os.name").toLowerCase();
-		if(os.contains("windows"))					
-			Runtime.getRuntime().exec("rundll32 url.dll , FileProtocolHandler "+ url);
-		if(os.contains("linux"))
-			Runtime.getRuntime().exec("firefox "+url);
+		try {
+			System.out.println("Visiting: " + url);
+			String os = System.getProperty("os.name").toLowerCase();
+			if (os.contains("windows"))
+				Runtime.getRuntime().exec(
+						"rundll32 url.dll , FileProtocolHandler " + url);
+			if (os.contains("linux"))
+				Runtime.getRuntime().exec("firefox " + url);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	public static enum OS{
-		WINDOWS,LINUX,MAC,ERROR
+
+	public static enum OS {
+		WINDOWS, LINUX, MAC, ERROR
 	}
-	public static OS getOS(){
-		String o=System.getProperty("os.name").toLowerCase();
-		if(o.contains("windows"))
+
+	public static OS getOS() {
+		String o = System.getProperty("os.name").toLowerCase();
+		if (o.contains("windows"))
 			return OS.WINDOWS;
-		if(o.contains("mac"))
+		if (o.contains("mac"))
 			return OS.MAC;
-		if(o.contains("linux"))
+		if (o.contains("linux"))
 			return OS.LINUX;
-		
+
 		return OS.ERROR;
-		
-		
+
 	}
 }

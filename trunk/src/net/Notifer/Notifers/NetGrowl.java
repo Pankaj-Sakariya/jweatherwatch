@@ -1,7 +1,7 @@
 package net.Notifer.Notifers;
 
 
-import net.Settings;
+import net.SettingsReader;
 import net.Notifer.NetNotifer;
 import net.Notifer.NotiferTypes;
 import net.sf.libgrowl.Application;
@@ -34,8 +34,7 @@ public class NetGrowl implements NetNotifer {
 	public boolean load(NotificationType[] notifications, String host){
 		this.host=host;	
 		growlConnector = new GrowlConnector(host);
-		application = new Application(Settings.name, Settings.getWorkindirectory()
-				+ "/iconset/01.png");		
+		application = new Application(SettingsReader.name, SettingsReader.getIconpPath()+"01.png");		
 		return growlConnector.register(application, notificationTypes)==IResponse.OK;
 		
 	}
@@ -48,7 +47,6 @@ public class NetGrowl implements NetNotifer {
 				getNotification(alert), title, description);
 		notification.setIcon(iconPath);
 		growlConnector.notify(notification);
-
 	}
 
 	@Override
