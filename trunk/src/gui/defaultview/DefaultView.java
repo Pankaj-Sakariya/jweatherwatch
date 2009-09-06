@@ -200,15 +200,17 @@ public class DefaultView extends WeatherView {
 			jButton_Add.setBounds(new Rectangle(255, 45, 76, 16));
 			jButton_Add.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Thread() {
-						@Override
-						public void run() {
-							addLocation((Location) jComboBox_Results
-									.getSelectedItem());
-							update(((Location) jComboBox_Results
-									.getSelectedItem()).getNr());
-						}
-					}.start();
+
+					if (jComboBox_Results.getSelectedItem() != null)
+						new Thread() {
+							public void run() {
+
+								addLocation((Location) jComboBox_Results
+										.getSelectedItem());
+								update(((Location) jComboBox_Results
+										.getSelectedItem()).getNr());
+							}
+						}.start();
 
 				}
 			});
@@ -466,12 +468,13 @@ public class DefaultView extends WeatherView {
 			jButton_RemoveLocation
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							jComboBox_QuickSwitch.removeItemAt(displayed);
 							parent.getLocations().remove(displayed);
-							if (parent.getLocations().size() != 0) {
+							jComboBox_QuickSwitch.removeItemAt(displayed);
+							if (!parent.getLocations().isEmpty()) {
 								update(0);
-								jScrollBar.setValues(0, 1, 0, parent
-										.getLocations().size() - 1);
+								jScrollBar.setMaximum(parent.getLocations()
+										.size() - 1);
+								jScrollBar.setValue(0);
 							} else {
 								jScrollBar.setMaximum(0);
 								weatherPanel.clear();
@@ -554,8 +557,7 @@ public class DefaultView extends WeatherView {
 		imageBox_Loading.setVisible(true);
 		parent.addLocation(location);
 		jComboBox_QuickSwitch.addItem(location.toString());
-		jScrollBar.setMaximum(parent.getLocations()
-				.size() - 1);
+		jScrollBar.setMaximum(parent.getLocations().size() - 1);
 		imageBox_Loading.setVisible(false);
 		adding = false;
 
@@ -572,8 +574,8 @@ public class DefaultView extends WeatherView {
 		parent.getTrayIcon().setImage(weatherPanel.getImageBox().getImage());
 		jScrollBar.setValue(nr);
 		jScrollBar1_Forecast.setValue(0);
-		adjustForecast();
 		jComboBox_QuickSwitch.setSelectedIndex(nr);
+		adjustForecast();
 
 	}
 

@@ -96,7 +96,7 @@ public class NotificationConnector {
 			NotificationConnector.sendNotification("Startup", SettingsReader.name
 					+ " " + SettingsReader.version, SettingsReader.name + " "
 					+ SettingsReader.version + " succsessfully registered wit "
-					+ notifer2.getName(), "C:/Program Files/full phat/Snarl/etc/icons/info.png");
+					+ notifer2.getName(), null);
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");

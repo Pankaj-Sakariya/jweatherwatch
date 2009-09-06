@@ -31,7 +31,6 @@ public class LocationList extends HashMap<Integer, Location> implements
 
 	@Override
 	public Location remove(Object key) {
-
 		Location o = super.remove(key);
 		if (o == null)
 			return null;
@@ -86,7 +85,7 @@ public class LocationList extends HashMap<Integer, Location> implements
 	@Override
 	public Location put(Integer key, Location value) {
 		value.setNr(key);
-		value.setParentLocationList(this);
+		value.setParentLocationList(this);	
 		return super.put(key, value);
 	}
 

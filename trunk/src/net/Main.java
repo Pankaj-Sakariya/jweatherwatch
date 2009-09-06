@@ -3,6 +3,12 @@ package net;
 import gui.Gui;
 
 import java.awt.Frame;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+
+import javax.swing.JOptionPane;
 
 public class Main {
 	enum options {
@@ -36,9 +42,36 @@ public class Main {
 				} catch (Exception e) {
 					help(-1);
 				}
-			;
 		}
+		allreadyRunning();
 		new Gui(windowstate);
+
+	}
+
+	private static void allreadyRunning() {
+		try {
+			new File(SettingsReader
+					.getCurrentDirectory()+"/running").createNewFile();
+			RandomAccessFile randomFile = new RandomAccessFile(SettingsReader
+					.getCurrentDirectory()
+					+ "/running", "rw");
+
+			FileChannel channel = randomFile.getChannel();
+
+			if (channel.tryLock() == null) { // we couldnt acquire lock as it is
+				// already locked by another
+				// program instance)
+				System.out
+						.println("An application instance is already running.");
+				JOptionPane.showMessageDialog(null,
+						"An application instance is already running.",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				System.exit(0);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

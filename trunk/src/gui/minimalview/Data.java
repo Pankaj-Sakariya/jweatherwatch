@@ -34,7 +34,6 @@ public class Data extends JPanel {
 	 */
 	private void initialize() {
 		jLabel_Humidity = new JLabel();
-		jLabel_Humidity.setText("");
 		jLabel_Precipitation = new JLabel();
 		jLabel_Wind = new JLabel();
 		jLabel_Temp = new JLabel();
@@ -48,7 +47,6 @@ public class Data extends JPanel {
 		this.add(jLabel_Temp, null);
 		this.add(jLabel_Precipitation, null);
 		this.add(jLabel_Wind, null);
-		//	setLableVisebility();
 		this.add(jLabel_Humidity, null);
 	}
 
@@ -88,9 +86,6 @@ public class Data extends JPanel {
 
 	public void setBoxSize(int i) {
 		this.size = i;
-		//setLableVisebility();
-		//this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
 	}
 
 	public int getBoxSize() {

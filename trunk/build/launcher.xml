@@ -13,14 +13,16 @@
   <stayAlive>false</stayAlive>
   <manifest></manifest>
   <icon>.\01.ico</icon>
-  <singleInstance>
-    <mutexName>jWeatherWatch</mutexName>
-    <windowTitle>jWeatherWatch</windowTitle>
-  </singleInstance>
   <jre>
     <path></path>
     <minVersion>1.6.0</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>preferJre</jdkPreference>
   </jre>
+  <messages>
+    <startupErr>An error occurred while starting the application.</startupErr>
+    <bundledJreErr>This application was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted.</bundledJreErr>
+    <jreVersionErr>This application requires a Java Runtime Environment</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
+  </messages>
 </launch4jConfig>
