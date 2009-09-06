@@ -4,7 +4,8 @@ it makes it Eays tro use the Snarl Network Protocol.
 
 <br>
 ==Changes==
-SVN version now supports SNP 1.1
+ * Renamed some enumerations
+ * SVN version now supports SNP 1.1
 ==Downlaod==
 The Jar file can be downloaded [http://jweatherwatch.googlecode.com/files/SnarlnetworkeBridge.jar here]
 <br/> <br/>
