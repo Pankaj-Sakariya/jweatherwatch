@@ -3,6 +3,7 @@
 
 ==Planned Features=
  * For October, support for mac systems.
+ * single application instance control
 
 ==jWeatherWatch v1.2.8 RC2==
  * fixed the ability to set a different icon path
