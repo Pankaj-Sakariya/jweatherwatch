@@ -12,6 +12,7 @@
  * new Settings Dialog 
  * faster data fetching
  * added support for SNP 1.1(in development)
+ * fixed autostart
 
 ==jWeatherWatch v1.2.7.1==
  * Added workaround for currupted settingsxml,profile.xml
