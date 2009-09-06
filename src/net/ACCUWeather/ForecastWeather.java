@@ -15,7 +15,7 @@ public class ForecastWeather extends Weather {
 	Amount rain;
 	Amount snow;
 	Amount ice;
-	Amount precipitation;
+	
 	ForecastDay day;
 	int thunderstormProbability;
 	Day dayOrNight=null;
@@ -57,7 +57,7 @@ public class ForecastWeather extends Weather {
 	}
 
 	public boolean equals(ForecastWeather f) {
-		return super.equals(f)&&rain.equals(f.rain)&&snow.equals(f.snow)&&ice.equals(f.ice)&&precipitation.equals(f.precipitation)&&thunderstormProbability==f.thunderstormProbability;
+		return super.equals(f)&&rain.equals(f.rain)&&snow.equals(f.snow)&&ice.equals(f.ice)&&thunderstormProbability==f.thunderstormProbability;
 	}
 	
 	@Override
@@ -74,9 +74,7 @@ public class ForecastWeather extends Weather {
 	public Amount getIce() {
 		return ice;
 	}
-	public Amount getPrecipitation() {
-		return precipitation;
-	}
+	
 	public int getThunderstormProbability() {
 		return thunderstormProbability;
 	}

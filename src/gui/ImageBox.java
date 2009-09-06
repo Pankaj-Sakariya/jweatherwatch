@@ -91,5 +91,11 @@ public class ImageBox extends JPanel {
 		super.setBounds(r);
 		sizeUpdate();
 	}
+	@Override
+	public void setBounds(int x, int y, int width, int height) {
+		// TODO Auto-generated method stub
+		super.setBounds(x, y, width, height);
+	sizeUpdate();
+	}
 
 }

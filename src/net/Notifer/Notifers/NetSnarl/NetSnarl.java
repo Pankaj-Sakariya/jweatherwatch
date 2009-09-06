@@ -1,13 +1,12 @@
-package net.Notifer.Notifers;
+package net.Notifer.Notifers.NetSnarl;
 
 import net.NotificationConnector;
-import net.Settings;
+import net.SettingsReader;
 import net.Notifer.NetNotifer;
 import net.Notifer.NotiferTypes;
 import net.snarl.SnarlNetworkBridge;
 
 public class NetSnarl implements NetNotifer {
-	SnarlNetworkBridge snarl = null;
 
 	@Override
 	public boolean laod(String[] notifications) {
@@ -16,31 +15,28 @@ public class NetSnarl implements NetNotifer {
 
 	@Override
 	public boolean load(String[] notifications, String host) {
-		snarl = new SnarlNetworkBridge(Settings.name, host);
-		snarl.snRegisterConfig();
+		SnarlNetworkBridge.snRegisterConfig(SettingsReader.name, host);
 		for (String s : notifications) {
-			snarl.snRegisterAlert(s);
+			SnarlNetworkBridge.snRegisterAlert(s);
 		}
-
-		return snarl.isRunnging();
+		System.out.println(SnarlNetworkBridge.snIsRunnging());
+		return SnarlNetworkBridge.snIsRunnging();
 	}
 
 	@Override
 	public void send(String alert, String title, String description,
 			String iconPath) {
-		snarl.snShowMessage(alert, title, description);
+		SnarlNetworkBridge.snShowMessage(new NetSnarlWeatherNotification(alert, title, description));
 
 	}
 
 	@Override
 	public void unload() {
-		snarl.snRevokeConfig();
+		SnarlNetworkBridge.snRevokeConfig();
 
 	}
 
-	public SnarlNetworkBridge getSnarl() {
-		return snarl;
-	}
+
 
 	@Override
 	public void send(String alert, String title, String description) {
@@ -50,7 +46,7 @@ public class NetSnarl implements NetNotifer {
 
 	@Override
 	public String getHost() {
-		return snarl.getHost();
+		return SnarlNetworkBridge.snGetHost();
 	}
 
 	@Override

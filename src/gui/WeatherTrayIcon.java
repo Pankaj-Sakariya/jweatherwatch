@@ -1,5 +1,8 @@
 package gui;
 
+import gui.defaultview.DefaultView;
+import gui.minimalview.MinimumView;
+
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -10,7 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import net.NotificationConnector;
-import net.Settings;
+import net.SettingsReader;
 import net.ACCUWeather.Location;
 
 public class WeatherTrayIcon extends TrayIcon {
@@ -19,20 +22,16 @@ public class WeatherTrayIcon extends TrayIcon {
 	Gui parent = null;
 
 	public WeatherTrayIcon(final Gui parent, Image image) {
-		super(image, Settings.name);
+		super(image, SettingsReader.name);
 		this.parent = parent;
 
 		this.setImageAutoSize(true);
-		this.setToolTip(Settings.name + " " + Settings.version);
+		this.setToolTip(SettingsReader.name + " " + SettingsReader.version);
 		this.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (parent.getState() == JFrame.ICONIFIED) {
-					parent.setVisible(true);
-					parent.setState(JFrame.NORMAL);
-					parent.toFront();
-				}
+				NotificationConnector.bringFrameToFront();
 			}
 		});
 
@@ -56,9 +55,7 @@ public class WeatherTrayIcon extends TrayIcon {
 			bringToFront.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					if (parent.getState() == JFrame.ICONIFIED) {
-						parent.setVisible(true);
 						parent.setState(JFrame.NORMAL);
-						parent.toFront();
 					} else if (parent.getState() == JFrame.NORMAL)
 						parent.setState(JFrame.ICONIFIED);
 
@@ -79,18 +76,32 @@ public class WeatherTrayIcon extends TrayIcon {
 							}
 						}
 					});
-			
-			
+
 			MenuItem settings = new MenuItem("Settings");
 			settings.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					parent.getSettings().setVisible(true);
 				}
 			});
+			MenuItem minimalView = new MenuItem("Minimal View");
+			minimalView.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					parent.setView(new MinimumView(parent));
+				}
+			});
 
-			popupMenu.add(new MenuItem(Settings.name + " " + Settings.version));
+			MenuItem stadartView = new MenuItem("Default View");
+			stadartView.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					parent.setView(new DefaultView(parent));
+				}
+			});
+			popupMenu.add(new MenuItem(SettingsReader.name + " " + SettingsReader.version));
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(settings);
+			popupMenu.add(new MenuItem("-"));
+			popupMenu.add(stadartView);
+			popupMenu.add(minimalView);
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(bringToFront);
 			popupMenu.add(notifyCurrent);
