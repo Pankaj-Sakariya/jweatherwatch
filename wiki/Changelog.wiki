@@ -4,11 +4,12 @@
 ==Planned Features=
  * For October, support for mac systems.
  
+==jWeatherWatch v1.2.8 RC4==
+ * Hopefully fixed bug with iconpath....
 
 ==jWeatherWatch v1.2.8 RC3==
  * fixed clock in default view
  * changed running check
- * fixed all known bugs
  
 ==jWeatherWatch v1.2.8 RC2==
  * fixed the ability to set a different icon path
