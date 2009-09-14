@@ -16,7 +16,7 @@ public class KNotify implements Notifer {
 	}
 
 	@Override
-	public boolean laod(String[] notifications) {
+	public boolean load(String[] notifications) {
 		runtime = Runtime.getRuntime();
 		return new File("/usr/bin/kdialog").exists();
 	}

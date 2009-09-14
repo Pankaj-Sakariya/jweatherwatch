@@ -90,7 +90,7 @@ public class NotificationConnector {
 						+ notifer2.getName(), null);
 				return true;
 			}
-		} else if (notifer2.laod(notifications)) {
+		} else if (notifer2.load(notifications)) {
 			notifer = notifer2;
 			NotificationConnector.sendNotification("Startup", SettingsReader.name
 					+ " " + SettingsReader.version, SettingsReader.name + " "

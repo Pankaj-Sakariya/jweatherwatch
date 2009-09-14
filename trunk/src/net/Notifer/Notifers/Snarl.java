@@ -18,7 +18,7 @@ public class Snarl implements Notifer {
 	}
 
 	@Override
-	public boolean laod(String[] notifications) {
+	public boolean load(String[] notifications) {
 		if (!initialized)
 			return false;
 		long msg = Snarl4Java.snGetGlobalMsg();
