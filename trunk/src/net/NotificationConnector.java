@@ -64,8 +64,7 @@ public class NotificationConnector {
 		}
 		if(iconPath.matches("[0-9][0-9]")){
 		
-			if (notifer instanceof NetNotifer && !host.equals("localhost")
-					&& !host.equals("127.0.0.1"))
+			if (notifer instanceof NetNotifer )
 				iconPath = "http://jweatherwatch.googlecode.com/svn/trunk/iconset/"
 						+ iconPath + ".png";
 			else

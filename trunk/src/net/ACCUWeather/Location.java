@@ -21,7 +21,7 @@ public class Location implements Runnable {
 	private FiveDayForecast fiveDayForecast = null;
 	private boolean updateIsRunnging = false;
 	private int obsDaylight = 0;
-	private LocationList parentLocationList=null;
+	private LocationList parentLocationList = null;
 
 	public Location(Element element) {
 		city = element.getAttribute("city");
@@ -52,6 +52,7 @@ public class Location implements Runnable {
 	public CurrentWeather getCurrentWeather() {
 		if (currentWeather == null) {
 			update();
+			System.out.println("Blaaa");
 			NotificationConnector.sendNotification(
 					"Current Weather Notification", this.toString(),
 					currentWeather.getNotification(), currentWeather
@@ -115,7 +116,9 @@ public class Location implements Runnable {
 						+ "&metric="
 						+ ACCUWeatherFetcher.getUnit_code().getVal());
 
-		setTimezone(data);
+		if (timeZone == null)
+			setTimezone(data);
+		boolean updated = false;
 
 		CurrentWeather cw = new CurrentWeather((Element) data
 				.getElementsByTagName("currentconditions").item(0),
@@ -124,16 +127,23 @@ public class Location implements Runnable {
 				.getElementsByTagName("forecast").item(0), ACCUWeatherFetcher
 				.getUnit_code());
 
-		if (currentWeather != null && !cw.equals(currentWeather)) {
-			parentLocationList.updated(this);
+		if (currentWeather == null )
+			NotificationConnector.sendNotification(
+					"Current Weather Notification", this.toString(),
+					cw.getNotification(), cw
+							.getWeathericon());
+
+		
+		if(currentWeather != null &&!currentWeather.equals(cw)){
 			NotificationConnector.sendNotification(
 					"Current Weather Notification", this.toString(),
 					currentWeather.getNotification(), currentWeather
 							.getWeathericon());
+			updated=true;
 		}
-
-		if (fiveDayForecast != null && !fdf.equals(fiveDayForecast)) {
-			parentLocationList.updated(this);
+			
+		
+		if (fiveDayForecast != null&&!fiveDayForecast.equals(fdf)) {
 			for (int i = 1; i <= 5; ++i) {
 				if (!fdf.getDay(i).getDay().equals(
 						fiveDayForecast.getDay(i).getDay())) {
@@ -151,10 +161,12 @@ public class Location implements Runnable {
 
 				}
 			}
-			
+			updated=true;
 		}
 		fiveDayForecast = fdf;
 		currentWeather = cw;
+		if (updated)
+			parentLocationList.updated(this);
 
 	}
 

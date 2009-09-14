@@ -62,7 +62,7 @@ public class ForecastWeather extends Weather {
 	
 	@Override
 	public String getNotification() {		
-		return day.dayCode+" "+day.date+" "+dayOrNight+"\n"+super.getNotification()+"\nPrecipitation: "+precipitation+"\nThunderstorm Probability: "+thunderstormProbability;
+		return day.dayCode+" "+day.date+" "+dayOrNight+"\n"+super.getNotification()+"\nPrecipitation: "+precipitation+"\nThunderstorm Probability: "+thunderstormProbability+"%";
 	}
 	
 	public Amount getRain() {
