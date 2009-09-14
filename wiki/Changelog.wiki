@@ -4,18 +4,22 @@
 ==Planned Features=
  * For October, support for mac systems.
  
-==jWeatherWatch v1.2.8 RC4==
+==jWeatherWatch v1.2.8==
+===jWeatherWatch v1.2.8 RC5===
+ * implemented new version of SnarlNetworkBridge it now has icon support
+
+===jWeatherWatch v1.2.8 RC4===
  * Hopefully fixed bug with iconpath....
 
-==jWeatherWatch v1.2.8 RC3==
+===jWeatherWatch v1.2.8 RC3===
  * fixed clock in default view
  * changed running check
  
-==jWeatherWatch v1.2.8 RC2==
+===jWeatherWatch v1.2.8 RC2===
  * fixed the ability to set a different icon path
  * single application instance control
 
-==jWeatherWatch v1.2.8 RC1==
+===jWeatherWatch v1.2.8 RC1===
  * minimal View 
  * better exception handling
  * advanced settings
