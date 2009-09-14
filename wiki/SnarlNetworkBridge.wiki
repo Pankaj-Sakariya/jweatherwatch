@@ -30,7 +30,7 @@ it makes it Eays tro use the Snarl Network Protocol.
 
 
 ==Downlaod==
-The Jar file can be downloaded [http://jweatherwatch.googlecode.com/files/SnarlnetworkeBridge.jar here]
+The Jar file can be downloaded [http://code.google.com/p/jweatherwatch/downloads/list here]
 <br/> <br/>
 ==SVN Checkout==
 https://jweatherwatch.googlecode.com/svn/SnarlNetworkBridge/trunk/
