@@ -11,7 +11,8 @@ package net.snarl;
 public class Message {
 
 	private Reply reply = null;
-	private String msg = null;
+	private SNPProperty msg[] = null;
+	protected SNPProperty action = new SNPProperty("action");
 
 	/**
 	 * The Constructor of a Snarl Message
@@ -19,8 +20,19 @@ public class Message {
 	 * @param msg
 	 *            the SNP String
 	 */
-	public Message(String msg) {
-		this.msg = SnarlNetworkBridge.head + msg;
+	public Message(String action, SNPProperty[] propertys) {
+		this.msg = propertys;
+		this.action.setValue(action);
+	}
+
+	public Message(String action, SNPProperty propertys) {
+		this.action.setValue(action);
+		this.msg = new SNPProperty[] { propertys };
+	}
+
+	public Message() {
+
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -46,6 +58,12 @@ public class Message {
 	 * Returns the SNP String
 	 */
 	public String toString() {
-		return msg;
+		String out = SnarlNetworkBridge.head + action;
+		for (SNPProperty p : msg) {
+			out += p;
+		}
+		return out;
 	}
+
+	
 }

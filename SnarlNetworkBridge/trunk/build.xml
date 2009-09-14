@@ -24,7 +24,7 @@
 		</javadoc>
 	</target>
 
-	<target name="createSnarlNetworkBridge" depends="compile,doc">
+	<target name="createSnarlNetworkBridge" depends="compile">
 		
 		<jar destfile="./dist/SnarlNetworkeBridge.jar" basedir="./comp/" includes="/net/snarl/*">
 			<manifest>

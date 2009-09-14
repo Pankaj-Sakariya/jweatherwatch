@@ -12,6 +12,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 
+import com.sun.jmx.snmp.SnmpParameters;
+
 /**
  * SnarlNetworkBridge for SNP v1.1
  * 
@@ -31,10 +33,10 @@ public class SnarlNetworkBridge {
 	/**
 	 * The SNP header containing version
 	 */
-	public static final String head = "type=SNP#?version=" + SNPVersion;
+	public static final String head = "type=SNP#?version=" + SNPVersion+"#";
 
 	// the Applicatinname registred with Snarl
-	static String appName = null;
+	static SNPProperty appName =new SNPProperty("app");
 	// a HashMap with all registred alerts
 	static HashMap<String, Integer> alerts = new HashMap<String, Integer>();
 
@@ -68,7 +70,7 @@ public class SnarlNetworkBridge {
 			throw new Error("You have to unreister " + applicationName
 					+ " first.");
 		}
-		appName = applicationName;
+		appName.setValue(applicationName);
 		try {
 			sock = new Socket(InetAddress.getByName(host), 9887);
 			out = new PrintWriter(sock.getOutputStream(), true);
@@ -91,7 +93,7 @@ public class SnarlNetworkBridge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Message msg = send(new Message("#?action=register#?app=" + appName));
+		Message msg = send(new Message("register",appName));
 
 		snarlIsRegisterd = snarlIsRunning = msg != null
 				&& msg.getReply() != Reply.SNP_ERROR_NOT_RUNNING;
@@ -107,8 +109,7 @@ public class SnarlNetworkBridge {
 	 */
 	public static Message snRegisterAlert(String title) {
 		alerts.put(title, alerts.size() + 1);
-		return send(new Message("#?action=add_class#?app=" + appName
-				+ "#?class=" + alerts.size() + "#?title=" + title));
+		return send(new Message("add_class",new SNPProperty[]{appName,new SNPProperty("class",String.valueOf(alerts.size())),new SNPProperty("title",title)}));
 
 	}
 
@@ -144,7 +145,7 @@ public class SnarlNetworkBridge {
 	 */
 	public static Notification snShowMessage(String alert, String title,
 			String content, int timeout) {
-		return snShowMessage(new Notification(alert, title, content, timeout));
+		return snShowMessage(new Notification(alert, title, content, null,timeout));
 	}
 
 	/**
@@ -169,7 +170,7 @@ public class SnarlNetworkBridge {
 	 */
 	public static Message snRevokeConfig() {
 		snarlIsRegisterd = false;
-		Message rep = new Message("#?action=unregister#?app=" + appName);
+		Message rep = new Message("unregister",appName);
 		send(rep);
 		close();
 		return rep;
@@ -240,7 +241,7 @@ public class SnarlNetworkBridge {
 					// Set action
 					if (notifications.containsKey(Integer.valueOf(data[4]))) {
 						reply = notifications.get(Integer.valueOf(data[4]));
-						((Notification) reply).setAction(Action
+						((Notification) reply).setUserAction(Action
 								.getByCode(replyType.getCode()));
 					} else {
 						// set ID
@@ -321,6 +322,6 @@ public class SnarlNetworkBridge {
 		notifications.remove(notification);
 		if (debug)
 			System.out.println("Removed: " + notification.getId() + "_"
-					+ notification.getAction());
+					+ notification.getUserAction());
 	}
 }

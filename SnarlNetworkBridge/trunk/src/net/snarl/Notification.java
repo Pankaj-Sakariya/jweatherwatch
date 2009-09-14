@@ -10,7 +10,9 @@ package net.snarl;
 
 public class Notification extends Message {
 	private int id = -1;
-	private Action action = null;
+
+	private Action userAction = null;
+
 
 	/**
 	 * Creates a new Default Notification with SnarlNetworkBridge default
@@ -23,12 +25,16 @@ public class Notification extends Message {
 	 * @param content
 	 *            the content of the Notification
 	 */
-	public Notification(String alert, String title, String content) {
-		super(SnarlNetworkBridge.head + "#?action=notification#?app="
-				+ SnarlNetworkBridge.appName + "#?class="
-				+ SnarlNetworkBridge.alerts.get(alert) + "#?title=" + title
-				+ "#?text=" + content + "#?timeout="
-				+ SnarlNetworkBridge.snGetTimeout());
+	public Notification(String alert, String title, String content,
+			String iconUrl) {
+		super("notification", new SNPProperty[] {
+				new SNPProperty("class", String
+						.valueOf(SnarlNetworkBridge.alerts.get(alert))),
+				new SNPProperty("title", title),
+				new SNPProperty("text", content),
+				new SNPProperty("icon", iconUrl),
+				new SNPProperty("timeout", String.valueOf(SnarlNetworkBridge
+						.snGetTimeout())) });
 	}
 
 	/**
@@ -43,12 +49,18 @@ public class Notification extends Message {
 	 * @param timeout
 	 *            the timeout of the Notification
 	 */
-	public Notification(String alert, String title, String content, int timeout) {
-		super(SnarlNetworkBridge.head + "#?action=notification#?app="
-				+ SnarlNetworkBridge.appName + "#?class="
-				+ SnarlNetworkBridge.alerts.get(alert) + "#?title=" + title
-				+ "#?text=" + content + "#?timeout=" + timeout);
+	public Notification(String alert, String title, String content,
+			String iconUrl, int timeout) {
+		super("notification", new SNPProperty[] {
+				new SNPProperty("class", String
+						.valueOf(SnarlNetworkBridge.alerts.get(alert))),
+				new SNPProperty("title", title),
+				new SNPProperty("text", content),
+				new SNPProperty("icon", iconUrl),
+				new SNPProperty("timeout", String.valueOf(timeout)) });
+
 	}
+
 
 	/**
 	 * Sets the action which the user applied, should be overwritten to set user
@@ -57,8 +69,8 @@ public class Notification extends Message {
 	 * @param action
 	 *            the Action to be set
 	 */
-	protected void setAction(Action action) {
-		this.action = action;
+	protected void setUserAction(Action action) {
+		this.userAction = action;
 		if (action == Action.Closed || action == Action.LeftClicked
 				|| action == Action.Timed_Out)
 			SnarlNetworkBridge.removeNotification(this);
@@ -69,8 +81,8 @@ public class Notification extends Message {
 	 * 
 	 * @return the Action of the Notification
 	 */
-	public Action getAction() {
-		return action;
+	public Action getUserAction() {
+		return userAction;
 	}
 
 	/**
