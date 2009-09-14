@@ -17,7 +17,7 @@ public class NetGrowl implements NetNotifer {
 	String host=null;
 
 	@Override
-	public boolean laod(String[] notifications) {
+	public boolean load(String[] notifications) {
 	
 		return load(notifications,"localhost");
 

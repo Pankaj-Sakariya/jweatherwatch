@@ -9,7 +9,7 @@ import net.snarl.SnarlNetworkBridge;
 public class NetSnarl implements NetNotifer {
 
 	@Override
-	public boolean laod(String[] notifications) {
+	public boolean load(String[] notifications) {
 		return load(notifications, "localhost");
 	}
 

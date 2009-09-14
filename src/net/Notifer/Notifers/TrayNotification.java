@@ -14,7 +14,7 @@ public class TrayNotification implements Notifer {
 	}
 
 	@Override
-	public boolean laod(String[] notifications) {
+	public boolean load(String[] notifications) {
 		// TODO Auto-generated method stub
 		return true;
 	}
