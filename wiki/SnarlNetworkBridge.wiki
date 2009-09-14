@@ -9,7 +9,7 @@ it makes it Eays tro use the Snarl Network Protocol.
  * Getting the user action( clicked usw)
  * added support for iconUrl
 
-=Example for a user specific Notification=
+==Example for a user specific Notification==
 <code>public class NetSnarlWeatherNotification extends net.snarl.Notification {
 
 	public NetSnarlWeatherNotification(String alert, String title, String content,
