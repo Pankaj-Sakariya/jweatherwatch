@@ -17,23 +17,25 @@ public class Message {
 	/**
 	 * The Constructor of a Snarl Message
 	 * 
-	 * @param msg
-	 *            the SNP String
+	 * @param propertys
+	 *            an aray  of {@link SNPProperty}s 
 	 */
 	public Message(String action, SNPProperty[] propertys) {
 		this.msg = propertys;
 		this.action.setValue(action);
 	}
 
-	public Message(String action, SNPProperty propertys) {
+	/**
+	 * The Constructor of a Snarl Message
+	 * 
+	 * @param property the {@link SNPProperty} of the message
+	 */
+	public Message(String action, SNPProperty property) {
 		this.action.setValue(action);
-		this.msg = new SNPProperty[] { propertys };
+		this.msg = new SNPProperty[] { property };
 	}
 
-	public Message() {
 
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * Returns the Reply of Snarl if set, otherwise null

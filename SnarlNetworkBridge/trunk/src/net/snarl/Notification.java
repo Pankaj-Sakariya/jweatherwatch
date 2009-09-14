@@ -13,7 +13,6 @@ public class Notification extends Message {
 
 	private Action userAction = null;
 
-
 	/**
 	 * Creates a new Default Notification with SnarlNetworkBridge default
 	 * timeout
@@ -24,6 +23,8 @@ public class Notification extends Message {
 	 *            the title of the Notification
 	 * @param content
 	 *            the content of the Notification
+	 * @param iconUrl
+	 *            the http url to the icon
 	 */
 	public Notification(String alert, String title, String content,
 			String iconUrl) {
@@ -46,21 +47,22 @@ public class Notification extends Message {
 	 *            the title of the Notification
 	 * @param content
 	 *            the content of the Notification
+	 * @param iconUrl
+	 *            the http url to the icon
 	 * @param timeout
 	 *            the timeout of the Notification
+	 * 
 	 */
 	public Notification(String alert, String title, String content,
 			String iconUrl, int timeout) {
 		super("notification", new SNPProperty[] {
-				new SNPProperty("class", String
-						.valueOf(SnarlNetworkBridge.alerts.get(alert))),
+				new SNPProperty("class", String.valueOf(SnarlNetworkBridge.alerts.get(alert))),
 				new SNPProperty("title", title),
 				new SNPProperty("text", content),
 				new SNPProperty("icon", iconUrl),
 				new SNPProperty("timeout", String.valueOf(timeout)) });
 
 	}
-
 
 	/**
 	 * Sets the action which the user applied, should be overwritten to set user

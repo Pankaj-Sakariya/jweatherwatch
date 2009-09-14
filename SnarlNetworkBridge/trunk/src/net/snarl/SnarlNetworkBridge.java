@@ -12,8 +12,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 
-import com.sun.jmx.snmp.SnmpParameters;
-
 /**
  * SnarlNetworkBridge for SNP v1.1
  * 
