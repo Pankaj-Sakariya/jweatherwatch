@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
 
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.8 RC2";
+	public static final String version = "v1.2.8 RC5";
 
 	private static String homeDirectory = null;
 	private static String iconpPath = null;
@@ -77,7 +77,7 @@ public class SettingsReader {
 			notifer = NotiferTypes.valueOf(Utils
 					.getXMLValue(element, "notifer"));
 		if (iconpPath == null && Utils.getXMLValue(element, "iconPath") != null)
-			iconpPath = Utils.getXMLValue(element, "iconPath");
+			setIconpPath(Utils.getXMLValue(element, "iconPath"));
 
 		if (Utils.getXMLValue(element, "notificationIterval") != null)
 			notificationInterval = Integer.valueOf(Utils.getXMLValue(element,
@@ -227,7 +227,7 @@ public class SettingsReader {
 
 	public static String getIconpPath() {
 		if (iconpPath == null) {
-			iconpPath = getCurrentDirectory() + "iconset/";
+			setIconpPath(getCurrentDirectory() + "iconset/");
 		}
 		return iconpPath;
 	}
@@ -236,15 +236,15 @@ public class SettingsReader {
 		iconpPath = iconpPath.replace("\\", "/");
 		if (!iconpPath.endsWith("/"))
 			iconpPath += "/";
-		if (new File(iconpPath + "/01.png").exists())
+		if (new File(iconpPath + "/01.png").exists()) {
 			SettingsReader.iconpPath = iconpPath;
-
+			System.out.println("Setting up iconpath: " + iconpPath);
+		} 
 	}
 
 	public static String getCurrentDirectory() {
-		String out = new SettingsReader().getClass().getResource("/")
-				.toExternalForm();
-		return out.substring(6, out.length());
-
+		return new File(new SettingsReader().getClass().getResource("/")
+				.getPath()).toString().replace("%20", " ")
+				+ "/";
 	}
 }

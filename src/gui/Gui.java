@@ -4,6 +4,7 @@ import gui.settings.SettingsDialog;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.SystemTray;
 
 import javax.swing.JFrame;
@@ -62,7 +63,7 @@ public class Gui extends JFrame implements LocationListUser {
 			l.update();
 			System.out.println("Adding Location: " + l + " to location list.");
 			locations.put(locations.size(), l);
-			for(Location lo:locations){
+			for (Location lo : locations) {
 				System.out.println("[" + lo.getNr() + "] " + lo);
 			}
 		}
@@ -91,6 +92,9 @@ public class Gui extends JFrame implements LocationListUser {
 		this.setIconImage(utils.imageLodaer(SettingsReader.getIconpPath()
 				+ "/01.png"));
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			public void windowIconified(java.awt.event.WindowEvent e) {
+				setVisible(false);
+			}
 
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				close();
@@ -122,12 +126,12 @@ public class Gui extends JFrame implements LocationListUser {
 	}
 
 	public void close() {
-//		this.setContentPane(getSplash());
-//		splash.setLoadingText("Saving...");
+		this.setContentPane(getSplash());
+		splash.setLoadingText("Saving...");
 		System.out.println("Saving....");
 		ACCUWeatherFetcher.save(locations);
 		SettingsReader.save();
-	//	ACCUWeatherFetcher.saveOfflineData(locations, splash);
+		// ACCUWeatherFetcher.saveOfflineData(locations, splash);
 		NotificationConnector.exit();
 		SystemTray.getSystemTray().remove(trayIcon);
 
@@ -174,16 +178,10 @@ public class Gui extends JFrame implements LocationListUser {
 	public synchronized void setState(int state) {
 		super.setState(state);
 		switch (state) {
-		case JFrame.MAXIMIZED_BOTH:
-			System.out.println("max");
-			break;
 
-		case JFrame.NORMAL:
+		case Frame.NORMAL:
 			setVisible(true);
 			toFront();
-			break;
-		case JFrame.ICONIFIED:
-			setVisible(false);
 			break;
 		default:
 			break;
@@ -192,7 +190,8 @@ public class Gui extends JFrame implements LocationListUser {
 
 	@Override
 	public void locationUpdated(Location location) {
-	if(view!=null)view.locationUpdated();
+		if (view != null)
+			view.locationUpdated();
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"

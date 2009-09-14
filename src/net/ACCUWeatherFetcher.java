@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -52,13 +53,20 @@ public class ACCUWeatherFetcher {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			/*
-			 * if (url.contains("weather-data.asp")) { Document d =
-			 * getOfflineDocument(SettingsReader .getHomeDirectory() +
-			 * "/offline/" + url .substring( url.indexOf("location=") +
-			 * "location=".length(), url.indexOf("&")).replace("|", "-") +
-			 * ".xml"); if (d != null) return d; }
-			 */
+
+//			if (url.contains("weather-data.asp")) {
+//				Document d = getOfflineDocument(SettingsReader
+//						.getHomeDirectory()
+//						+ "/offline/"
+//						+ url
+//								.substring(
+//										url.indexOf("location=")
+//												+ "location=".length(),
+//										url.indexOf("&")).replace("|", "-")
+//						+ ".xml");
+//				if (d != null)
+//					return d;
+//			}
 
 			System.out
 					.println("There is a problem with zour Internet connection.\n jWeatherWatch exits now.");
@@ -79,9 +87,10 @@ public class ACCUWeatherFetcher {
 	}
 
 	private static Document getOfflineDocument(String url) {
+		System.out.println ("Lodaing offline data");
 		try {
-			DocumentBuilderFactory.newInstance().newDocumentBuilder()
-			.parse(new File(url));
+			DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
+					new File(url));
 		} catch (FileNotFoundException e) {
 			System.out.println("File: " + url + " not found, retrying");
 			return null;
@@ -177,27 +186,32 @@ public class ACCUWeatherFetcher {
 		for (Location l : locationList) {
 			splash.setLoadingText("Saving offline weather data of: " + l);
 			try {
+				new File(SettingsReader.getHomeDirectory() + "/offline/")
+						.mkdirs();
+				File outfile = new File(SettingsReader.getHomeDirectory()
+						+ "/offline/tmp");
 				url = new URL(baseURL + "weather-data.asp?location="
 						+ l.getLocation() + "&metric=" + unitCode.getVal());
 
-				out = new BufferedOutputStream(new FileOutputStream(
-						SettingsReader.getHomeDirectory() + "/offline/tmp"));
+				out = new BufferedOutputStream(new FileOutputStream(outfile));
 				conn = url.openConnection();
 
 				in = conn.getInputStream();
-
 				byte[] buffer = new byte[1024];
 				int numRead;
 				while ((numRead = in.read(buffer)) != -1) {
 					out.write(buffer, 0, numRead);
 				}
+				out.close();
 				new File(SettingsReader.getHomeDirectory() + "/offline/"
 						+ l.getLocation().replace("|", "-") + ".xml").delete();
-				new File(SettingsReader.getHomeDirectory() + "/offline/tmp")
-						.renameTo(new File(SettingsReader.getHomeDirectory()
-								+ "/offline/"
-								+ l.getLocation().replace("|", "-") + ".xml"));
-			} catch (UnknownHostException e) {
+				outfile.renameTo(new File(SettingsReader.getHomeDirectory()
+						+ "/offline/" + l.getLocation().replace("|", "-")
+						+ ".xml"));
+			}catch(ConnectException e){
+				return;
+			}			
+			catch (UnknownHostException e) {
 				return;
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -205,6 +219,7 @@ public class ACCUWeatherFetcher {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			}
 		}
 

@@ -50,11 +50,13 @@ public class Main {
 
 	private static void allreadyRunning() {
 		try {
-			new File(SettingsReader
-					.getCurrentDirectory()+"/running").createNewFile();
-			RandomAccessFile randomFile = new RandomAccessFile(SettingsReader
-					.getCurrentDirectory()
-					+ "/running", "rw");
+			File path=new File(SettingsReader.getHomeDirectory() );
+			File running=new File(path+ "/running");
+			if(!running.exists()){
+				path.mkdirs();
+				running.createNewFile();
+			}
+			RandomAccessFile randomFile = new RandomAccessFile(running, "rw");
 
 			FileChannel channel = randomFile.getChannel();
 
@@ -64,13 +66,12 @@ public class Main {
 				System.out
 						.println("An application instance is already running.");
 				JOptionPane.showMessageDialog(null,
-						"An application instance is already running.",
-						"Error", JOptionPane.ERROR_MESSAGE);
+						"An application instance is already running.", "Error",
+						JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return;
 		}
 
 	}

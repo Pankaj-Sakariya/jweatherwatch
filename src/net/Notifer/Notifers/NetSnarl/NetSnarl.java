@@ -15,18 +15,20 @@ public class NetSnarl implements NetNotifer {
 
 	@Override
 	public boolean load(String[] notifications, String host) {
+	//	SnarlNetworkBridge.setDebug(true);
 		SnarlNetworkBridge.snRegisterConfig(SettingsReader.name, host);
+		
 		for (String s : notifications) {
 			SnarlNetworkBridge.snRegisterAlert(s);
 		}
-		System.out.println(SnarlNetworkBridge.snIsRunnging());
+	
 		return SnarlNetworkBridge.snIsRunnging();
 	}
 
 	@Override
 	public void send(String alert, String title, String description,
 			String iconPath) {
-		SnarlNetworkBridge.snShowMessage(new NetSnarlWeatherNotification(alert, title, description));
+		SnarlNetworkBridge.snShowMessage(new NetSnarlWeatherNotification(alert, title, description,iconPath));
 
 	}
 
