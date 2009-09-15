@@ -31,7 +31,7 @@ public class NotificationConnector {
 		if (notifer != null)
 			return;
 
-		switch (Utils.getOS()) {
+	/*	switch (Utils.getOS()) {
 		case WINDOWS:
 			if (setNotifer(new Snarl()))
 				return;
@@ -44,7 +44,7 @@ public class NotificationConnector {
 		case LINUX:
 			if (setNotifer(new KNotify()))
 				return;
-		}
+		}*/
 
 		setNotifer(new TrayNotification(trayIcon));
 

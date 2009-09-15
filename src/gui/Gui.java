@@ -52,10 +52,10 @@ public class Gui extends JFrame implements LocationListUser {
 		this.setContentPane(view);
 		setNotificationthread(new NotificationThread(locations,
 				SettingsReader.notificationInterval));
-		JOptionPane.showMessageDialog(null,
+/*		JOptionPane.showMessageDialog(null,
 				"This is a beta version please report all occuring errors.",
 				"This is a beta", JOptionPane.INFORMATION_MESSAGE);
-
+*/
 	}
 
 	public void addLocation(Location l) {
