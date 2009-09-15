@@ -5,6 +5,9 @@
  * For October, support for mac systems.
  
 ==jWeatherWatch v1.2.8==
+ * fixed a bug who prevented weather display update after removing of a location
+ * jWeatherWatch now hides on window closing
+
 ===jWeatherWatch v1.2.8 RC5===
  * implemented new version of SnarlNetworkBridge it now has icon support
 
