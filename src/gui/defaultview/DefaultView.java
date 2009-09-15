@@ -205,10 +205,11 @@ public class DefaultView extends WeatherView {
 						new Thread() {
 							public void run() {
 
-								addLocation((Location) jComboBox_Results
-										.getSelectedItem());
-								update(((Location) jComboBox_Results
-										.getSelectedItem()).getNr());
+								Location l = (Location) jComboBox_Results
+										.getSelectedItem();
+								addLocation(l);
+								displayed = -1;
+								update(l.getNr());
 							}
 						}.start();
 
@@ -475,6 +476,7 @@ public class DefaultView extends WeatherView {
 								jScrollBar.setMaximum(parent.getLocations()
 										.size() - 1);
 								jScrollBar.setValue(0);
+								displayed = -1;
 							} else {
 								jScrollBar.setMaximum(0);
 								weatherPanel.clear();
