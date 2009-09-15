@@ -27,7 +27,7 @@ public class NetGrowl implements NetNotifer {
 		for (int i = 0; i < notifications.length; ++i) {
 			notificationTypes[i] = new NotificationType(notifications[i]);
 		}	
-		return load(notifications, host);
+		return load(notificationTypes, host);
 		
 	}
 	
@@ -76,7 +76,7 @@ public class NetGrowl implements NetNotifer {
 		return host;
 	}
 
-	@Override
+	
 	public boolean setHost(String host) {
 		unload();		
 		return load(notificationTypes,host);		
