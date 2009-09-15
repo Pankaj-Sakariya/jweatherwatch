@@ -8,7 +8,6 @@ import java.awt.Frame;
 import java.awt.SystemTray;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import net.ACCUWeatherFetcher;
 import net.NotificationConnector;

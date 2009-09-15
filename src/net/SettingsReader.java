@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
 
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.8";
+	public static final String version = "v1.2.8.1";
 
 	private static String homeDirectory = null;
 	private static String iconpPath = null;
