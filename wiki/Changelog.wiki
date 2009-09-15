@@ -4,6 +4,8 @@
 ==Planned Features=
  * For October, support for mac systems.
  
+==jWeatherWatch v1.2.1==
+ * fixed NetGrowl notifierthanks to danmancuso and wamcgruder for leaving a comment and reported this bug, if you find a bug leave a [http://code.google.com/p/jweatherwatch/wiki/Comments Comment]
 ==jWeatherWatch v1.2.8==
  * fixed a bug who prevented weather display update after removing of a location
  * jWeatherWatch now hides on window closing
