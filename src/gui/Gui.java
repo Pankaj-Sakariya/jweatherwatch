@@ -87,7 +87,7 @@ public class Gui extends JFrame implements LocationListUser {
 
 		this.setSize(new Dimension(817, 448));
 		this.setContentPane(getSplash());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setTitle(SettingsReader.name);
 		this.setIconImage(utils.imageLodaer(SettingsReader.getIconpPath()
 				+ "/01.png"));
@@ -96,9 +96,7 @@ public class Gui extends JFrame implements LocationListUser {
 				setVisible(false);
 			}
 
-			public void windowClosing(java.awt.event.WindowEvent e) {
-				close();
-			}
+		
 
 		});
 
