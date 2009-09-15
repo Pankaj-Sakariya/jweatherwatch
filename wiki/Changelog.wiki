@@ -7,6 +7,7 @@
 ==jWeatherWatch v1.2.8==
  * fixed a bug who prevented weather display update after removing of a location
  * jWeatherWatch now hides on window closing
+ * TraIcon is now the default notifier because there was a problem with notifier recognition, it always ended up with Snarl, just set the notifier in the settings dialog.
 
 ===jWeatherWatch v1.2.8 RC5===
  * implemented new version of SnarlNetworkBridge it now has icon support
