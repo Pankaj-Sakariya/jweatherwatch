@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import net.Notifer.NotiferTypes;
+import net.Utils.OS;
 import net.myxml.Doc;
 
 import org.w3c.dom.Document;
@@ -22,7 +23,7 @@ import org.xml.sax.SAXException;
 
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "v1.2.8.1";
+	public static final String version = "v1.2.8.2";
 
 	private static String homeDirectory = null;
 	private static String iconpPath = null;
@@ -243,8 +244,9 @@ public class SettingsReader {
 	}
 
 	public static String getCurrentDirectory() {
-		return new File(new SettingsReader().getClass().getResource("/")
-				.getPath()).toString().replace("%20", " ")
-				+ "/";
+		String out=new SettingsReader().getClass().getResource("/").getFile().replace("%20", " ");
+		if(Utils.getOS()==OS.WINDOWS)
+			out=out.replaceFirst("/","");
+	return out;
 	}
 }
