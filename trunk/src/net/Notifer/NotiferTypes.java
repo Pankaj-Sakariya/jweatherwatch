@@ -7,7 +7,7 @@ import net.Notifer.Notifers.TrayNotification;
 import net.Notifer.Notifers.NetSnarl.NetSnarl;
 
 public enum NotiferTypes {
-	Snarl, NetSnarl, NetGrowl, TrayIcon, KNotify;
+	Snarl, NetSnarl, NetGrowl, TrayIcon, KNotify,LibNotify;
 	public static Notifer getNotifer(NotiferTypes type,java.awt.TrayIcon icon) {
 		switch (type) {
 		case Snarl:
