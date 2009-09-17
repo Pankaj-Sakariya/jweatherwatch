@@ -14,7 +14,7 @@ http://jweatherwatch.googlecode.com/svn/images/kde.png
 [Snarl] 
 http://www.fullphat.net/applications/Misc/jWeatherWatch/jWeatherWatch.png 
 SnarlNetwork
-http://jweatherwatch.googlecode.com/svn/images/snarlnet.png
+http://jweatherwatch.googlecode.com/svn/images/win_gntp.png
 <br/>
 [GrowlForWindows]
 http://jweatherwatch.googlecode.com/svn/images/win_gntp.png
