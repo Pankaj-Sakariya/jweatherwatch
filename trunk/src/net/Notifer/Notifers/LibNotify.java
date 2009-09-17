@@ -27,53 +27,57 @@ public class LibNotify implements Notifer {
 
 		if (!initialized) {
 			if (!gtkInitialized)
-				try{
-				Gtk.init(new String[] {});
-				}catch(UnsatisfiedLinkError e){
+				try {
+					Gtk.init(new String[] {});
+				} catch (UnsatisfiedLinkError e) {
 					return false;
-				}		
+				}
 
-			 new Thread("gtk"){
-				public void run() {Gtk.main();}; 
-			 }.start();
+			new Thread("gtk") {
+				public void run() {
+					Gtk.main();
+				};
+			}.start();
 			gtkInitialized = true;
 			initialized = true;
-		return	Notify.init(SettingsReader.name);
+			return Notify.init(SettingsReader.name);
 		}
 		return true;
 	}
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath,final String url) {
+			String iconPath, final String url) {
 		Notification not = new org.gnome.notify.Notification(title,
 				description, iconPath, getIcon());
-		not.addAction("b", "Visit Forecast",
-				new org.gnome.notify.Notification.Action() {
-					public void onAction(Notification arg0, String arg1) {
-						Utils.visitURL(url);
-					}
-				});
+		if (url != null) {
+			not.addAction("b", "Visit Forecast",
+					new org.gnome.notify.Notification.Action() {
+						public void onAction(Notification arg0, String arg1) {
+							Utils.visitURL(url);
+						}
+					});
+		}
 		not.addAction("a", "Show jWeatherWatch",
 				new org.gnome.notify.Notification.Action() {
 					public void onAction(Notification arg0, String arg1) {
 						NotificationConnector.bringFrameToFront();
 					}
 				});
-		
+
 		not.show();
 	}
 
 	@Override
-	public void send(String alert, String title, String description,String url) {
-		send(alert, title, description, "",null);
+	public void send(String alert, String title, String description, String url) {
+		send(alert, title, description, "", null);
 	}
 
 	@Override
 	public void unload() {
 		if (initialized) {
 			Notify.uninit();
-			 Gtk.mainQuit();
+			Gtk.mainQuit();
 			initialized = false;
 		}
 	}
