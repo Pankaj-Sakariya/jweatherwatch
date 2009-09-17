@@ -25,13 +25,16 @@ public class LibNotify implements Notifer {
 
 		if (!initialized) {
 			if (!gtkInitialized)
+				try{
 				Gtk.init(new String[] {});
-
-			Notify.init(SettingsReader.name);
+				}catch(UnsatisfiedLinkError e){
+					return false;
+				}		
 
 //			 Gtk.main();
 			gtkInitialized = true;
 			initialized = true;
+		return	Notify.init(SettingsReader.name);
 		}
 		return true;
 	}
