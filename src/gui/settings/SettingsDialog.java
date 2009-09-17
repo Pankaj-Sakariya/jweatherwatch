@@ -58,7 +58,7 @@ public class SettingsDialog extends JFrame {
 		this.setSize(new Dimension(305, 257));
 		this.setResizable(false);
 		this.setContentPane(getJPanel());
-		this.setIconImage(parent.getIconImage());
+		this.setIconImage(parent.getIconImages().get(0));
 	}
 
 	/**
