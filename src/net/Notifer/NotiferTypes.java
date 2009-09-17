@@ -24,6 +24,8 @@ public enum NotiferTypes {
 
 		case KNotify:
 			return new KNotify();
+		case LibNotify:
+			return new net.Notifer.Notifers.LibNotify();
 		}
 		return null;
 	}

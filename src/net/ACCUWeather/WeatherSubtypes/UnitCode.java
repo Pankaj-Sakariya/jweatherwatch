@@ -12,9 +12,9 @@ public enum UnitCode {
 	public String temperature() {
 		switch (this) {
 		case Metric:
-			return "°C";
+			return "\u00B0C";
 		case English :	
-			return "°F";
+			return "\u00B0F";
 		default:
 			return "Error";
 		}

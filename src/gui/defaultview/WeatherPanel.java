@@ -59,7 +59,7 @@ public class WeatherPanel extends JPanel {
 		jLabel_text.setToolTipText(weather.getWeathertext());
 		jLabel.setText("Temprature:");
 		jLabel_Temp.setText(weather.getTemperature().toString());
-		jLabel1.setText("RealFeal®:");
+		jLabel1.setText("RealFeal\u00AE:");
 		jLabel_RealFeal.setText(weather.getRealfeel().toString());
 		jLabel2.setText("Wind:");
 		jLabel_Wind.setText(weather.getWinddirection() + " "

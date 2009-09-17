@@ -129,6 +129,7 @@ public class NotificationConnector {
 	}
 
 	public static void bringFrameToFront() {
+		System.out.println("ao");
 		frame.setState(JFrame.NORMAL);
 	}
 }
