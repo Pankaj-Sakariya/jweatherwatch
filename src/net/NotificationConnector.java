@@ -7,11 +7,7 @@ import javax.swing.JFrame;
 import net.Notifer.NetNotifer;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
-import net.Notifer.Notifers.KNotify;
-import net.Notifer.Notifers.NetGrowl;
-import net.Notifer.Notifers.Snarl;
 import net.Notifer.Notifers.TrayNotification;
-import net.Notifer.Notifers.NetSnarl.NetSnarl;
 
 public class NotificationConnector {
 
@@ -129,7 +125,6 @@ public class NotificationConnector {
 	}
 
 	public static void bringFrameToFront() {
-		System.out.println("ao");
 		frame.setState(JFrame.NORMAL);
 	}
 }
