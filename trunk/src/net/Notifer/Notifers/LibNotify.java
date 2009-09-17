@@ -1,8 +1,5 @@
 package net.Notifer.Notifers;
 
-import java.awt.TrayIcon;
-
-import net.NotificationConnector;
 import net.SettingsReader;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
@@ -32,7 +29,7 @@ public class LibNotify implements Notifer {
 
 			Notify.init(SettingsReader.name);
 
-			// Gtk.main();
+//			 Gtk.main();
 			gtkInitialized = true;
 			initialized = true;
 		}
@@ -44,16 +41,12 @@ public class LibNotify implements Notifer {
 			String iconPath) {
 		Notification not = new org.gnome.notify.Notification(title,
 				description, iconPath, getIcon());
-		not.addAction("a", "Show jWeatherWatch",
-				new org.gnome.notify.Notification.Action() {
-
-					public void onAction(Notification arg0, String arg1) {
-						System.out.println("ia");
-						NotificationConnector.bringFrameToFront();
-					
-					}
-
-				});
+//		not.addAction("a", "Show jWeatherWatch",
+//				new org.gnome.notify.Notification.Action() {
+//					public void onAction(Notification arg0, String arg1) {
+//						NotificationConnector.bringFrameToFront();
+//					}
+//				});
 		not.show();
 	}
 
@@ -66,7 +59,7 @@ public class LibNotify implements Notifer {
 	public void unload() {
 		if (initialized) {
 			Notify.uninit();
-			// Gtk.mainQuit();
+//			 Gtk.mainQuit();
 			initialized = false;
 		}
 	}
