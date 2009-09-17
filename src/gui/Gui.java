@@ -29,7 +29,6 @@ public class Gui extends JDialog implements LocationListUser {
 	private Splash splash = null; // @jve:decl-index=0:visual-constraint="277,470"
 	private WeatherTrayIcon trayIcon = null;
 	private SettingsDialog settings = null; // @jve:decl-index=0:visual-constraint="-3,68"
-
 	static {
 		SettingsReader.load();
 	}
@@ -37,13 +36,10 @@ public class Gui extends JDialog implements LocationListUser {
 	/**
 	 * This is the default constructor
 	 */
-	public Gui(int windowstate) {
-		super();
+	public Gui(boolean visible) {
+		super(null, ModalityType.TOOLKIT_MODAL);
 		initialize();
-		
-			this.setVisible(windowstate != JFrame.ICONIFIED);
-	
-			
+		this.setVisible(visible);
 		NotificationConnector.initialize(this, getTrayIcon());
 		locations = ACCUWeatherFetcher.load(this);
 		for (Location l : locations) {
