@@ -11,7 +11,7 @@ import org.gnome.notify.Notify;
 
 public class LibNotify implements Notifer {
 
-	private StatusIcon icon = null;
+	private static StatusIcon icon = null;
 	private static boolean initialized = false;
 	private static boolean gtkInitialized = false;
 
