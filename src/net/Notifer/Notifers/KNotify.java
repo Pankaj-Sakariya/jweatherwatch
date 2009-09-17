@@ -35,7 +35,7 @@ public class KNotify implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description,String url) {
-		send(alert, title, description, null);
+		send(alert, title, description, null,null);
 	}
 
 	@Override
