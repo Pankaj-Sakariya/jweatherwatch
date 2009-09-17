@@ -1,8 +1,8 @@
 package net;
 
-import java.awt.TrayIcon;
+import gui.Gui;
 
-import javax.swing.JFrame;
+import java.awt.TrayIcon;
 
 import net.Notifer.NetNotifer;
 import net.Notifer.Notifer;
@@ -12,12 +12,12 @@ import net.Notifer.Notifers.TrayNotification;
 public class NotificationConnector {
 
 	private static Notifer notifer;
-	private static JFrame frame = null;
+	private static Gui frame = null;
 	public final static String[] notifications = new String[] { "Startup",
 			"Forecast Weather Notification", "Current Weather Notification" };
 	private static String host = "localhost";
 
-	public static void initialize(JFrame frame, TrayIcon trayIcon) {
+	public static void initialize(Gui frame, TrayIcon trayIcon) {
 		NotificationConnector.frame = frame;
 		if (SettingsReader.notifer != null
 				&& setNotifer(NotiferTypes.getNotifer(SettingsReader.notifer,
@@ -117,11 +117,11 @@ public class NotificationConnector {
 
 	}
 
-	public static JFrame getFrame() {
+	public static Gui getFrame() {
 		return frame;
 	}
 
 	public static void bringFrameToFront() {
-		frame.setState(JFrame.NORMAL);
+		frame.setVisible(true);
 	}
 }

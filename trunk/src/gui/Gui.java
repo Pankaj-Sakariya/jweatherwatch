@@ -4,9 +4,9 @@ import gui.settings.SettingsDialog;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.SystemTray;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import net.ACCUWeatherFetcher;
@@ -18,7 +18,7 @@ import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
 import net.ACCUWeather.LocationListUser;
 
-public class Gui extends JFrame implements LocationListUser {
+public class Gui extends JDialog implements LocationListUser {
 	private NotificationThread notificationthread = null; // @jve:decl-index=0:
 
 	private static final long serialVersionUID = 1L;
@@ -40,7 +40,10 @@ public class Gui extends JFrame implements LocationListUser {
 	public Gui(int windowstate) {
 		super();
 		initialize();
-		this.setState(windowstate);
+		
+			this.setVisible(windowstate != JFrame.ICONIFIED);
+	
+			
 		NotificationConnector.initialize(this, getTrayIcon());
 		locations = ACCUWeatherFetcher.load(this);
 		for (Location l : locations) {
@@ -51,10 +54,11 @@ public class Gui extends JFrame implements LocationListUser {
 		this.setContentPane(view);
 		setNotificationthread(new NotificationThread(locations,
 				SettingsReader.notificationInterval));
-/*		JOptionPane.showMessageDialog(null,
-				"This is a beta version please report all occuring errors.",
-				"This is a beta", JOptionPane.INFORMATION_MESSAGE);
-*/
+		/*
+		 * JOptionPane.showMessageDialog(null,
+		 * "This is a beta version please report all occuring errors.",
+		 * "This is a beta", JOptionPane.INFORMATION_MESSAGE);
+		 */
 	}
 
 	public void addLocation(Location l) {
@@ -94,8 +98,6 @@ public class Gui extends JFrame implements LocationListUser {
 			public void windowIconified(java.awt.event.WindowEvent e) {
 				setVisible(false);
 			}
-
-		
 
 		});
 
@@ -171,24 +173,17 @@ public class Gui extends JFrame implements LocationListUser {
 		return view;
 	}
 
-	@Override
-	public synchronized void setState(int state) {
-		super.setState(state);
-		switch (state) {
-
-		case Frame.NORMAL:
-			setVisible(true);
-			toFront();
-			break;
-		default:
-			break;
-		}
-	}
-
-	@Override
 	public void locationUpdated(Location location) {
 		if (view != null)
 			view.locationUpdated();
+	}
+
+	@Override
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		super.setVisible(b);
+		if (b)
+			this.toFront();
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"
