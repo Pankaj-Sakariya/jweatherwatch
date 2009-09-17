@@ -4,10 +4,8 @@
  
 ==Upcomming in  jWeatherWatch v1.3==
  * support for lib notify
- # On Gnome
-http://jweatherwatch.googlecode.com/svn/images/libnotify%20gnome.png <br>
- # On KDE 4
-http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
+ # On Gnome http://jweatherwatch.googlecode.com/svn/images/libnotify%20gnome.png 
+ # On KDE 4 http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
 ==jWeatherWatch v1.2.2==
  * fixed autostart setting in windows
 ==jWeatherWatch v1.2.1==
