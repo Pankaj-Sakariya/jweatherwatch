@@ -2,6 +2,10 @@
 ==Planned Features=
  * For October, support for mac systems.
  
+==Upcomming in  jWeatherWatch v1.3==
+ * support for lib notify
+http://jweatherwatch.googlecode.com/svn/images/libnotify%20gnome.png <br>
+http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
 ==jWeatherWatch v1.2.2==
  * fixed autostart setting in windows
 ==jWeatherWatch v1.2.1==
