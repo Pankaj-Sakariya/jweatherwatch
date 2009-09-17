@@ -27,20 +27,12 @@ public class NotificationConnector {
 		if (notifer != null)
 			return;
 
-	/*	switch (Utils.getOS()) {
-		case WINDOWS:
-			if (setNotifer(new Snarl()))
-				return;
-			if (setNotifer(new NetSnarl()))
-				return;
-		case MAC:
-			if (setNotifer(new NetGrowl()))
-				return;
-			break;
-		case LINUX:
-			if (setNotifer(new KNotify()))
-				return;
-		}*/
+		/*
+		 * switch (Utils.getOS()) { case WINDOWS: if (setNotifer(new Snarl()))
+		 * return; if (setNotifer(new NetSnarl())) return; case MAC: if
+		 * (setNotifer(new NetGrowl())) return; break; case LINUX: if
+		 * (setNotifer(new KNotify())) return; }
+		 */
 
 		setNotifer(new TrayNotification(trayIcon));
 
@@ -56,42 +48,46 @@ public class NotificationConnector {
 		}
 		if (iconPath == null || iconPath.equals("")) {
 			notifer.send(alert, title, description);
-		return;
+			return;
 		}
-		if(iconPath.matches("[0-9][0-9]")){
-		
-			if (notifer instanceof NetNotifer )
+		if (iconPath.matches("[0-9][0-9]")) {
+
+			if (notifer instanceof NetNotifer)
 				iconPath = "http://jweatherwatch.googlecode.com/svn/trunk/iconset/"
 						+ iconPath + ".png";
 			else
-				iconPath = SettingsReader.getIconpPath()
-						+ iconPath + ".png";
+				iconPath = SettingsReader.getIconpPath() + iconPath + ".png";
 			notifer.send(alert, title, description, iconPath);
-		}else
+		} else
 			notifer.send(alert, title, description, iconPath);
-			
+
 	}
 
 	public static boolean setNotifer(Notifer notifer2) {
 		if (notifer != null && notifer2.getName() == notifer.getName())
 			return false;
-		if (notifer != null)
-			notifer.unload();
 		if (notifer2 instanceof NetNotifer) {
+
 			if (((NetNotifer) notifer2).load(notifications, host)) {
+				if (notifer != null)
+					notifer.unload();
 				notifer = notifer2;
-				NotificationConnector.sendNotification("Startup", SettingsReader.name
-						+ " " + SettingsReader.version, SettingsReader.name + " "
-						+ SettingsReader.version + " succsessfully registered wit "
-						+ notifer2.getName(), null);
+				NotificationConnector.sendNotification("Startup",
+						SettingsReader.name + " " + SettingsReader.version,
+						SettingsReader.name + " " + SettingsReader.version
+								+ " succsessfully registered wit "
+								+ notifer2.getName(), null);
 				return true;
 			}
 		} else if (notifer2.load(notifications)) {
+			if (notifer != null)
+				notifer.unload();
 			notifer = notifer2;
-			NotificationConnector.sendNotification("Startup", SettingsReader.name
-					+ " " + SettingsReader.version, SettingsReader.name + " "
-					+ SettingsReader.version + " succsessfully registered wit "
-					+ notifer2.getName(), null);
+			NotificationConnector.sendNotification("Startup",
+					SettingsReader.name + " " + SettingsReader.version,
+					SettingsReader.name + " " + SettingsReader.version
+							+ " succsessfully registered wit "
+							+ notifer2.getName(), null);
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");
@@ -111,7 +107,8 @@ public class NotificationConnector {
 	}
 
 	public static void setHost(String host) {
-		if(NotificationConnector.host.equals(host))return;
+		if (NotificationConnector.host.equals(host))
+			return;
 		NotificationConnector.host = host;
 		if (notifer instanceof NetNotifer) {
 			((NetNotifer) NotificationConnector.getNotifer())

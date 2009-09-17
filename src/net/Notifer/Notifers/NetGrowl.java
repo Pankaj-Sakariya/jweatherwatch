@@ -32,10 +32,11 @@ public class NetGrowl implements NetNotifer {
 	}
 	
 	public boolean load(NotificationType[] notifications, String host){
+		
 		this.host=host;	
 		growlConnector = new GrowlConnector(host);
 		application = new Application(SettingsReader.name, SettingsReader.getIconpPath()+"01.png");		
-		return growlConnector.register(application, notificationTypes)==IResponse.OK;
+		return growlConnector.register(application, notificationTypes)==IResponse.OK;	
 		
 	}
 
