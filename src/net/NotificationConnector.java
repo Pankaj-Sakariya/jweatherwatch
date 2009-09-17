@@ -10,7 +10,6 @@ import net.Notifer.NotiferTypes;
 import net.Notifer.Notifers.TrayNotification;
 
 public class NotificationConnector {
-
 	private static Notifer notifer;
 	private static Gui frame = null;
 	public final static String[] notifications = new String[] { "Startup",

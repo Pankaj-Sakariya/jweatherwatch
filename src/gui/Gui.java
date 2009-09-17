@@ -37,7 +37,8 @@ public class Gui extends JDialog implements LocationListUser {
 	 * This is the default constructor
 	 */
 	public Gui(boolean visible) {
-		super(null, ModalityType.TOOLKIT_MODAL);
+		super(null, ModalityType.MODELESS);
+
 		initialize();
 		this.setVisible(visible);
 		NotificationConnector.initialize(this, getTrayIcon());
