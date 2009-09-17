@@ -29,7 +29,7 @@ public class NotificationThread extends Thread {
 				NotificationConnector.sendNotification(
 						"Current Weather Notification", l.toString(), l
 								.getCurrentWeather().getNotification(), l
-								.getCurrentWeather().getWeathericon());
+								.getCurrentWeather().getWeathericon(),l.getCurrentWeather().getUrl());
 			}
 		}
 	}

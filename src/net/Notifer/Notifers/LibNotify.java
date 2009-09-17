@@ -2,6 +2,7 @@ package net.Notifer.Notifers;
 
 import net.NotificationConnector;
 import net.SettingsReader;
+import net.Utils;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
 
@@ -44,20 +45,27 @@ public class LibNotify implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath) {
+			String iconPath,final String url) {
 		Notification not = new org.gnome.notify.Notification(title,
 				description, iconPath, getIcon());
+		not.addAction("b", "Visit Forecast",
+				new org.gnome.notify.Notification.Action() {
+					public void onAction(Notification arg0, String arg1) {
+						Utils.visitURL(url);
+					}
+				});
 		not.addAction("a", "Show jWeatherWatch",
 				new org.gnome.notify.Notification.Action() {
 					public void onAction(Notification arg0, String arg1) {
 						NotificationConnector.bringFrameToFront();
 					}
 				});
+		
 		not.show();
 	}
 
 	@Override
-	public void send(String alert, String title, String description) {
+	public void send(String alert, String title, String description,String url) {
 		send(alert, title, description, "");
 	}
 

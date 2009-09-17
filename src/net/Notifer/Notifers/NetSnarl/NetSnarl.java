@@ -27,8 +27,8 @@ public class NetSnarl implements NetNotifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath) {
-		SnarlNetworkBridge.snShowMessage(new NetSnarlWeatherNotification(alert, title, description,iconPath));
+			String iconPath,String url) {
+		SnarlNetworkBridge.snShowMessage(new NetSnarlWeatherNotification(alert, title, description,iconPath,url));
 
 	}
 
@@ -41,8 +41,8 @@ public class NetSnarl implements NetNotifer {
 
 
 	@Override
-	public void send(String alert, String title, String description) {
-		send(alert, title, description, null);
+	public void send(String alert, String title, String description,String url) {
+		send(alert, title, description, null,url);
 
 	}
 

@@ -30,7 +30,7 @@ public class Snarl implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath) {
+			String iconPath,String url) {
 		Snarl4Java.snShowMessage(title, description, 4, iconPath, 0, 0);
 
 	}
@@ -42,7 +42,7 @@ public class Snarl implements Notifer {
 	}
 
 	@Override
-	public void send(String alert, String title, String description) {
+	public void send(String alert, String title, String description,String url) {
 		send(alert, title, description, "");
 
 	}

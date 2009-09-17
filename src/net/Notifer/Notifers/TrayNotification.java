@@ -21,7 +21,7 @@ public class TrayNotification implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath) {
+			String iconPath,String url) {
 		trayIcon.displayMessage(title, description, MessageType.NONE);
 
 	}
@@ -33,7 +33,7 @@ public class TrayNotification implements Notifer {
 	}
 
 	@Override
-	public void send(String alert, String title, String description) {
+	public void send(String alert, String title, String description,String url) {
 	send(alert, title, description, null);
 		
 	}

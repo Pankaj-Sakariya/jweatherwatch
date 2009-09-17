@@ -5,9 +5,9 @@ public interface Notifer {
 	public boolean load(String[] notifications);
 	
 	public void send(String alert, String title,
-			String description, String iconPath);
+			String description, String iconPath,String url);
 	public void send(String alert, String title,
-			String description);
+			String description,String url);
 	
 	public void unload();
 

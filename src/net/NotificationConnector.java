@@ -38,15 +38,14 @@ public class NotificationConnector {
 	}
 
 	public static void sendNotification(String alert, String title,
-			String description, String iconPath) {
-
+			String description, String iconPath,String url) {
 		if (notifer == null) {
 			System.err
 					.println("NotificationConnector is not initialized, please run \"NotificationConnector.initialize(trayicon);\" firs.");
 			return;
 		}
 		if (iconPath == null || iconPath.equals("")) {
-			notifer.send(alert, title, description);
+			notifer.send(alert, title, description,url);
 			return;
 		}
 		if (iconPath.matches("[0-9][0-9]")) {
@@ -56,9 +55,9 @@ public class NotificationConnector {
 						+ iconPath + ".png";
 			else
 				iconPath = SettingsReader.getIconpPath() + iconPath + ".png";
-			notifer.send(alert, title, description, iconPath);
+			notifer.send(alert, title, description, iconPath,url);
 		} else
-			notifer.send(alert, title, description, iconPath);
+			notifer.send(alert, title, description, iconPath,url);
 
 	}
 
@@ -75,7 +74,7 @@ public class NotificationConnector {
 						SettingsReader.name + " " + SettingsReader.version,
 						SettingsReader.name + " " + SettingsReader.version
 								+ " succsessfully registered wit "
-								+ notifer2.getName(), null);
+								+ notifer2.getName(), null,null);
 				return true;
 			}
 		} else if (notifer2.load(notifications)) {
@@ -86,7 +85,7 @@ public class NotificationConnector {
 					SettingsReader.name + " " + SettingsReader.version,
 					SettingsReader.name + " " + SettingsReader.version
 							+ " succsessfully registered wit "
-							+ notifer2.getName(), null);
+							+ notifer2.getName(), null,null);
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");

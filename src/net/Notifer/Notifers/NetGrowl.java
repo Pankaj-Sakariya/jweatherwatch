@@ -43,7 +43,7 @@ public class NetGrowl implements NetNotifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath) {
+			String iconPath,String url) {
 		Notification notification=new Notification(application,
 				getNotification(alert), title, description);
 		notification.setIcon(iconPath);
@@ -51,7 +51,7 @@ public class NetGrowl implements NetNotifer {
 	}
 
 	@Override
-	public void send(String alert, String title, String description) {
+	public void send(String alert, String title, String description,String url) {
 		send(alert, title, description, "");
 
 	}
