@@ -67,7 +67,7 @@ public class WeatherTrayIcon extends TrayIcon {
 												.getCurrentWeather()
 												.getNotification(), l
 												.getCurrentWeather()
-												.getWeathericon());
+												.getWeathericon(),l.getCurrentWeather().getUrl());
 							}
 						}
 					});

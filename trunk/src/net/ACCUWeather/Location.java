@@ -56,7 +56,7 @@ public class Location implements Runnable {
 			NotificationConnector.sendNotification(
 					"Current Weather Notification", this.toString(),
 					currentWeather.getNotification(), currentWeather
-							.getWeathericon());
+							.getWeathericon(),currentWeather.getUrl());
 		}
 		if (!updateIsRunnging) {
 			new Thread(this).start();
@@ -131,14 +131,14 @@ public class Location implements Runnable {
 			NotificationConnector.sendNotification(
 					"Current Weather Notification", this.toString(),
 					cw.getNotification(), cw
-							.getWeathericon());
+							.getWeathericon(),cw.getUrl());
 
 		
 		if(currentWeather != null &&!currentWeather.equals(cw)){
 			NotificationConnector.sendNotification(
 					"Current Weather Notification", this.toString(),
 					currentWeather.getNotification(), currentWeather
-							.getWeathericon());
+							.getWeathericon(),currentWeather.getUrl());
 			updated=true;
 		}
 			
@@ -150,14 +150,16 @@ public class Location implements Runnable {
 					NotificationConnector.sendNotification(
 							"Forecast Weather Notification", this.toString(),
 							fdf.getDay(i).getDay().getNotification(), fdf
-									.getDay(i).getDay().getWeathericon());
+									.getDay(i).getDay().getWeathericon(),fdf
+									.getDay(i).getDay().getUrl());
 				}
 				if (!fdf.getDay(i).getNight().equals(
 						fiveDayForecast.getDay(i).getNight())) {
 					NotificationConnector.sendNotification(
 							"Forecast Weather Notification", this.toString(),
 							fdf.getDay(i).getNight().getNotification(), fdf
-									.getDay(i).getNight().getWeathericon());
+									.getDay(i).getNight().getWeathericon(),fdf
+									.getDay(i).getNight().getUrl());
 
 				}
 			}
