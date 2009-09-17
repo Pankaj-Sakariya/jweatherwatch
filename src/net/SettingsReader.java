@@ -234,6 +234,8 @@ public class SettingsReader {
 	}
 
 	public static void setIconpPath(String iconpPath) {
+		System.out.println("Setting up iconpath: " + iconpPath);
+		
 		iconpPath = iconpPath.replace("\\", "/");
 		if (!iconpPath.endsWith("/"))
 			iconpPath += "/";
