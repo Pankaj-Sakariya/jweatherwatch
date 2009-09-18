@@ -4,29 +4,14 @@ it makes it Eays tro use the Snarl Network Protocol.
 
 <br>
 ==Changes==
+ ===SNP v1.1===
+ * Action listener like handling of user actions
+
+ ===SNP v1.1 rc1===
  * Renamed some enumerations
  * SVN version now supports SNP 1.1
  * Getting the user action( clicked usw)
  * added support for iconUrl
-
-==Example for a user specific Notification==
-<code>public class NetSnarlWeatherNotification extends net.snarl.Notification {
-
-	public NetSnarlWeatherNotification(String alert, String title, String content,
-			String iconUrl) {
-		super(alert, title, content, iconUrl);
-	}
-
-	@Override
-	protected void setUserAction(Action action) {
-		super.setUserAction(action);
-		if (action== Action.LeftClicked) {
-			NotificationConnector.bringFrameToFront();
-		}
-	}
-
-}
-</code>
 
 
 ==Downlaod==
