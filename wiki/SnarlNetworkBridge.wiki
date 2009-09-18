@@ -1,5 +1,7 @@
 #labels Featured
 SnarlNetworkBridge is a java implementation of the SNP protocol for Snarl.
+<br>
+http://jweatherwatch.googlecode.com/svn/images/snarlnet.png
 
 <br>
 ==Changes==
