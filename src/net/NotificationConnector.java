@@ -45,7 +45,7 @@ public class NotificationConnector {
 			return;
 		}
 		if (iconPath == null || iconPath.equals("")) {
-			notifer.send(alert, title, description,url);
+			notifer.send(alert, title, description,null,url);
 			return;
 		}
 		if (iconPath.matches("[0-9][0-9]")) {

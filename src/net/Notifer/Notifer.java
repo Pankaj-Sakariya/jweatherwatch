@@ -6,8 +6,7 @@ public interface Notifer {
 	
 	public void send(String alert, String title,
 			String description, String iconPath,String url);
-	public void send(String alert, String title,
-			String description,String url);
+
 	
 	public void unload();
 
