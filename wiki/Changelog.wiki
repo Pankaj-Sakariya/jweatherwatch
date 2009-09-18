@@ -5,13 +5,13 @@
 ==Upcomming in  jWeatherWatch v1.3==
  * mainframe now epands JDialog --> no minimize maximize button anymore
  * added actions to supporting  Notificationsystems
- # NetSnarl Lefclick bring to front, Rightclick visit forecast
- # LibNotify added buttons for these actions
- # Tray icon click brings the aplication to front
+  # NetSnarl Lefclick bring to front, Rightclick visit forecast
+  # LibNotify added buttons for these actions
+  # Tray icon click brings the aplication to front
 
  * support for lib notify
- # On Gnome http://jweatherwatch.googlecode.com/svn/images/libnotify%20gnome.png 
- # On KDE 4 http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
+  # On Gnome http://jweatherwatch.googlecode.com/svn/images/libnotify%20gnome.png 
+  # On KDE 4 http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
 ==jWeatherWatch v1.2.2==
  * fixed autostart setting in windows
 ==jWeatherWatch v1.2.1==
