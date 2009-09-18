@@ -1,0 +1,7 @@
+Linux notification system.
+
+=On KDE4=
+http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
+
+=On Gnome=
+http://jweatherwatch.googlecode.com/svn/images/libnotify%20gnome.png
