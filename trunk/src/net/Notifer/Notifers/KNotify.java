@@ -23,19 +23,15 @@ public class KNotify implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath,String url) {
+			String iconPath, String url) {
 		try {
-			runtime.exec(new String[]{"kdialog", "--title",  title,"--passivepopup",description ,"10"});
+			runtime.exec(new String[] { "kdialog", "--title", title,
+					"--passivepopup", description, "10" });
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	}
-
-	@Override
-	public void send(String alert, String title, String description,String url) {
-		send(alert, title, description, null,null);
 	}
 
 	@Override
