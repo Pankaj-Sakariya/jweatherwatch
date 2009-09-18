@@ -5,7 +5,7 @@
 ==Upcomming in  jWeatherWatch v1.3==
  * mainframe now extends JDialog --> no minimize maximize button anymore
  * added actions to supporting  Notificationsystems
-  # NetSnarl Lefclick bring to front, Rightclick visit forecast
+  # [http://code.google.com/p/jweatherwatch/wiki/Snarl NetSnarl] Lefclick bring to front, Rightclick visit forecast
   # LibNotify added buttons for these actions
   # Tray icon click brings the aplication to front
 
