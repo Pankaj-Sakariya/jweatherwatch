@@ -10,7 +10,7 @@ package net.snarl;
 
 public class Notification extends Message {
 	private int id = -1;
-
+	private SNPActionListener actionListener = null;
 	private Action userAction = null;
 
 	/**
@@ -56,7 +56,8 @@ public class Notification extends Message {
 	public Notification(String alert, String title, String content,
 			String iconUrl, int timeout) {
 		super("notification", new SNPProperty[] {
-				new SNPProperty("class", String.valueOf(SnarlNetworkBridge.alerts.get(alert))),
+				new SNPProperty("class", String
+						.valueOf(SnarlNetworkBridge.alerts.get(alert))),
 				new SNPProperty("title", title),
 				new SNPProperty("text", content),
 				new SNPProperty("icon", iconUrl),
@@ -65,17 +66,34 @@ public class Notification extends Message {
 	}
 
 	/**
-	 * Sets the action which the user applied, should be overwritten to set user
-	 * specific actions
+	 * Sets the action which the user applied
 	 * 
 	 * @param action
 	 *            the Action to be set
+	 * 
 	 */
-	protected void setUserAction(Action action) {
+	void setUserAction(Action action) {
 		this.userAction = action;
 		if (action == Action.Closed || action == Action.LeftClicked
 				|| action == Action.Timed_Out)
 			SnarlNetworkBridge.removeNotification(this);
+		if (actionListener == null)
+			return;
+		switch (action) {
+		case LeftClicked:
+			actionListener.notificationLeftClicked();
+			break;
+		case RhigthClicked:
+			actionListener.notificationRightClicked();
+			break;
+		case Closed:
+			actionListener.notificationClosed();
+			break;
+		case Timed_Out:
+			actionListener.notificationTimedOut();
+		default:
+			break;
+		}
 	}
 
 	/**
@@ -104,6 +122,25 @@ public class Notification extends Message {
 	 */
 	public int getId() {
 		return id;
+	}
+
+	/**
+	 * Sets the SNPActionListener
+	 * 
+	 * @param actionListener
+	 *            the ActionListener to be set
+	 */
+	public void setActionListener(SNPActionListener actionListener) {
+		this.actionListener = actionListener;
+	}
+
+	/**
+	 * Returns the SNPActionlistener
+	 * 
+	 * @return the current ActionListner or null
+	 */
+	public SNPActionListener getActionListener() {
+		return actionListener;
 	}
 
 }
