@@ -3,7 +3,7 @@
  * For October, support for mac systems.
  
 ==Upcomming in  jWeatherWatch v1.3==
- * mainframe now epands JDialog --> no minimize maximize button anymore
+ * mainframe now extends JDialog --> no minimize maximize button anymore
  * added actions to supporting  Notificationsystems
   # NetSnarl Lefclick bring to front, Rightclick visit forecast
   # LibNotify added buttons for these actions
