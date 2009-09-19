@@ -2,7 +2,6 @@
 <project default="release" name="Create Runnable Jar for Project ACCUWeatherSnarl">
 
 	<target name="init">
-		<delete dir="./dist" />
 		<mkdir dir="./dist" />
 		<mkdir dir="./comp" />
 	</target>
