@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jnlp codebase="http://jweatherwatch.googlecode.com/svn/installer/" href="installer.jnlp" spec="1.0+">
+<jnlp codebase="http://jweatherwatch.googlecode.com/svn/installer" href="installer.jnlp" spec="1.0+">
     <information>
         <title>jWeatherWatch</title>
         <vendor>Patrick von Reth</vendor>
         <homepage href="http://code.google.com/p/jweatherwatch/"/>
         <description>The Installer for jWeatherWatch</description>
-        <description kind="short">jWeatherWatch installer</description>
-
-
     </information>
 <security>
 <all-permissions/>
@@ -15,9 +12,8 @@
     <resources>
 <j2se version="1.5+"/>
 <jar eager="true" href="installer.jar" main="true"/>
-
 </resources>
-    <application-desc main-class="gui.Frame">
-
-    </application-desc>
+    <application-desc main-class="gui.Frame"/>
 </jnlp>
+
+
