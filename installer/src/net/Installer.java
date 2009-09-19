@@ -13,17 +13,20 @@ import java.net.URLConnection;
 
 public class Installer {
 
-	public static boolean download(String version) {
+	public static File download(String version) {
 		OutputStream out = null;
 		URLConnection conn = null;
 		InputStream in = null;
 		URL url;
-		System.out.println(System.getProperty("java.io.tmpdir"));
-		try {
-			File outfile = new File(System.getProperty("java.io.tmpdir")
-					+ "/"+version+".zip");
-			url = new URL("http://jweatherwatch.googlecode.com/files/"+ version + ".zip");
+		File outfile = null;
 
+		try {
+			outfile = new File(System.getProperty("java.io.tmpdir") + "/"
+					+ version + ".zip");
+			System.out.println(outfile);
+			url = new URL(("http://jweatherwatch.googlecode.com/files/"
+					+ version + ".zip").replace(" ", "%20"));
+			System.out.println(url);
 			out = new BufferedOutputStream(new FileOutputStream(outfile));
 			conn = url.openConnection();
 
@@ -36,16 +39,15 @@ public class Installer {
 			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			return false;
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
 		}
-		return true;
+		return outfile;
 	}
+
+	
 }

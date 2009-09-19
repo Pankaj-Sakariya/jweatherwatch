@@ -3,19 +3,23 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import net.Installer;
+import net.ZipArchiveExtractor;
 
 import org.xml.sax.SAXException;
+
 
 public class Gui extends JFrame {
 
@@ -144,10 +148,18 @@ public class Gui extends JFrame {
 	}
 
 	private void install(){
+		if(jTextField_Path.getText().equals("")){
+			JOptionPane
+			.showMessageDialog(
+					null,
+					"Please set Installation Path",
+					"Installation Path not set", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		org.w3c.dom.Document doc =null;
 		try {
 			doc= DocumentBuilderFactory.newInstance().newDocumentBuilder()
-			.parse("http://jweatherwatch.googlecode.com/svn/installer/CurrentVersion.xml");
+			.parse("http://jweatherwatch.googlecode.com/svn/trunk/CurrentVersion.xml");
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -160,7 +172,32 @@ public class Gui extends JFrame {
 		}
 		String version=doc.getElementsByTagName("version").item(0).getChildNodes().item(0).getNodeValue(); 
 		System.out.println(version);
-		Installer.download(version);
+		File download=Installer.download(version);
+		if(download!=null){			
+			try {
+				ZipArchiveExtractor.extract(download.toString(), jTextField_Path.getText());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				JOptionPane
+				.showMessageDialog(
+						null,
+						"Installation of jWeatherWatcher Failed",
+						"Installation failed!", JOptionPane.ERROR_MESSAGE);
+			}
+			JOptionPane
+			.showMessageDialog(
+					null,
+					"Instalaltion of jWeatherWatcher was succsessfull",
+					"Installation complete", JOptionPane.INFORMATION_MESSAGE);
+			try {
+				Runtime.getRuntime().exec(new String[]{"java","-jar", jTextField_Path.getText()+"/JWeatherWatch.jar"});
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.exit(0);
+		}
+		
 		
 		
 	}
