@@ -9,6 +9,8 @@ import java.nio.channels.FileChannel;
 
 import javax.swing.JOptionPane;
 
+import updater.net.Updater;
+
 public class Main {
 	enum options {
 		minimized, workindirectory, help, h, version
@@ -42,7 +44,9 @@ public class Main {
 				}
 		}
 		allreadyRunning();
-		if (Float.valueOf(Updater.getVersion()) > SettingsReader.version) {
+		if (Float.valueOf(Integer
+				.valueOf(Updater.getVersion().replace(".", ""))) > Integer
+				.valueOf(SettingsReader.version.replace(".", ""))) {
 			int result = JOptionPane
 					.showConfirmDialog(
 							null,
@@ -50,18 +54,19 @@ public class Main {
 							"Update", JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
 				try {
-					new File(SettingsReader.getCurrentDirectory()
-							+ "/lib/Updater.jar").renameTo(new File(System
+
+					Updater.copy(SettingsReader.getCurrentDirectory()
+							+ "/lib/Updater.jar", System
 							.getProperty("java.io.tmpdir")
-							+ "/Updater.jar"));
+							+ "/Updater.jar");
 					Runtime.getRuntime().exec(
 							new String[] {
 									"java",
 									"-classpath",
 									System.getProperty("java.io.tmpdir")
-											+ "/Updater.jar", "net.Updater",
+											+ "/Updater.jar",
+									"updater.net.Updater",
 									SettingsReader.getCurrentDirectory() });
-
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
