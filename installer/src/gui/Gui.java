@@ -1,27 +1,23 @@
 package gui;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 
-import javax.swing.JToggleButton;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.Installer;
+
 import org.xml.sax.SAXException;
 
-import com.sun.xml.internal.txw2.Document;
-
-public class Installer extends JFrame {
+public class Gui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -33,7 +29,7 @@ public class Installer extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public Installer() {
+	public Gui() {
 		super();
 		initialize();
 	}
@@ -47,7 +43,7 @@ public class Installer extends JFrame {
 		this.setSize(316, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("jWeatherWatch Installer");
 	}
 
 	/**
@@ -162,13 +158,18 @@ public class Installer extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String version=doc.getElementsByTagName("version").item(0).getNodeValue(); 
+		String version=doc.getElementsByTagName("version").item(0).getChildNodes().item(0).getNodeValue(); 
 		System.out.println(version);
+		Installer.download(version);
 		
 		
 	}
+	
+	
+	
+	
 	public static void main(String[] args) {
-		Installer f = new Installer();
+		Gui f = new Gui();
 		f.setVisible(true);
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"
