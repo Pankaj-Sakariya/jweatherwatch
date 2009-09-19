@@ -25,6 +25,7 @@ public class Gui extends JFrame {
 	private JButton jButton_Browse = null;
 	private JButton jButton_Cancell1 = null;
 	private JLabel jLabel = null;
+	private JLabel jLabel1 = null;
 
 	/**
 	 * This is the default constructor
@@ -53,6 +54,9 @@ public class Gui extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabel1 = new JLabel();
+			jLabel1.setBounds(new Rectangle(15, 60, 62, 18));
+			jLabel1.setText("Install to:");
 			jLabel = new JLabel();
 			jLabel.setBounds(new Rectangle(19, 15, 177, 16));
 			jLabel.setText("Install "+Updater.getVersion());
@@ -63,6 +67,7 @@ public class Gui extends JFrame {
 			jContentPane.add(getJButton_Browse(), null);
 			jContentPane.add(getJButton_Cancell1(), null);
 			jContentPane.add(jLabel, null);
+			jContentPane.add(jLabel1, null);
 		}
 		return jContentPane;
 	}
@@ -97,7 +102,7 @@ public class Gui extends JFrame {
 	private JTextField getJTextField_Path() {
 		if (jTextField_Path == null) {
 			jTextField_Path = new JTextField();
-			jTextField_Path.setBounds(new Rectangle(15, 45, 271, 16));
+			jTextField_Path.setBounds(new Rectangle(15, 75, 271, 16));
 		}
 		return jTextField_Path;
 	}
@@ -111,7 +116,7 @@ public class Gui extends JFrame {
 		if (jButton_Browse == null) {
 			jButton_Browse = new JButton();
 			jButton_Browse.setText("Browse");
-			jButton_Browse.setBounds(new Rectangle(180, 60, 106, 16));
+			jButton_Browse.setBounds(new Rectangle(180, 90, 106, 16));
 			jButton_Browse
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
