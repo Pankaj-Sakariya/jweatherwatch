@@ -17,7 +17,7 @@
 <jar eager="true" href="installer.jar" main="true"/>
 
 </resources>
-    <application-desc main-class="com.mmoui.minion.installer.Main">
+    <application-desc main-class="gui.Frame">
 
     </application-desc>
 </jnlp>
