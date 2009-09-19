@@ -18,11 +18,11 @@ public class Installer {
 		URLConnection conn = null;
 		InputStream in = null;
 		URL url;
+		System.out.println(System.getProperty("java.io.tmpdir"));
 		try {
 			File outfile = new File(System.getProperty("java.io.tmpdir")
-					+ "/version");
-			url = new URL("http://jweatherwatch.googlecode.com/files/"
-					+ version + ".zip");
+					+ "/"+version+".zip");
+			url = new URL("http://jweatherwatch.googlecode.com/files/"+ version + ".zip");
 
 			out = new BufferedOutputStream(new FileOutputStream(outfile));
 			conn = url.openConnection();
