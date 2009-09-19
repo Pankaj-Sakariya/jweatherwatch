@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jnlp codebase="http://minion.mmoui.com/" href="minion.jnlp" spec="1.0+">
+<jnlp codebase="http://jweatherwatch.googlecode.com/svn/installer/" href="installer.jnlp" spec="1.0+">
     <information>
-        <title>MMOUI Minion Installer</title>
-        <vendor>Matthew P. Del Buono</vendor>
-        <homepage href="http://minion.mmoui.com/"/>
-        <description>Installer application for the MMOUI Minion project</description>
-        <description kind="short">MMOUI Minion Installer</description>
+        <title>jWeatherWatch</title>
+        <vendor>Patrick von Reth</vendor>
+        <homepage href="http://code.google.com/p/jweatherwatch/"/>
+        <description>The Installer for jWeatherWatch</description>
+        <description kind="short">jWeatherWatch installer</description>
 
 
     </information>
@@ -14,7 +14,7 @@
 </security>
     <resources>
 <j2se version="1.5+"/>
-<jar eager="true" href="minioninstaller.jar" main="true"/>
+<jar eager="true" href="installer.jar" main="true"/>
 
 </resources>
     <application-desc main-class="com.mmoui.minion.installer.Main">
