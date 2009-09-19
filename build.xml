@@ -14,7 +14,7 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<javac srcdir="./src" destdir="./comp" classpath="./lib/libgrowl.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar;./lib/gtk-4.0.jar;./build/Updater.jar">
+		<javac srcdir="./src" destdir="./comp" classpath="./lib/libgrowl.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar;./lib/gtk-4.0.jar;./lib/Updater.jar">
 		</javac>
 	</target>
 
@@ -22,7 +22,7 @@
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="net.Main" />
-				<attribute name="Class-Path" value=". ./lib/Snarl4Java-0.1.1.jar ./lib/libgrowl.jar ./lib/SnarlNetworkeBridge.jar ./lib/gtk-4.0.jar ./Updater.jar" />
+				<attribute name="Class-Path" value=". ./lib/Snarl4Java-0.1.1.jar ./lib/libgrowl.jar ./lib/SnarlNetworkeBridge.jar ./lib/gtk-4.0.jar ./lib/Updater.jar" />
 			</manifest>
 			<fileset dir="./comp" />
 			<fileset dir="./data" />
@@ -36,17 +36,15 @@
 			<fileset dir="iconset" />
 		</copy>
 		<copy file="./build/jWeatherWatch.exe" tofile="./dist/jWeatherWatch.exe" />
-		<copy file="./build/Updater.jar" tofile="./dist/Updater.jar" />
 		<copy file="./build/jWeatherWatch" tofile="./dist/jWeatherWatch" />
-
 		<copy todir="./dist/lib">
 			<fileset dir="lib" />
 		</copy>
 	</target>
 
 	<target name="getVersion">
-		<exec executable="java" outputproperty="version"> 
-					<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -version"/>
+		<exec executable="java" outputproperty="version">
+			<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -version" />
 		</exec>
 
 
