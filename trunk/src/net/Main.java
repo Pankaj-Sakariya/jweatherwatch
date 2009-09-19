@@ -15,7 +15,7 @@ public class Main {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		boolean windowstate = true;
 		for (int i = 0; i < args.length; ++i) {
 			if (args[i].charAt(0) == '-')
@@ -28,8 +28,7 @@ public class Main {
 						i++;
 						break;
 					case version:
-						System.out.println(SettingsReader.name + " "
-								+ SettingsReader.version);
+						System.out.println(SettingsReader.version);
 						System.exit(0);
 						break;
 					case help:
@@ -43,6 +42,15 @@ public class Main {
 				}
 		}
 		allreadyRunning();
+		if(Float.valueOf(Updater.getVerion())==1.3f){
+			try {
+				Runtime.getRuntime().exec(
+						new String[] { "java","-classpath","net.Updater",SettingsReader.getCurrentDirectory(), "-jar","Updater.jar" });
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		new Gui(windowstate);
 
 	}
