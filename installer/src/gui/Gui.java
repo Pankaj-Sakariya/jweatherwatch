@@ -54,7 +54,7 @@ public class Gui extends JFrame {
 		if (jContentPane == null) {
 			jLabel = new JLabel();
 			jLabel.setBounds(new Rectangle(19, 15, 177, 16));
-			jLabel.setText("Install "+Updater.getVerion());
+			jLabel.setText("Install "+Updater.getVersion());
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getJButton_Install(), null);

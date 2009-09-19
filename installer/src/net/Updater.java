@@ -20,7 +20,7 @@ public class Updater {
 
 	private static String version = null;
 
-	public static String getVerion() {
+	public static String getVersion() {
 		if (version == null) {
 			org.w3c.dom.Document doc = null;
 			try {
@@ -41,13 +41,13 @@ public class Updater {
 			}
 			version = doc.getElementsByTagName("version").item(0)
 					.getChildNodes().item(0).getNodeValue();
-			System.out.println(version);
+			System.out.println(getVersion());
 		}
 		return version;
 	}
 
 	public static boolean update(String destination){
-		File download=Updater.download(version);
+		File download=Updater.download(getVersion());
 		try {
 			ZipArchiveExtractor.extract(download.toString(), destination+"/");
 		} catch (Exception e) {
@@ -67,11 +67,11 @@ public class Updater {
 		File outfile = null;
 
 		try {
-			outfile = new File(System.getProperty("java.io.tmpdir") + "/"
+			outfile = new File(System.getProperty("java.io.tmpdir") + "/jWeatherWatch v"
 					+ version + ".zip");
 			System.out.println(outfile);
-			url = new URL(("http://jweatherwatch.googlecode.com/files/"
-					+ version + ".zip").replace(" ", "%20"));
+			url = new URL(("http://jweatherwatch.googlecode.com/files/jWeatherWatch%20v"
+					+ version + ".zip"));
 			System.out.println(url);
 			out = new BufferedOutputStream(new FileOutputStream(outfile));
 			conn = url.openConnection();
@@ -95,4 +95,16 @@ public class Updater {
 		return outfile;
 	}
 
+	public static void main(String[] args) {
+		if(args.length!=1)
+			return;
+		update(args[0]);
+		try {
+			Runtime.getRuntime().exec(
+					new String[] { "java", "-jar",args[0]+ "/JWeatherWatch.jar" });
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
