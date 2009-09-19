@@ -42,7 +42,7 @@ public class Main {
 				}
 		}
 		allreadyRunning();
-		if(Float.valueOf(Updater.getVerion())==1.3f){
+		if(Float.valueOf(Updater.getVerion())>SettingsReader.version){
 			try {
 				Runtime.getRuntime().exec(
 						new String[] { "java","-classpath","net.Updater",SettingsReader.getCurrentDirectory(), "-jar","Updater.jar" });
