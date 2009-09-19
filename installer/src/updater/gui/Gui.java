@@ -1,4 +1,4 @@
-package gui;
+package updater.gui;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -12,8 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import net.Updater;
 import javax.swing.JLabel;
+
+import updater.net.Updater;
 
 public class Gui extends JFrame {
 

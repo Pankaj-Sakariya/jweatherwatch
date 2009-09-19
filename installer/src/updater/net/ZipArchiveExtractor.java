@@ -1,4 +1,4 @@
-package net;
+package updater.net;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
