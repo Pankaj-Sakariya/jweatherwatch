@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="http://minion.mmoui.com/" href="minion.jnlp" spec="1.0+">
+    <information>
+        <title>MMOUI Minion Installer</title>
+        <vendor>Matthew P. Del Buono</vendor>
+        <homepage href="http://minion.mmoui.com/"/>
+        <description>Installer application for the MMOUI Minion project</description>
+        <description kind="short">MMOUI Minion Installer</description>
+
+
+    </information>
+<security>
+<all-permissions/>
+</security>
+    <resources>
+<j2se version="1.5+"/>
+<jar eager="true" href="minioninstaller.jar" main="true"/>
+
+</resources>
+    <application-desc main-class="com.mmoui.minion.installer.Main">
+
+    </application-desc>
+</jnlp>
