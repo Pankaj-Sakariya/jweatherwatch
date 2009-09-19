@@ -55,6 +55,7 @@
 	<target name="release" depends="dev,getVersion">
 		<zip destfile="./dist/${version}.zip" basedir="./dist">
 		</zip>
+		<echo file="CurrentVersion.xml" message="&lt;version>${version}&lt;/version>" />
 	</target>
 
 
