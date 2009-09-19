@@ -21,7 +21,7 @@
 
 	<target name="release" depends="compile">
 		
-		<jar destfile="./dist/Installer.jar" basedir="./comp/" >
+		<jar destfile="./dist/Updater.jar" basedir="./comp/" >
 			<manifest>
 				<attribute name="version" value="1.0" />
 			</manifest>

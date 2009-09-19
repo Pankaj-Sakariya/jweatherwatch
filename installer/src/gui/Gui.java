@@ -3,7 +3,6 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -12,14 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
-import net.Installer;
-import net.ZipArchiveExtractor;
-
-import org.xml.sax.SAXException;
-
+import net.Updater;
+import javax.swing.JLabel;
 
 public class Gui extends JFrame {
 
@@ -29,6 +23,7 @@ public class Gui extends JFrame {
 	private JTextField jTextField_Path = null;
 	private JButton jButton_Browse = null;
 	private JButton jButton_Cancell1 = null;
+	private JLabel jLabel = null;
 
 	/**
 	 * This is the default constructor
@@ -57,12 +52,16 @@ public class Gui extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabel = new JLabel();
+			jLabel.setBounds(new Rectangle(19, 15, 177, 16));
+			jLabel.setText("Install "+Updater.getVerion());
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getJButton_Install(), null);
 			jContentPane.add(getJTextField_Path(), null);
 			jContentPane.add(getJButton_Browse(), null);
 			jContentPane.add(getJButton_Cancell1(), null);
+			jContentPane.add(jLabel, null);
 		}
 		return jContentPane;
 	}
@@ -78,10 +77,12 @@ public class Gui extends JFrame {
 			jButton_Install.setText("Install");
 			jButton_Install.setLocation(new Point(180, 135));
 			jButton_Install.setSize(new Dimension(100, 16));
-			jButton_Install.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-			install();}
-			});
+			jButton_Install
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							install();
+						}
+					});
 			;
 		}
 		return jButton_Install;
@@ -114,7 +115,8 @@ public class Gui extends JFrame {
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 							JFileChooser fc = new JFileChooser();
-							fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+							fc
+									.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 							int result = fc.showOpenDialog(null);
 							if (result == JFileChooser.APPROVE_OPTION)
@@ -147,64 +149,34 @@ public class Gui extends JFrame {
 		return jButton_Cancell1;
 	}
 
-	private void install(){
-		if(jTextField_Path.getText().equals("")){
-			JOptionPane
-			.showMessageDialog(
-					null,
-					"Please set Installation Path",
+	private void install() {
+		if (jTextField_Path.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Please set Installation Path",
 					"Installation Path not set", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		org.w3c.dom.Document doc =null;
+
+		if (!Updater.update(jTextField_Path.getText())) {
+			JOptionPane.showMessageDialog(null,
+					"Installation of jWeatherWatcher Failed",
+					"Installation failed!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		JOptionPane.showMessageDialog(null,
+				"Instalaltion of jWeatherWatcher was succsessfull",
+				"Installation complete", JOptionPane.INFORMATION_MESSAGE);
+
 		try {
-			doc= DocumentBuilderFactory.newInstance().newDocumentBuilder()
-			.parse("http://jweatherwatch.googlecode.com/svn/trunk/CurrentVersion.xml");
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Runtime.getRuntime().exec(
+					new String[] { "java", "-jar",
+							jTextField_Path.getText() + "/JWeatherWatch.jar" });
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		String version=doc.getElementsByTagName("version").item(0).getChildNodes().item(0).getNodeValue(); 
-		System.out.println(version);
-		File download=Installer.download(version);
-		if(download!=null){			
-			try {
-				ZipArchiveExtractor.extract(download.toString(), jTextField_Path.getText());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				JOptionPane
-				.showMessageDialog(
-						null,
-						"Installation of jWeatherWatcher Failed",
-						"Installation failed!", JOptionPane.ERROR_MESSAGE);
-			}
-			JOptionPane
-			.showMessageDialog(
-					null,
-					"Instalaltion of jWeatherWatcher was succsessfull",
-					"Installation complete", JOptionPane.INFORMATION_MESSAGE);
-			try {
-				Runtime.getRuntime().exec(new String[]{"java","-jar", jTextField_Path.getText()+"/JWeatherWatch.jar"});
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.exit(0);
-		}
-		
-		
-		
+		System.exit(0);
 	}
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 		Gui f = new Gui();
 		f.setVisible(true);

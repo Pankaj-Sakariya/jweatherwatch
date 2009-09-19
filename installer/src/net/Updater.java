@@ -11,8 +11,54 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class Installer {
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+public class Updater {
+
+	private static String version = null;
+
+	public static String getVerion() {
+		if (version == null) {
+			org.w3c.dom.Document doc = null;
+			try {
+				doc = DocumentBuilderFactory
+						.newInstance()
+						.newDocumentBuilder()
+						.parse(
+								"http://jweatherwatch.googlecode.com/svn/trunk/CurrentVersion.xml");
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			version = doc.getElementsByTagName("version").item(0)
+					.getChildNodes().item(0).getNodeValue();
+			System.out.println(version);
+		}
+		return version;
+	}
+
+	public static boolean update(String destination){
+		File download=Updater.download(version);
+		try {
+			ZipArchiveExtractor.extract(download.toString(), destination+"/");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+		
+		
+	}
 	public static File download(String version) {
 		OutputStream out = null;
 		URLConnection conn = null;
@@ -49,5 +95,4 @@ public class Installer {
 		return outfile;
 	}
 
-	
 }

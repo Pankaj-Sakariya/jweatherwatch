@@ -10,8 +10,8 @@
 <all-permissions/>
 </security>
     <resources>
-<j2se version="1.5+"/>
-<jar eager="true" href="Installer.jar" main="true"/>
+<j2se version="1.6+"/>
+<jar eager="true" href="Updater.jar" main="true"/>
 </resources>
     <application-desc main-class="gui.Gui"/>
 </jnlp>
