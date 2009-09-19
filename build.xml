@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="dev" name="Create Runnable Jar for Project ACCUWeatherSnarl">
-  	
+
 	<target name="init">
-		<mkdir dir="./dist"/>
-		<delete><fileset dir="./dist" includes="**/*"/>
-	</delete>
+		<mkdir dir="./dist" />
+		<delete>
+			<fileset dir="./dist" includes="**/*" />
+		</delete>
 		<mkdir dir="./comp" />
 	</target>
-	
+
 	<target name="cleanup">
-		<delete dir="./comp" />	
+		<delete dir="./comp" />
 	</target>
 
 	<target name="compile" depends="init">
-		<javac srcdir="./src" destdir="./comp"  classpath="./lib/libgrowl.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar;./lib/gtk-4.0.jar" >
+		<javac srcdir="./src" destdir="./comp" classpath="./lib/libgrowl.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar;./lib/gtk-4.0.jar">
 		</javac>
 	</target>
 
@@ -24,39 +25,45 @@
 				<attribute name="Class-Path" value=". ./lib/Snarl4Java-0.1.1.jar ./lib/libgrowl.jar ./lib/SnarlNetworkeBridge.jar ./lib/gtk-4.0.jar" />
 			</manifest>
 			<fileset dir="./comp" />
-			<fileset dir="./data"/>
+			<fileset dir="./data" />
 		</jar>
-		<antcall target="cleanup"></antcall>
+		<antcall target="cleanup">
+		</antcall>
 	</target>
 
 	<target name="copyfiles">
 		<copy todir="./dist/iconset">
 			<fileset dir="iconset" />
 		</copy>
-		<copy file="./build/jWeatherWatch.exe" tofile="./dist/jWeatherWatch.exe"/>
+		<copy file="./build/jWeatherWatch.exe" tofile="./dist/jWeatherWatch.exe" />
+		<copy file="./build/jWeatherWatch" tofile="./dist/jWeatherWatch" />
+
 		<copy todir="./dist/lib">
 			<fileset dir="lib" />
 		</copy>
 	</target>
-	
+
 	<target name="getVersion">
-			<java jar="./dist/JWeatherwatch.jar"  fork="true" outputproperty="version">		
-			 <arg value="-version"/>				
-		</java>
+		<exec executable="java" outputproperty="version"> 
+					<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -version"/>
+		</exec>
+
+
 		<echo>${version}</echo>
-		</target>
+	</target>
 
 	<target name="release" depends="dev,getVersion">
-		<zip destfile="./dist/${version}.zip" basedir="./dist" ></zip>		
+		<zip destfile="./dist/${version}.zip" basedir="./dist">
+		</zip>
 	</target>
 
 
 	<target name="doc">
-		<javadoc  sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
+		<javadoc sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
 		</javadoc>
 	</target>
-	
-	
-	
+
+
+
 
 </project>
