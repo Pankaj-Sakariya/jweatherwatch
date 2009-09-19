@@ -168,6 +168,7 @@ public class Gui extends JFrame {
 					"Installation failed!", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		Updater.creatLnk(jTextField_Path.getText());
 		JOptionPane.showMessageDialog(null,
 				"Instalaltion of jWeatherWatcher was succsessfull",
 				"Installation complete", JOptionPane.INFORMATION_MESSAGE);

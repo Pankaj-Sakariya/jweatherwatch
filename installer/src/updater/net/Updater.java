@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -49,19 +50,19 @@ public class Updater {
 		return version;
 	}
 
-	public static boolean update(String destination){
-		File download=Updater.download(getVersion());
+	public static boolean update(String destination) {
+		File download = Updater.download(getVersion());
 		try {
-			ZipArchiveExtractor.extract(download.toString(), destination+"/");
+			ZipArchiveExtractor.extract(download.toString(), destination + "/");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
 		return true;
-		
-		
+
 	}
+
 	public static File download(String version) {
 		OutputStream out = null;
 		URLConnection conn = null;
@@ -70,11 +71,12 @@ public class Updater {
 		File outfile = null;
 
 		try {
-			outfile = new File(System.getProperty("java.io.tmpdir") + "/jWeatherWatch v"
-					+ version + ".zip");
+			outfile = new File(System.getProperty("java.io.tmpdir")
+					+ "/jWeatherWatch v" + version + ".zip");
 			System.out.println(outfile);
-			url = new URL(("http://jweatherwatch.googlecode.com/files/jWeatherWatch%20v"
-					+ version + ".zip"));
+			url = new URL(
+					("http://jweatherwatch.googlecode.com/files/jWeatherWatch%20v"
+							+ version + ".zip"));
 			System.out.println(url);
 			out = new BufferedOutputStream(new FileOutputStream(outfile));
 			conn = url.openConnection();
@@ -99,94 +101,125 @@ public class Updater {
 	}
 
 	public static void main(String[] args) {
-		if(args.length!=1)
+		if (args.length != 1)
 			return;
 		update(args[0]);
 		try {
 			Runtime.getRuntime().exec(
-					new String[] { "java", "-jar",args[0]+ "/JWeatherWatch.jar" });
+					new String[] { "java", "-jar",
+							args[0] + "/JWeatherWatch.jar" });
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	/**Found at http://www.java2s.com/Code/Java/File-Input-Output/CopyfilesusingJavaIOAPI.htm
+
+	/**
+	 * Found at http://www.java2s.com/Code/Java/File-Input-Output/
+	 * CopyfilesusingJavaIOAPI.htm
 	 * 
 	 * @param fromFileName
 	 * @param toFileName
 	 * @throws IOException
 	 */
 	public static void copy(String fromFileName, String toFileName)
-    throws IOException {
-  File fromFile = new File(fromFileName);
-  File toFile = new File(toFileName);
+			throws IOException {
+		File fromFile = new File(fromFileName);
+		File toFile = new File(toFileName);
 
-  if (!fromFile.exists())
-    throw new IOException("FileCopy: " + "no such source file: "
-        + fromFileName);
-  if (!fromFile.isFile())
-    throw new IOException("FileCopy: " + "can't copy directory: "
-        + fromFileName);
-  if (!fromFile.canRead())
-    throw new IOException("FileCopy: " + "source file is unreadable: "
-        + fromFileName);
+		if (!fromFile.exists())
+			throw new IOException("FileCopy: " + "no such source file: "
+					+ fromFileName);
+		if (!fromFile.isFile())
+			throw new IOException("FileCopy: " + "can't copy directory: "
+					+ fromFileName);
+		if (!fromFile.canRead())
+			throw new IOException("FileCopy: " + "source file is unreadable: "
+					+ fromFileName);
 
-  if (toFile.isDirectory())
-    toFile = new File(toFile, fromFile.getName());
+		if (toFile.isDirectory())
+			toFile = new File(toFile, fromFile.getName());
 
-  if (toFile.exists()) {
-    if (!toFile.canWrite())
-      throw new IOException("FileCopy: "
-          + "destination file is unwriteable: " + toFileName);
-    System.out.print("Overwrite existing file " + toFile.getName()
-        + "? (Y/N): ");
-    System.out.flush();
-    BufferedReader in = new BufferedReader(new InputStreamReader(
-        System.in));
-    String response = in.readLine();
-    if (!response.equals("Y") && !response.equals("y"))
-      throw new IOException("FileCopy: "
-          + "existing file was not overwritten.");
-  } else {
-    String parent = toFile.getParent();
-    if (parent == null)
-      parent = System.getProperty("user.dir");
-    File dir = new File(parent);
-    if (!dir.exists())
-      throw new IOException("FileCopy: "
-          + "destination directory doesn't exist: " + parent);
-    if (dir.isFile())
-      throw new IOException("FileCopy: "
-          + "destination is not a directory: " + parent);
-    if (!dir.canWrite())
-      throw new IOException("FileCopy: "
-          + "destination directory is unwriteable: " + parent);
-  }
+		if (toFile.exists()) {
+			if (!toFile.canWrite())
+				throw new IOException("FileCopy: "
+						+ "destination file is unwriteable: " + toFileName);
+			System.out.print("Overwrite existing file " + toFile.getName()
+					+ "? (Y/N): ");
+			System.out.flush();
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					System.in));
+			String response = in.readLine();
+			if (!response.equals("Y") && !response.equals("y"))
+				throw new IOException("FileCopy: "
+						+ "existing file was not overwritten.");
+		} else {
+			String parent = toFile.getParent();
+			if (parent == null)
+				parent = System.getProperty("user.dir");
+			File dir = new File(parent);
+			if (!dir.exists())
+				throw new IOException("FileCopy: "
+						+ "destination directory doesn't exist: " + parent);
+			if (dir.isFile())
+				throw new IOException("FileCopy: "
+						+ "destination is not a directory: " + parent);
+			if (!dir.canWrite())
+				throw new IOException("FileCopy: "
+						+ "destination directory is unwriteable: " + parent);
+		}
 
-  FileInputStream from = null;
-  FileOutputStream to = null;
-  try {
-    from = new FileInputStream(fromFile);
-    to = new FileOutputStream(toFile);
-    byte[] buffer = new byte[4096];
-    int bytesRead;
+		FileInputStream from = null;
+		FileOutputStream to = null;
+		try {
+			from = new FileInputStream(fromFile);
+			to = new FileOutputStream(toFile);
+			byte[] buffer = new byte[4096];
+			int bytesRead;
 
-    while ((bytesRead = from.read(buffer)) != -1)
-      to.write(buffer, 0, bytesRead); // write
-  } finally {
-    if (from != null)
-      try {
-        from.close();
-      } catch (IOException e) {
-        ;
-      }
-    if (to != null)
-      try {
-        to.close();
-      } catch (IOException e) {
-        ;
-      }
-  }
-}
+			while ((bytesRead = from.read(buffer)) != -1)
+				to.write(buffer, 0, bytesRead); // write
+		} finally {
+			if (from != null)
+				try {
+					from.close();
+				} catch (IOException e) {
+					;
+				}
+			if (to != null)
+				try {
+					to.close();
+				} catch (IOException e) {
+					;
+				}
+		}
+	}
+
+	public static void creatLnk(String location) {
+		String o = System.getProperty("os.name").toLowerCase();
+		if (o.contains("windows")) {
+
+			PrintWriter printWriter = null;
+			try {
+				printWriter = new PrintWriter(new File(System
+						.getProperty("user.home")
+						+ "/Desktop/jWeatherWatch.url"));
+
+				printWriter.println("[InternetShortcut]\n" + "URL=file://"
+						+ location + "jWeatherWatch.exe\n"
+						+ "WorkingDirectory=" + location + "\n"
+						+ "IconIndex=0\n" + "IconFile=" + location
+						+ "\\icon.ico\n" + "IDList=\n" + "HotKey=0\n"
+						+ "[{000214A0-0000-0000-C000-000000000046}]\n"
+						+ "Prop3=19,9");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				printWriter.close();
+			}
+
+		}
+
+	}
 }
