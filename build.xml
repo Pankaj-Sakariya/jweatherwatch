@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="zip" name="Create Runnable Jar for Project ACCUWeatherSnarl">
+<project default="dev" name="Create Runnable Jar for Project ACCUWeatherSnarl">
   	
 	<target name="init">
+		<mkdir dir="./dist"/>
 		<delete><fileset dir="./dist" includes="**/*"/>
 	</delete>
 		<mkdir dir="./comp" />
 	</target>
+	
 	<target name="cleanup">
 		<delete dir="./comp" />	
 	</target>
@@ -15,7 +17,7 @@
 		</javac>
 	</target>
 
-	<target name="jar" depends="compile,copyfiles">
+	<target name="dev" depends="compile,copyfiles">
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="net.Main" />
@@ -44,7 +46,7 @@
 		<echo>${version}</echo>
 		</target>
 
-	<target name="zip" depends="jar,copyfiles,getVersion">
+	<target name="release" depends="dev,getVersion">
 		<zip destfile="./dist/${version}.zip" basedir="./dist" ></zip>		
 	</target>
 
@@ -53,6 +55,7 @@
 		<javadoc  sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="jWeatherWatch">
 		</javadoc>
 	</target>
+	
 	
 	
 
