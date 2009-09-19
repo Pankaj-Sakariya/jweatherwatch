@@ -15,7 +15,7 @@ public class Main {
 
 	}
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		boolean windowstate = true;
 		for (int i = 0; i < args.length; ++i) {
 			if (args[i].charAt(0) == '-')
@@ -42,13 +42,23 @@ public class Main {
 				}
 		}
 		allreadyRunning();
-		if(Float.valueOf(Updater.getVerion())>SettingsReader.version){
-			try {
-				Runtime.getRuntime().exec(
-						new String[] { "java","-classpath","net.Updater",SettingsReader.getCurrentDirectory(), "-jar","Updater.jar" });
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if (Float.valueOf(Updater.getVersion()) > SettingsReader.version) {
+			int result = JOptionPane
+					.showConfirmDialog(
+							null,
+							"A new version of jWeatherWatch is availible,do you want to update?",
+							"Update", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
+				try {
+					Runtime.getRuntime().exec(
+							new String[] { "java", "-classpath","Updater.jar", "net.Updater",
+									SettingsReader.getCurrentDirectory(), });
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.exit(0);
 			}
 		}
 		new Gui(windowstate);
