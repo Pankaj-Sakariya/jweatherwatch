@@ -13,7 +13,7 @@
 <j2se version="1.6+"/>
 <jar eager="true" href="Updater.jar" main="true"/>
 </resources>
-    <application-desc main-class="gui.Gui"/>
+    <application-desc main-class="updater.gui.Gui"/>
 </jnlp>
 
 
