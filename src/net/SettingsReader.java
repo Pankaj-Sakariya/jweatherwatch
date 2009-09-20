@@ -24,7 +24,7 @@ import org.xml.sax.SAXException;
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
 	public static final Version version = new Version("1.2.8.2");
-	public static final Version devversion = new Version("1.3.3");
+	public static final Version devversion = new Version("1.3.4");
 	public static boolean devChannel=false;
 
 	private static String homeDirectory = null;
@@ -43,7 +43,10 @@ public class SettingsReader {
 
 	public static Views view = Views.standart;
 
+	private static boolean loaded=false;
 	static public boolean load() {
+		if(loaded)return true;
+		loaded=true;
 		if (!new File(SettingsReader.getHomeDirectory() + "/settings.xml")
 				.exists())
 			return false;
@@ -238,15 +241,12 @@ public class SettingsReader {
 		return iconpPath;
 	}
 
-	public static void setIconpPath(String iconpPath) {
-		System.out.println("Setting up iconpath: " + iconpPath);
-		
+	public static void setIconpPath(String iconpPath) {		
 		iconpPath = iconpPath.replace("\\", "/");
 		if (!iconpPath.endsWith("/"))
 			iconpPath += "/";
 		if (new File(iconpPath + "/01.png").exists()) {
 			SettingsReader.iconpPath = iconpPath;
-			System.out.println("Setting up iconpath: " + iconpPath);
 		} 
 	}
 
