@@ -23,7 +23,7 @@ public class Snarl implements Notifer {
 			return false;
 		Snarl4Java.snGetGlobalMsg();
 		Snarl4Java.snRegisterConfig(111, SettingsReader.name + " "
-				+ SettingsReader.version, 3);
+				+ SettingsReader.getVersion(), 3);
 		return true;
 	}
 

@@ -24,7 +24,7 @@ public class WeatherTrayIcon extends TrayIcon {
 		this.parent = parent;
 
 		this.setImageAutoSize(true);
-		this.setToolTip(SettingsReader.name + " " + SettingsReader.version);
+		this.setToolTip(SettingsReader.name + " " + SettingsReader.getVersion());
 		this.addActionListener(new ActionListener() {
 
 			@Override
@@ -91,7 +91,7 @@ public class WeatherTrayIcon extends TrayIcon {
 					parent.setView(new DefaultView(parent));
 				}
 			});
-			popupMenu.add(new MenuItem(SettingsReader.name + " " + SettingsReader.version));
+			popupMenu.add(new MenuItem(SettingsReader.name + " " + SettingsReader.getVersion()));
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(settings);
 			popupMenu.add(new MenuItem("-"));

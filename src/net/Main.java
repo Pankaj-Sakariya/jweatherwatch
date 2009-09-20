@@ -38,10 +38,10 @@ public class Main {
 						System.exit(0);
 						break;
 					case versions:
-						System.out.println("<version>" + SettingsReader.version
-								+ "</version>");
-						System.out.println("<devVersion>"
-								+ SettingsReader.devversion + "</devVersion>");
+						System.out.println("<versions>\n" + "\t<version>"
+								+ SettingsReader.version + "</version>\n"
+								+ "\t<devVersion>" + SettingsReader.devversion
+								+ "</devVersion>\n" + "</versions>");
 						System.exit(0);
 						break;
 					case help:

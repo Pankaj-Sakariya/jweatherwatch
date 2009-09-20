@@ -24,7 +24,7 @@ import org.xml.sax.SAXException;
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
 	public static final Version version = new Version("1.2.8.2");
-	public static final Version devversion = new Version("1.3.2");
+	public static final Version devversion = new Version("1.3.3");
 	public static boolean devChannel=false;
 
 	private static String homeDirectory = null;
@@ -255,5 +255,8 @@ public class SettingsReader {
 		if(Utils.getOS()==OS.WINDOWS)
 			out=out.replaceFirst("/","");
 	return out;
+	}
+	public static Version getVersion() {
+		return version.compareTo(devversion)>0?version:devversion;
 	}
 }
