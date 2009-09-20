@@ -3,6 +3,12 @@
  * For October, support for mac systems.
  
 ==Upcomming in  jWeatherWatch v1.3==
+ * Wrote a small installer using java webstart [http://code.google.com/p/jweatherwatch/source/browse/installer/dist/installer.jnlp Try It]
+  # The installer downloads and extract the files to a directory you choose
+  # on Windows it creates a desktop shortcut
+  # it starts jWeatherWatch after completing instalation
+ 
+ * Implemented autoupdate
  * mainframe now extends JDialog --> no minimize maximize button anymore
  * added actions to supporting  Notificationsystems
   # [http://code.google.com/p/jweatherwatch/wiki/Snarl NetSnarl] Lefclick bring to front, Rightclick visit forecast
