@@ -122,7 +122,7 @@ public class Updater {
 	 * @param toFileName
 	 * @throws IOException
 	 */
-	public static void copy(String fromFileName, String toFileName)
+	public static void copy(String fromFileName, String toFileName,boolean force)
 			throws IOException {
 		File fromFile = new File(fromFileName);
 		File toFile = new File(toFileName);
@@ -140,7 +140,7 @@ public class Updater {
 		if (toFile.isDirectory())
 			toFile = new File(toFile, fromFile.getName());
 
-		if (toFile.exists()) {
+		if (!force&&toFile.exists()) {
 			if (!toFile.canWrite())
 				throw new IOException("FileCopy: "
 						+ "destination file is unwriteable: " + toFileName);
