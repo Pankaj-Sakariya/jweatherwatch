@@ -82,7 +82,7 @@ public class SettingsReader {
 		if (iconpPath == null && Utils.getXMLValue(element, "iconPath") != null)
 			setIconpPath(Utils.getXMLValue(element, "iconPath"));
 		if (Utils.getXMLValue(element, "devChannel") != null)
-			NotificationConnector.setHost(Utils.getXMLValue(element, "devChannel"));
+			devChannel=Boolean.parseBoolean(Utils.getXMLValue(element, "devChannel"));
 
 		if (Utils.getXMLValue(element, "notificationIterval") != null)
 			notificationInterval = Integer.valueOf(Utils.getXMLValue(element,
