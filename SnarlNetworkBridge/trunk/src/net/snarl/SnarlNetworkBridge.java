@@ -31,10 +31,10 @@ public class SnarlNetworkBridge {
 	/**
 	 * The SNP header containing version
 	 */
-	public static final String head = "type=SNP#?version=" + SNPVersion+"#";
+	public static final String head = "type=SNP#?version=" + SNPVersion + "#";
 
 	// the Applicatinname registred with Snarl
-	static SNPProperty appName =new SNPProperty("app");
+	static SNPProperty appName = new SNPProperty("app");
 	// a HashMap with all registred alerts
 	static HashMap<String, Integer> alerts = new HashMap<String, Integer>();
 
@@ -81,6 +81,7 @@ public class SnarlNetworkBridge {
 				};
 			}.start();
 			snarlIsRegisterd = true;
+			snarlIsRunning = true;
 		} catch (ConnectException e) {
 			snarlIsRunning = false;
 			System.out.println("Snarl is not running");
@@ -91,7 +92,7 @@ public class SnarlNetworkBridge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Message msg = send(new Message("register",appName));
+		Message msg = send(new Message("register", appName));
 
 		snarlIsRegisterd = snarlIsRunning = msg != null
 				&& msg.getReply() != Reply.SNP_ERROR_NOT_RUNNING;
@@ -107,7 +108,9 @@ public class SnarlNetworkBridge {
 	 */
 	public static Message snRegisterAlert(String title) {
 		alerts.put(title, alerts.size() + 1);
-		return send(new Message("add_class",new SNPProperty[]{appName,new SNPProperty("class",String.valueOf(alerts.size())),new SNPProperty("title",title)}));
+		return send(new Message("add_class", new SNPProperty[] { appName,
+				new SNPProperty("class", String.valueOf(alerts.size())),
+				new SNPProperty("title", title) }));
 
 	}
 
@@ -143,7 +146,8 @@ public class SnarlNetworkBridge {
 	 */
 	public static Notification snShowMessage(String alert, String title,
 			String content, int timeout) {
-		return snShowMessage(new Notification(alert, title, content, null,timeout));
+		return snShowMessage(new Notification(alert, title, content, null,
+				timeout));
 	}
 
 	/**
@@ -168,7 +172,7 @@ public class SnarlNetworkBridge {
 	 */
 	public static Message snRevokeConfig() {
 		snarlIsRegisterd = false;
-		Message rep = new Message("unregister",appName);
+		Message rep = new Message("unregister", appName);
 		send(rep);
 		close();
 		return rep;
@@ -212,7 +216,7 @@ public class SnarlNetworkBridge {
 	public static boolean snIsRunnging() {
 		return snarlIsRunning;
 	}
-	
+
 	public static void setDebug(boolean debug) {
 		SnarlNetworkBridge.debug = debug;
 	}
