@@ -23,7 +23,9 @@ import org.xml.sax.SAXException;
 
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
-	public static final String version = "1.3.1";
+	public static final Version version = new Version("1.2.8.2");
+	public static final Version devversion = new Version("1.3.1");
+	public static boolean devChannel=false;
 
 	private static String homeDirectory = null;
 	private static String iconpPath = null;
@@ -79,6 +81,8 @@ public class SettingsReader {
 					.getXMLValue(element, "notifer"));
 		if (iconpPath == null && Utils.getXMLValue(element, "iconPath") != null)
 			setIconpPath(Utils.getXMLValue(element, "iconPath"));
+		if (Utils.getXMLValue(element, "devChannel") != null)
+			NotificationConnector.setHost(Utils.getXMLValue(element, "devChannel"));
 
 		if (Utils.getXMLValue(element, "notificationIterval") != null)
 			notificationInterval = Integer.valueOf(Utils.getXMLValue(element,
@@ -123,6 +127,7 @@ public class SettingsReader {
 		doc.appendNode("currentView", view, "The View loaded on start");
 		doc.appendNode("iconPath", iconpPath,
 				"Icon path used for weather icons");
+		doc.appendNode("devChannel",devChannel);
 		net.myxml.Doc minimalView = new Doc("minimalView");
 		minimalView.appendNode("minimalViewRows", mininimalViewRows,
 				"Number of Rows displayed in Minimal View");
