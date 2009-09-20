@@ -58,7 +58,7 @@ public class Main {
 					Updater.copy(SettingsReader.getCurrentDirectory()
 							+ "/lib/Updater.jar", System
 							.getProperty("java.io.tmpdir")
-							+ "/Updater.jar");
+							+ "/Updater.jar",true);
 					Runtime.getRuntime().exec(
 							new String[] {
 									"java",
