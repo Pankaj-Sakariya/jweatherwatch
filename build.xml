@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="dev" name="Create Runnable Jar for Project ACCUWeatherSnarl">
+<project default="devrelease" name="Create Runnable Jar for Project ACCUWeatherSnarl">
 
 	<target name="init">
 		<mkdir dir="./dist" />
 		<delete>
 			<fileset dir="./dist" includes="**/*" />
+		</delete>
+		<mkdir dir="./dev" />
+		<delete>
+			<fileset dir="./dev" includes="**/*" />
 		</delete>
 		<mkdir dir="./comp" />
 	</target>
@@ -18,7 +22,7 @@
 		</javac>
 	</target>
 
-	<target name="dev" depends="compile,copyfiles">
+	<target name="jar" depends="compile,copyfiles">
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="net.Main" />
@@ -46,17 +50,32 @@
 		<exec executable="java" outputproperty="version">
 			<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -version" />
 		</exec>
-
-
 		<echo>${version}</echo>
 	</target>
 
-	<target name="release" depends="dev,getVersion">
-		<zip destfile="./dist/jWeatherWatch v${version}.zip" basedir="./dist">
-		</zip>
-		<echo file="CurrentVersion.xml" message="&lt;version>${version}&lt;/version>" />
+	<target name="getVersionFile">
+		<exec executable="java" outputproperty="versions">
+			<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -versions" />
+		</exec>
+		<echo file="CurrentVersion.xml" message="${versions}" />
 	</target>
 
+	<target name="getdevVersion">
+		<exec executable="java" outputproperty="devversion">
+			<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -devversion" />
+		</exec>
+
+	</target>
+
+	<target name="release" depends="jar,getVersion,getVersionFile">
+		<zip destfile="./dist/jWeatherWatch v${version}.zip" basedir="./dist">
+		</zip>
+	</target>
+
+	<target name="devrelease" depends="jar,getdevVersion,getVersionFile">
+		<zip destfile="./dev/jWeatherWatch v${devversion}.zip" basedir="./dist">
+		</zip>
+	</target>
 
 	<target name="doc">
 		<javadoc sourcepath="src" defaultexcludes="yes" destdir="./javadoc/" author="true" version="true" use="true" windowtitle="jWeatherWatch">

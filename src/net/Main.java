@@ -13,7 +13,7 @@ import updater.net.Updater;
 
 public class Main {
 	enum options {
-		minimized, workindirectory, help, h, version
+		minimized, workindirectory, help, h, version, devversion, versions
 
 	}
 
@@ -33,6 +33,17 @@ public class Main {
 						System.out.println(SettingsReader.version);
 						System.exit(0);
 						break;
+					case devversion:
+						System.out.println(SettingsReader.devversion);
+						System.exit(0);
+						break;
+					case versions:
+						System.out.println("<version>" + SettingsReader.version
+								+ "</version>");
+						System.out.println("<devVersion>"
+								+ SettingsReader.devversion + "</devVersion>");
+						System.exit(0);
+						break;
 					case help:
 					case h:
 					default:
@@ -44,9 +55,19 @@ public class Main {
 				}
 		}
 		allreadyRunning();
-		if (Integer
-				.valueOf(Updater.getVersion().replace(".", "")) > Integer
-				.valueOf(SettingsReader.version.replace(".", ""))) {
+		Version version = SettingsReader.version;
+		Version compare = new Version(Updater.getVersion());
+		if (SettingsReader.devChannel) {
+			JOptionPane
+					.showMessageDialog(
+							null,
+							"This is a beta version please report all occuring errors.",
+							"This is a beta", JOptionPane.INFORMATION_MESSAGE);
+			version = SettingsReader.devversion;
+			compare = new Version(Updater.getDevVersion());
+		}
+
+		if (compare.compareTo(version) > 0) {
 			int result = JOptionPane
 					.showConfirmDialog(
 							null,
@@ -58,7 +79,7 @@ public class Main {
 					Updater.copy(SettingsReader.getCurrentDirectory()
 							+ "/lib/Updater.jar", System
 							.getProperty("java.io.tmpdir")
-							+ "/Updater.jar",true);
+							+ "/Updater.jar", true);
 					Runtime.getRuntime().exec(
 							new String[] {
 									"java",
@@ -66,7 +87,8 @@ public class Main {
 									System.getProperty("java.io.tmpdir")
 											+ "/Updater.jar",
 									"updater.net.Updater",
-									SettingsReader.getCurrentDirectory() });
+									SettingsReader.getCurrentDirectory(),
+									SettingsReader.devChannel + "" });
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
