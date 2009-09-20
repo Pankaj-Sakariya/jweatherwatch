@@ -16,6 +16,9 @@ public class Main {
 		minimized, workindirectory, help, h, version, devversion, versions
 
 	}
+	static{
+		SettingsReader.load();
+	}
 
 	public static void main(String[] args) {
 		boolean windowstate = true;
