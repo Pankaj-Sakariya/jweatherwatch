@@ -44,8 +44,8 @@ public class Main {
 				}
 		}
 		allreadyRunning();
-		if (Float.valueOf(Integer
-				.valueOf(Updater.getVersion().replace(".", ""))) > Integer
+		if (Integer
+				.valueOf(Updater.getVersion().replace(".", "")) > Integer
 				.valueOf(SettingsReader.version.replace(".", ""))) {
 			int result = JOptionPane
 					.showConfirmDialog(
