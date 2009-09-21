@@ -3,6 +3,8 @@
  * For October, support for mac systems.
  
 ==Upcomming in  jWeatherWatch v1.3==
+ * Implemented an auto update feture
+ * With the new version it is possible to recive "nightly builds" 
  * Wrote a small installer using java webstart [http://jweatherwatch.googlecode.com/svn/installer/dist/installer.jnlp Try It]
   # The installer downloads and extract the files to a directory you choose
   # on Windows it creates a desktop shortcut
