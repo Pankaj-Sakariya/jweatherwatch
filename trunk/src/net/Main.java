@@ -16,9 +16,7 @@ public class Main {
 		minimized, workindirectory, help, h, version, devversion, versions
 
 	}
-	static{
-		SettingsReader.load();
-	}
+	
 
 	public static void main(String[] args) {
 		boolean windowstate = true;
@@ -37,13 +35,13 @@ public class Main {
 						System.exit(0);
 						break;
 					case devversion:
-						System.out.println(SettingsReader.devversion);
+						System.out.println(SettingsReader.getDevversion());
 						System.exit(0);
 						break;
 					case versions:
 						System.out.println("<versions>\n" + "\t<version>"
 								+ SettingsReader.version + "</version>\n"
-								+ "\t<devVersion>" + SettingsReader.devversion
+								+ "\t<devVersion>" + SettingsReader.getDevversion()
 								+ "</devVersion>\n" + "</versions>");
 						System.exit(0);
 						break;
@@ -66,7 +64,7 @@ public class Main {
 							null,
 							"This is a beta version please report all occuring errors.",
 							"This is a beta", JOptionPane.INFORMATION_MESSAGE);
-			version = SettingsReader.devversion;
+			version = SettingsReader.getDevversion();
 			compare = new Version(Updater.getDevVersion());
 		}
 
