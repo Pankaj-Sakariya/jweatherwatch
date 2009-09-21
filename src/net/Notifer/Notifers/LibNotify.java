@@ -1,11 +1,15 @@
 package net.Notifer.Notifers;
 
+import java.io.FileNotFoundException;
+
 import net.NotificationConnector;
 import net.SettingsReader;
 import net.Utils;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
 
+import org.gnome.gdk.InterpType;
+import org.gnome.gdk.Pixbuf;
 import org.gnome.gtk.Gtk;
 import org.gnome.gtk.StatusIcon;
 import org.gnome.notify.Notification;
@@ -49,7 +53,7 @@ public class LibNotify implements Notifer {
 	public void send(String alert, String title, String description,
 			String iconPath, final String url) {
 		Notification not = new org.gnome.notify.Notification(title,
-				description, iconPath, getIcon());
+				description, null, getIcon());
 		if (url != null) {
 			not.addAction("b", "Visit Forecast",
 					new org.gnome.notify.Notification.Action() {
@@ -64,7 +68,15 @@ public class LibNotify implements Notifer {
 						NotificationConnector.bringFrameToFront();
 					}
 				});
-
+		if (iconPath != null)
+			try {
+				Pixbuf buf = new Pixbuf(iconPath);
+				buf=buf.scale(40, 40, InterpType.BILINEAR);
+				not.setIcon(buf);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		not.show();
 	}
 

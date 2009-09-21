@@ -29,9 +29,6 @@ public class Gui extends JDialog implements LocationListUser {
 	private Splash splash = null; // @jve:decl-index=0:visual-constraint="277,470"
 	private WeatherTrayIcon trayIcon = null;
 	private SettingsDialog settings = null; // @jve:decl-index=0:visual-constraint="-3,68"
-	static {
-		SettingsReader.load();
-	}
 
 	/**
 	 * This is the default constructor

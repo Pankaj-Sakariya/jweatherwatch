@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -24,8 +26,8 @@ import org.xml.sax.SAXException;
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
 	public static final Version version = new Version("1.2.8.2");
-	public static final Version devversion = new Version("1.3.4");
-	public static boolean devChannel=false;
+	private static Version devversion = null;
+	public static boolean devChannel = false;
 
 	private static String homeDirectory = null;
 	private static String iconpPath = null;
@@ -43,10 +45,11 @@ public class SettingsReader {
 
 	public static Views view = Views.standart;
 
-	private static boolean loaded=false;
-	static public boolean load() {
-		if(loaded)return true;
-		loaded=true;
+	static {
+		load();
+	}
+
+	static private boolean load() {
 		if (!new File(SettingsReader.getHomeDirectory() + "/settings.xml")
 				.exists())
 			return false;
@@ -85,7 +88,10 @@ public class SettingsReader {
 		if (iconpPath == null && Utils.getXMLValue(element, "iconPath") != null)
 			setIconpPath(Utils.getXMLValue(element, "iconPath"));
 		if (Utils.getXMLValue(element, "devChannel") != null)
-			devChannel=Boolean.parseBoolean(Utils.getXMLValue(element, "devChannel"));
+			devChannel = Boolean.parseBoolean(Utils.getXMLValue(element,
+					"devChannel"));
+		if (devChannel)
+			getDevversion();
 
 		if (Utils.getXMLValue(element, "notificationIterval") != null)
 			notificationInterval = Integer.valueOf(Utils.getXMLValue(element,
@@ -130,7 +136,7 @@ public class SettingsReader {
 		doc.appendNode("currentView", view, "The View loaded on start");
 		doc.appendNode("iconPath", iconpPath,
 				"Icon path used for weather icons");
-		doc.appendNode("devChannel",devChannel);
+		doc.appendNode("devChannel", devChannel);
 		net.myxml.Doc minimalView = new Doc("minimalView");
 		minimalView.appendNode("minimalViewRows", mininimalViewRows,
 				"Number of Rows displayed in Minimal View");
@@ -241,22 +247,33 @@ public class SettingsReader {
 		return iconpPath;
 	}
 
-	public static void setIconpPath(String iconpPath) {		
+	public static void setIconpPath(String iconpPath) {
 		iconpPath = iconpPath.replace("\\", "/");
 		if (!iconpPath.endsWith("/"))
 			iconpPath += "/";
 		if (new File(iconpPath + "/01.png").exists()) {
 			SettingsReader.iconpPath = iconpPath;
-		} 
+		}
 	}
 
 	public static String getCurrentDirectory() {
-		String out=new SettingsReader().getClass().getResource("/").getFile().replace("%20", " ");
-		if(Utils.getOS()==OS.WINDOWS)
-			out=out.replaceFirst("/","");
-	return out;
+		String out = new SettingsReader().getClass().getResource("/").getFile()
+				.replace("%20", " ");
+		if (Utils.getOS() == OS.WINDOWS)
+			out = out.replaceFirst("/", "");
+		return out;
 	}
+
 	public static Version getVersion() {
-		return version.compareTo(devversion)>0?version:devversion;
+		return devversion != null ? devversion : version;
+	}
+
+	public static Version getDevversion() {
+		if (devversion == null) {
+			devversion = new Version(new SimpleDateFormat("MMddyy")
+					.format(new Date()));
+
+		}
+		return devversion;
 	}
 }
