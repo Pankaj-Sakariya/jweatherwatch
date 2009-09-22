@@ -13,7 +13,7 @@ import updater.net.Updater;
 
 public class Main {
 	enum options {
-		minimized, workindirectory, help, h, version, devversion, versions
+		minimized, workindirectory, help, h, version
 
 	}
 	
@@ -32,17 +32,6 @@ public class Main {
 						break;
 					case version:
 						System.out.println(SettingsReader.version);
-						System.exit(0);
-						break;
-					case devversion:
-						System.out.println(SettingsReader.getDevversion());
-						System.exit(0);
-						break;
-					case versions:
-						System.out.println("<versions>\n" + "\t<version>"
-								+ SettingsReader.version + "</version>\n"
-								+ "\t<devVersion>" + SettingsReader.getDevversion()
-								+ "</devVersion>\n" + "</versions>");
 						System.exit(0);
 						break;
 					case help:

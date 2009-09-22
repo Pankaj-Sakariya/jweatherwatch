@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="devrelease" name="Create Runnable Jar for Project ACCUWeatherSnarl">
 
+	<path id="jww.classpath">
+		<fileset dir="./lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
 	<target name="init">
 		<mkdir dir="./dist" />
 		<delete>
@@ -18,17 +24,23 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<javac srcdir="./src" destdir="./comp" classpath="./lib/libgrowl.jar;./lib/Snarl4Java-0.1.1.jar;./lib/SnarlNetworkeBridge.jar;./lib/gtk-4.0.jar;./lib/Updater.jar">
+		<javac srcdir="./src" destdir="./comp">
+			<classpath refid="jww.classpath" />
 		</javac>
 	</target>
 
-	<target name="jar" depends="compile,copyfiles">
+	<target name="jar" depends="compile,copyfiles,getVersionFile">
+		<pathconvert property="mf.classpath" pathsep=" ./lib/">
+			<path refid="jww.classpath" />
+			<flattenmapper />
+		</pathconvert>
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="net.Main" />
-				<attribute name="Class-Path" value=". ./lib/Snarl4Java-0.1.1.jar ./lib/libgrowl.jar ./lib/SnarlNetworkeBridge.jar ./lib/gtk-4.0.jar ./lib/Updater.jar" />
+				<attribute name="Class-Path" value=". ./lib/${mf.classpath}" />
 			</manifest>
 			<fileset dir="./comp" />
+			<fileset file="CurrentVersion.xml" />
 			<fileset dir="./data" />
 		</jar>
 		<antcall target="cleanup">
@@ -48,32 +60,28 @@
 
 	<target name="getVersion">
 		<exec executable="java" outputproperty="version">
-			<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -version" />
+			<arg line="-cp comp net.Main -version" />
 		</exec>
 		<echo>${version}</echo>
 	</target>
 
-	<target name="getVersionFile">
-		<exec executable="java" outputproperty="versions">
-			<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -versions" />
-		</exec>
-		<echo file="CurrentVersion.xml" message="${versions}" />
+	<target name="getVersionFile" depends="getVersion,getdevVersion">
+		<echo file="CurrentVersion.xml" message="&lt;versions&gt;&#xA;&#x9;&lt;version&gt;${version}&lt;/version&gt;&#xA;&#x9;&lt;devVersion&gt;${devversion}&lt;/devVersion&gt;&#xA;&lt;/versions&gt;" />
 	</target>
 
 	<target name="getdevVersion">
-		<exec executable="java" outputproperty="devversion">
-			<arg line="-classpath ./dist/JWeatherWatch.jar net.Main -devversion" />
-		</exec>
-
+		<tstamp>
+			<format property="devversion" pattern="MMddyy" />
+		</tstamp>
 	</target>
 
-	<target name="release" depends="jar,getVersion,getVersionFile">
+	<target name="release" depends="jar">
 		<zip destfile="./dist/jWeatherWatch v${version}.zip" basedir="./dist">
 		</zip>
 	</target>
 
-	<target name="devrelease" depends="jar,getdevVersion,getVersionFile">
-		<zip destfile="./dev/jWeatherWatch v${devversion}.zip" basedir="./dist">
+	<target name="devrelease" depends="jar">
+		<zip destfile="./dev/jWeatherWatch ${devversion}.zip" basedir="./dist">
 		</zip>
 	</target>
 
