@@ -5,6 +5,8 @@ http://jweatherwatch.googlecode.com/svn/images/snarlnet.png
 
 <br>
 ==Changes==
+===SNP v1.1 fix 1===
+ * fixed a bug which prevented registration of Snarl classes
  ===SNP v1.1===
  * Action listener like handling of user actions
 
