@@ -62,6 +62,6 @@ public class SNPProperty {
 	public String toString() {
 		if (value == null)
 			return "";
-		return "?" + name + "=" + value + "#";
+		return "#?" + name + "=" + value ;
 	}
 }

@@ -31,7 +31,7 @@ public class SnarlNetworkBridge {
 	/**
 	 * The SNP header containing version
 	 */
-	public static final String head = "type=SNP#?version=" + SNPVersion + "#";
+	public static final String head = "type=SNP#?version=" + SNPVersion ;
 
 	// the Applicatinname registred with Snarl
 	static SNPProperty appName = new SNPProperty("app");

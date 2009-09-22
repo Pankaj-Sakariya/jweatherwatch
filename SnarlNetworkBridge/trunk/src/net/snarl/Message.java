@@ -64,7 +64,7 @@ public class Message {
 		for (SNPProperty p : msg) {
 			out += p;
 		}
-		return out;
+		return out+"\r\n";
 	}
 
 	
