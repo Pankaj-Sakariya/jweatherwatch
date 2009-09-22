@@ -59,9 +59,9 @@ public class Updater {
 	}
 
 	public static boolean update(String destination, boolean developementversion) {
-		String adress = developementversion ? "http://jweatherwatch.googlecode.com/svn/trunk/dev/jWeatherWatch%20v"
+		String adress = developementversion ? "http://jweatherwatch.googlecode.com/svn/trunk/dev/jWeatherWatch%20"
 				+ getDevVersion() + ".zip"
-				: "http://jweatherwatch.googlecode.com/files/jWeatherWatch%20"
+				: "http://jweatherwatch.googlecode.com/files/jWeatherWatch%20v"
 						+ getVersion() + ".zip";
 		File download = Updater.download(adress);
 		try {
