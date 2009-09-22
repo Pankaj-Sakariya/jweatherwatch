@@ -31,12 +31,10 @@ public class SnarlNetworkBridge {
 	/**
 	 * The SNP header containing version
 	 */
-	public static final String head = "type=SNP#?version=" + SNPVersion ;
+	public static final String head = "type=SNP#?version=" + SNPVersion;
 
 	// the Applicatinname registred with Snarl
 	static SNPProperty appName = new SNPProperty("app");
-	// a HashMap with all registred alerts
-	static HashMap<String, Integer> alerts = new HashMap<String, Integer>();
 
 	private static int timeout = 10;
 
@@ -100,17 +98,31 @@ public class SnarlNetworkBridge {
 	}
 
 	/**
-	 * Register a new alert class to Snarl
+	 * Register a new alert class to Snarl displayname and alert name are the
+	 * same
 	 * 
 	 * @param title
 	 *            the title representing the Alert
 	 * @return a message containing the reply of Snarl
 	 */
 	public static Message snRegisterAlert(String title) {
-		alerts.put(title, alerts.size() + 1);
+		return snRegisterAlert(title, title);
+
+	}
+
+	/**
+	 * Register a new alert class to Snarl
+	 * 
+	 * @param title
+	 *            the title representing the Alert
+	 * @param displayName
+	 *            the user friendly name displayed in snarl
+	 * @return a message containing the reply of Snarl
+	 */
+	public static Message snRegisterAlert(String title, String displayName) {
 		return send(new Message("add_class", new SNPProperty[] { appName,
-				new SNPProperty("class", String.valueOf(alerts.size())),
-				new SNPProperty("title", title) }));
+				new SNPProperty("class", title),
+				new SNPProperty("title", displayName) }));
 
 	}
 

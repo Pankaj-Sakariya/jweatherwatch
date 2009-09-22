@@ -29,8 +29,7 @@ public class Notification extends Message {
 	public Notification(String alert, String title, String content,
 			String iconUrl) {
 		super("notification", new SNPProperty[] {
-				new SNPProperty("class", String
-						.valueOf(SnarlNetworkBridge.alerts.get(alert))),
+				new SNPProperty("class", alert),
 				new SNPProperty("title", title),
 				new SNPProperty("text", content),
 				new SNPProperty("icon", iconUrl),
@@ -56,8 +55,7 @@ public class Notification extends Message {
 	public Notification(String alert, String title, String content,
 			String iconUrl, int timeout) {
 		super("notification", new SNPProperty[] {
-				new SNPProperty("class", String
-						.valueOf(SnarlNetworkBridge.alerts.get(alert))),
+				new SNPProperty("class", alert),
 				new SNPProperty("title", title),
 				new SNPProperty("text", content),
 				new SNPProperty("icon", iconUrl),
