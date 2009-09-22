@@ -34,10 +34,6 @@ public class Version implements Comparable<Version> {
 		return 0;
 
 	}
-	public static void main(String[] args) {
-		Version a=new Version("1.1");
-		Version b=new Version("1.1");
-		System.out.println(a.compareTo(b));
-	}
+
 
 }

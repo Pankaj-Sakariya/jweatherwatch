@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -27,7 +25,7 @@ public class SettingsReader {
 	public static final String name = "jWeatherWatch";
 	public static final Version version = new Version("1.2.8.2");
 	private static Version devversion = null;
-	public static boolean devChannel = false;
+	public static boolean devChannel = true;
 
 	private static String homeDirectory = null;
 	private static String iconpPath = null;
@@ -270,9 +268,16 @@ public class SettingsReader {
 
 	public static Version getDevversion() {
 		if (devversion == null) {
-			devversion = new Version(new SimpleDateFormat("MMddyy")
-					.format(new Date()));
-
+			try {
+				devversion = new Version(DocumentBuilderFactory.newInstance()
+						.newDocumentBuilder().parse(
+								new SettingsReader().getClass().getResource(
+										"/CurrentVersion.xml").toString())
+						.getElementsByTagName("devVersion").item(0)
+						.getChildNodes().item(0).getNodeValue());
+			} catch (Exception e) {
+				devversion = new Version("0");
+			}
 		}
 		return devversion;
 	}
