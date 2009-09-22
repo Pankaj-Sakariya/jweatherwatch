@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import updater.net.Updater;
+import javax.swing.JCheckBox;
 
 public class Gui extends JFrame {
 
@@ -26,6 +27,8 @@ public class Gui extends JFrame {
 	private JButton jButton_Cancell1 = null;
 	private JLabel jLabel = null;
 	private JLabel jLabel1 = null;
+	private JLabel jLabel2 = null;
+	private JCheckBox jCheckBox_Dev = null;
 
 	/**
 	 * This is the default constructor
@@ -54,12 +57,15 @@ public class Gui extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabel2 = new JLabel();
+			jLabel2.setBounds(new Rectangle(15, 105, 120, 16));
+			jLabel2.setText("Developement build?");
 			jLabel1 = new JLabel();
 			jLabel1.setBounds(new Rectangle(15, 60, 62, 18));
 			jLabel1.setText("Install to:");
 			jLabel = new JLabel();
 			jLabel.setBounds(new Rectangle(19, 15, 177, 16));
-			jLabel.setText("Install "+Updater.getVersion());
+			jLabel.setText("Install " + Updater.getVersion());
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getJButton_Install(), null);
@@ -68,6 +74,8 @@ public class Gui extends JFrame {
 			jContentPane.add(getJButton_Cancell1(), null);
 			jContentPane.add(jLabel, null);
 			jContentPane.add(jLabel1, null);
+			jContentPane.add(jLabel2, null);
+			jContentPane.add(getJCheckBox_Dev(), null);
 		}
 		return jContentPane;
 	}
@@ -162,7 +170,11 @@ public class Gui extends JFrame {
 			return;
 		}
 
-		if (!Updater.update(jTextField_Path.getText())) {
+			JOptionPane.showMessageDialog(null, "this may take some time",
+					"Installation will start now", JOptionPane.INFORMATION_MESSAGE);
+	
+
+		if (!Updater.update(jTextField_Path.getText(), jCheckBox_Dev.isSelected())) {
 			JOptionPane.showMessageDialog(null,
 					"Installation of jWeatherWatcher Failed",
 					"Installation failed!", JOptionPane.ERROR_MESSAGE);
@@ -182,6 +194,30 @@ public class Gui extends JFrame {
 			e.printStackTrace();
 		}
 		System.exit(0);
+	}
+
+	/**
+	 * This method initializes jCheckBox_Dev
+	 * 
+	 * @return javax.swing.JCheckBox
+	 */
+	private JCheckBox getJCheckBox_Dev() {
+		if (jCheckBox_Dev == null) {
+			jCheckBox_Dev = new JCheckBox();
+			jCheckBox_Dev.setBounds(new Rectangle(150, 105, 31, 16));
+			jCheckBox_Dev
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							if (jCheckBox_Dev.isSelected())
+								jLabel.setText("Install "
+										+ Updater.getDevVersion());
+							else
+								jLabel.setText("Install "
+										+ Updater.getVersion());
+						}
+					});
+		}
+		return jCheckBox_Dev;
 	}
 
 	public static void main(String[] args) {

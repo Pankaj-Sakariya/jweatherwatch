@@ -23,6 +23,7 @@ import org.xml.sax.SAXException;
 public class Updater {
 
 	private static String version = null;
+	private static String devVersion = null;
 
 	public static String getVersion() {
 		if (version == null) {
@@ -45,13 +46,24 @@ public class Updater {
 			}
 			version = doc.getElementsByTagName("version").item(0)
 					.getChildNodes().item(0).getNodeValue();
-			System.out.println(getVersion());
+			devVersion = doc.getElementsByTagName("devVersion").item(0)
+					.getChildNodes().item(0).getNodeValue();
 		}
 		return version;
 	}
 
-	public static boolean update(String destination) {
-		File download = Updater.download(getVersion());
+	public static String getDevVersion() {
+		if (devVersion == null)
+			getVersion();
+		return devVersion;
+	}
+
+	public static boolean update(String destination, boolean developementversion) {
+		String adress = developementversion ? "http://jweatherwatch.googlecode.com/svn/trunk/dev/jWeatherWatch%20v"
+				+ getDevVersion() + ".zip"
+				: "http://jweatherwatch.googlecode.com/files/jWeatherWatch%20"
+						+ getVersion() + ".zip";
+		File download = Updater.download(adress);
 		try {
 			ZipArchiveExtractor.extract(download.toString(), destination + "/");
 		} catch (Exception e) {
@@ -63,7 +75,7 @@ public class Updater {
 
 	}
 
-	public static File download(String version) {
+	public static File download(String adress) {
 		OutputStream out = null;
 		URLConnection conn = null;
 		InputStream in = null;
@@ -71,12 +83,10 @@ public class Updater {
 		File outfile = null;
 
 		try {
-			outfile = new File(System.getProperty("java.io.tmpdir")
-					+ "/jWeatherWatch v" + version + ".zip");
+			outfile = new File(System.getProperty("java.io.tmpdir") + "/"
+					+ adress.substring(adress.lastIndexOf("/")));
 			System.out.println(outfile);
-			url = new URL(
-					("http://jweatherwatch.googlecode.com/files/jWeatherWatch%20v"
-							+ version + ".zip"));
+			url = new URL((adress));
 			System.out.println(url);
 			out = new BufferedOutputStream(new FileOutputStream(outfile));
 			conn = url.openConnection();
@@ -101,9 +111,9 @@ public class Updater {
 	}
 
 	public static void main(String[] args) {
-		if (args.length != 1)
+		if (args.length != 2)
 			return;
-		update(args[0]);
+		update(args[0],Boolean.parseBoolean(args[1]));
 		try {
 			Runtime.getRuntime().exec(
 					new String[] { "java", "-jar",
@@ -122,8 +132,8 @@ public class Updater {
 	 * @param toFileName
 	 * @throws IOException
 	 */
-	public static void copy(String fromFileName, String toFileName,boolean force)
-			throws IOException {
+	public static void copy(String fromFileName, String toFileName,
+			boolean force) throws IOException {
 		File fromFile = new File(fromFileName);
 		File toFile = new File(toFileName);
 
@@ -140,7 +150,7 @@ public class Updater {
 		if (toFile.isDirectory())
 			toFile = new File(toFile, fromFile.getName());
 
-		if (!force&&toFile.exists()) {
+		if (!force && toFile.exists()) {
 			if (!toFile.canWrite())
 				throw new IOException("FileCopy: "
 						+ "destination file is unwriteable: " + toFileName);
