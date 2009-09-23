@@ -8,7 +8,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import net.Main;
 import net.SettingsReader;
+import net.Version;
+import updater.net.Updater;
 
 public class AdvancedTab extends SettingsTab{
 
@@ -72,7 +75,13 @@ public class AdvancedTab extends SettingsTab{
 	@Override
 	public void save(Gui gui) {
 		SettingsReader.setIconpPath(jTextField_IconPath.getText());
-		SettingsReader.devChannel=jCheckBox_Dev.isSelected();
+		if(SettingsReader.devChannel!=jCheckBox_Dev.isSelected()){
+			SettingsReader.devChannel=jCheckBox_Dev.isSelected();
+			Version compare=new Version(SettingsReader.devChannel? Updater.getDevVersion():Updater.getVersion());
+			if(SettingsReader.getVersion().compareTo(compare)!=0)
+					Main.update();
+			
+		}
 	}
 
 	/**

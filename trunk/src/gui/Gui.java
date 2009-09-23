@@ -115,8 +115,6 @@ public class Gui extends JDialog implements LocationListUser {
 	}
 
 	public void close() {
-		this.setContentPane(getSplash());
-		splash.setLoadingText("Saving...");
 		System.out.println("Saving....");
 		ACCUWeatherFetcher.save(locations);
 		SettingsReader.save();
