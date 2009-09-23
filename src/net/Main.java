@@ -16,7 +16,6 @@ public class Main {
 		minimized, workindirectory, help, h, version
 
 	}
-	
 
 	public static void main(String[] args) {
 		boolean windowstate = true;
@@ -58,35 +57,43 @@ public class Main {
 		}
 
 		if (compare.compareTo(version) > 0) {
-			int result = JOptionPane
-					.showConfirmDialog(
-							null,
-							"A new version of jWeatherWatch is availible,do you want to update?",
-							"Update", JOptionPane.YES_NO_OPTION);
-			if (result == JOptionPane.YES_OPTION) {
-				try {
-
-					Updater.copy(SettingsReader.getCurrentDirectory()
-							+ "/lib/Updater.jar", System
-							.getProperty("java.io.tmpdir")
-							+ "/Updater.jar", true);
-					Runtime.getRuntime().exec(
-							new String[] {
-									"java",
-									"-classpath",
-									System.getProperty("java.io.tmpdir")
-											+ "/Updater.jar",
-									"updater.net.Updater",
-									SettingsReader.getCurrentDirectory(),
-									SettingsReader.devChannel + "" });
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.exit(0);
-			}
+			update();
 		}
 		new Gui(windowstate);
+
+	}
+
+	public static void update() {
+		String version=SettingsReader.devChannel?Updater.getDevVersion().toString():Updater.getVersion().toString();
+		int result = JOptionPane
+				.showConfirmDialog(
+						null,
+						"A new version of jWeatherWatch is availible,do you want to update?",
+						"Update to "+version, JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.NO_OPTION)
+			return;
+		JOptionPane
+		.showMessageDialog(
+				null,
+				"jWeather Watch whil now quit and update to version "+version+" this will take some moments",
+				"Update Started", JOptionPane.INFORMATION_MESSAGE);
+		try {
+			Updater.copy(SettingsReader.getCurrentDirectory()
+					+ "/lib/Updater.jar", System.getProperty("java.io.tmpdir")
+					+ "/Updater.jar", true);
+			Runtime.getRuntime().exec(
+					new String[] {
+							"java",
+							"-classpath",
+							System.getProperty("java.io.tmpdir")
+									+ "/Updater.jar", "updater.net.Updater",
+							SettingsReader.getCurrentDirectory(),
+							SettingsReader.devChannel + "" });
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		System.exit(0);
 
 	}
 
@@ -117,6 +124,7 @@ public class Main {
 		}
 
 	}
+	
 
 	private static void help(int i) {
 		System.out.println(SettingsReader.name + " [-options]" + "\n-"
