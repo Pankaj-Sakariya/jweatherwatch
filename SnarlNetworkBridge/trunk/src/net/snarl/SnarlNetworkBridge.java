@@ -243,9 +243,8 @@ public class SnarlNetworkBridge {
 		String data[] = null;
 		Message reply = null;
 		Reply replyType = null;
-		while (snarlIsRegisterd) {
-			try {
-				line = in.readLine();
+		try {
+			while (snarlIsRegisterd&&(line=in.readLine())!=null) {
 				if (debug)
 					System.out.println("Reciving: " + line);
 				data = line.split("/");
@@ -274,11 +273,12 @@ public class SnarlNetworkBridge {
 					reply.setReply(replyType);
 				}
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		snarlIsRunning=false;
 
 	}
 
