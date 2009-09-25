@@ -1,10 +1,16 @@
 package gui.settings.tabs;
 
+import edu.stanford.ejalbert.BrowserLauncher;
+import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
+import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 import gui.Gui;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -13,7 +19,7 @@ import net.SettingsReader;
 import net.Version;
 import updater.net.Updater;
 
-public class AdvancedTab extends SettingsTab{
+public class AdvancedTab extends SettingsTab {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField jTextField_IconPath = null;
@@ -21,6 +27,9 @@ public class AdvancedTab extends SettingsTab{
 	private JLabel jLabel1 = null;
 	private JCheckBox jCheckBox_Dev = null;
 	private JLabel jLabel2 = null;
+	private JLabel jLabel3 = null;
+	private JComboBox jComboBox_Broswer = null;
+
 	/**
 	 * This is the default constructor
 	 */
@@ -35,6 +44,9 @@ public class AdvancedTab extends SettingsTab{
 	 * @return void
 	 */
 	private void initialize() {
+		jLabel3 = new JLabel();
+		jLabel3.setBounds(new Rectangle(75, 105, 151, 16));
+		jLabel3.setText("Browser");
 		jLabel2 = new JLabel();
 		jLabel2.setBounds(new Rectangle(75, 75, 76, 16));
 		jLabel2.setText("updates:");
@@ -51,12 +63,14 @@ public class AdvancedTab extends SettingsTab{
 		this.add(jLabel1, null);
 		this.add(getJCheckBox_Dev(), null);
 		this.add(jLabel2, null);
+		this.add(jLabel3, null);
+		this.add(getJComboBox_Broswer(), null);
 	}
 
 	/**
-	 * This method initializes jTextField_IconPath	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes jTextField_IconPath
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JTextField getJTextField_IconPath() {
 		if (jTextField_IconPath == null) {
@@ -68,26 +82,28 @@ public class AdvancedTab extends SettingsTab{
 
 	@Override
 	public void load() {
-	jTextField_IconPath.setText(SettingsReader.getIconpPath());
-	jCheckBox_Dev.setSelected(SettingsReader.devChannel);
+		jTextField_IconPath.setText(SettingsReader.getIconpPath());
+		jCheckBox_Dev.setSelected(SettingsReader.devChannel);
+		jComboBox_Broswer.setSelectedItem(SettingsReader.webBrowser);
 	}
 
 	@Override
 	public void save(Gui gui) {
+		SettingsReader.webBrowser=jComboBox_Broswer.getSelectedItem().toString();
 		SettingsReader.setIconpPath(jTextField_IconPath.getText());
-		if(SettingsReader.devChannel!=jCheckBox_Dev.isSelected()){
-			SettingsReader.devChannel=jCheckBox_Dev.isSelected();
-			Version compare=new Version(SettingsReader.devChannel? Updater.getDevVersion():Updater.getVersion());
-			if(SettingsReader.getVersion().compareTo(compare)!=0)
-					Main.update();
-			
+		if (SettingsReader.devChannel != jCheckBox_Dev.isSelected()) {
+			SettingsReader.devChannel = jCheckBox_Dev.isSelected();
+			Version compare = new Version(SettingsReader.devChannel ? Updater
+					.getDevVersion() : Updater.getVersion());
+			if (SettingsReader.getVersion().compareTo(compare) != 0)
+				Main.update();
 		}
 	}
 
 	/**
-	 * This method initializes jCheckBox_Dev	
-	 * 	
-	 * @return javax.swing.JCheckBox	
+	 * This method initializes jCheckBox_Dev
+	 * 
+	 * @return javax.swing.JCheckBox
 	 */
 	private JCheckBox getJCheckBox_Dev() {
 		if (jCheckBox_Dev == null) {
@@ -97,4 +113,31 @@ public class AdvancedTab extends SettingsTab{
 		return jCheckBox_Dev;
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="27,11"
+	/**
+	 * This method initializes jComboBox_Broswer
+	 * 
+	 * @return javax.swing.JComboBox
+	 */	
+	private JComboBox getJComboBox_Broswer() {
+		if (jComboBox_Broswer == null) {
+			BrowserLauncher b;
+			List<String> l = new ArrayList<String>();
+			l.add("No Browser Found");
+
+			try {
+				b = new BrowserLauncher();
+
+				l = b.getBrowserList();
+
+			} catch (BrowserLaunchingInitializingException e) {
+			} catch (UnsupportedOperatingSystemException e) {
+
+			}
+			jComboBox_Broswer = new JComboBox(l.toArray());
+			jComboBox_Broswer.setBounds(new Rectangle(75, 120, 151, 16));
+
+		}
+		return jComboBox_Broswer;
+	}
+
+} // @jve:decl-index=0:visual-constraint="27,11"
