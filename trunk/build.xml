@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="devrelease" name="Create Runnable Jar for Project ACCUWeatherSnarl">
 
+	 <loadproperties srcFile="jww.properties"/>
+	
 	<path id="jww.classpath">
 		<fileset dir="./lib">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
-	<target name="init">
+	<target name="init">			
 		<mkdir dir="./dist" />
 		<delete>
 			<fileset dir="./dist" includes="**/*" />
@@ -58,15 +60,9 @@
 		</copy>
 	</target>
 
-	<target name="getVersion">
-		<exec executable="java" outputproperty="version">
-			<arg line="-cp comp net.Main -version" />
-		</exec>
-		<echo>${version}</echo>
-	</target>
 
-	<target name="getVersionFile" depends="getVersion,getdevVersion">
-		<echo file="CurrentVersion.xml" message="&lt;versions&gt;&#xA;&#x9;&lt;version&gt;${version}&lt;/version&gt;&#xA;&#x9;&lt;devVersion&gt;${devversion}&lt;/devVersion&gt;&#xA;&lt;/versions&gt;" />
+	<target name="getVersionFile" depends="getdevVersion">
+		<echo file="CurrentVersion.xml" message="&lt;versions&gt;&#xA;&#x9;&lt;version&gt;${jww.version}&lt;/version&gt;&#xA;&#x9;&lt;devVersion&gt;${devversion}&lt;/devVersion&gt;&#xA;&lt;/versions&gt;" />
 	</target>
 
 	<target name="getdevVersion">

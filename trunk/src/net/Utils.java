@@ -14,10 +14,11 @@ import javax.swing.ImageIcon;
 
 import org.w3c.dom.Element;
 
+import edu.stanford.ejalbert.BrowserLauncher;
+import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
+import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
+
 public class Utils {
-	public Utils() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public static String TimeStamp() {
 		return "["
@@ -76,19 +77,19 @@ public class Utils {
 		return s;
 	}
 
-	public static void visitURL(String url) {
-		try {
+	public static void visitURL(String url) {	
 			System.out.println("Visiting: " + url);
-			String os = System.getProperty("os.name").toLowerCase();
-			if (os.contains("windows"))
-				Runtime.getRuntime().exec(
-						"rundll32 url.dll , FileProtocolHandler " + url);
-			if (os.contains("linux"))
-				Runtime.getRuntime().exec("firefox " + url);
-		} catch (IOException e) {
+		try {
+			new BrowserLauncher().openURLinBrowser(url);
+		} catch (BrowserLaunchingInitializingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-	}
+		} catch (UnsupportedOperatingSystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
 	}
 
 	public static enum OS {
