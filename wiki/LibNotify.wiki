@@ -1,5 +1,8 @@
 Linux notification system.
 
+
+Are the icons to small?
+
 =On KDE4=
 http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
 
