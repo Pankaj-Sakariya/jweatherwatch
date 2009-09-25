@@ -24,9 +24,10 @@ http://jweatherwatch.googlecode.com/svn/images/snarlnet.png
 
 ==Downlaod==
 The Jar file can be downloaded [http://code.google.com/p/jweatherwatch/downloads/list here]
-<br/> <br/>
-==SVN Checkout==
-https://jweatherwatch.googlecode.com/svn/SnarlNetworkBridge/trunk/
-<br/> <br/>
+<br> <br>
 ==Doc==
 Javadoc can be found  [http://jweatherwatch.googlecode.com/svn/SnarlNetworkBridge/trunk/javadoc/index.html here]
+<br><br>
+==SVN Checkout==
+https://jweatherwatch.googlecode.com/svn/SnarlNetworkBridge/trunk/
+<br> <br>
