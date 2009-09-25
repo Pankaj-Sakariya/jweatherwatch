@@ -3,27 +3,30 @@
  * For October, support for mac systems.
  
 ==Upcomming in  jWeatherWatch v1.3==
+ * Added library BrwoserLauncher2 now its possible to select a browser(Settings->Advanced)
+  * to use this with Chromium on linux you have to set Chromium to your default browser and select Konquerer(kde) to your browser in jWeatherWatch
+ * Added library junique now jWeatherWatch comes to front if you try to start a second instance
  * modified lib-growl(NetGrowl) its now possible to detect if growl is running
- * With the new version it is possible to recive "nightly builds" 
+ * With the new version it is possible to receive "nightly builds" 
  * Wrote a small installer using java webstart [http://jweatherwatch.googlecode.com/svn/installer/dist/installer.jnlp Try It]
   # The installer downloads and extract the files to a directory you choose
   # on Windows it creates a desktop shortcut
-  # it starts jWeatherWatch after completing instalation
+  # it starts jWeatherWatch after completing installation
  
- * Implemented autoupdate
+ * Implemented auto update
  * mainframe now extends JDialog --> no minimize maximize button anymore
  * added actions to supporting  Notificationsystems
   # [http://code.google.com/p/jweatherwatch/wiki/Snarl NetSnarl] Lefclick bring to front, Rightclick visit forecast
   # LibNotify added buttons for these actions
-  # Tray icon click brings the aplication to front
+  # Tray icon click brings the application to front
 
  * support for lib notify
   # On Gnome http://jweatherwatch.googlecode.com/svn/images/libnotify%20gnome.png 
   # On KDE 4 http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
 ==jWeatherWatch v1.2.2==
- * fixed autostart setting in windows
+ * fixed auto start setting in windows
 ==jWeatherWatch v1.2.1==
- * fixed NetGrowl notifierthanks to danmancuso and wamcgruder for leaving a comment and reported this bug, if you find a bug leave a [http://code.google.com/p/jweatherwatch/wiki/Comments Comment]
+ * fixed NetGrowl notifier thanks to danmancuso and wamcgruder for leaving a comment and reported this bug, if you find a bug leave a [http://code.google.com/p/jweatherwatch/wiki/Comments Comment]
 ==jWeatherWatch v1.2.8==
  * fixed a bug who prevented weather display update after removing of a location
  * jWeatherWatch now hides on window closing
@@ -50,7 +53,7 @@
  * new Settings Dialog 
  * faster data fetching
  * added support for SNP 1.1(in development)
- * fixed autostart
+ * fixed auto start
 <br>
 [http://jweatherwatch.googlecode.com/svn/images/minimal%20view.png]
 
@@ -61,7 +64,7 @@
  * Created launcher exe and changed release to zip, to make it essayer for windows user to start jWeatherWatch
 
 ==jWeatherWatch v1.2.5.6.1==
- * Fixed remove from autostart
+ * Fixed remove from auto start
 
 ==jWeatherWatch v1.2.5.6==
  * Fixed bug With Remove button
