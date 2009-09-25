@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -81,12 +80,9 @@ public class Utils {
 	public static void visitURL(String url) {	
 			System.out.println("Visiting: " + url);
 			try {
-			BrowserLauncher b=new BrowserLauncher();
-			List<String> l=b.getBrowserList();
-			for(String s:l)
-			System.out.println(s);
 		
-			new BrowserLauncher().openURLinBrowser(url);
+		
+			new BrowserLauncher().openURLinBrowser(SettingsReader.webBrowser,url);
 		} catch (BrowserLaunchingInitializingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,7 +1,5 @@
 package net;
 
-import gui.WeatherView.Views;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,9 +19,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import edu.stanford.ejalbert.launching.IBrowserLaunching;
+import gui.WeatherView.Views;
+
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
-	public static final Version version = new Version("1.2.8.2");
+	public static Version version = null;
 	private static Version devversion = null;
 	public static boolean devChannel = true;
 
@@ -40,6 +41,8 @@ public class SettingsReader {
 	public static int minimumViewSize = 65;
 	// StandartView
 	public static int standartSelected = 0;
+
+	public static String webBrowser = IBrowserLaunching.BROWSER_DEFAULT;
 
 	public static Views view = Views.standart;
 
@@ -87,10 +90,9 @@ public class SettingsReader {
 			setIconpPath(Utils.getXMLValue(element, "iconPath"));
 		if (Utils.getXMLValue(element, "devChannel") != null)
 			devChannel = Boolean.parseBoolean(Utils.getXMLValue(element,
-					"devChannel"));
-		if (devChannel)
-			getDevversion();
-
+					"devChannel"));		
+		if (Utils.getXMLValue(element, "webBrowser") != null)
+			webBrowser = Utils.getXMLValue(element, "webBrowser");
 		if (Utils.getXMLValue(element, "notificationIterval") != null)
 			notificationInterval = Integer.valueOf(Utils.getXMLValue(element,
 					"notificationIterval"));
@@ -135,6 +137,7 @@ public class SettingsReader {
 		doc.appendNode("iconPath", iconpPath,
 				"Icon path used for weather icons");
 		doc.appendNode("devChannel", devChannel);
+		doc.appendNode("webBrowser", webBrowser);
 		net.myxml.Doc minimalView = new Doc("minimalView");
 		minimalView.appendNode("minimalViewRows", mininimalViewRows,
 				"Number of Rows displayed in Minimal View");
@@ -263,22 +266,36 @@ public class SettingsReader {
 	}
 
 	public static Version getVersion() {
-		return devversion != null ? devversion : version;
+		if (version == null) {
+			initializeVersions();
+		}
+		return devChannel ? devversion : version;
 	}
 
 	public static Version getDevversion() {
 		if (devversion == null) {
-			try {
-				devversion = new Version(DocumentBuilderFactory.newInstance()
-						.newDocumentBuilder().parse(
-								new SettingsReader().getClass().getResource(
-										"/CurrentVersion.xml").toString())
-						.getElementsByTagName("devVersion").item(0)
-						.getChildNodes().item(0).getNodeValue());
-			} catch (Exception e) {
-				devversion = new Version("0");
-			}
+			initializeVersions();
 		}
 		return devversion;
+	}
+
+	private static void initializeVersions() {
+		try {
+			version = new Version(DocumentBuilderFactory.newInstance()
+					.newDocumentBuilder().parse(
+							new SettingsReader().getClass().getResource(
+									"/CurrentVersion.xml").toString())
+					.getElementsByTagName("version").item(0).getChildNodes()
+					.item(0).getNodeValue());
+			devversion = new Version(DocumentBuilderFactory.newInstance()
+					.newDocumentBuilder().parse(
+							new SettingsReader().getClass().getResource(
+									"/CurrentVersion.xml").toString())
+					.getElementsByTagName("devVersion").item(0).getChildNodes()
+					.item(0).getNodeValue());
+		} catch (Exception e) {
+			devversion = new Version("0");
+		}
+
 	}
 }
