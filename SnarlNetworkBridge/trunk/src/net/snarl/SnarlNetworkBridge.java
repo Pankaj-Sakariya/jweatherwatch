@@ -285,20 +285,20 @@ public class SnarlNetworkBridge {
 	/**
 	 * Sends a string to Snarl
 	 * 
-	 * @param s
-	 *            the String to send
+	 * @param msg
+	 *            the Message to send
 	 * 
 	 */
-	private static Message send(Message reply) {
+	private static Message send(Message msg) {
 		if (!snarlIsRunning) {
 			System.err.println("Snarl is not running");
 			return null;
 		}
-		waitingMessages.push(reply);
+		waitingMessages.push(msg);
 		if (debug)
-			System.out.println("Sending: " + reply);
-		out.println(reply);
-		while (reply.getReply() == null) {
+			System.out.println("Sending: " + msg);
+		out.println(msg);
+		while (msg.getReply() == null) {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -306,7 +306,7 @@ public class SnarlNetworkBridge {
 				e.printStackTrace();
 			}
 		}
-		return reply;
+		return msg;
 	}
 
 	/**

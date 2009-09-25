@@ -12,6 +12,9 @@ public class Message {
 
 	private Reply reply = null;
 	private SNPProperty msg[] = null;
+	/**
+	 * the SNP action(notification,register...);
+	 */
 	protected SNPProperty action = new SNPProperty("action");
 
 	/**
