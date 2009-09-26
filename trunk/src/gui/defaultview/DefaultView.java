@@ -85,7 +85,7 @@ public class DefaultView extends WeatherView {
 		this.setLayout(null);
 		jLabel4 = new JLabel();
 		jLabel4.setBounds(new Rectangle(465, 390, 76, 16));
-		jLabel4.setText("Povered by:");
+		jLabel4.setText("Powered by:");
 		jLabel3 = new JLabel();
 		jLabel3.setText("Metric:");
 		jLabel3.setBounds(new Rectangle(105, 15, 61, 16));
