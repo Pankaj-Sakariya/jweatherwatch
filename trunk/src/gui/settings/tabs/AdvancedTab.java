@@ -45,13 +45,13 @@ public class AdvancedTab extends SettingsTab {
 	 */
 	private void initialize() {
 		jLabel3 = new JLabel();
-		jLabel3.setBounds(new Rectangle(75, 105, 151, 16));
+		jLabel3.setBounds(new Rectangle(75, 60, 151, 16));
 		jLabel3.setText("Browser");
 		jLabel2 = new JLabel();
-		jLabel2.setBounds(new Rectangle(75, 75, 76, 16));
+		jLabel2.setBounds(new Rectangle(75, 120, 76, 16));
 		jLabel2.setText("updates:");
 		jLabel1 = new JLabel();
-		jLabel1.setBounds(new Rectangle(75, 60, 151, 16));
+		jLabel1.setBounds(new Rectangle(75, 105, 151, 16));
 		jLabel1.setText("Recive developement");
 		jLabel = new JLabel();
 		jLabel.setBounds(new Rectangle(75, 15, 151, 16));
@@ -108,7 +108,7 @@ public class AdvancedTab extends SettingsTab {
 	private JCheckBox getJCheckBox_Dev() {
 		if (jCheckBox_Dev == null) {
 			jCheckBox_Dev = new JCheckBox();
-			jCheckBox_Dev.setBounds(new Rectangle(165, 75, 31, 16));
+			jCheckBox_Dev.setBounds(new Rectangle(165, 120, 31, 16));
 		}
 		return jCheckBox_Dev;
 	}
@@ -131,10 +131,9 @@ public class AdvancedTab extends SettingsTab {
 
 			} catch (BrowserLaunchingInitializingException e) {
 			} catch (UnsupportedOperatingSystemException e) {
-
 			}
 			jComboBox_Broswer = new JComboBox(l.toArray());
-			jComboBox_Broswer.setBounds(new Rectangle(75, 120, 151, 16));
+			jComboBox_Broswer.setBounds(new Rectangle(75, 75, 151, 16));
 
 		}
 		return jComboBox_Broswer;
