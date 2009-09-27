@@ -24,8 +24,8 @@ import gui.WeatherView.Views;
 
 public class SettingsReader {
 	public static final String name = "jWeatherWatch";
-	public static Version version = null;
-	private static Version devversion = null;
+	private static Version releaseVersion = null;
+	private static Version devVersion = null;
 	public static boolean devChannel = true;
 
 	private static String homeDirectory = null;
@@ -90,7 +90,7 @@ public class SettingsReader {
 			setIconpPath(Utils.getXMLValue(element, "iconPath"));
 		if (Utils.getXMLValue(element, "devChannel") != null)
 			devChannel = Boolean.parseBoolean(Utils.getXMLValue(element,
-					"devChannel"));		
+					"devChannel"));
 		if (Utils.getXMLValue(element, "webBrowser") != null)
 			webBrowser = Utils.getXMLValue(element, "webBrowser");
 		if (Utils.getXMLValue(element, "notificationIterval") != null)
@@ -265,36 +265,40 @@ public class SettingsReader {
 		return out;
 	}
 
-	public static Version getVersion() {
-		if (version == null) {
+	public static Version getReleaseVersion() {
+		if (releaseVersion == null) {
 			initializeVersions();
 		}
-		return devChannel ? devversion : version;
+		return releaseVersion;
+	}
+
+	public static Version getVersion() {
+		return devChannel ? getDevversion() : getReleaseVersion();
 	}
 
 	public static Version getDevversion() {
-		if (devversion == null) {
+		if (devVersion == null) {
 			initializeVersions();
 		}
-		return devversion;
+		return devVersion;
 	}
 
 	private static void initializeVersions() {
 		try {
-			version = new Version(DocumentBuilderFactory.newInstance()
+			releaseVersion = new Version(DocumentBuilderFactory.newInstance()
 					.newDocumentBuilder().parse(
 							new SettingsReader().getClass().getResource(
 									"/CurrentVersion.xml").toString())
 					.getElementsByTagName("version").item(0).getChildNodes()
 					.item(0).getNodeValue());
-			devversion = new Version(DocumentBuilderFactory.newInstance()
+			devVersion = new Version(DocumentBuilderFactory.newInstance()
 					.newDocumentBuilder().parse(
 							new SettingsReader().getClass().getResource(
 									"/CurrentVersion.xml").toString())
 					.getElementsByTagName("devVersion").item(0).getChildNodes()
 					.item(0).getNodeValue());
 		} catch (Exception e) {
-			devversion = new Version("0");
+			devVersion = new Version("0");
 		}
 
 	}

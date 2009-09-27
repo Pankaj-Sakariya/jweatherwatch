@@ -21,19 +21,18 @@ public class Main {
 		boolean windowstate = parseArgs(args);
 		allreadyRunning(args);
 
-		Version version = SettingsReader.version;
+		
 		Version compare = new Version(Updater.getVersion());
 		if (SettingsReader.devChannel) {
 			JOptionPane
 					.showMessageDialog(
 							null,
 							"This is a beta version please report all occuring errors.",
-							"This is a beta", JOptionPane.INFORMATION_MESSAGE);
-			version = SettingsReader.getDevversion();
+							SettingsReader.name+SettingsReader.getVersion(), JOptionPane.INFORMATION_MESSAGE);
 			compare = new Version(Updater.getDevVersion());
 		}
 
-		if (compare.compareTo(version) > 0) {
+		if (compare.compareTo(SettingsReader.getVersion()) > 0) {
 			update();
 		}
 		new Gui(windowstate);
@@ -53,7 +52,7 @@ public class Main {
 						i++;
 						break;
 					case version:
-						System.out.println(SettingsReader.name+" "+SettingsReader.version);
+						System.out.println(SettingsReader.name+" "+SettingsReader.getReleaseVersion());
 						System.exit(0);
 						break;
 					case tofront:
