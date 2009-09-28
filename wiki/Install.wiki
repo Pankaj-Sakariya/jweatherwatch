@@ -2,5 +2,5 @@
 *[http://jweatherwatch.googlecode.com/svn/installer/dist/installer.jnlp launch the installer]*
 
 =Alternate Installation=
-If the installer fails you can try to install it manual by downloading and extracting the files
+If the installer fails you can try to install it manualy by downloading and extracting the files
 [http://code.google.com/p/jweatherwatch/downloads/list Download]
