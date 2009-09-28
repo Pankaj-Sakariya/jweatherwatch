@@ -71,8 +71,8 @@ public class NotificationConnector {
 					notifer.unload();
 				notifer = notifer2;
 				NotificationConnector.sendNotification("Startup",
-						SettingsReader.name + " " + SettingsReader.getVersion(),
-						SettingsReader.name + " " + SettingsReader.getVersion()
+						SettingsReader.name + " v" + SettingsReader.getVersion(),
+						SettingsReader.name + " v" + SettingsReader.getVersion()
 								+ " succsessfully registered wit "
 								+ notifer2.getName(), null,null);
 				return true;
@@ -82,8 +82,8 @@ public class NotificationConnector {
 				notifer.unload();
 			notifer = notifer2;
 			NotificationConnector.sendNotification("Startup",
-					SettingsReader.name + " " + SettingsReader.getVersion(),
-					SettingsReader.name + " " + SettingsReader.getVersion()
+					SettingsReader.name + " v" + SettingsReader.getVersion(),
+					SettingsReader.name + " v" + SettingsReader.getVersion()
 							+ " succsessfully registered wit "
 							+ notifer2.getName(), null,null);
 			return true;
