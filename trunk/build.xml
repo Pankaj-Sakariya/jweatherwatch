@@ -61,24 +61,32 @@
 	</target>
 
 
-	<target name="getVersionFile" depends="getdevVersion">
-		<echo file="CurrentVersion.xml" message="&lt;versions&gt;&#xA;&#x9;&lt;version&gt;${jww.version}&lt;/version&gt;&#xA;&#x9;&lt;devVersion&gt;${devversion}&lt;/devVersion&gt;&#xA;&lt;/versions&gt;" />
+	<target name="getVersionFile" >
+		<echo file="CurrentVersion.xml" message="&lt;versions&gt;&#xA;&#x9;&lt;version&gt;${jww.version}&lt;/version&gt;&#xA;&#x9;&lt;devVersion&gt;${dev}&lt;/devVersion&gt;&#xA;&lt;/versions&gt;" />
 	</target>
 
 	<target name="getdevVersion">
 		<tstamp>
-			<format property="devversion" pattern="MMddyy" />
-		</tstamp>
+			<format property="dev"  pattern="MMddyy"  />			
+		</tstamp>		
 	</target>
 
-	<target name="release" depends="jar">
+	<target name="release" >
+		<property name="dev" value="${jww.devversion}"/>
+		<antcall target="jar"></antcall>
 		<zip destfile="./dist/jWeatherWatch v${jww.version}.zip" basedir="./dist">
 		</zip>
 	</target>
 
-	<target name="devrelease" depends="jar">
-		<zip destfile="./dev/jWeatherWatch ${devversion}.zip" basedir="./dist">
+	<target name="devrelease" depends="getdevVersion,jar">
+		<zip destfile="./dev/jWeatherWatch ${dev}.zip" basedir="./dist">			
 		</zip>
+		<propertyfile
+		    file="jww.properties"
+		    comment="jWeatherWatch">
+			<entry  key="jww.version" default="" operation="=" value="${jww.version}"/>
+		  <entry  key="jww.devversion" default="" operation="=" value="${dev}" />
+		</propertyfile>
 	</target>
 
 	<target name="doc">
