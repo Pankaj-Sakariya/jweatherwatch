@@ -1,8 +1,7 @@
 #labels Featured
-==Planned Features=
- * For October, support for mac systems.
+
  
-==Upcomming in  jWeatherWatch v1.3==
+==jWeatherWatch v1.3==
  * Added library BrwoserLauncher2 now its possible to select a browser(Settings->Advanced)
   * to use this with Chromium on linux you have to set Chromium to your default browser and select Konquerer(kde) to your browser in jWeatherWatch
  * Added library junique now jWeatherWatch comes to front if you try to start a second instance
