@@ -1,4 +1,5 @@
-*Just click [http://jweatherwatch.googlecode.com/svn/installer/dist/installer.jnlp here] to install jWeatherWatch*
+=Installation=
+*[http://jweatherwatch.googlecode.com/svn/installer/dist/installer.jnlp lauch the installer]*
 
 =Alternate Installation=
 If the installer fails you can try to install it manual by downloading and extracting the files
