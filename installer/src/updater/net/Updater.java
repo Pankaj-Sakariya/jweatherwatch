@@ -217,7 +217,7 @@ public class Updater {
 
 				printWriter.println("[InternetShortcut]\n" + "URL=\"file://"
 						+ location + "\\jWeatherWatch.exe\"\n"
-						+ "WorkingDirectory=" + location + "\n"
+						+ "WorkingDirectory=\"" + location + "\"\n"
 						+ "IconIndex=0\n" + "IconFile=\"" + location
 						+ "\\jWeatherWatch.exe\"\n" + "IDList=\n" + "HotKey=0\n"
 						+ "[{000214A0-0000-0000-C000-000000000046}]\n"
