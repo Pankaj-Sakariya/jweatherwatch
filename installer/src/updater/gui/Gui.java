@@ -90,6 +90,7 @@ public class Gui extends JFrame {
 			jButton_Install = new JButton();
 			jButton_Install.setText("Install");
 			jButton_Install.setLocation(new Point(180, 135));
+			jButton_Install.setPreferredSize(new Dimension(78, 26));
 			jButton_Install.setSize(new Dimension(100, 16));
 			jButton_Install
 					.addActionListener(new java.awt.event.ActionListener() {
@@ -151,8 +152,9 @@ public class Gui extends JFrame {
 	private JButton getJButton_Cancell1() {
 		if (jButton_Cancell1 == null) {
 			jButton_Cancell1 = new JButton();
-			jButton_Cancell1.setBounds(new Rectangle(75, 135, 96, 16));
 			jButton_Cancell1.setText("Cancell");
+			jButton_Cancell1.setSize(new Dimension(100, 16));
+			jButton_Cancell1.setLocation(new Point(75, 135));
 			jButton_Cancell1
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
