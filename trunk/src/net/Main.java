@@ -52,7 +52,7 @@ public class Main {
 						i++;
 						break;
 					case version:
-						System.out.println(SettingsReader.name+" "+SettingsReader.getReleaseVersion());
+						System.out.println(SettingsReader.name+" "+SettingsReader.getVersion());
 						System.exit(0);
 						break;
 					case tofront:

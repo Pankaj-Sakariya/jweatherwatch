@@ -26,7 +26,7 @@ public class SettingsReader {
 	public static final String name = "jWeatherWatch";
 	private static Version releaseVersion = null;
 	private static Version devVersion = null;
-	public static boolean devChannel = true;
+	public static boolean devChannel = false;
 
 	private static String homeDirectory = null;
 	private static String iconpPath = null;

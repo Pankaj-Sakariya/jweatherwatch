@@ -72,7 +72,7 @@
 	</target>
 
 	<target name="release" depends="jar">
-		<zip destfile="./dist/jWeatherWatch v${version}.zip" basedir="./dist">
+		<zip destfile="./dist/jWeatherWatch v${jww.version}.zip" basedir="./dist">
 		</zip>
 	</target>
 
