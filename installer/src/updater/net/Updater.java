@@ -117,7 +117,7 @@ public class Updater {
 		update(args[0], dev);
 		try {
 			Runtime.getRuntime().exec(
-					new String[] { "java", "-jar",
+					new String[] { System.getProperty("java.home")+"/bin/java", "-jar",
 							args[0] + "/JWeatherWatch.jar",
 							dev ? "-dev" : "-nodev" });
 		} catch (IOException e) {

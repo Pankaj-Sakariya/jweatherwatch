@@ -189,7 +189,7 @@ public class Gui extends JFrame {
 
 		try {
 			Runtime.getRuntime().exec(
-					new String[] { "java", "-jar",
+					new String[] { System.getProperty("java.home")+"/bin/java", "-jar",
 							jTextField_Path.getText() + "/JWeatherWatch.jar",
 							jCheckBox_Dev.isSelected() ? "-dev" : "-nodev" });
 		} catch (IOException e) {
