@@ -113,11 +113,13 @@ public class Updater {
 	public static void main(String[] args) {
 		if (args.length != 2)
 			return;
-		update(args[0],Boolean.parseBoolean(args[1]));
+		boolean dev = Boolean.parseBoolean(args[1]);
+		update(args[0], dev);
 		try {
 			Runtime.getRuntime().exec(
 					new String[] { "java", "-jar",
-							args[0] + "/JWeatherWatch.jar" });
+							args[0] + "/JWeatherWatch.jar",
+							dev ? "-dev" : "-nodev" });
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -219,7 +221,8 @@ public class Updater {
 						+ location + "\\jWeatherWatch.exe\"\n"
 						+ "WorkingDirectory=\"" + location + "\"\n"
 						+ "IconIndex=0\n" + "IconFile=\"" + location
-						+ "\\jWeatherWatch.exe\"\n" + "IDList=\n" + "HotKey=0\n"
+						+ "\\jWeatherWatch.exe\"\n" + "IDList=\n"
+						+ "HotKey=0\n"
 						+ "[{000214A0-0000-0000-C000-000000000046}]\n"
 						+ "Prop3=19,9");
 			} catch (FileNotFoundException e) {

@@ -172,11 +172,11 @@ public class Gui extends JFrame {
 			return;
 		}
 
-			JOptionPane.showMessageDialog(null, "this may take some time",
-					"Installation will start now", JOptionPane.INFORMATION_MESSAGE);
-	
+		JOptionPane.showMessageDialog(null, "this may take some time",
+				"Installation will start now", JOptionPane.INFORMATION_MESSAGE);
 
-		if (!Updater.update(jTextField_Path.getText(), jCheckBox_Dev.isSelected())) {
+		if (!Updater.update(jTextField_Path.getText(), jCheckBox_Dev
+				.isSelected())) {
 			JOptionPane.showMessageDialog(null,
 					"Installation of jWeatherWatcher Failed",
 					"Installation failed!", JOptionPane.ERROR_MESSAGE);
@@ -190,7 +190,8 @@ public class Gui extends JFrame {
 		try {
 			Runtime.getRuntime().exec(
 					new String[] { "java", "-jar",
-							jTextField_Path.getText() + "/JWeatherWatch.jar" });
+							jTextField_Path.getText() + "/JWeatherWatch.jar",
+							jCheckBox_Dev.isSelected() ? "-dev" : "-nodev" });
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
