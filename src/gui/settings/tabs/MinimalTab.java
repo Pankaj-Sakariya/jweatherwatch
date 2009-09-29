@@ -43,10 +43,10 @@ public class MinimalTab extends SettingsTab{
 
 		jLabel1 = new JLabel();
 		jLabel1.setBounds(new Rectangle(60, 120, 151, 16));
-		jLabel1.setText("Set size of a row "+SettingsReader.minimumViewSize);
+		jLabel1.setText("Set size of a row "+SettingsReader.getInstance().minimumViewSize);
 		jLabel = new JLabel();
 		jLabel.setBounds(new Rectangle(60, 60, 151, 16));
-		jLabel.setText("Number of Rows "+SettingsReader.mininimalViewRows);
+		jLabel.setText("Number of Rows "+SettingsReader.getInstance().mininimalViewRows);
 		this.setSize(300,200);
 		this.setLayout(null);
 		this.add(getJSlider_RowCount(), null);
@@ -73,16 +73,16 @@ public class MinimalTab extends SettingsTab{
 
 	public void load() {
 		jToggleButton_MinimalShifted
-		.setSelected(SettingsReader.minimalView_Shifted);
-		jSlider_RowCount.setValue(SettingsReader.mininimalViewRows);
-		jSlider_Size.setValue(SettingsReader.minimumViewSize);
+		.setSelected(SettingsReader.getInstance().minimalView_Shifted);
+		jSlider_RowCount.setValue(SettingsReader.getInstance().mininimalViewRows);
+		jSlider_Size.setValue(SettingsReader.getInstance().minimumViewSize);
 	}
 
 	public void save(Gui gui) {
-	SettingsReader.minimalView_Shifted = jToggleButton_MinimalShifted
+	SettingsReader.getInstance().minimalView_Shifted = jToggleButton_MinimalShifted
 				.isSelected();
-		SettingsReader.mininimalViewRows=jSlider_RowCount.getValue();
-		SettingsReader.minimumViewSize=jSlider_Size.getValue();
+		SettingsReader.getInstance().mininimalViewRows=jSlider_RowCount.getValue();
+		SettingsReader.getInstance().minimumViewSize=jSlider_Size.getValue();
 	}
 
 	/**

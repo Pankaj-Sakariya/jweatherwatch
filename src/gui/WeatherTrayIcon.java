@@ -10,6 +10,7 @@ import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import net.Main;
 import net.NotificationConnector;
 import net.SettingsReader;
 import net.ACCUWeather.Location;
@@ -24,7 +25,7 @@ public class WeatherTrayIcon extends TrayIcon {
 		this.parent = parent;
 
 		this.setImageAutoSize(true);
-		this.setToolTip(SettingsReader.name + " " + SettingsReader.getVersion());
+		this.setToolTip(SettingsReader.name + " " + SettingsReader.getInstance().getVersion());
 		this.addActionListener(new ActionListener() {
 
 			@Override
@@ -44,9 +45,8 @@ public class WeatherTrayIcon extends TrayIcon {
 			MenuItem exit = new MenuItem("Exit");
 			exit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					parent.close();
 					parent.dispose();
-					System.exit(0);
+					Main.close();
 				}
 			});
 			MenuItem bringToFront = new MenuItem("Show/Hide");
@@ -91,7 +91,7 @@ public class WeatherTrayIcon extends TrayIcon {
 					parent.setView(new DefaultView(parent));
 				}
 			});
-			popupMenu.add(new MenuItem(SettingsReader.name + " " + SettingsReader.getVersion()));
+			popupMenu.add(new MenuItem(SettingsReader.name + " " + SettingsReader.getInstance().getVersion()));
 			popupMenu.add(new MenuItem("-"));
 			popupMenu.add(settings);
 			popupMenu.add(new MenuItem("-"));

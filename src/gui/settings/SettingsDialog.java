@@ -49,7 +49,7 @@ public class SettingsDialog extends JFrame {
 		for (SettingsTab t : tabs) {
 			t.save(parent);
 		}
-		parent.setView(WeatherView.getViewByName(SettingsReader.view,parent));
+		parent.setView(WeatherView.getViewByName(SettingsReader.getInstance().view,parent));
 
 	}
 

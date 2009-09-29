@@ -67,7 +67,7 @@ public class DefaultView extends WeatherView {
 	 */
 	public DefaultView(Gui parent) {
 		super(parent, Views.standart);
-		final int selected = Integer.valueOf(SettingsReader.standartSelected);
+		final int selected = Integer.valueOf(SettingsReader.getInstance().standartSelected);
 		initialize();
 		for (Location l : parent.getLocations())
 			addLocation(l);
@@ -570,7 +570,7 @@ public class DefaultView extends WeatherView {
 			return;
 		super.update(nr);
 		Location location = parent.getLocations().get(nr);
-		SettingsReader.standartSelected = nr;
+		SettingsReader.getInstance().standartSelected = nr;
 		weatherPanel.updateWeather(location, location.getCurrentWeather());
 		parent.setIconImage(weatherPanel.getImageBox().getImage());
 		parent.getTrayIcon().setImage(weatherPanel.getImageBox().getImage());

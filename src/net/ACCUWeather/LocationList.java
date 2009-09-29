@@ -1,13 +1,17 @@
 package net.ACCUWeather;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.ACCUWeatherFetcher;
+
 import org.w3c.dom.Element;
 
 public class LocationList extends HashMap<Integer, Location> implements
-		Iterable<Location>, Iterator<Location> {
+		Iterable<Location>, Iterator<Location>,Closeable {
 
 	/**
 	 * 
@@ -92,6 +96,11 @@ public class LocationList extends HashMap<Integer, Location> implements
 	public void updated(Location location) {
 		if (parent != null)
 			parent.locationUpdated(location);
+	}
+
+	@Override
+	public void close() throws IOException {
+		ACCUWeatherFetcher.save(this);		
 	}
 
 }

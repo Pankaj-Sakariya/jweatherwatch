@@ -3,13 +3,14 @@ package net;
 import gui.Gui;
 
 import java.awt.TrayIcon;
+import java.io.Closeable;
 
 import net.Notifer.NetNotifer;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
 import net.Notifer.Notifers.TrayNotification;
 
-public class NotificationConnector {
+public class NotificationConnector implements Closeable{
 	private static Notifer notifer;
 	private static Gui frame = null;
 	public final static String[] notifications = new String[] { "Startup",
@@ -17,9 +18,10 @@ public class NotificationConnector {
 	private static String host = "localhost";
 
 	public static void initialize(Gui frame, TrayIcon trayIcon) {
+		Main.thingsToClose.add(new NotificationConnector());
 		NotificationConnector.frame = frame;
-		if (SettingsReader.notifer != null
-				&& setNotifer(NotiferTypes.getNotifer(SettingsReader.notifer,
+		if (SettingsReader.getInstance().notifer != null
+				&& setNotifer(NotiferTypes.getNotifer(SettingsReader.getInstance().notifer,
 						trayIcon)))
 			return;
 
@@ -54,7 +56,7 @@ public class NotificationConnector {
 				iconPath = "http://jweatherwatch.googlecode.com/svn/trunk/iconset/"
 						+ iconPath + ".png";
 			else
-				iconPath = SettingsReader.getIconpPath() + iconPath + ".png";
+				iconPath = SettingsReader.getInstance().getIconpPath() + iconPath + ".png";
 			notifer.send(alert, title, description, iconPath,url);
 		} else
 			notifer.send(alert, title, description, iconPath,url);
@@ -70,9 +72,10 @@ public class NotificationConnector {
 				if (notifer != null)
 					notifer.unload();
 				notifer = notifer2;
+				SettingsReader.getInstance();
 				NotificationConnector.sendNotification("Startup",
-						SettingsReader.name + " v" + SettingsReader.getVersion(),
-						SettingsReader.name + " v" + SettingsReader.getVersion()
+						SettingsReader.name + " v" + SettingsReader.getInstance().getVersion(),
+						SettingsReader.name + " v" + SettingsReader.getInstance().getVersion()
 								+ " succsessfully registered wit "
 								+ notifer2.getName(), null,null);
 				return true;
@@ -81,9 +84,11 @@ public class NotificationConnector {
 			if (notifer != null)
 				notifer.unload();
 			notifer = notifer2;
+			SettingsReader.getInstance();
+			SettingsReader.getInstance();
 			NotificationConnector.sendNotification("Startup",
-					SettingsReader.name + " v" + SettingsReader.getVersion(),
-					SettingsReader.name + " v" + SettingsReader.getVersion()
+					SettingsReader.name + " v" + SettingsReader.getInstance().getVersion(),
+					SettingsReader.name + " v" + SettingsReader.getInstance().getVersion()
 							+ " succsessfully registered wit "
 							+ notifer2.getName(), null,null);
 			return true;
@@ -92,7 +97,7 @@ public class NotificationConnector {
 		return false;
 	}
 
-	public static void exit() {
+	public void close() {
 		notifer.unload();
 	}
 

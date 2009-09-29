@@ -1,5 +1,6 @@
 package net;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,37 +23,45 @@ import org.xml.sax.SAXException;
 import edu.stanford.ejalbert.launching.IBrowserLaunching;
 import gui.WeatherView.Views;
 
-public class SettingsReader {
-	public static final String name = "jWeatherWatch";
-	private static Version releaseVersion = null;
-	private static Version devVersion = null;
-	public static boolean devChannel = false;
+public class SettingsReader implements Closeable {
+	private static  SettingsReader instance = null;
+	public  static final String name = "jWeatherWatch";
+	private  Version releaseVersion = null;
+	private  Version devVersion = null;
+	public  boolean devChannel = false;
 
-	private static String homeDirectory = null;
-	private static String iconpPath = null;
-	private static boolean autostart = false;
+	private  String homeDirectory = null;
+	private  String iconpPath = null;
+	private  boolean autostart = false;
 
 	// Notifer
-	public static NotiferTypes notifer = null;
-	public static int notificationInterval = 30;
+	public  NotiferTypes notifer = null;
+	public  int notificationInterval = 30;
 	// MinimalView Settings
-	public static int mininimalViewRows = 3;
-	public static boolean minimalView_Shifted = false;
-	public static int minimumViewSize = 65;
+	public  int mininimalViewRows = 3;
+	public  boolean minimalView_Shifted = false;
+	public  int minimumViewSize = 65;
 	// StandartView
-	public static int standartSelected = 0;
+	public  int standartSelected = 0;
 
-	public static String webBrowser = IBrowserLaunching.BROWSER_DEFAULT;
+	public  String webBrowser = IBrowserLaunching.BROWSER_DEFAULT;
 
-	public static Views view = Views.standart;
+	public  Views view = Views.standart;
 
-	static {
+	public static  SettingsReader getInstance() {
+		if (instance == null) {
+			instance = new SettingsReader();
+			Main.thingsToClose.add(instance);
+		}
+		return instance;
+	}
+
+	private SettingsReader() {
 		load();
 	}
 
-	static private boolean load() {
-		if (!new File(SettingsReader.getHomeDirectory() + "/settings.xml")
-				.exists())
+	private boolean load() {
+		if (!new File(getHomeDirectory() + "/settings.xml").exists())
 			return false;
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 				.newInstance();
@@ -60,7 +69,7 @@ public class SettingsReader {
 		Document doc = null;
 		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
-			doc = docBuilder.parse(new File(SettingsReader.getHomeDirectory()
+			doc = docBuilder.parse(new File(getHomeDirectory()
 					+ "/settings.xml"));
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
@@ -69,8 +78,7 @@ public class SettingsReader {
 			JOptionPane.showMessageDialog(null, "Settings are reseted.",
 					"Your Settings file is corrupted",
 					JOptionPane.ERROR_MESSAGE);
-			new File(SettingsReader.getHomeDirectory() + "/settings.xml")
-					.delete();
+			new File(getHomeDirectory() + "/settings.xml").delete();
 			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -126,7 +134,7 @@ public class SettingsReader {
 		return true;
 	}
 
-	static public void save() {
+	public void save() {
 		net.myxml.Doc doc = new Doc(SettingsReader.name + "Settings");
 		doc.appendNode("host", NotificationConnector.getHost(),
 				"Notification Connector Host");
@@ -151,16 +159,16 @@ public class SettingsReader {
 				"Slelected location in standart view");
 		doc.addDoc(standartView);
 
-		doc.save(new File(SettingsReader.getHomeDirectory() + "/settings.xml"));
+		doc.save(new File(getHomeDirectory() + "/settings.xml"));
 
 	}
 
-	public static void addtoAutostart() {
+	public void addtoAutostart() {
 		if (Utils.getOS() != Utils.OS.WINDOWS)
 			return;
 		try {
 			PrintWriter out = new PrintWriter(new FileOutputStream(
-					SettingsReader.getHomeDirectory() + "/regme.reg"));
+					getHomeDirectory() + "/regme.reg"));
 
 			out.println("Windows Registry Editor Version 5.00");
 			out.println();
@@ -173,7 +181,7 @@ public class SettingsReader {
 			out.close();
 			Runtime.getRuntime().exec(
 					new String[] { "regedit.exe", "/s",
-							SettingsReader.getHomeDirectory() + "/regme.reg" });
+							getHomeDirectory() + "/regme.reg" });
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -186,12 +194,12 @@ public class SettingsReader {
 
 	}
 
-	public static void removeAutostart() {
+	public void removeAutostart() {
 		if (Utils.getOS() != Utils.OS.WINDOWS)
 			return;
 		try {
 			PrintWriter out = new PrintWriter(new FileOutputStream(
-					SettingsReader.getHomeDirectory() + "/regme.reg"));
+					getHomeDirectory() + "/regme.reg"));
 
 			out.println("Windows Registry Editor Version 5.00");
 			out.println();
@@ -202,7 +210,7 @@ public class SettingsReader {
 			out.close();
 			Runtime.getRuntime().exec(
 					new String[] { "regedit.exe", "/s",
-							SettingsReader.getHomeDirectory() + "/regme.reg" });
+							getHomeDirectory() + "/regme.reg" });
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -214,11 +222,11 @@ public class SettingsReader {
 		autostart = false;
 	}
 
-	public static boolean isAutostart() {
+	public boolean isAutostart() {
 		return autostart;
 	}
 
-	private static void initializeHomeDirectory() {
+	private void initializeHomeDirectory() {
 		switch (Utils.getOS()) {
 		case WINDOWS:
 			homeDirectory = System.getenv("appdata") + "\\." + name;
@@ -235,29 +243,29 @@ public class SettingsReader {
 
 	}
 
-	public static String getHomeDirectory() {
+	public String getHomeDirectory() {
 		if (homeDirectory == null)
 			initializeHomeDirectory();
 		return homeDirectory;
 	}
 
-	public static String getIconpPath() {
+	public String getIconpPath() {
 		if (iconpPath == null) {
 			setIconpPath(getCurrentDirectory() + "iconset/");
 		}
 		return iconpPath;
 	}
 
-	public static void setIconpPath(String iconpPath) {
+	public void setIconpPath(String iconpPath) {
 		iconpPath = iconpPath.replace("\\", "/");
 		if (!iconpPath.endsWith("/"))
 			iconpPath += "/";
 		if (new File(iconpPath + "/01.png").exists()) {
-			SettingsReader.iconpPath = iconpPath;
+			this.iconpPath = iconpPath;
 		}
 	}
 
-	public static String getCurrentDirectory() {
+	public String getCurrentDirectory() {
 		String out = new SettingsReader().getClass().getResource("/").getFile()
 				.replace("%20", " ");
 		if (Utils.getOS() == OS.WINDOWS)
@@ -265,25 +273,25 @@ public class SettingsReader {
 		return out;
 	}
 
-	public static Version getReleaseVersion() {
+	public Version getReleaseVersion() {
 		if (releaseVersion == null) {
 			initializeVersions();
 		}
 		return releaseVersion;
 	}
 
-	public static Version getVersion() {
+	public Version getVersion() {
 		return devChannel ? getDevversion() : getReleaseVersion();
 	}
 
-	public static Version getDevversion() {
+	public Version getDevversion() {
 		if (devVersion == null) {
 			initializeVersions();
 		}
 		return devVersion;
 	}
 
-	private static void initializeVersions() {
+	private void initializeVersions() {
 		try {
 			releaseVersion = new Version(DocumentBuilderFactory.newInstance()
 					.newDocumentBuilder().parse(
@@ -298,8 +306,15 @@ public class SettingsReader {
 					.getElementsByTagName("devVersion").item(0).getChildNodes()
 					.item(0).getNodeValue());
 		} catch (Exception e) {
-			devVersion = new Version("0");
+			System.err.println("Version file is missing");
+			Main.close();
 		}
+
+	}
+
+	@Override
+	public void close() throws IOException {
+		save();
 
 	}
 }

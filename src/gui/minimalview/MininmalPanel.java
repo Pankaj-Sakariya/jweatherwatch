@@ -90,12 +90,12 @@ public class MininmalPanel extends JPanel {
 		if (boxes[i] == null) {
 			boxes[i] = new ImageBox();
 			if (i == 0) {
-				boxes[i].setImage(utils.imageLodaer(SettingsReader.getIconpPath()
+				boxes[i].setImage(utils.imageLodaer(SettingsReader.getInstance().getIconpPath()
 						+ weatherLocation.getCurrentWeather().getWeathericon()
 						+ ".png"));
 				boxes[i].setToolTipText("Current");
 			} else {
-				boxes[i].setImage(utils.imageLodaer(SettingsReader.getIconpPath()
+				boxes[i].setImage(utils.imageLodaer(SettingsReader.getInstance().getIconpPath()
 						+ weatherLocation.getFiveDayForecast().getDay(i)
 								.getDay().getWeathericon() + ".png"));
 				boxes[i].setToolTipText(weatherLocation.getFiveDayForecast()

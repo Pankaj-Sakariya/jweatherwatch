@@ -15,12 +15,12 @@ public class MinimumView extends WeatherView {
 	private static final long serialVersionUID = -8337831440587765857L;
 
 	private MininmalPanel mininmalPanerls[] = null;
-	private int imsize = SettingsReader.minimumViewSize;//65;
+	private int imsize = SettingsReader.getInstance().minimumViewSize;//65;
 
 	public MinimumView(Gui parent) {
 		super(parent,Views.minimal);
 		this.setLayout(null);
-		mininmalPanerls = new MininmalPanel[SettingsReader.mininimalViewRows];
+		mininmalPanerls = new MininmalPanel[SettingsReader.getInstance().mininimalViewRows];
 		parent.setIconImage(new Utils().imageLodaer("./iconset/01.png"));
 		for (Location l : parent.getLocations())
 			addLocation(l);
@@ -35,10 +35,10 @@ public class MinimumView extends WeatherView {
 	public void update(int nr) {
 		super.update(nr);
 		LocationList list = parent.getLocations();
-		for (int i = 0; i < SettingsReader.mininimalViewRows && i + nr < list.size(); ++i) {
+		for (int i = 0; i < SettingsReader.getInstance().mininimalViewRows && i + nr < list.size(); ++i) {
 			if (mininmalPanerls[i]==null||!list.get(nr + i).equals(mininmalPanerls[i].getWeatherLocation()))
 				mininmalPanerls[i] = new MininmalPanel(list.get(nr + i),imsize);
-			mininmalPanerls[i].setShifted(SettingsReader.minimalView_Shifted);
+			mininmalPanerls[i].setShifted(SettingsReader.getInstance().minimalView_Shifted);
 			mininmalPanerls[i].setLocation(5, (imsize + 40) * i);
 			this.setSize((imsize + 5) * 7 + 10, (imsize + 40) * (i + 1));
 			parent.setSize(this.getWidth() + 5, this.getHeight() + 30);

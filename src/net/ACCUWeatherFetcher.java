@@ -55,7 +55,7 @@ public class ACCUWeatherFetcher {
 		} catch (IOException e) {
 
 //			if (url.contains("weather-data.asp")) {
-//				Document d = getOfflineDocument(SettingsReader
+//				Document d = getOfflineDocument(SettingsReader.getInstance()
 //						.getHomeDirectory()
 //						+ "/offline/"
 //						+ url
@@ -115,16 +115,16 @@ public class ACCUWeatherFetcher {
 	}
 
 	public static void save(LocationList locationList) {
-		net.myxml.Doc doc = new Doc(SettingsReader.name + "Profile");
+		net.myxml.Doc doc = new Doc(SettingsReader.getInstance().name + "Profile");
 
 		doc.appendNode("unitCode", unitCode.toString(),
 				"The UnitCcode English/Metric");
 		doc.addDoc(locationList.toXML());
-		doc.save(new File(SettingsReader.getHomeDirectory() + "/profile.xml"));
+		doc.save(new File(SettingsReader.getInstance().getHomeDirectory() + "/profile.xml"));
 	}
 
 	public static LocationList load(LocationListUser listUser) {
-		if (!new File(SettingsReader.getHomeDirectory() + "/profile.xml")
+		if (!new File(SettingsReader.getInstance().getHomeDirectory() + "/profile.xml")
 				.exists())
 			return new LocationList();
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
@@ -133,7 +133,7 @@ public class ACCUWeatherFetcher {
 		Document doc = null;
 		try {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
-			doc = docBuilder.parse(new File(SettingsReader.getHomeDirectory()
+			doc = docBuilder.parse(new File(SettingsReader.getInstance().getHomeDirectory()
 					+ "/profile.xml"));
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
@@ -143,7 +143,7 @@ public class ACCUWeatherFetcher {
 					.showMessageDialog(null, "Locations reseted.",
 							"Your Location List iscorrupted",
 							JOptionPane.ERROR_MESSAGE);
-			new File(SettingsReader.getHomeDirectory() + "/profile.xml")
+			new File(SettingsReader.getInstance().getHomeDirectory() + "/profile.xml")
 					.delete();
 			return new LocationList();
 		} catch (IOException e) {
@@ -153,7 +153,7 @@ public class ACCUWeatherFetcher {
 
 		if (doc.getElementsByTagName("unitCode").item(0) != null)
 			unitCode = UnitCode.valueOf(Utils.getXMLValue(((Element) (doc
-					.getElementsByTagName("" + SettingsReader.name + "Profile")
+					.getElementsByTagName("" + SettingsReader.getInstance().name + "Profile")
 					.item(0))), "unitCode"));
 		LocationList locationList = null;
 		if (doc.getElementsByTagName("locations").item(0) != null) {
@@ -186,9 +186,9 @@ public class ACCUWeatherFetcher {
 		for (Location l : locationList) {
 			splash.setLoadingText("Saving offline weather data of: " + l);
 			try {
-				new File(SettingsReader.getHomeDirectory() + "/offline/")
+				new File(SettingsReader.getInstance().getHomeDirectory() + "/offline/")
 						.mkdirs();
-				File outfile = new File(SettingsReader.getHomeDirectory()
+				File outfile = new File(SettingsReader.getInstance().getHomeDirectory()
 						+ "/offline/tmp");
 				url = new URL(baseURL + "weather-data.asp?location="
 						+ l.getLocation() + "&metric=" + unitCode.getVal());
@@ -203,9 +203,9 @@ public class ACCUWeatherFetcher {
 					out.write(buffer, 0, numRead);
 				}
 				out.close();
-				new File(SettingsReader.getHomeDirectory() + "/offline/"
+				new File(SettingsReader.getInstance().getHomeDirectory() + "/offline/"
 						+ l.getLocation().replace("|", "-") + ".xml").delete();
-				outfile.renameTo(new File(SettingsReader.getHomeDirectory()
+				outfile.renameTo(new File(SettingsReader.getInstance().getHomeDirectory()
 						+ "/offline/" + l.getLocation().replace("|", "-")
 						+ ".xml"));
 			}catch(ConnectException e){

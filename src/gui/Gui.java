@@ -5,11 +5,14 @@ import gui.settings.SettingsDialog;
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.SystemTray;
+import java.io.Closeable;
+import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import net.ACCUWeatherFetcher;
+import net.Main;
 import net.NotificationConnector;
 import net.NotificationThread;
 import net.SettingsReader;
@@ -18,7 +21,7 @@ import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
 import net.ACCUWeather.LocationListUser;
 
-public class Gui extends JDialog implements LocationListUser {
+public class Gui extends JDialog implements LocationListUser,Closeable {
 	private NotificationThread notificationthread = null; // @jve:decl-index=0:
 
 	private static final long serialVersionUID = 1L;
@@ -35,19 +38,22 @@ public class Gui extends JDialog implements LocationListUser {
 	 */
 	public Gui(boolean visible) {
 		super(null, ModalityType.MODELESS);
-
+		
 		initialize();
 		this.setVisible(visible);
 		NotificationConnector.initialize(this, getTrayIcon());
 		locations = ACCUWeatherFetcher.load(this);
+		Main.thingsToClose.add(locations);
+		Main.thingsToClose.add(this);
 		for (Location l : locations) {
 			splash.setLoadingText("Loading Station: " + l);
 			l.update();
 		}
-		view = WeatherView.getViewByName(SettingsReader.view, this);
+		
+		view = WeatherView.getViewByName(SettingsReader.getInstance().view, this);
 		this.setContentPane(view);
 		setNotificationthread(new NotificationThread(locations,
-				SettingsReader.notificationInterval));
+				SettingsReader.getInstance().notificationInterval));
 		
 	}
 
@@ -82,7 +88,7 @@ public class Gui extends JDialog implements LocationListUser {
 		this.setContentPane(getSplash());
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setTitle(SettingsReader.name);
-		this.setIconImage(utils.imageLodaer(SettingsReader.getIconpPath()
+		this.setIconImage(utils.imageLodaer(SettingsReader.getInstance().getIconpPath()
 				+ "/01.png"));
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowIconified(java.awt.event.WindowEvent e) {
@@ -96,7 +102,7 @@ public class Gui extends JDialog implements LocationListUser {
 	public WeatherTrayIcon getTrayIcon() {
 		if (trayIcon == null) {
 			trayIcon = new WeatherTrayIcon(this, utils
-					.imageLodaer(SettingsReader.getIconpPath() + "/01.png"));
+					.imageLodaer(SettingsReader.getInstance().getIconpPath() + "/01.png"));
 		}
 
 		return trayIcon;
@@ -114,15 +120,7 @@ public class Gui extends JDialog implements LocationListUser {
 		return splash;
 	}
 
-	public void close() {
-		System.out.println("Saving....");
-		ACCUWeatherFetcher.save(locations);
-		SettingsReader.save();
-		// ACCUWeatherFetcher.saveOfflineData(locations, splash);
-		NotificationConnector.exit();
-		SystemTray.getSystemTray().remove(trayIcon);
 
-	}
 
 	public LocationList getLocations() {
 		return locations;
@@ -152,7 +150,7 @@ public class Gui extends JDialog implements LocationListUser {
 		if (this.view != null)
 			this.view.close();
 		this.view = view;
-		SettingsReader.view = view.getType();
+		SettingsReader.getInstance().view = view.getType();
 		this.setContentPane(view);
 
 	}
@@ -172,6 +170,11 @@ public class Gui extends JDialog implements LocationListUser {
 		super.setVisible(b);
 		if (b)
 			this.toFront();
+	}
+	@Override
+	public void close() throws IOException {
+		SystemTray.getSystemTray().remove(trayIcon);
+		
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"
