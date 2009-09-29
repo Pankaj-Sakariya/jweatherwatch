@@ -17,8 +17,7 @@ public class Main {
 	public static LinkedList<Closeable> thingsToClose = new LinkedList<Closeable>();
 
 	enum options {
-		minimized, workindirectory, help, h, version, tofront, dev, nodev
-
+		minimized, workindirectory, help, h, version, tofront, dev, nodev, portable
 	}
 
 	public static void main(String[] args) {
@@ -69,13 +68,19 @@ public class Main {
 						break;
 					case nodev:
 						SettingsReader.getInstance().devChannel = false;
+						break;
+					case portable:
+						SettingsReader.getInstance().setPortable(true);
+						break;
 					case help:
 					case h:
 					default:
 						help(0);
 						break;
 					}
-				} catch (Exception e) {
+
+				} catch (EnumConstantNotPresentException e) {
+					System.out.println("Unknown kommand: " + args[i]);
 					help(-1);
 				}
 		}
@@ -103,7 +108,7 @@ public class Main {
 					+ "/Updater.jar", true);
 			Runtime.getRuntime().exec(
 					new String[] {
-							"java",
+							System.getProperty("java.home")+"/bin/java",
 							"-classpath",
 							System.getProperty("java.io.tmpdir")
 									+ "/Updater.jar", "updater.net.Updater",
@@ -143,10 +148,12 @@ public class Main {
 		System.out.println("Saving....");
 		try {
 			for (Closeable c : thingsToClose) {
-				System.out.println("Closing: "+c.getClass());
+				System.out.println("Closing: " + c.getClass());
 				c.close();
-				
 			}
+			System.out.println("Closing: "
+					+ SettingsReader.getInstance().getClass());
+			SettingsReader.getInstance().close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -157,12 +164,16 @@ public class Main {
 	}
 
 	private static void help(int i) {
-		System.out.println(SettingsReader.name + " [-options]"
-				+ "\n-" + options.minimized
-				+ " to start the programm minimized\n-" + options.h + "/"
-				+ options.help + "\n-"
-				+ "iconPath the path where the icons are placed \n-"
-				+ " to display this text" + "\n-" + options.version);
+		System.out
+				.println(SettingsReader.name
+						+ " [-options]"
+						+ "\n-"
+						+ options.minimized
+						+ " to start the programm minimized\n-"
+						+ options.portable
+						+ " to save settings files in the directory of jWeatherWatch\n-"
+						+ options.h + "/" + options.help
+						+ " to display this text" + "\n-" + options.version);
 		System.exit(i);
 
 	}

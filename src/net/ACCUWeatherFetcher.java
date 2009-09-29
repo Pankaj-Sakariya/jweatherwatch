@@ -115,7 +115,7 @@ public class ACCUWeatherFetcher {
 	}
 
 	public static void save(LocationList locationList) {
-		net.myxml.Doc doc = new Doc(SettingsReader.getInstance().name + "Profile");
+		net.myxml.Doc doc = new Doc(SettingsReader.name + "Profile");
 
 		doc.appendNode("unitCode", unitCode.toString(),
 				"The UnitCcode English/Metric");
@@ -153,7 +153,7 @@ public class ACCUWeatherFetcher {
 
 		if (doc.getElementsByTagName("unitCode").item(0) != null)
 			unitCode = UnitCode.valueOf(Utils.getXMLValue(((Element) (doc
-					.getElementsByTagName("" + SettingsReader.getInstance().name + "Profile")
+					.getElementsByTagName("" + SettingsReader.name + "Profile")
 					.item(0))), "unitCode"));
 		LocationList locationList = null;
 		if (doc.getElementsByTagName("locations").item(0) != null) {

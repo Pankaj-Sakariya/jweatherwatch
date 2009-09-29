@@ -24,39 +24,45 @@ import edu.stanford.ejalbert.launching.IBrowserLaunching;
 import gui.WeatherView.Views;
 
 public class SettingsReader implements Closeable {
-	private static  SettingsReader instance = null;
-	public  static final String name = "jWeatherWatch";
-	private  Version releaseVersion = null;
-	private  Version devVersion = null;
-	public  boolean devChannel = false;
+	private static SettingsReader instance = null;
+	private boolean portable = false;
+	public static final String name = "jWeatherWatch";
+	private Version releaseVersion = null;
+	private Version devVersion = null;
+	public boolean devChannel = false;
 
-	private  String homeDirectory = null;
-	private  String iconpPath = null;
-	private  boolean autostart = false;
+	private String homeDirectory = null;
+	private String iconpPath = null;
+	private boolean autostart = false;
 
 	// Notifer
-	public  NotiferTypes notifer = null;
-	public  int notificationInterval = 30;
+	public NotiferTypes notifer = null;
+	public int notificationInterval = 30;
 	// MinimalView Settings
-	public  int mininimalViewRows = 3;
-	public  boolean minimalView_Shifted = false;
-	public  int minimumViewSize = 65;
+	public int mininimalViewRows = 3;
+	public boolean minimalView_Shifted = false;
+	public int minimumViewSize = 65;
 	// StandartView
-	public  int standartSelected = 0;
+	public int standartSelected = 0;
 
-	public  String webBrowser = IBrowserLaunching.BROWSER_DEFAULT;
+	public String webBrowser = IBrowserLaunching.BROWSER_DEFAULT;
 
-	public  Views view = Views.standart;
+	public Views view = Views.standart;
 
-	public static  SettingsReader getInstance() {
+	public static SettingsReader getInstance() {
 		if (instance == null) {
-			instance = new SettingsReader();
-			Main.thingsToClose.add(instance);
+			instance = new SettingsReader();			
 		}
 		return instance;
 	}
 
 	private SettingsReader() {
+		load();
+	}
+
+	private SettingsReader(boolean portable) {
+		this.portable = portable;
+		System.out.println(getHomeDirectory());
 		load();
 	}
 
@@ -232,7 +238,6 @@ public class SettingsReader implements Closeable {
 			homeDirectory = System.getenv("appdata") + "\\." + name;
 			break;
 		case LINUX:
-		case MAC:
 			homeDirectory = System.getProperty("user.home") + "/." + name;
 			break;
 		default:
@@ -246,6 +251,8 @@ public class SettingsReader implements Closeable {
 	public String getHomeDirectory() {
 		if (homeDirectory == null)
 			initializeHomeDirectory();
+		if (portable)
+			homeDirectory = getCurrentDirectory();
 		return homeDirectory;
 	}
 
@@ -316,5 +323,13 @@ public class SettingsReader implements Closeable {
 	public void close() throws IOException {
 		save();
 
+	}
+
+	public void setPortable(boolean portable) {
+		instance = new SettingsReader(portable);
+	}
+
+	public boolean isPortable() {
+		return portable;
 	}
 }
