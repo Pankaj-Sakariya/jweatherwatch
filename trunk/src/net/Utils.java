@@ -82,7 +82,7 @@ public class Utils {
 			try {
 		
 		
-			new BrowserLauncher().openURLinBrowser(SettingsReader.webBrowser,url);
+			new BrowserLauncher().openURLinBrowser(SettingsReader.getInstance().webBrowser,url);
 		} catch (BrowserLaunchingInitializingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

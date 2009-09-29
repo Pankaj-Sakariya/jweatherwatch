@@ -53,7 +53,7 @@ public class WeatherPanel extends JPanel {
 		url = weather.getUrl();
 		jLabel_Location.setText(location.toString());
 		jLabel_Location.setToolTipText(location.toString());
-		imageBox.setImage(utils.imageLodaer(SettingsReader.getIconpPath()
+		imageBox.setImage(utils.imageLodaer(SettingsReader.getInstance().getIconpPath()
 				+ weather.getWeathericon() + ".png"));
 		jLabel_text.setText(weather.getWeathertext());
 		jLabel_text.setToolTipText(weather.getWeathertext());

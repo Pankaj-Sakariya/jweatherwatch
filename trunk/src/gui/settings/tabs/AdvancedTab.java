@@ -82,20 +82,20 @@ public class AdvancedTab extends SettingsTab {
 
 	@Override
 	public void load() {
-		jTextField_IconPath.setText(SettingsReader.getIconpPath());
-		jCheckBox_Dev.setSelected(SettingsReader.devChannel);
-		jComboBox_Broswer.setSelectedItem(SettingsReader.webBrowser);
+		jTextField_IconPath.setText(SettingsReader.getInstance().getIconpPath());
+		jCheckBox_Dev.setSelected(SettingsReader.getInstance().devChannel);
+		jComboBox_Broswer.setSelectedItem(SettingsReader.getInstance().webBrowser);
 	}
 
 	@Override
 	public void save(Gui gui) {
-		SettingsReader.webBrowser=jComboBox_Broswer.getSelectedItem().toString();
-		SettingsReader.setIconpPath(jTextField_IconPath.getText());
-		if (SettingsReader.devChannel != jCheckBox_Dev.isSelected()) {
-			SettingsReader.devChannel = jCheckBox_Dev.isSelected();
-			Version compare = new Version(SettingsReader.devChannel ? Updater
+		SettingsReader.getInstance().webBrowser=jComboBox_Broswer.getSelectedItem().toString();
+		SettingsReader.getInstance().setIconpPath(jTextField_IconPath.getText());
+		if (SettingsReader.getInstance().devChannel != jCheckBox_Dev.isSelected()) {
+			SettingsReader.getInstance().devChannel = jCheckBox_Dev.isSelected();
+			Version compare = new Version(SettingsReader.getInstance().devChannel ? Updater
 					.getDevVersion() : Updater.getVersion());
-			if (SettingsReader.getVersion().compareTo(compare) != 0)
+			if (SettingsReader.getInstance().getVersion().compareTo(compare) != 0)
 				Main.update();
 		}
 	}

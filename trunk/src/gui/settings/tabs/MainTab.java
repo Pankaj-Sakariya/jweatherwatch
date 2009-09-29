@@ -114,7 +114,7 @@ public class MainTab extends SettingsTab {
 			jToggleButton_SystemStart
 					.setBounds(new Rectangle(75, 150, 151, 16));
 			jToggleButton_SystemStart.setText("Start with System");
-			jToggleButton_SystemStart.setSelected(SettingsReader.isAutostart());
+			jToggleButton_SystemStart.setSelected(SettingsReader.getInstance().isAutostart());
 			jToggleButton_SystemStart
 					.setEnabled(Utils.getOS() == Utils.OS.WINDOWS);
 
@@ -140,7 +140,7 @@ public class MainTab extends SettingsTab {
 		jComboBox_Notifer.setSelectedItem(NotificationConnector.getNotifer()
 				.getName());
 		jTextField_NotificationInterval.setText(String
-				.valueOf(SettingsReader.notificationInterval));
+				.valueOf(SettingsReader.getInstance().notificationInterval));
 		jTextField_Host.setText(NotificationConnector.getHost());
 
 	}
@@ -152,12 +152,12 @@ public class MainTab extends SettingsTab {
 						.getTrayIcon()));
 
 		// autostart
-		if (SettingsReader.isAutostart() != jToggleButton_SystemStart
+		if (SettingsReader.getInstance().isAutostart() != jToggleButton_SystemStart
 				.isSelected()) {
 			if (jToggleButton_SystemStart.isSelected())
-				SettingsReader.addtoAutostart();
+				SettingsReader.getInstance().addtoAutostart();
 			else
-				SettingsReader.removeAutostart();
+				SettingsReader.getInstance().removeAutostart();
 		}
 
 		NotificationConnector.setHost(jTextField_Host.getText());

@@ -5,15 +5,19 @@ import it.sauronsoftware.junique.AlreadyLockedException;
 import it.sauronsoftware.junique.JUnique;
 import it.sauronsoftware.junique.MessageHandler;
 
+import java.io.Closeable;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
 import updater.net.Updater;
 
 public class Main {
+	public static LinkedList<Closeable> thingsToClose = new LinkedList<Closeable>();
+
 	enum options {
-		minimized, workindirectory, help, h, version, tofront
+		minimized, workindirectory, help, h, version, tofront, dev, nodev
 
 	}
 
@@ -21,18 +25,19 @@ public class Main {
 		boolean windowstate = parseArgs(args);
 		allreadyRunning(args);
 
-		
 		Version compare = new Version(Updater.getVersion());
-		if (SettingsReader.devChannel) {
+		if (SettingsReader.getInstance().devChannel) {
 			JOptionPane
 					.showMessageDialog(
 							null,
 							"This is a beta version please report all occuring errors.",
-							SettingsReader.name+SettingsReader.getVersion(), JOptionPane.INFORMATION_MESSAGE);
+							SettingsReader.name
+									+ SettingsReader.getInstance().getVersion(),
+							JOptionPane.INFORMATION_MESSAGE);
 			compare = new Version(Updater.getDevVersion());
 		}
 
-		if (compare.compareTo(SettingsReader.getVersion()) > 0) {
+		if (compare.compareTo(SettingsReader.getInstance().getVersion()) > 0) {
 			update();
 		}
 		new Gui(windowstate);
@@ -52,12 +57,18 @@ public class Main {
 						i++;
 						break;
 					case version:
-						System.out.println(SettingsReader.name+" "+SettingsReader.getVersion());
+						System.out.println(SettingsReader.name + " "
+								+ SettingsReader.getInstance().getVersion());
 						System.exit(0);
 						break;
 					case tofront:
 						NotificationConnector.bringFrameToFront();
 						break;
+					case dev:
+						SettingsReader.getInstance().devChannel = true;
+						break;
+					case nodev:
+						SettingsReader.getInstance().devChannel = false;
 					case help:
 					case h:
 					default:
@@ -73,8 +84,8 @@ public class Main {
 	}
 
 	public static void update() {
-		String version = SettingsReader.devChannel ? Updater.getDevVersion()
-				.toString() : Updater.getVersion().toString();
+		String version = SettingsReader.getInstance().devChannel ? Updater
+				.getDevVersion().toString() : Updater.getVersion().toString();
 		int result = JOptionPane
 				.showConfirmDialog(
 						null,
@@ -87,7 +98,7 @@ public class Main {
 						+ " this will take some moments", "Update Started",
 				JOptionPane.INFORMATION_MESSAGE);
 		try {
-			Updater.copy(SettingsReader.getCurrentDirectory()
+			Updater.copy(SettingsReader.getInstance().getCurrentDirectory()
 					+ "/lib/Updater.jar", System.getProperty("java.io.tmpdir")
 					+ "/Updater.jar", true);
 			Runtime.getRuntime().exec(
@@ -96,13 +107,13 @@ public class Main {
 							"-classpath",
 							System.getProperty("java.io.tmpdir")
 									+ "/Updater.jar", "updater.net.Updater",
-							SettingsReader.getCurrentDirectory(),
-							SettingsReader.devChannel + "" });
+							SettingsReader.getInstance().getCurrentDirectory(),
+							SettingsReader.getInstance().devChannel + "" });
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
-		System.exit(0);
+		close();
 
 	}
 
@@ -128,10 +139,28 @@ public class Main {
 		return true;
 	}
 
+	public static void close() {
+		System.out.println("Saving....");
+		try {
+			for (Closeable c : thingsToClose) {
+				System.out.println("Closing: "+c.getClass());
+				c.close();
+				
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.exit(0);
+
+	}
+
 	private static void help(int i) {
-		System.out.println(SettingsReader.name + " [-options]" + "\n-"
-				+ options.minimized + " to start the programm minimized\n-"
-				+ options.h + "/" + options.help + "\n-"
+		System.out.println(SettingsReader.name + " [-options]"
+				+ "\n-" + options.minimized
+				+ " to start the programm minimized\n-" + options.h + "/"
+				+ options.help + "\n-"
 				+ "iconPath the path where the icons are placed \n-"
 				+ " to display this text" + "\n-" + options.version);
 		System.exit(i);

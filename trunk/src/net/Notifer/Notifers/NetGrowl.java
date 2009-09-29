@@ -40,7 +40,7 @@ public class NetGrowl implements NetNotifer {
 		if (Utils.getOS() == OS.MAC)
 			port = 23052;
 		growlConnector = new GrowlConnector(host, port);
-		application = new Application(SettingsReader.name, SettingsReader
+		application = new Application(SettingsReader.name, SettingsReader.getInstance()
 				.getIconpPath()
 				+ "01.png");
 		return growlConnector.register(application, notificationTypes) == IResponse.OK;
