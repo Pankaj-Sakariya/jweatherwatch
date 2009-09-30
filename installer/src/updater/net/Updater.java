@@ -111,6 +111,8 @@ public class Updater {
 	}
 
 	public static void main(String[] args) {
+		for(String s:args)
+			System.out.println(s);
 		if (args.length != 2)
 			return;
 		boolean dev = Boolean.parseBoolean(args[1]);
@@ -118,7 +120,7 @@ public class Updater {
 		try {
 			Runtime.getRuntime().exec(
 					new String[] { System.getProperty("java.home")+"/bin/java", "-classpath",
-							"\""+args[0] + "/JWeatherWatch.jar\"","net.Main",
+							args[0] + "/JWeatherWatch.jar","net.Main",
 							dev ? "-dev" : "-nodev" });
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

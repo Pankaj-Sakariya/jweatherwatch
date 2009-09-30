@@ -190,7 +190,7 @@ public class Gui extends JFrame {
 		try {
 			Runtime.getRuntime().exec(
 					new String[] { System.getProperty("java.home")+"/bin/java", "-classpath",
-							"\""+jTextField_Path.getText() + "/JWeatherWatch.jar\"","net.Main",
+							jTextField_Path.getText() + "/JWeatherWatch.jar","net.Main",
 							jCheckBox_Dev.isSelected() ? "-dev" : "-nodev" });
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
