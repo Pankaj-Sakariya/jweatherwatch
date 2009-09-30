@@ -4,7 +4,6 @@ package net.ACCUWeather;
 
 import net.Utils;
 import net.ACCUWeather.WeatherSubtypes.Day;
-import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 import org.w3c.dom.Element;
 
@@ -18,15 +17,15 @@ public class ForecastDay  {
 	String url;
 	int dayNR;
 
-	public ForecastDay(Element element,int i, UnitCode unitCode) {
+	public ForecastDay(Element element,int i) {
 		dayNR=i;
 		date = Utils.getXMLValue(element, "obsdate");
 		dayCode = Utils.getXMLValue(element, "daycode");
 		sunrise = Utils.getXMLValue(element, "sunrise");
 		sunset = Utils.getXMLValue(element, "sunset");
 		url = Utils.getXMLValue(element, "url");
-		day=new ForecastWeather((Element)element.getElementsByTagName("daytime").item(0), this,Day.Day, unitCode);
-		night=new ForecastWeather((Element)element.getElementsByTagName("nighttime").item(0), this,Day.Night,unitCode);
+		day=new ForecastWeather((Element)element.getElementsByTagName("daytime").item(0), this,Day.Day);
+		night=new ForecastWeather((Element)element.getElementsByTagName("nighttime").item(0), this,Day.Night);
 
 	}
 	

@@ -1,16 +1,14 @@
 package net.ACCUWeather;
 
-import net.ACCUWeather.WeatherSubtypes.UnitCode;
-
 import org.w3c.dom.Element;
 
 public class FiveDayForecast {
 	ForecastDay forecast[] = new ForecastDay[5];
 
-	public FiveDayForecast(Element element, UnitCode unitCode) {
+	public FiveDayForecast(Element element) {
 		for (int i = 0; i < 5; ++i) {
 			forecast[i] = new ForecastDay((Element) element
-					.getElementsByTagName("day").item(i),i+1, unitCode);
+					.getElementsByTagName("day").item(i),i+1);
 		}
 	}
 

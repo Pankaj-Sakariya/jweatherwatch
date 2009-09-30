@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
 
 public class ACCUWeatherFetcher {
 	public static String baseURL = "http://vonreth.accu-weather.com/widget/vonreth/";
-	private static UnitCode unitCode = UnitCode.English;
+
 
 	public static LocationList search(String location) {
 		Document doc = getDocument(baseURL + "city-find.asp?location="
@@ -106,18 +106,13 @@ public class ACCUWeatherFetcher {
 		return null;
 	}
 
-	public static UnitCode getUnit_code() {
-		return unitCode;
-	}
 
-	public static void setUnitCode(UnitCode unitCode) {
-		ACCUWeatherFetcher.unitCode = unitCode;
-	}
+
 
 	public static void save(LocationList locationList) {
 		net.myxml.Doc doc = new Doc(SettingsReader.name + "Profile");
 
-		doc.appendNode("unitCode", unitCode.toString(),
+		doc.appendNode("unitCode", UnitCode.stringValue(),
 				"The UnitCcode English/Metric");
 		doc.addDoc(locationList.toXML());
 		doc.save(new File(SettingsReader.getInstance().getHomeDirectory() + "/profile.xml"));
@@ -152,7 +147,7 @@ public class ACCUWeatherFetcher {
 		}
 
 		if (doc.getElementsByTagName("unitCode").item(0) != null)
-			unitCode = UnitCode.valueOf(Utils.getXMLValue(((Element) (doc
+			UnitCode.getByName(Utils.getXMLValue(((Element) (doc
 					.getElementsByTagName("" + SettingsReader.name + "Profile")
 					.item(0))), "unitCode"));
 		LocationList locationList = null;
@@ -191,7 +186,7 @@ public class ACCUWeatherFetcher {
 				File outfile = new File(SettingsReader.getInstance().getHomeDirectory()
 						+ "/offline/tmp");
 				url = new URL(baseURL + "weather-data.asp?location="
-						+ l.getLocation() + "&metric=" + unitCode.getVal());
+						+ l.getLocation() + "&metric=" + UnitCode.getVal());
 
 				out = new BufferedOutputStream(new FileOutputStream(outfile));
 				conn = url.openConnection();

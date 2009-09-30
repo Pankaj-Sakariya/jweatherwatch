@@ -10,7 +10,6 @@ import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import net.Main;
 import net.NotificationConnector;
 import net.SettingsReader;
 import net.ACCUWeather.Location;
@@ -46,7 +45,7 @@ public class WeatherTrayIcon extends TrayIcon {
 			exit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					parent.dispose();
-					Main.close();
+					System.exit(0);
 				}
 			});
 			MenuItem bringToFront = new MenuItem("Show/Hide");

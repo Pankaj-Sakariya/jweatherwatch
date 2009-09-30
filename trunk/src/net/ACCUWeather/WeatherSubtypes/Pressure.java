@@ -3,13 +3,11 @@ package net.ACCUWeather.WeatherSubtypes;
 import org.w3c.dom.Element;
 
 public class Pressure {
-	UnitCode unitCode;
-	double pressure;
+	float pressure;
 	String state;
 
-	public Pressure(Element element,UnitCode unitCode) {
-		this.unitCode=unitCode;
-		pressure = Double.valueOf(element.getElementsByTagName("pressure")
+	public Pressure(Element element) {
+		pressure = Float.valueOf(element.getElementsByTagName("pressure")
 				.item(0).getChildNodes().item(0).getNodeValue());
 		state = ((Element) element.getElementsByTagName("pressure").item(0))
 				.getAttribute("state");
@@ -24,7 +22,7 @@ public class Pressure {
 	}
 
 	public String toString() {
-		return state + " " + pressure+" "+unitCode.pressure();
+		return state + " " + pressure+" "+UnitCode.pressure();
 	}
 	
 	
