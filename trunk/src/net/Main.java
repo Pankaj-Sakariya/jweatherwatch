@@ -109,9 +109,9 @@ public class Main {
 			Runtime.getRuntime().exec(
 					new String[] {
 							System.getProperty("java.home")+"/bin/java",
-							"-classpath",
+							"-classpath","\""+
 							System.getProperty("java.io.tmpdir")
-									+ "/Updater.jar", "updater.net.Updater",
+									+ "/Updater.jar\"", "updater.net.Updater",
 							SettingsReader.getInstance().getCurrentDirectory(),
 							SettingsReader.getInstance().devChannel + "" });
 		} catch (IOException e) {
