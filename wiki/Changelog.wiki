@@ -1,6 +1,8 @@
 #labels Featured
-
- 
+  
+==jWeatherWatch v1.3.1==
+ * Fixed a bug with " " in installation path
+ * added portable option, now itspossible to start jWeatherWatch with the argument -portable, then the settings will be saved in the same path as the jar 
 ==jWeatherWatch v1.3==
  * Added library BrwoserLauncher2 now its possible to select a browser(Settings->Advanced)
   * to use this with Chromium on linux you have to set Chromium to your default browser and select Konquerer(kde) to your browser in jWeatherWatch
