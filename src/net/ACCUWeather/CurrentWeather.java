@@ -6,7 +6,6 @@ import net.ACCUWeather.WeatherSubtypes.Pressure;
 import net.ACCUWeather.WeatherSubtypes.Speed;
 import net.ACCUWeather.WeatherSubtypes.Temperature;
 import net.ACCUWeather.WeatherSubtypes.UVIndex;
-import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 import org.w3c.dom.Element;
 
@@ -22,20 +21,19 @@ public class CurrentWeather extends Weather {
 	String windchill;
 	
 
-	public CurrentWeather(Element element, UnitCode unitCode) {
+	public CurrentWeather(Element element) {
 		url = Utils.getXMLValue(element, "url");
-		pressure = new Pressure(element,unitCode);
-		temperature = new Temperature(Utils.getXMLValue(element, "temperature"),
-				unitCode);
-		realfeel = new Temperature(Utils.getXMLValue(element, "realfeel"), unitCode);
+		pressure = new Pressure(element);
+		temperature = new Temperature(Utils.getXMLValue(element, "temperature"));
+		realfeel = new Temperature(Utils.getXMLValue(element, "realfeel"));
 		humidity = Utils.getXMLValue(element, "humidity");
 		weathertext = Utils.getXMLValue(element, "weathertext");
 		weathericon = Utils.getXMLValue(element, "weathericon");
 		windgusts = Utils.getXMLValue(element, "windgusts");
-		windspeed = new Speed(Utils.getXMLValue(element, "windspeed"),unitCode);
+		windspeed = new Speed(Utils.getXMLValue(element, "windspeed"));
 		winddirection = Utils.getXMLValue(element, "winddirection");
 		visibility = Utils.getXMLValue(element, "visibility");
-		precipitation = new Amount(Utils.getXMLValue(element, "precip"),unitCode);
+		precipitation = new Amount(Utils.getXMLValue(element, "precip"));
 		uvindex = new UVIndex(element);
 		dewpoint = Utils.getXMLValue(element, "dewpoint");
 		cloudcover = Utils.getXMLValue(element, "cloudcover");

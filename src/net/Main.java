@@ -21,12 +21,14 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		Runtime.getRuntime().addShutdownHook(new Thread("jWeatherWatchDispose"){
-			@Override
-			public void run() {
-				close();
-			}
-		});
+		Runtime.getRuntime().addShutdownHook(
+				new Thread("jWeatherWatchDispose") {
+					@Override
+					public void run() {
+						close();
+						Runtime.getRuntime().halt(0);
+					}
+				});
 		boolean windowstate = parseArgs(args);
 		allreadyRunning(args);
 
@@ -114,7 +116,7 @@ public class Main {
 					+ "/Updater.jar", true);
 			Runtime.getRuntime().exec(
 					new String[] {
-							System.getProperty("java.home")+"/bin/java",
+							System.getProperty("java.home") + "/bin/java",
 							"-classpath",
 							System.getProperty("java.io.tmpdir")
 									+ "/Updater.jar", "updater.net.Updater",
@@ -150,7 +152,7 @@ public class Main {
 		return true;
 	}
 
-	public static void close() {
+	private static void close() {
 		System.out.println("Saving....");
 		try {
 			for (Closeable c : thingsToClose) {
@@ -164,8 +166,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.exit(0);
+		
 
 	}
 

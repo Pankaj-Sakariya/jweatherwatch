@@ -21,7 +21,7 @@ import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
 import net.ACCUWeather.LocationListUser;
 
-public class Gui extends JDialog implements LocationListUser,Closeable {
+public class Gui extends JDialog implements LocationListUser, Closeable {
 	private NotificationThread notificationthread = null; // @jve:decl-index=0:
 
 	private static final long serialVersionUID = 1L;
@@ -38,7 +38,7 @@ public class Gui extends JDialog implements LocationListUser,Closeable {
 	 */
 	public Gui(boolean visible) {
 		super(null, ModalityType.MODELESS);
-		
+
 		initialize();
 		this.setVisible(visible);
 		NotificationConnector.initialize(this, getTrayIcon());
@@ -49,12 +49,13 @@ public class Gui extends JDialog implements LocationListUser,Closeable {
 			splash.setLoadingText("Loading Station: " + l);
 			l.update();
 		}
-		
-		view = WeatherView.getViewByName(SettingsReader.getInstance().view, this);
+
+		view = WeatherView.getViewByName(SettingsReader.getInstance().view,
+				this);
 		this.setContentPane(view);
-		setNotificationthread(new NotificationThread(locations,
-				SettingsReader.getInstance().notificationInterval));
-		
+		setNotificationthread(new NotificationThread(locations, SettingsReader
+				.getInstance().notificationInterval));
+
 	}
 
 	public void addLocation(Location l) {
@@ -88,7 +89,8 @@ public class Gui extends JDialog implements LocationListUser,Closeable {
 		this.setContentPane(getSplash());
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setTitle(SettingsReader.name);
-		this.setIconImage(utils.imageLodaer(SettingsReader.getInstance().getIconpPath()
+		this.setIconImage(utils.imageLodaer(SettingsReader.getInstance()
+				.getIconpPath()
 				+ "/01.png"));
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowIconified(java.awt.event.WindowEvent e) {
@@ -102,7 +104,8 @@ public class Gui extends JDialog implements LocationListUser,Closeable {
 	public WeatherTrayIcon getTrayIcon() {
 		if (trayIcon == null) {
 			trayIcon = new WeatherTrayIcon(this, utils
-					.imageLodaer(SettingsReader.getInstance().getIconpPath() + "/01.png"));
+					.imageLodaer(SettingsReader.getInstance().getIconpPath()
+							+ "/01.png"));
 		}
 
 		return trayIcon;
@@ -119,8 +122,6 @@ public class Gui extends JDialog implements LocationListUser,Closeable {
 		}
 		return splash;
 	}
-
-
 
 	public LocationList getLocations() {
 		return locations;
@@ -166,15 +167,21 @@ public class Gui extends JDialog implements LocationListUser,Closeable {
 
 	@Override
 	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
 		super.setVisible(b);
-		if (b)
+		if (b) {
 			this.toFront();
+		} 	
 	}
+
 	@Override
 	public void close() throws IOException {
-		SystemTray.getSystemTray().remove(trayIcon);
-		
+		new Thread() {
+			@Override
+			public void run() {
+				SystemTray.getSystemTray().remove(trayIcon);
+			}
+		}.start();
+
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"

@@ -1,21 +1,19 @@
 package net.ACCUWeather.WeatherSubtypes;
 
 public class Speed {
-	int speed;
-	UnitCode unitCode;
+	byte speed;
 
-	public Speed(String value, UnitCode unitCode) {
-		this.speed = Integer.valueOf(value);
-		this.unitCode = unitCode;
+	public Speed(String value) {
+		this.speed = Byte.valueOf(value);
+
 	}
 
 	@Override
 	public String toString() {
-		return speed + " " + unitCode.speed();
+		return speed + " " + UnitCode.speed();
 	}
-	
-	
+
 	public boolean equals(Speed s) {
-		return speed==s.speed;
+		return speed == s.speed;
 	}
 }

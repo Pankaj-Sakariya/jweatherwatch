@@ -6,6 +6,7 @@ import java.util.TimeZone;
 import net.ACCUWeatherFetcher;
 import net.NotificationConnector;
 import net.Utils;
+import net.ACCUWeather.WeatherSubtypes.UnitCode;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -114,18 +115,16 @@ public class Location implements Runnable {
 				.getDocument(ACCUWeatherFetcher.baseURL
 						+ "weather-data.asp?location=" + getLocation()
 						+ "&metric="
-						+ ACCUWeatherFetcher.getUnit_code().getVal());
+						+ UnitCode.getVal());
 
 		if (timeZone == null)
 			setTimezone(data);
 		boolean updated = false;
 
 		CurrentWeather cw = new CurrentWeather((Element) data
-				.getElementsByTagName("currentconditions").item(0),
-				ACCUWeatherFetcher.getUnit_code());
+				.getElementsByTagName("currentconditions").item(0));
 		FiveDayForecast fdf = new FiveDayForecast((Element) data
-				.getElementsByTagName("forecast").item(0), ACCUWeatherFetcher
-				.getUnit_code());
+				.getElementsByTagName("forecast").item(0));
 
 		if (currentWeather == null )
 			NotificationConnector.sendNotification(

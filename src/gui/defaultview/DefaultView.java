@@ -27,6 +27,7 @@ import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
 import net.ACCUWeather.WeatherSubtypes.Day;
 import net.ACCUWeather.WeatherSubtypes.UnitCode;
+import net.ACCUWeather.WeatherSubtypes.UnitCode.UnitCodes;
 
 public class DefaultView extends WeatherView {
 
@@ -67,7 +68,8 @@ public class DefaultView extends WeatherView {
 	 */
 	public DefaultView(Gui parent) {
 		super(parent, Views.standart);
-		final int selected = Integer.valueOf(SettingsReader.getInstance().standartSelected);
+		final int selected = Integer
+				.valueOf(SettingsReader.getInstance().standartSelected);
 		initialize();
 		for (Location l : parent.getLocations())
 			addLocation(l);
@@ -103,7 +105,7 @@ public class DefaultView extends WeatherView {
 		this.add(getImageBox_Logo(), null);
 		this.add(jLabel4, null);
 
-		if (ACCUWeatherFetcher.getUnit_code() == UnitCode.Metric)
+		if (UnitCode.getUnitCode() == UnitCode.UnitCodes.Metric)
 			jRadioButton_Metric.setSelected(true);
 		else
 			jRadioButton_English.setSelected(true);
@@ -367,11 +369,9 @@ public class DefaultView extends WeatherView {
 								public void run() {
 									imageBox_Loading.setVisible(true);
 									if (jRadioButton_English.isSelected())
-										ACCUWeatherFetcher
-												.setUnitCode(UnitCode.English);
+										UnitCode.setUnitCode(UnitCodes.English);
 									else
-										ACCUWeatherFetcher
-												.setUnitCode(UnitCode.Metric);
+										UnitCode.setUnitCode(UnitCodes.Metric);
 
 									for (Location l : parent.getLocations()) {
 										l.update();

@@ -314,7 +314,7 @@ public class SettingsReader implements Closeable {
 					.item(0).getNodeValue());
 		} catch (Exception e) {
 			System.err.println("Version file is missing");
-			Main.close();
+			System.exit(0);
 		}
 
 	}

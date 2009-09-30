@@ -5,18 +5,18 @@ import org.w3c.dom.Element;
 public class UVIndex {
 
 	String indexName = "";
-	int index;
+	byte index;
 
 	public UVIndex(Element element) {
 		indexName = element.getElementsByTagName("uvindex").item(0)
 				.getChildNodes().item(0).getNodeValue();
-		index = Integer.valueOf(((Element) element.getElementsByTagName(
+		index = Byte.valueOf(((Element) element.getElementsByTagName(
 				"uvindex").item(0)).getAttribute("index"));
 	}
 
 	public UVIndex(String value) {
 		if (value != null)
-			this.index = Integer.valueOf(value);		
+			this.index = Byte.valueOf(value);		
 	}
 
 	public int getIndex() {
