@@ -20,7 +20,9 @@ public class Main {
 		minimized, workindirectory, help, h, version, tofront, dev, nodev, portable
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
+		boolean windowstate = parseArgs(args);
+		allreadyRunning(args);		
 		Runtime.getRuntime().addShutdownHook(
 				new Thread("jWeatherWatchDispose") {
 					@Override
@@ -29,9 +31,6 @@ public class Main {
 						Runtime.getRuntime().halt(0);
 					}
 				});
-		boolean windowstate = parseArgs(args);
-		allreadyRunning(args);
-
 		Version compare = new Version(Updater.getVersion());
 		if (SettingsReader.getInstance().devChannel) {
 			JOptionPane
