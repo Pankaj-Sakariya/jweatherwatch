@@ -150,8 +150,10 @@ public class Main {
 		System.exit(0);
 		return true;
 	}
-
+	private static boolean closing=false;
 	private static void close() {
+		if(closing)return;
+		closing=true;
 		System.out.println("Saving....");
 		try {
 			for (Closeable c : thingsToClose) {
