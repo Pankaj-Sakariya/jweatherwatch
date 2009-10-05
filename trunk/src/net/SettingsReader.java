@@ -51,7 +51,7 @@ public class SettingsReader implements Closeable {
 
 	public static SettingsReader getInstance() {
 		if (instance == null) {
-			instance = new SettingsReader();			
+			instance = new SettingsReader();
 		}
 		return instance;
 	}
@@ -145,7 +145,9 @@ public class SettingsReader implements Closeable {
 		doc.appendNode("host", NotificationConnector.getHost(),
 				"Notification Connector Host");
 		doc.appendNode("notificationIterval", notificationInterval);
-		doc.appendNode("notifer", NotificationConnector.getNotifer().getName());
+		if (NotificationConnector.getNotifer() != null)
+			doc.appendNode("notifer", NotificationConnector.getNotifer()
+					.getName());
 		doc.appendNode("autoStart", autostart, "Autostart true/false");
 		doc.appendNode("currentView", view, "The View loaded on start");
 		doc.appendNode("iconPath", iconpPath,
@@ -314,6 +316,8 @@ public class SettingsReader implements Closeable {
 					.item(0).getNodeValue());
 		} catch (Exception e) {
 			System.err.println("Version file is missing");
+			releaseVersion = new Version("0");
+			devVersion = new Version("0");
 			System.exit(0);
 		}
 
