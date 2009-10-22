@@ -1,5 +1,9 @@
 #labels Featured
-  
+    
+==jWeatherWatch v1.3.2==
+ * jWeatherWatch saves settings on System Shutdown
+ * jWeatherWatch should be more stable and use less memory
+
 ==jWeatherWatch v1.3.1==
  * Fixed a bug with " " in installation path
  * added portable option, now itspossible to start jWeatherWatch with the argument -portable, then the settings will be saved in the same path as the jar 
