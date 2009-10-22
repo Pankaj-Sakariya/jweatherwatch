@@ -3,6 +3,7 @@
 ==jWeatherWatch v1.3.2==
  * jWeatherWatch saves settings on System Shutdown
  * jWeatherWatch should be more stable and use less memory
+ * fixed a bug which prevented switching dev/release channel in Advanced-Settingstab
 
 ==jWeatherWatch v1.3.1==
  * Fixed a bug with " " in installation path
