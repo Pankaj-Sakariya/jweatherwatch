@@ -125,7 +125,13 @@ public class Main {
 			e.printStackTrace();
 			return;
 		}
-		close();
+		try {
+			SettingsReader.getInstance().close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Runtime.getRuntime().halt(0);
 
 	}
 
