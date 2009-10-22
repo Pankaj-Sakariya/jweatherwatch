@@ -33,6 +33,7 @@ public class LibNotify implements Notifer {
 			if (!gtkInitialized)
 				try {
 					Gtk.init(new String[] {});
+					gtkInitialized=true;
 				} catch (UnsatisfiedLinkError e) {
 					return false;
 				}
@@ -42,7 +43,6 @@ public class LibNotify implements Notifer {
 					Gtk.main();
 				};
 			}.start();
-			gtkInitialized = true;
 			initialized = true;
 			return Notify.init(SettingsReader.name);
 		}
