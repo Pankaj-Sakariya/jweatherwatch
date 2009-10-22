@@ -1,6 +1,8 @@
 package net.ACCUWeather;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 import net.ACCUWeatherFetcher;
@@ -191,15 +193,7 @@ public class Location implements Runnable {
 	}
 
 	public String getCurrentTime() {
-		Calendar c = getTime();
-		String hour = c.get(Calendar.HOUR_OF_DAY) + "";
-		String min = c.get(Calendar.MINUTE) + "";
-		if (hour.length() == 1)
-			hour = "0" + hour;
-		if (min.length() == 1)
-			min = "0" + min;
-		return hour + ":" + min;
-
+		return new SimpleDateFormat("hh:mm").format(new Date(getTime().getTimeInMillis()));
 	}
 
 	public Calendar getTime() {

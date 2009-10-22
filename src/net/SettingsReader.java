@@ -318,7 +318,7 @@ public class SettingsReader implements Closeable {
 			System.err.println("Version file is missing");
 			releaseVersion = new Version("0");
 			devVersion = new Version("0");
-			System.exit(0);
+			//System.exit(0);
 		}
 
 	}

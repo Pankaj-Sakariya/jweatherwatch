@@ -92,10 +92,10 @@ public class AdvancedTab extends SettingsTab {
 		SettingsReader.getInstance().webBrowser=jComboBox_Broswer.getSelectedItem().toString();
 		SettingsReader.getInstance().setIconpPath(jTextField_IconPath.getText());
 		if (SettingsReader.getInstance().devChannel != jCheckBox_Dev.isSelected()) {
-			Version compare = new Version(SettingsReader.getInstance().devChannel ? Updater
+			Version compare = new Version(jCheckBox_Dev.isSelected() ? Updater
 					.getDevVersion() : Updater.getVersion());
-			if (SettingsReader.getInstance().getVersion().compareTo(compare) != 0)
-				SettingsReader.getInstance().devChannel = jCheckBox_Dev.isSelected();
+			SettingsReader.getInstance().devChannel = jCheckBox_Dev.isSelected();
+			if (SettingsReader.getInstance().getVersion().compareTo(compare) != 0)				
 				Main.update();
 		}
 	}
