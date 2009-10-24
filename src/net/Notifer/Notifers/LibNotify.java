@@ -34,8 +34,7 @@ public class LibNotify implements Notifer {
 				try {
 					Gtk.init(new String[] {});
 					new Thread("gtk") {				
-						public void run() {
-							Gtk.mainQuit();
+						public void run() {							
 							Gtk.main();
 						};
 					}.start();
