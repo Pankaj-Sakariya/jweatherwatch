@@ -3,7 +3,7 @@ Linux notification system.
 
 To use LibNotify you have to install libnotify and  [http://java-gnome.sourceforge.net/ java-gnome]
 
-on a derbian system just
+on a Derbian system just
 <code>
 sudo apt-get install libjava-gnome-java libnotify
 </code>
