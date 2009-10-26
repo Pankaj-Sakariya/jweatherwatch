@@ -7,6 +7,7 @@ import net.SettingsReader;
 import net.Utils;
 import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
+import net.Utils.OS;
 
 import org.gnome.gdk.InterpType;
 import org.gnome.gdk.Pixbuf;
@@ -28,7 +29,8 @@ public class LibNotify implements Notifer {
 
 	@Override
 	public boolean load(String[] notifications) {
-
+		if(Utils.getOS()!=OS.LINUX)
+			return false;
 		if (!initialized) {
 			if (!gtkInitialized)
 				try {
