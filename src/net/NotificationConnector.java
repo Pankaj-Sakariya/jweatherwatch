@@ -10,21 +10,21 @@ import net.Notifer.Notifer;
 import net.Notifer.NotiferTypes;
 import net.Notifer.Notifers.TrayNotification;
 
-public class NotificationConnector implements Closeable{
+public class NotificationConnector implements Closeable {
 	private static Notifer notifer;
 	private static Gui frame = null;
 	public final static String[] notifications = new String[] { "Startup",
 			"Forecast Weather Notification", "Current Weather Notification" };
 	private static String host = "localhost";
-	private static TrayIcon trayIcon=null;
+	private static TrayIcon trayIcon = null;
 
 	public static void initialize(Gui frame, TrayIcon trayIcon) {
-		NotificationConnector.trayIcon=trayIcon;
+		NotificationConnector.trayIcon = trayIcon;
 		Main.thingsToClose.add(new NotificationConnector());
 		NotificationConnector.frame = frame;
 		if (SettingsReader.getInstance().notifer != null
-				&& setNotifer(NotiferTypes.getNotifer(SettingsReader.getInstance().notifer,
-						trayIcon)))
+				&& setNotifer(NotiferTypes.getNotifer(SettingsReader
+						.getInstance().notifer, trayIcon)))
 			return;
 
 		if (notifer != null)
@@ -42,14 +42,14 @@ public class NotificationConnector implements Closeable{
 	}
 
 	public static void sendNotification(String alert, String title,
-			String description, String iconPath,String url) {
+			String description, String iconPath, String url) {
 		if (notifer == null) {
 			System.err
 					.println("NotificationConnector is not initialized, please run \"NotificationConnector.initialize(trayicon);\" firs.");
 			return;
 		}
 		if (iconPath == null || iconPath.equals("")) {
-			notifer.send(alert, title, description,null,url);
+			notifer.send(alert, title, description, null, url);
 			return;
 		}
 		if (iconPath.matches("[0-9][0-9]")) {
@@ -58,10 +58,11 @@ public class NotificationConnector implements Closeable{
 				iconPath = "http://jweatherwatch.googlecode.com/svn/trunk/iconset/"
 						+ iconPath + ".png";
 			else
-				iconPath = SettingsReader.getInstance().getIconpPath() + iconPath + ".png";
-			notifer.send(alert, title, description, iconPath,url);
+				iconPath = SettingsReader.getInstance().getIconpPath()
+						+ iconPath + ".png";
+			notifer.send(alert, title, description, iconPath, url);
 		} else
-			notifer.send(alert, title, description, iconPath,url);
+			notifer.send(alert, title, description, iconPath, url);
 
 	}
 
@@ -76,10 +77,12 @@ public class NotificationConnector implements Closeable{
 				notifer = notifer2;
 				SettingsReader.getInstance();
 				NotificationConnector.sendNotification("Startup",
-						SettingsReader.name + " v" + SettingsReader.getInstance().getVersion(),
-						SettingsReader.name + " v" + SettingsReader.getInstance().getVersion()
+						SettingsReader.name + " v"
+								+ SettingsReader.getInstance().getVersion(),
+						SettingsReader.name + " v"
+								+ SettingsReader.getInstance().getVersion()
 								+ " succsessfully registered wit "
-								+ notifer2.getName(), null,null);
+								+ notifer2.getName(), null, null);
 				return true;
 			}
 		} else if (notifer2.load(notifications)) {
@@ -89,10 +92,12 @@ public class NotificationConnector implements Closeable{
 			SettingsReader.getInstance();
 			SettingsReader.getInstance();
 			NotificationConnector.sendNotification("Startup",
-					SettingsReader.name + " v" + SettingsReader.getInstance().getVersion(),
-					SettingsReader.name + " v" + SettingsReader.getInstance().getVersion()
+					SettingsReader.name + " v"
+							+ SettingsReader.getInstance().getVersion(),
+					SettingsReader.name + " v"
+							+ SettingsReader.getInstance().getVersion()
 							+ " succsessfully registered wit "
-							+ notifer2.getName(), null,null);
+							+ notifer2.getName(), null, null);
 			return true;
 		} else
 			System.err.println("Setting Notifer failed");
@@ -115,7 +120,8 @@ public class NotificationConnector implements Closeable{
 		if (NotificationConnector.host.equals(host))
 			return;
 		NotificationConnector.host = host;
-		if(notifer!=null)setNotifer(NotiferTypes.getNotifer(notifer.getName(),trayIcon ));
+		if (notifer != null && notifer instanceof NetNotifer)
+			setNotifer(NotiferTypes.getNotifer(notifer.getName(), trayIcon));
 
 	}
 
