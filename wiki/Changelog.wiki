@@ -1,5 +1,10 @@
 #labels Featured
     
+==jWeatherWatch v1.3.3==
+ * fixed LibNotify
+ * added LibNotify support on x64 systems
+ * removed java-gnome from package you have now to install it frist see [LibNotify]
+
 ==jWeatherWatch v1.3.2==
  * jWeatherWatch saves settings on System Shutdown
  * jWeatherWatch should be more stable and use less memory
