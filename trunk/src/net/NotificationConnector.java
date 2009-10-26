@@ -16,8 +16,10 @@ public class NotificationConnector implements Closeable{
 	public final static String[] notifications = new String[] { "Startup",
 			"Forecast Weather Notification", "Current Weather Notification" };
 	private static String host = "localhost";
+	private static TrayIcon trayIcon=null;
 
 	public static void initialize(Gui frame, TrayIcon trayIcon) {
+		NotificationConnector.trayIcon=trayIcon;
 		Main.thingsToClose.add(new NotificationConnector());
 		NotificationConnector.frame = frame;
 		if (SettingsReader.getInstance().notifer != null
@@ -113,10 +115,7 @@ public class NotificationConnector implements Closeable{
 		if (NotificationConnector.host.equals(host))
 			return;
 		NotificationConnector.host = host;
-		if (notifer instanceof NetNotifer) {
-			((NetNotifer) NotificationConnector.getNotifer())
-					.setHost(NotificationConnector.host);
-		}
+		if(notifer!=null)setNotifer(NotiferTypes.getNotifer(notifer.getName(),trayIcon ));
 
 	}
 

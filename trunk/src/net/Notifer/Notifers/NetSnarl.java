@@ -72,11 +72,7 @@ public class NetSnarl implements NetNotifer {
 		return SnarlNetworkBridge.snGetHost();
 	}
 
-	@Override
-	public boolean setHost(String host) {
-		unload();
-		return load(NotificationConnector.notifications, host);
-	}
+
 
 	@Override
 	public NotiferTypes getName() {

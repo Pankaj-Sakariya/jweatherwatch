@@ -76,11 +76,7 @@ public class NetGrowl implements NetNotifer {
 		return host;
 	}
 
-	@Override
-	public boolean setHost(String host) {
-		unload();
-		return load(notificationTypes, host);
-	}
+
 
 	@Override
 	public NotiferTypes getName() {

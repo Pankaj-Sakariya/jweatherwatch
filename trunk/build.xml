@@ -4,9 +4,11 @@
 	 <loadproperties srcFile="jww.properties"/>
 	
 	<path id="jww.classpath">
+		
 		<fileset dir="./lib">
 			<include name="**/*.jar" />
 		</fileset>
+
 	</path>
 
 	<target name="init">			
@@ -25,9 +27,12 @@
 		<delete dir="./comp" />
 	</target>
 
+	
 	<target name="compile" depends="init">
-		<javac srcdir="./src" destdir="./comp">
+		<echo message="${toString:jww.classpath}"/>
+		<javac srcdir="./src" destdir="./comp">			
 			<classpath refid="jww.classpath" />
+			<classpath location="./build/gtk-4.0.jar"></classpath>
 		</javac>
 	</target>
 
@@ -39,7 +44,7 @@
 		<jar destfile="./dist/JWeatherWatch.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="net.Main" />
-				<attribute name="Class-Path" value=". ./lib/${mf.classpath}" />
+				<attribute name="Class-Path" value=". ./lib/${mf.classpath} /usr/share/java/gtk.jar" />
 			</manifest>
 			<fileset dir="./comp" />
 			<fileset file="CurrentVersion.xml" />
