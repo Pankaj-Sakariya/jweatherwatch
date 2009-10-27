@@ -1,14 +1,12 @@
 package gui.settings.tabs;
 
 import gui.Gui;
-import it.sauronsoftware.junique.JUnique;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
@@ -168,19 +166,9 @@ public class MainTab extends SettingsTab {
 		}
 
 		NotificationConnector.setHost(jTextField_Host.getText());
-		if (restart) {
-			int result = JOptionPane
-					.showConfirmDialog(
-							null,
-							"The changes you made will be availible afte restarting jWeatherWatch",
-							"Restart Needed", JOptionPane.YES_NO_OPTION);
-			if (result == JOptionPane.NO_OPTION)
-				return;
-			JUnique.releaseLock(SettingsReader.name);
+		if (restart)restart();
 
-			Utils.restart();
-
-		}
+		
 
 	}
 }
