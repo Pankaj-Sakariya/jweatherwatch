@@ -8,7 +8,19 @@ on a Derbian system just
 sudo apt-get install libjava-gnome-java libnotify
 </code>
 
-Are the icons to small?
+=Knwon Issues=
+ On some 32bit sytems jWeatherWatch crashes with 
+<code>
+GThread-ERROR **: GThread system may only be initialized once.
+aborting...
+</code>
+when changing notifier from TrayIcon to libnotify.
+Then you have to edit ~/.jWeatherWatch/settings.xml and change  <code><notifer>TryIcon</notifer></code>
+to
+<code><notifer>LibNotify</notifer></code>
+and restart
+
+
 
 =On KDE4=
 http://jweatherwatch.googlecode.com/svn/images/libnotify%20kde.png
