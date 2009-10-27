@@ -1,5 +1,10 @@
 #labels Featured
     
+==jWeatherWatch v1.3.4==
+ * fixed GThread issue when switching to LibNotify
+ * fixed X Errors when using LibNotify
+ * cleaned up some mess
+
 ==jWeatherWatch v1.3.3==
  * fixed LibNotify
  * added LibNotify support on x64 systems
