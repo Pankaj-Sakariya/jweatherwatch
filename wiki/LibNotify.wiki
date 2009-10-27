@@ -8,17 +8,7 @@ on a Derbian system just
 sudo apt-get install libjava-gnome-java libnotify
 </code>
 
-=Knwon Issues=
- In some Java distributions jWeatherWatch crashes with 
-<code>
-GThread-ERROR **: GThread system may only be initialized once.
-aborting...
-</code>
-when changing notifier from TrayIcon to libnotify.
-Then you have to edit ~/.jWeatherWatch/settings.xml and change  <code><notifer>TryIcon</notifer></code>
-to
-<code><notifer>LibNotify</notifer></code>
-and restart
+All known LibNotify got solved in current dev version. So if there occurs an error please try the dev release. 
 
 
 
