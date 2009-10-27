@@ -4,6 +4,7 @@
  * fixed GThread issue when switching to LibNotify
  * fixed X Errors when using LibNotify
  * cleaned up some mess
+ * used new restart feture to switch betwene dev/nonDev channel
 
 ==jWeatherWatch v1.3.3==
  * fixed LibNotify
