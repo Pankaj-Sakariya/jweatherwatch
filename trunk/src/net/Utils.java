@@ -110,4 +110,22 @@ public class Utils {
 		return OS.ERROR;
 
 	}
+
+	public static void restart() {
+		try {
+			SettingsReader.getInstance().close();
+			Runtime.getRuntime().exec(
+					new String[] {
+							System.getProperty("java.home") + "/bin/java",
+							"-classpath",
+							SettingsReader.getInstance()
+									.getCurrentDirectory()
+									+ "JWeatherWatch.jar", "net.Main" });
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Runtime.getRuntime().halt(0);
+		
+	}
 }

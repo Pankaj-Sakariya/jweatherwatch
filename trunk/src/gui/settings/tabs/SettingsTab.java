@@ -27,4 +27,5 @@ public abstract class SettingsTab extends JPanel {
 	public abstract void save(Gui gui);
 
 	public abstract void load();
+
 }
