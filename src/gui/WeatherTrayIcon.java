@@ -43,8 +43,7 @@ public class WeatherTrayIcon extends TrayIcon {
 			popupMenu = new PopupMenu();
 			MenuItem exit = new MenuItem("Exit");
 			exit.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					parent.dispose();
+				public void actionPerformed(ActionEvent e) {					
 					System.exit(0);
 				}
 			});

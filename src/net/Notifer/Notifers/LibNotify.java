@@ -12,13 +12,14 @@ import net.Utils.OS;
 import org.gnome.gdk.InterpType;
 import org.gnome.gdk.Pixbuf;
 import org.gnome.gtk.Gtk;
-import org.gnome.gtk.StatusIcon;
+import org.gnome.gtk.Widget;
 import org.gnome.notify.Notification;
 import org.gnome.notify.Notify;
 
 public class LibNotify implements Notifer {
 
-	private static StatusIcon icon = null;
+
+	private static final Widget widgetNull =null;
 	private static boolean initialized = false;
 	private static boolean gtkInitialized = false;
 
@@ -34,18 +35,21 @@ public class LibNotify implements Notifer {
 		if (!initialized) {
 			if (!gtkInitialized)
 				try {
-					Gtk.init(new String[] {});
-					new Thread("gtk") {				
-						public void run() {							
-							Gtk.main();
-						};
-					}.start();
+				
+					Gtk.init(new String[] {});			
 					gtkInitialized=true;
 				} catch (UnsatisfiedLinkError e) {
 					return false;
 				}
 				
-
+				new Thread("gtk") {				
+					public void run() {							
+						Gtk.main();
+					};
+				}.start();
+				
+				
+				
 			initialized = true;
 			return Notify.init(SettingsReader.name);
 		}
@@ -54,9 +58,9 @@ public class LibNotify implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath, final String url) {
+			String iconPath, final String url) {		
 		Notification not = new org.gnome.notify.Notification(title,
-				description, null, getIcon());
+				description, SettingsReader.getInstance().getIconpPath()+"01.png",widgetNull);
 		if (url != null) {
 			not.addAction("b", "Visit Forecast",
 					new org.gnome.notify.Notification.Action() {
@@ -81,22 +85,18 @@ public class LibNotify implements Notifer {
 				e.printStackTrace();
 			}
 		not.show();
+		
 	}
 
 	@Override
 	public void unload() {
 		if (initialized) {
 			Notify.uninit();
-			Gtk.mainQuit();
-			initialized = false;
+			Gtk.mainQuit();	
+			initialized = false;			
 		}
 	}
 
-	private StatusIcon getIcon() {
-		if (icon == null) {
-			icon = new StatusIcon();
-			icon.setVisible(false);
-		}
-		return icon;
-	}
+
+
 }

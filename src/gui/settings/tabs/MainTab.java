@@ -1,12 +1,14 @@
 package gui.settings.tabs;
 
 import gui.Gui;
+import it.sauronsoftware.junique.JUnique;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
@@ -114,7 +116,8 @@ public class MainTab extends SettingsTab {
 			jToggleButton_SystemStart
 					.setBounds(new Rectangle(75, 150, 151, 16));
 			jToggleButton_SystemStart.setText("Start with System");
-			jToggleButton_SystemStart.setSelected(SettingsReader.getInstance().isAutostart());
+			jToggleButton_SystemStart.setSelected(SettingsReader.getInstance()
+					.isAutostart());
 			jToggleButton_SystemStart
 					.setEnabled(Utils.getOS() == Utils.OS.WINDOWS);
 
@@ -139,17 +142,21 @@ public class MainTab extends SettingsTab {
 	public void load() {
 		jComboBox_Notifer.setSelectedItem(NotificationConnector.getNotifer()
 				.getName());
-		jTextField_NotificationInterval.setText(String
-				.valueOf(SettingsReader.getInstance().notificationInterval));
+		jTextField_NotificationInterval.setText(String.valueOf(SettingsReader
+				.getInstance().notificationInterval));
 		jTextField_Host.setText(NotificationConnector.getHost());
 
 	}
 
 	@Override
 	public void save(Gui gui) {
-		NotificationConnector.setNotifer(NotiferTypes.getNotifer(
-				(NotiferTypes) jComboBox_Notifer.getSelectedItem(), gui
-						.getTrayIcon()));
+		boolean restart = false;
+		if (SettingsReader.getInstance().notifer != (NotiferTypes) jComboBox_Notifer
+				.getSelectedItem()) {
+			SettingsReader.getInstance().notifer = (NotiferTypes) jComboBox_Notifer
+					.getSelectedItem();
+			restart = true;
+		}
 
 		// autostart
 		if (SettingsReader.getInstance().isAutostart() != jToggleButton_SystemStart
@@ -161,6 +168,19 @@ public class MainTab extends SettingsTab {
 		}
 
 		NotificationConnector.setHost(jTextField_Host.getText());
+		if (restart) {
+			int result = JOptionPane
+					.showConfirmDialog(
+							null,
+							"The changes you made will be availible afte restarting jWeatherWatch",
+							"Restart Needed", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.NO_OPTION)
+				return;
+			JUnique.releaseLock(SettingsReader.name);
+
+			Utils.restart();
+
+		}
 
 	}
 }

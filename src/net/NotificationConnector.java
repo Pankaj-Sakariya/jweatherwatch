@@ -30,12 +30,7 @@ public class NotificationConnector implements Closeable {
 		if (notifer != null)
 			return;
 
-		/*
-		 * switch (Utils.getOS()) { case WINDOWS: if (setNotifer(new Snarl()))
-		 * return; if (setNotifer(new NetSnarl())) return; case MAC: if
-		 * (setNotifer(new NetGrowl())) return; break; case LINUX: if
-		 * (setNotifer(new KNotify())) return; }
-		 */
+	
 
 		setNotifer(new TrayNotification(trayIcon));
 
@@ -69,28 +64,23 @@ public class NotificationConnector implements Closeable {
 	public static boolean setNotifer(Notifer notifer2) {
 		if (notifer != null && notifer2.getName() == notifer.getName())
 			return false;
+		boolean ret=false;
 		if (notifer2 instanceof NetNotifer) {
 
 			if (((NetNotifer) notifer2).load(notifications, host)) {
 				if (notifer != null)
 					notifer.unload();
 				notifer = notifer2;
-				SettingsReader.getInstance();
-				NotificationConnector.sendNotification("Startup",
-						SettingsReader.name + " v"
-								+ SettingsReader.getInstance().getVersion(),
-						SettingsReader.name + " v"
-								+ SettingsReader.getInstance().getVersion()
-								+ " succsessfully registered wit "
-								+ notifer2.getName(), null, null);
-				return true;
+				ret=true;		
 			}
 		} else if (notifer2.load(notifications)) {
 			if (notifer != null)
 				notifer.unload();
 			notifer = notifer2;
-			SettingsReader.getInstance();
-			SettingsReader.getInstance();
+			ret=true;
+		} else
+			System.err.println("Setting Notifer failed");
+		if(ret)
 			NotificationConnector.sendNotification("Startup",
 					SettingsReader.name + " v"
 							+ SettingsReader.getInstance().getVersion(),
@@ -98,10 +88,7 @@ public class NotificationConnector implements Closeable {
 							+ SettingsReader.getInstance().getVersion()
 							+ " succsessfully registered wit "
 							+ notifer2.getName(), null, null);
-			return true;
-		} else
-			System.err.println("Setting Notifer failed");
-		return false;
+		return ret;
 	}
 
 	public void close() {

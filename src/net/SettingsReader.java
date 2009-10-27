@@ -146,8 +146,7 @@ public class SettingsReader implements Closeable {
 				"Notification Connector Host");
 		doc.appendNode("notificationIterval", notificationInterval);
 		if (NotificationConnector.getNotifer() != null)
-			doc.appendNode("notifer", NotificationConnector.getNotifer()
-					.getName());
+			doc.appendNode("notifer", notifer);
 		doc.appendNode("autoStart", autostart, "Autostart true/false");
 		doc.appendNode("currentView", view, "The View loaded on start");
 		doc.appendNode("iconPath", iconpPath,

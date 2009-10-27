@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import net.SettingsReader;
 
@@ -36,14 +38,10 @@ public class SettingsDialog extends JFrame {
 		super("Settings");
 		parent = gui;
 		initialize();
-		load();
+	
 	}
 
-	private void load() {
-		for (SettingsTab t : tabs) {
-			t.load();
-		}
-	}
+	
 
 	private void save() {
 		for (SettingsTab t : tabs) {
@@ -76,15 +74,18 @@ public class SettingsDialog extends JFrame {
 			for (SettingsTab t : tabs)
 				jTabbedPane.addTab(t.getTabName(), null, t, t.getTabName());
 		}
+		jTabbedPane.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				((SettingsTab) jTabbedPane.getSelectedComponent()).load();				
+			}
+		});
+		((SettingsTab) jTabbedPane.getSelectedComponent()).load();		
 		return jTabbedPane;
 	}
 
-	@Override
-	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		super.setVisible(b);
-		load();
-	}
+
 
 	/**
 	 * This method initializes jPanel
