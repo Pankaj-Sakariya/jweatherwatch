@@ -191,4 +191,23 @@ public class Main {
 		System.exit(i);
 
 	}
+
+	public static void restart() {
+		try {
+			close();
+			JUnique.releaseLock(SettingsReader.name);
+			Runtime.getRuntime().exec(
+					new String[] {
+							System.getProperty("java.home") + "/bin/java",
+							"-classpath",
+							SettingsReader.getInstance()
+									.getCurrentDirectory()
+									+ "JWeatherWatch.jar", "net.Main" });
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Runtime.getRuntime().halt(0);
+		
+	}
 }
