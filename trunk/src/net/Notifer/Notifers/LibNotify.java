@@ -34,8 +34,7 @@ public class LibNotify implements Notifer {
 			return false;
 		if (!initialized) {
 			if (!gtkInitialized)
-				try {
-				
+				try {				
 					Gtk.init(new String[] {});			
 					gtkInitialized=true;
 				} catch (UnsatisfiedLinkError e) {
@@ -62,14 +61,14 @@ public class LibNotify implements Notifer {
 		Notification not = new org.gnome.notify.Notification(title,
 				description, SettingsReader.getInstance().getIconpPath()+"01.png",widgetNull);
 		if (url != null) {
-			not.addAction("b", "Visit Forecast",
+			not.addAction("VisitForecast", "Visit Forecast",
 					new org.gnome.notify.Notification.Action() {
 						public void onAction(Notification arg0, String arg1) {
 							Utils.visitURL(url);
 						}
 					});
 		}
-		not.addAction("a", "Show jWeatherWatch",
+		not.addAction("BringToFront", "Show jWeatherWatch",
 				new org.gnome.notify.Notification.Action() {
 					public void onAction(Notification arg0, String arg1) {
 						NotificationConnector.bringFrameToFront();
@@ -80,11 +79,13 @@ public class LibNotify implements Notifer {
 				Pixbuf buf = new Pixbuf(iconPath);
 				buf=buf.scale(40, 40, InterpType.BILINEAR);
 				not.setIcon(buf);
+				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		not.show();
+		
 		
 	}
 

@@ -1,7 +1,5 @@
 package net;
 
-import it.sauronsoftware.junique.JUnique;
-
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -113,22 +111,5 @@ public class Utils {
 
 	}
 
-	public static void restart() {
-		try {
-			SettingsReader.getInstance().close();
-			JUnique.releaseLock(SettingsReader.name);
-			Runtime.getRuntime().exec(
-					new String[] {
-							System.getProperty("java.home") + "/bin/java",
-							"-classpath",
-							SettingsReader.getInstance()
-									.getCurrentDirectory()
-									+ "JWeatherWatch.jar", "net.Main" });
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Runtime.getRuntime().halt(0);
-		
-	}
+	
 }

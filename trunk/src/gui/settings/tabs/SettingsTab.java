@@ -5,7 +5,7 @@ import gui.Gui;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import net.Utils;
+import net.Main;
 
 public abstract class SettingsTab extends JPanel {
 
@@ -37,7 +37,7 @@ public abstract class SettingsTab extends JPanel {
 				if (result == JOptionPane.NO_OPTION)
 					return;
 
-				Utils.restart();
+				Main.restart();
 	}
 	public abstract void save(Gui gui);
 
