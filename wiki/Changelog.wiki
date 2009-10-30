@@ -7,6 +7,7 @@
  * used new restart feture to switch betwene dev/nonDev channel
  * added autostart suport for linux
  * jWeatherWatch adds itself to ~/bin/ if ~/bin/ exists
+ * removed unavailible notifier from combobox in settings dialog
 
 
 ==jWeatherWatch v1.3.3==
