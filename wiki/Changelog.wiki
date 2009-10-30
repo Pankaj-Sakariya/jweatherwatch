@@ -5,6 +5,9 @@
  * fixed X Errors when using LibNotify
  * cleaned up some mess
  * used new restart feture to switch betwene dev/nonDev channel
+ * added autostart suport for linux
+ * jWeatherWatch adds itself to ~/bin/ if ~/bin/ exists
+
 
 ==jWeatherWatch v1.3.3==
  * fixed LibNotify
