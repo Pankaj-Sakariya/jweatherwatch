@@ -152,7 +152,7 @@ public class Gui extends JFrame {
 	private JButton getJButton_Cancell1() {
 		if (jButton_Cancell1 == null) {
 			jButton_Cancell1 = new JButton();
-			jButton_Cancell1.setText("Cancell");
+			jButton_Cancell1.setText("Cancel");
 			jButton_Cancell1.setSize(new Dimension(100, 16));
 			jButton_Cancell1.setLocation(new Point(75, 135));
 			jButton_Cancell1
