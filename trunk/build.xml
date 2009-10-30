@@ -59,7 +59,6 @@
 			<fileset dir="iconset" />
 		</copy>
 		<copy file="./build/jWeatherWatch.exe" tofile="./dist/jWeatherWatch.exe" />
-		<copy file="./build/jWeatherWatch" tofile="./dist/jWeatherWatch" />
 		<copy todir="./dist/lib">
 			<fileset dir="lib" />
 		</copy>

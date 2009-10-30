@@ -72,10 +72,10 @@ public class MinimalTab extends SettingsTab{
 	}
 
 	public void load() {
-		jToggleButton_MinimalShifted
-		.setSelected(SettingsReader.getInstance().minimalView_Shifted);
+		jToggleButton_MinimalShifted.setSelected(SettingsReader.getInstance().minimalView_Shifted);
 		jSlider_RowCount.setValue(SettingsReader.getInstance().mininimalViewRows);
 		jSlider_Size.setValue(SettingsReader.getInstance().minimumViewSize);
+		return;
 	}
 
 	public void save(Gui gui) {
