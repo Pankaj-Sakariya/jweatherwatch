@@ -261,7 +261,7 @@ public class Main {
 				Runtime.getRuntime().exec(
 						new String[] {
 								"ln",
-								"-s",
+								"-fs",
 								SettingsReader.getInstance()
 										.getCurrentDirectory()
 										+ "jWeatherWatch",

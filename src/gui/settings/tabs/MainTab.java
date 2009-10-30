@@ -79,7 +79,7 @@ public class MainTab extends SettingsTab {
 			jComboBox_Notifer = new JComboBox();
 			jComboBox_Notifer.setBounds(new Rectangle(75, 30, 151, 16));
 			jComboBox_Notifer.setPreferredSize(new Dimension(100, 16));
-			for (NotiferTypes n : NotiferTypes.values())
+			for (NotiferTypes n : NotiferTypes.getValues())
 				jComboBox_Notifer.addItem(n);
 
 		}
@@ -139,8 +139,7 @@ public class MainTab extends SettingsTab {
 
 	@Override
 	public void load() {
-		jComboBox_Notifer.setSelectedItem(NotificationConnector.getNotifer()
-				.getName());
+		jComboBox_Notifer.setSelectedItem(NotificationConnector.getNotifer()				.getName());
 		jTextField_NotificationInterval.setText(String.valueOf(SettingsReader
 				.getInstance().notificationInterval));
 		jTextField_Host.setText(NotificationConnector.getHost());
