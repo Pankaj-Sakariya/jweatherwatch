@@ -14,6 +14,7 @@ import net.NotificationConnector;
 import net.SettingsReader;
 import net.Utils;
 import net.Notifer.NotiferTypes;
+import net.Utils.OS;
 
 public class MainTab extends SettingsTab {
 
@@ -117,7 +118,7 @@ public class MainTab extends SettingsTab {
 			jToggleButton_SystemStart.setSelected(SettingsReader.getInstance()
 					.isAutostart());
 			jToggleButton_SystemStart
-					.setEnabled(Utils.getOS() == Utils.OS.WINDOWS);
+					.setEnabled(Utils.getOS() == Utils.OS.WINDOWS||Utils.getOS()==OS.LINUX);
 
 		}
 		return jToggleButton_SystemStart;
