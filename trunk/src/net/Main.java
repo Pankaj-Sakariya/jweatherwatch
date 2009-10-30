@@ -35,6 +35,12 @@ public class Main {
 						Runtime.getRuntime().halt(0);
 					}
 				});
+		new Thread("init") {
+			public void run() {
+				if (Utils.getOS() == OS.LINUX)
+					initLinux();
+			};
+		}.start();
 		Version compare = new Version(Updater.getVersion());
 		if (SettingsReader.getInstance().devChannel) {
 			JOptionPane
@@ -220,12 +226,12 @@ public class Main {
 
 	public static void initLinux() {
 		PrintWriter out = null;
-		File file = new File(SettingsReader.getInstance().getCurrentDirectory()+"/jWeatherWatch");
+		File file = new File(SettingsReader.getInstance().getCurrentDirectory()
+				+ "/jWeatherWatch");
 		try {
 			if (file.getParentFile() != null && !file.getParentFile().exists())
 				return;
 			out = new PrintWriter(file);
-
 			out
 					.print("#!/bin/bash\nstarttime=`date +%s`\necho \"start = $starttime\"\njava -classpath "
 							+ SettingsReader.getInstance()
@@ -239,7 +245,9 @@ public class Main {
 							SettingsReader.getInstance().getCurrentDirectory()
 									+ "jWeatherWatch" });
 
-			file = new File(SettingsReader.getInstance().getCurrentDirectory()+"/jWeatherWatch.desktop");
+			file = new File(SettingsReader.getInstance().getCurrentDirectory()
+					+ "/jWeatherWatch.desktop");
+			file.mkdirs();
 			out = new PrintWriter(file);
 			out.println("[Desktop Entry]\n" + "Version=1.0\n"
 					+ "Encoding=UTF-8\n" + "Name=jWeatherWatch\n"

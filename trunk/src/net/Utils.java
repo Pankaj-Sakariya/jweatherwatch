@@ -77,12 +77,11 @@ public class Utils {
 		return s;
 	}
 
-	public static void visitURL(String url) {	
-			System.out.println("Visiting: " + url);
-			try {
-		
-		
-			new BrowserLauncher().openURLinBrowser(SettingsReader.getInstance().webBrowser,url);
+	public static void visitURL(String url) {
+		System.out.println("Visiting: " + url);
+		try {
+			new BrowserLauncher().openURLinBrowser(
+					SettingsReader.getInstance().webBrowser, url);
 		} catch (BrowserLaunchingInitializingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,8 +89,7 @@ public class Utils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
+
 	}
 
 	public static enum OS {
@@ -111,5 +109,4 @@ public class Utils {
 
 	}
 
-	
 }
