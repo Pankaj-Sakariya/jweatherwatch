@@ -1,0 +1,8 @@
+#!/bin/bash
+starttime=`date +%s`
+echo "start = $starttime"
+java -classpath /home/patrick/workspace/jWeatherWatch/bin/JWeatherWatch.jar net.Main 
+endtime=`date +%s`
+echo "end = $endtime"
+total=`expr $endtime - $starttime`
+ echo "jWeatherWatch lived $total seconds"

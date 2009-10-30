@@ -170,9 +170,10 @@ public class SettingsReader implements Closeable {
 
 	}
 
+	
 	public void addtoAutostart() {
-		if (Utils.getOS() != Utils.OS.WINDOWS)
-			return;
+		OS os=Utils.getOS();
+		if (os== Utils.OS.WINDOWS){
 		try {
 			PrintWriter out = new PrintWriter(new FileOutputStream(
 					getHomeDirectory() + "/regme.reg"));
@@ -193,40 +194,64 @@ public class SettingsReader implements Closeable {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			autostart = false;
+			return;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			autostart = false;
+			return;
+		}
+		}
+		if(os==OS.LINUX){		
+				Main.initLinux();
+				try {
+					Runtime.getRuntime().exec(new String[]{"ln","-s",getCurrentDirectory()+"jWeatherWatch.desktop",System.getProperty("user.home")+"/.config/autostart/jWeatherWatch.desktop"});
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					autostart = false;
+					return;
+				}
+			
 		}
 		autostart = true;
 
 	}
 
 	public void removeAutostart() {
-		if (Utils.getOS() != Utils.OS.WINDOWS)
-			return;
-		try {
-			PrintWriter out = new PrintWriter(new FileOutputStream(
-					getHomeDirectory() + "/regme.reg"));
+		OS os=Utils.getOS();
+		if ( os== Utils.OS.WINDOWS) {
+			try {
+				PrintWriter out = new PrintWriter(new FileOutputStream(
+						getHomeDirectory() + "/regme.reg"));
 
-			out.println("Windows Registry Editor Version 5.00");
-			out.println();
-			out
-					.println("[HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run]");
-			out.println("\"jWeatherWatch\"=-");
-			out.println();
-			out.close();
-			Runtime.getRuntime().exec(
-					new String[] { "regedit.exe", "/s",
-							getHomeDirectory() + "/regme.reg" });
+				out.println("Windows Registry Editor Version 5.00");
+				out.println();
+				out
+						.println("[HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run]");
+				out.println("\"jWeatherWatch\"=-");
+				out.println();
+				out.close();
+				Runtime.getRuntime().exec(
+						new String[] { "regedit.exe", "/s",
+								getHomeDirectory() + "/regme.reg" });
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(os==OS.LINUX){
+			File autoStartFile=new File(System.getProperty("user.home")+"/.config/autostart/jWeatherWatch.desktop");
+			if(autoStartFile.exists())
+				autoStartFile.delete();
 		}
 		autostart = false;
+
 	}
 
 	public boolean isAutostart() {
@@ -317,7 +342,7 @@ public class SettingsReader implements Closeable {
 			System.err.println("Version file is missing");
 			releaseVersion = new Version("0");
 			devVersion = new Version("0");
-			//System.exit(0);
+			// System.exit(0);
 		}
 
 	}
