@@ -24,7 +24,7 @@ public class SettingsDialog extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Gui parent = null;
-	private SettingsTab tabs[] = new SettingsTab[3];
+	private SettingsTab tabs[] = null;
 
 	private JTabbedPane jTabbedPane = null;
 	private JPanel jPanel = null;
@@ -66,6 +66,7 @@ public class SettingsDialog extends JFrame {
 		if (jTabbedPane == null) {
 			jTabbedPane = new JTabbedPane();
 			jTabbedPane.setSize(300, 200);
+			tabs=new SettingsTab[3];
 			tabs[0] = new MainTab();
 			tabs[1] = new MinimalTab();
 			tabs[2]=new AdvancedTab();
@@ -125,7 +126,7 @@ public class SettingsDialog extends JFrame {
 		if (jButton_Aply == null) {
 			jButton_Aply = new JButton();
 			jButton_Aply.setBounds(new Rectangle(120, 210, 76, 16));
-			jButton_Aply.setText("Aply");
+			jButton_Aply.setText("Apply");
 			jButton_Aply.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					save();
