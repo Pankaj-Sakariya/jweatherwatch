@@ -34,17 +34,18 @@ public class Install {
 		default:
 			break;
 		}
+		SettingsReader.getInstance().removeAutostart();
 
 	}
 
 	private static void unInstallWindows() {
-	new File(	System.getProperty("user.home")
-		+ "/Desktop/jWeatherWatch.url").delete();
-	
-	new File(System.getProperty("user.home")
+		new File(System.getProperty("user.home") + "/Desktop/jWeatherWatch.url")
+				.delete();
+
+		new File(System.getProperty("user.home")
 				+ "/Start Menu/jWeatherWatch/jWeatherWatch.url").delete();
-	new File(System.getProperty("user.home")
-			+ "/Start Menu/jWeatherWatch/").delete();
+		new File(System.getProperty("user.home") + "/Start Menu/jWeatherWatch/")
+				.delete();
 
 	}
 
@@ -56,7 +57,10 @@ public class Install {
 
 		new File(System.getProperty("user.home") + "/bin/jWeatherWatch")
 				.delete();
-		SettingsReader.getInstance().removeAutostart();
+		
+		new File(System.getProperty("user.home")
+		+ "/.local/share/applications/jWeatherWatch.desktop").delete();
+
 
 	}
 
@@ -90,7 +94,7 @@ public class Install {
 					"Displays Weather from AccuWeather", SettingsReader
 							.getInstance().getCurrentDirectory(),
 					SettingsReader.getInstance().getCurrentDirectory()
-							+ "iconset/01.png", "Internet", SettingsReader
+							+ "iconset/01.png", "Application;Network;", SettingsReader
 							.getInstance().getCurrentDirectory()
 							+ "/jWeatherWatch.desktop");
 
@@ -104,6 +108,14 @@ public class Install {
 										+ "jWeatherWatch",
 								System.getProperty("user.home")
 										+ "/bin/jWeatherWatch" });
+			Runtime.getRuntime().exec(
+					new String[] {
+							"ln",
+							"-fs",
+							SettingsReader.getInstance().getCurrentDirectory()
+									+ "jWeatherWatch.desktop",
+							System.getProperty("user.home")
+									+ "/.local/share/applications/jWeatherWatch.desktop" });
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -164,6 +176,8 @@ public class Install {
 		PrintWriter out = null;
 		if (!dest.endsWith(".desktop"))
 			dest += ".desktop";
+		if (!category.endsWith(";"))
+			dest += ";";
 		File file = new File(dest);
 		try {
 			out = new PrintWriter(file);
@@ -172,7 +186,7 @@ public class Install {
 					+ "GenericName=" + programmmName + "\n" + "Comment="
 					+ description + "\n" + "Exec=" + target + "jWeatherWatch\n"
 					+ "Icon=" + icon + "\n" + "StartupNotify=false\n"
-					+ "Type=Application\n" + "Categories=" + category + ";");
+					+ "Type=Application\n" + "Categories=" + category);
 			out.close();
 			Runtime.getRuntime().exec(new String[] { "chmod", "+x", dest });
 		} catch (FileNotFoundException e) {
