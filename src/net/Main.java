@@ -6,22 +6,18 @@ import it.sauronsoftware.junique.JUnique;
 import it.sauronsoftware.junique.MessageHandler;
 
 import java.io.Closeable;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-import net.Utils.OS;
 import updater.net.Updater;
 
 public class Main {
 	public static LinkedList<Closeable> thingsToClose = new LinkedList<Closeable>();
 
 	enum options {
-		minimized, workindirectory, help, h, version, tofront, dev, nodev, portable
+		minimized, workindirectory, help, h, version, tofront, dev, nodev, portable,install,uninstall
 	}
 
 	public static void main(String[] args) {
@@ -35,12 +31,7 @@ public class Main {
 						Runtime.getRuntime().halt(0);
 					}
 				});
-		new Thread("init") {
-			public void run() {
-				if (Utils.getOS() == OS.LINUX)
-					initLinux();
-			};
-		}.start();
+
 		Version compare = new Version(Updater.getVersion());
 		if (SettingsReader.getInstance().devChannel) {
 			JOptionPane
@@ -88,6 +79,12 @@ public class Main {
 						break;
 					case portable:
 						SettingsReader.getInstance().setPortable(true);
+						break;
+					case install:
+					Install.install();
+						break;
+					case uninstall:
+						Install.unInstall();
 						break;
 					case help:
 					case h:
@@ -186,8 +183,6 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (Utils.getOS() == OS.LINUX)
-			initLinux();
 
 	}
 
@@ -224,65 +219,5 @@ public class Main {
 
 	}
 
-	public static void initLinux() {
-		PrintWriter out = null;
-		File file = new File(SettingsReader.getInstance().getCurrentDirectory()
-				+ "/jWeatherWatch");
-		try {
-			if (file.getParentFile() != null && !file.getParentFile().exists())
-				return;
-			out = new PrintWriter(file);
-			out
-					.print("#!/bin/bash\nstarttime=`date +%s`\necho \"start = $starttime\"\njava -classpath "
-							+ SettingsReader.getInstance()
-									.getCurrentDirectory()
-							+ "JWeatherWatch.jar net.Main \nendtime=`date +%s`\necho \"end = $endtime\"\ntotal=`expr $endtime - $starttime`\n echo \"jWeatherWatch lived $total seconds\"\n");
-			out.close();
-			Runtime.getRuntime().exec(
-					new String[] {
-							"chmod",
-							"+x",
-							SettingsReader.getInstance().getCurrentDirectory()
-									+ "jWeatherWatch" });
-
-			file = new File(SettingsReader.getInstance().getCurrentDirectory()
-					+ "/jWeatherWatch.desktop");
-			file.mkdirs();
-			out = new PrintWriter(file);
-			out.println("[Desktop Entry]\n" + "Version=1.0\n"
-					+ "Encoding=UTF-8\n" + "Name=jWeatherWatch\n"
-					+ "GenericName=jWeatherWatch\n"
-					+ "Comment=Displays Weather from AccuWeather\n" + "Exec="
-					+ SettingsReader.getInstance().getCurrentDirectory()
-					+ "jWeatherWatch\n" + "Icon="
-					+ SettingsReader.getInstance().getCurrentDirectory()
-					+ "iconset/01.png\n" + "StartupNotify=false\n"
-					+ "Type=Application\n" + "Categories=Internet;");
-			out.close();
-			Runtime.getRuntime().exec(
-					new String[] {
-							"chmod",
-							"+x",
-							SettingsReader.getInstance().getCurrentDirectory()
-									+ "jWeatherWatch.desktop" });
-			if (new File(System.getProperty("user.home") + "/bin/").exists())
-				Runtime.getRuntime().exec(
-						new String[] {
-								"ln",
-								"-fs",
-								SettingsReader.getInstance()
-										.getCurrentDirectory()
-										+ "jWeatherWatch",
-								System.getProperty("user.home")
-										+ "/bin/jWeatherWatch" });
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
+	
 }

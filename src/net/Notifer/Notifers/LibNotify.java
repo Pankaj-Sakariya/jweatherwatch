@@ -18,37 +18,33 @@ import org.gnome.notify.Notify;
 
 public class LibNotify implements Notifer {
 
-
-	private static final Widget widgetNull =null;
+	private static final Widget widgetNull = null;
 	private static boolean initialized = false;
 	private static boolean gtkInitialized = false;
 
 	public NotiferTypes getName() {
-
 		return NotiferTypes.LibNotify;
 	}
 
 	@Override
 	public boolean load(String[] notifications) {
-		if(Utils.getOS()!=OS.LINUX)
+		if (Utils.getOS() != OS.LINUX)
 			return false;
 		if (!initialized) {
 			if (!gtkInitialized)
-				try {				
-					Gtk.init(new String[] {});			
-					gtkInitialized=true;
+				try {
+					Gtk.init(new String[] {});
+					Gtk.setProgramName(SettingsReader.name);
+					gtkInitialized = true;
 				} catch (UnsatisfiedLinkError e) {
+					e.printStackTrace();
 					return false;
 				}
-				
-				new Thread("gtk") {				
-					public void run() {							
-						Gtk.main();
-					};
-				}.start();
-				
-				
-				
+			new Thread("gtk") {
+				public void run() {
+					Gtk.main();
+				};
+			}.start();
 			initialized = true;
 			return Notify.init(SettingsReader.name);
 		}
@@ -57,9 +53,10 @@ public class LibNotify implements Notifer {
 
 	@Override
 	public void send(String alert, String title, String description,
-			String iconPath, final String url) {		
+			String iconPath, final String url) {
 		Notification not = new org.gnome.notify.Notification(title,
-				description, SettingsReader.getInstance().getIconpPath()+"01.png",widgetNull);
+				description, SettingsReader.getInstance().getIconpPath()
+						+ "01.png", widgetNull);
 		if (url != null) {
 			not.addAction("VisitForecast", "Visit Forecast",
 					new org.gnome.notify.Notification.Action() {
@@ -77,27 +74,24 @@ public class LibNotify implements Notifer {
 		if (iconPath != null)
 			try {
 				Pixbuf buf = new Pixbuf(iconPath);
-				buf=buf.scale(40, 40, InterpType.BILINEAR);
+				buf = buf.scale(40, 40, InterpType.BILINEAR);
 				not.setIcon(buf);
-				
+
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		not.show();
-		
-		
+
 	}
 
 	@Override
 	public void unload() {
 		if (initialized) {
 			Notify.uninit();
-			Gtk.mainQuit();	
-			initialized = false;			
+			Gtk.mainQuit();
+			initialized = false;
 		}
 	}
-
-
 
 }
