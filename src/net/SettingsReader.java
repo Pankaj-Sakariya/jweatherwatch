@@ -206,7 +206,7 @@ public class SettingsReader implements Closeable {
 		if(os==OS.LINUX){	
 			Install.installLinux();
 				try {
-					Runtime.getRuntime().exec(new String[]{"ln","-s",getCurrentDirectory()+"jWeatherWatch.desktop",System.getProperty("user.home")+"/.config/autostart/jWeatherWatch.desktop"});
+					Runtime.getRuntime().exec(new String[]{"ln","-fs",getCurrentDirectory()+"jWeatherWatch.desktop",System.getProperty("user.home")+"/.config/autostart/jWeatherWatch.desktop"});
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

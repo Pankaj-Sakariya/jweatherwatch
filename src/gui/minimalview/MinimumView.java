@@ -3,7 +3,6 @@ package gui.minimalview;
 import gui.Gui;
 import gui.WeatherView;
 import net.SettingsReader;
-import net.Utils;
 import net.ACCUWeather.Location;
 import net.ACCUWeather.LocationList;
 
@@ -21,7 +20,6 @@ public class MinimumView extends WeatherView {
 		super(parent,Views.minimal);
 		this.setLayout(null);
 		mininmalPanerls = new MininmalPanel[SettingsReader.getInstance().mininimalViewRows];
-		parent.setIconImage(new Utils().imageLodaer("./iconset/01.png"));
 		for (Location l : parent.getLocations())
 			addLocation(l);
 
