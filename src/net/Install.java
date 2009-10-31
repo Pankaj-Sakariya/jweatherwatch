@@ -42,9 +42,9 @@ public class Install {
 		+ "/Desktop/jWeatherWatch.url").delete();
 	
 	new File(System.getProperty("user.home")
-				+ "Start Menu/jWeatherWatch/jWeatherWatch.url").delete();
+				+ "/Start Menu/jWeatherWatch/jWeatherWatch.url").delete();
 	new File(System.getProperty("user.home")
-			+ "Start Menu/jWeatherWatch/").delete();
+			+ "/Start Menu/jWeatherWatch/").delete();
 
 	}
 
@@ -121,15 +121,14 @@ public class Install {
 				.getCurrentDirectory()
 				+ "/jWeatherWatch.exe", System.getProperty("user.home")
 				+ "/Desktop/jWeatherWatch");
-		new File(System.getProperty("user.home") + "Start Menu/jWeatherWatch")
+		new File(System.getProperty("user.home") + "/Start Menu/jWeatherWatch")
 				.mkdirs();
 		creatUrlFile(SettingsReader.name, SettingsReader.getInstance()
 				.getCurrentDirectory()
 				+ "/jWeatherWatch.exe", SettingsReader.getInstance()
 				.getCurrentDirectory()
 				+ "/jWeatherWatch.exe", System.getProperty("user.home")
-				+ "Start Menu/jWeatherWatch/jWeatherWatch");
-
+				+ "/Start Menu/jWeatherWatch/jWeatherWatch");
 	}
 
 	public static void creatUrlFile(String programmmName, String target,
