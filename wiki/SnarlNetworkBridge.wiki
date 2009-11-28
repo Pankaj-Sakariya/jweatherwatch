@@ -18,6 +18,8 @@ http://jweatherwatch.googlecode.com/svn/images/snarlnet.png
  * 32/64bit 
  
 ==Changes==
+===SNP1.1 v3===
+  * Fixed missing application name in Notification
  ===SNP1.1 v2===
   * Solved an error which leaded the program to crash if Snarl is quit 
  ===SNP1.1 v1===
