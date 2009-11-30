@@ -42,9 +42,8 @@ public class Install {
 		new File(System.getProperty("user.home") + "/Desktop/jWeatherWatch.url")
 				.delete();
 
-		new File(System.getProperty("user.home")
-				+ "/Start Menu/jWeatherWatch/jWeatherWatch.url").delete();
-		new File(System.getProperty("user.home") + "/Start Menu/jWeatherWatch/")
+		new File(System.getProperty("user.home")+ "/Start Menu/Programs/jWeatherWatch/jWeatherWatch.url").delete();
+		new File(System.getProperty("user.home") + "/Start Menu/Programs/jWeatherWatch/")
 				.delete();
 
 	}
@@ -133,14 +132,14 @@ public class Install {
 				.getCurrentDirectory()
 				+ "/jWeatherWatch.exe", System.getProperty("user.home")
 				+ "/Desktop/jWeatherWatch");
-		new File(System.getProperty("user.home") + "/Start Menu/jWeatherWatch")
-				.mkdirs();
+		new File(System.getProperty("user.home") + "/Start Menu/Programs/jWeatherWatch")
+				.mkdir();
 		creatUrlFile(SettingsReader.name, SettingsReader.getInstance()
 				.getCurrentDirectory()
 				+ "/jWeatherWatch.exe", SettingsReader.getInstance()
 				.getCurrentDirectory()
 				+ "/jWeatherWatch.exe", System.getProperty("user.home")
-				+ "/Start Menu/jWeatherWatch/jWeatherWatch");
+				+ "/Start Menu/Programs/jWeatherWatch/jWeatherWatch");
 	}
 
 	public static void creatUrlFile(String programmmName, String target,
@@ -150,9 +149,7 @@ public class Install {
 
 		PrintWriter printWriter = null;
 		try {
-			printWriter = new PrintWriter(new File(System
-					.getProperty("user.home")
-					+ "/Desktop/jWeatherWatch.url"));
+			printWriter = new PrintWriter(new File(dest));
 
 			printWriter.println("[InternetShortcut]\n" + "URL=\"file://"
 					+ target + "\"\n" + "WorkingDirectory=\""

@@ -153,7 +153,7 @@ public class MainTab extends SettingsTab {
 				.getSelectedItem()) {
 			SettingsReader.getInstance().notifer = (NotiferTypes) jComboBox_Notifer
 					.getSelectedItem();
-			restart = true;
+			restart=true;
 		}
 
 		// autostart
