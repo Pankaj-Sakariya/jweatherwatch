@@ -12,7 +12,7 @@ import net.Notifer.Notifers.TrayNotification;
 import net.Utils.OS;
 
 public enum NotiferTypes {
-	Snarl, NetSnarl, NetGrowl, TrayIcon, KNotify,LibNotify;
+	Snarl, NetSnarl, NetGrowl, TrayIcon, KNotify;
 	public static Notifer getNotifer(NotiferTypes type,java.awt.TrayIcon icon) {
 		switch (type) {
 		case Snarl:
@@ -29,8 +29,6 @@ public enum NotiferTypes {
 
 		case KNotify:
 			return new KNotify();
-		case LibNotify:
-			return new net.Notifer.Notifers.LibNotify();
 		}
 		
 		return null;
@@ -42,13 +40,10 @@ public enum NotiferTypes {
 		OS os=Utils.getOS();
 		if(os==OS.WINDOWS){
 			nots.remove(KNotify);
-			nots.remove(LibNotify);
 		}
 		if(os==OS.LINUX)
 		{
 			nots.remove(Snarl);
-		if(!new File("/usr/share/java/gtk.jar").exists())
-			nots.remove(LibNotify);
 		if(!new File("/usr/bin/kdialog").exists())
 				nots.remove(KNotify);
 		}

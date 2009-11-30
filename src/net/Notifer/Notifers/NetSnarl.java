@@ -18,7 +18,7 @@ public class NetSnarl implements NetNotifer {
 
 	@Override
 	public boolean load(String[] notifications, String host) {
-		// SnarlNetworkBridge.setDebug(true);
+		 SnarlNetworkBridge.setDebug(true);
 		SnarlNetworkBridge.snRegisterConfig(SettingsReader.name, host);
 
 		for (String s : notifications) {
