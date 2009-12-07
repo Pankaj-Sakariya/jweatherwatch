@@ -1,6 +1,5 @@
 package net.ACCUWeather;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -48,9 +47,6 @@ public class Location implements Runnable {
 		return location;
 	}
 
-	public String getTimeZone() {
-		return timeZone;
-	}
 
 	public CurrentWeather getCurrentWeather() {
 		if (currentWeather == null) {
@@ -102,7 +98,9 @@ public class Location implements Runnable {
 			ti = Integer.valueOf(t.substring(0, t.indexOf(":")));
 		else
 			ti = Integer.valueOf(t);
+		if(TimeZone.getDefault().inDaylightTime(new Date()))
 		obsDaylight = Integer.valueOf(Utils.getXMLValue(ele, "obsDaylight"));
+
 		if (t.contains(":"))
 			timeZone = (ti + obsDaylight) + t.substring(t.indexOf(":"));
 		else
@@ -193,11 +191,14 @@ public class Location implements Runnable {
 	}
 
 	public String getCurrentTime() {
-		return new SimpleDateFormat("hh:mm").format(new Date(getTime().getTimeInMillis()));
+		int h=getTimeZone().get(Calendar.HOUR_OF_DAY);
+		int m=getTimeZone().get(Calendar.MINUTE);
+		return (h>9?h:"0"+h)+":"+(m>9?m:"0"+m);
+		
 	}
 
-	public Calendar getTime() {
-		return Calendar.getInstance(TimeZone.getTimeZone("GMT" + timeZone));
+	public Calendar getTimeZone() {
+		return Calendar.getInstance(TimeZone.getTimeZone("GMT" + timeZone));	
 	}
 
 	protected void setParentLocationList(LocationList parentLocationList) {
