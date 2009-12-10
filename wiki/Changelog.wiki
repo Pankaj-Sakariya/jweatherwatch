@@ -1,21 +1,27 @@
 #labels Featured
     
+    
+==jWeatherWatch v1.3.5==
+ * Removed direct Libnotify support using gnome-java cause its to unstable
+  * If you still interested in good locking notifications on Linux try [http://code.google.com/p/snorenotify/ SnoreNotify] 
+ * fixed word time clock
+
 ==jWeatherWatch v1.3.4==
  * fixed GThread issue when switching to LibNotify
  * fixed X Errors when using LibNotify
  * cleaned up some mess
- * used new restart feture to switch betwene dev/nonDev channel
- * added autostart support for linux
+ * used new restart feature to switch between dev/nonDev channel
+ * added auto start support for Linux
  * jWeatherWatch adds itself to ~/bin/ if ~/bin/ exists
- * removed unavailible notifier from combobox in settings dialog
+ * removed unavailable notifier from combobox in settings dialog
  * added install uninstall command and functions
- * added startmenu entry on windows
+ * added start menu entry on windows
 
 
 ==jWeatherWatch v1.3.3==
  * fixed LibNotify
  * added LibNotify support on x64 systems
- * removed java-gnome from package you have now to install it frist see [LibNotify]
+ * removed java-gnome from package you have now to install it first see [LibNotify]
 
 ==jWeatherWatch v1.3.2==
  * jWeatherWatch saves settings on System Shutdown
@@ -24,7 +30,7 @@
 
 ==jWeatherWatch v1.3.1==
  * Fixed a bug with " " in installation path
- * added portable option, now itspossible to start jWeatherWatch with the argument -portable, then the settings will be saved in the same path as the jar 
+ * added portable option, now its possible to start jWeatherWatch with the argument -portable, then the settings will be saved in the same path as the jar 
 ==jWeatherWatch v1.3==
  * Added library BrwoserLauncher2 now its possible to select a browser(Settings->Advanced)
   * to use this with Chromium on linux you have to set Chromium to your default browser and select Konquerer(kde) to your browser in jWeatherWatch
