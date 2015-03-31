@@ -1,0 +1,1 @@
+to leave a comment visit [jWeatherWatch Forum](http://groups.google.de/group/jweatherwatch)

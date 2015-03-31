@@ -1,0 +1,1 @@
+SnarlNetworkBridge has moved to [GitHub](http://theonering.github.com/SnarlNetworkBridge/)
